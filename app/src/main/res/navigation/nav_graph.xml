@@ -13,10 +13,23 @@
         <action
             android:id="@+id/action_LoginScreen_to_OrderScreen"
             app:destination="@id/OrderScreen" />
+        <action
+            android:id="@+id/action_LoginScreen_to_AccountCreationScreen"
+            app:destination="@id/AccountCreationScreen" />
     </fragment>
     <fragment
         android:id="@+id/OrderScreen"
         android:name="com.cjcj55.scrum_project_1.OrderScreen"
         android:label="@string/order_screen_label"
         tools:layout="@layout/orderui"/>
+
+    <fragment
+        android:id="@+id/AccountCreationScreen"
+        android:name="com.cjcj55.scrum_project_1.AccountCreationScreen"
+        android:label="@string/accountcreation_screen_label"
+        tools:layout="@layout/accountcreationui">
+        <action
+            android:id="@+id/action_AccountCreationScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
+    </fragment>
 </navigation>

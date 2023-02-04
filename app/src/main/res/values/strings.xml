@@ -2,13 +2,16 @@
     <string name="app_name">Scrum-Project-1</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="login_screen_label">Login Screen</string>
-    <string name="order_screen_label">Order Screen</string>
+    <string name="login_screen_label">Login</string>
+    <string name="order_screen_label">Order</string>
+    <string name ="accountcreation_screen_label">Account Creation</string>
     <string name="next">Next</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="newemail">New Email</string>
     <string name="previous">Previous</string>
     <string name="login">Login</string>
+    <string name="newpassword">New Password</string>
     <string name="workerview">Worker View</string>
     <string name="createaccount">Create Account</string>
     <string name="hello_first_fragment">Hello first fragment</string>
