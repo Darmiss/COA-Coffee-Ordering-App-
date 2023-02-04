@@ -29,8 +29,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
 
     // Define transaction table columns
-        // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to orders table.
-            // Orders table has each individual item a user purchases.
+        // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to Order Coffee table.
+            // Order Coffee table has each individual item a user purchases.
     private static final String TRANSACTIONS_TABLE = "CREATE TABLE transactions (transaction_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "user_id INTEGER NOT NULL, " +
             "time_ordered DATETIME DEFAULT CURRENT_TIMESTAMP, " +
