@@ -11,7 +11,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     /**
-     * @param context
+     * @param context the app the database is a part of
      *
      * Initialize database.
      */
@@ -29,18 +29,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
 
     // Define transaction table columns
-        // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to orders table.
-            // Orders table has each individual item a user purchases.
+        // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to Order Coffee table.
+            // Order Coffee table has each individual item a user purchases.
     private static final String TRANSACTIONS_TABLE = "CREATE TABLE transactions (transaction_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "user_id INTEGER NOT NULL, " +
             "time_ordered DATETIME DEFAULT CURRENT_TIMESTAMP, " +
             "pickup_time DATETIME NOT NULL, " +
             "price REAL NOT NULL, " +
+            "fulfilled BOOLEAN NOT NULL DEFAULT 0, " +
+            "cancelled_by_customer BOOLEAN NOT NULL DEFAULT 0, " +
             "FOREIGN KEY (user_id) REFERENCES users(user_id))";
-//    private static final String ORDERS_TABLE = "CREATE TABLE orders (order_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-//            "transaction_id INTEGER NOT NULL, " +
-//            "price REAL NOT NULL, " +
-//            "FOREIGN KEY (transaction_id) REFERENCES transactions(transaction_id))";
     private static final String ORDER_COFFEE = "CREATE TABLE order_coffee (order_coffee_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "transaction_id INTEGER NOT NULL, " +
             "coffee_id INTEGER NOT NULL," +
@@ -61,7 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             "FOREIGN KEY (flavor_id) REFERENCES flavors(flavor_id))";
 
     /**
-     * @param db
+     * @param db database to be initialized
      *
      * Initializes the database, creating all tables and populating those that require population.
      */
@@ -84,9 +82,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param db
-     * @param oldVersion
-     * @param newVersion
+     * @param db database to be updated
+     * @param oldVersion version of database to be replaced
+     * @param newVersion version of database to replace old version
      *
      * If database version is changed, update all tables.
      */
@@ -229,9 +227,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param name
-     * @param description
-     * @param price
+     * @param name The name of the coffee to be added
+     * @param description The description of the coffee to be added
+     * @param price The price of the coffee to be added
      *
      * Insert a Coffee tuple into the Coffee table
      */
@@ -246,9 +244,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param name
-     * @param description
-     * @param price
+     * @param name The name of a topping to be added
+     * @param description the description of a topping to be added
+     * @param price the price of a topping to be added
      *
      * Insert a Topping tuple into the Toppings table
      */
@@ -263,9 +261,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param name
-     * @param description
-     * @param price
+     * @param name The name of a flavor to be added
+     * @param description the description of a flavor to be added
+     * @param price the price of a flavor to be added
      *
      * Insert a Flavor tuple into the Flavors table
      */
@@ -280,10 +278,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
+     * @param username The unique username for a customer
+     * @param password The password for a customer
+     * @param firstName The customer's first name
+     * @param lastName The customer's last name
      *
      * For registration, adds a new user to the Users table.
      * Consists of username, password, first name, and last name.
@@ -300,10 +298,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
+     * @param username The employee's unique username
+     * @param password The password for an employee
+     * @param firstName The employee's first name
+     * @param lastName The employee's last name
      *
      * For registration, adds a new employee to the Employees table.
      * Consists of username, password, first name, and last name.
@@ -320,7 +318,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param coffeeId
+     * @param coffeeId the coffee_id from the Coffee table in the database
      *
      * Removes a Coffee from the Coffee table, provided a valid id is given.
      */
@@ -333,7 +331,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param toppingId
+     * @param toppingId the topping_id from the Toppings table in the database
      *
      * Removes a Topping from the Toppings table, provided a valid id is given.
      */
@@ -346,7 +344,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param flavorId
+     * @param flavorId the flavor_id from the Flavors table in the database
      *
      * Removes a Flavor from the Flavors table, provided a valid id is given.
      */
