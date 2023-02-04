@@ -1,7 +1,9 @@
 package com.cjcj55.scrum_project_1;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
+import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,9 +25,41 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    // db path can be accessed in Device File Explorer in Android Studio (bottom right of IDE).
+        // The path is:  /data/data/com.cjcj55.scrum_project_1/databases/coffee.db
+        // The coffee.db file can be opened to view tables with DB Browser for SQLite.
+    private DatabaseHelper db;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Create single instance of DatabaseHelper.
+        // Pass this to the fragments.
+        db = new DatabaseHelper(this);
+
+        // Retrieve data from the database.
+        // Use this as an example for retrieving data.
+        Cursor cursor = db.getAllCoffees();
+        while (cursor.moveToNext()) {
+            int idIndex = cursor.getColumnIndex("id");
+            int nameIndex = cursor.getColumnIndex("name");
+            int descriptionIndex = cursor.getColumnIndex("description");
+            int priceIndex = cursor.getColumnIndex("price");
+
+            if (idIndex != -1 && nameIndex != -1 && descriptionIndex != -1 && priceIndex != -1) {
+                int id = cursor.getInt(idIndex);
+                String name = cursor.getString(nameIndex);
+                String description = cursor.getString(descriptionIndex);
+                String price = cursor.getString(priceIndex);
+                // Do something with data
+            } else {
+                // Handle case where one or more columns not found
+            }
+        }
+        cursor.close();
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
