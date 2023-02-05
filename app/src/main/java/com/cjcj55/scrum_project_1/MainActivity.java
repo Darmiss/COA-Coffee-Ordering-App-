@@ -1,14 +1,10 @@
 package com.cjcj55.scrum_project_1;
 
-import android.database.Cursor;
 import android.os.Bundle;
 
 import com.cjcj55.scrum_project_1.db.DatabaseHelper;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.view.View;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -16,9 +12,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cjcj55.scrum_project_1.databinding.ActivityMainBinding;
+import com.cjcj55.scrum_project_1.objects.Coffee;
+import com.cjcj55.scrum_project_1.objects.Flavor;
+import com.cjcj55.scrum_project_1.objects.Topping;
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
         // The coffee.db file can be opened to view tables with DB Browser for SQLite.
     private DatabaseHelper db;
 
-
+    List<Coffee> coffeeTypes;
+    List<Topping> toppingTypes;
+    List<Flavor> flavorTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,28 +41,24 @@ public class MainActivity extends AppCompatActivity {
 
         // Create single instance of DatabaseHelper.
         // Pass this to the fragments.
-        db = new DatabaseHelper(this);
+        db = DatabaseHelper.getInstance(this);
 
-        // Retrieve data from the database.
-        // Use this as an example for retrieving data.
-        Cursor cursor = db.getAllCoffees();
-        while (cursor.moveToNext()) {
-            int idIndex = cursor.getColumnIndex("id");
-            int nameIndex = cursor.getColumnIndex("name");
-            int descriptionIndex = cursor.getColumnIndex("description");
-            int priceIndex = cursor.getColumnIndex("price");
+        coffeeTypes = DatabaseHelper.getAllCoffeeTypes(db);
+        toppingTypes = DatabaseHelper.getAllToppingTypes(db);
+        flavorTypes = DatabaseHelper.getAllFlavorTypes(db);
 
-            if (idIndex != -1 && nameIndex != -1 && descriptionIndex != -1 && priceIndex != -1) {
-                int id = cursor.getInt(idIndex);
-                String name = cursor.getString(nameIndex);
-                String description = cursor.getString(descriptionIndex);
-                String price = cursor.getString(priceIndex);
-                // Do something with data
-            } else {
-                // Handle case where one or more columns not found
-            }
+        System.out.println("-------------------------------\nCoffee:\n-------------------------------");
+        for (Coffee coffee : coffeeTypes) {
+            System.out.println(coffee.toString());
         }
-        cursor.close();
+        System.out.println("-------------------------------\nToppings:\n-------------------------------");
+        for (Topping topping : toppingTypes) {
+            System.out.println(topping.toString());
+        }
+        System.out.println("-------------------------------\nFlavors:\n-------------------------------");
+        for (Flavor flavor : flavorTypes) {
+            System.out.println(flavor.toString());
+        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

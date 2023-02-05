@@ -6,17 +6,36 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.cjcj55.scrum_project_1.objects.Coffee;
+import com.cjcj55.scrum_project_1.objects.Flavor;
+import com.cjcj55.scrum_project_1.objects.Topping;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "coffee.db";
     private static final int DATABASE_VERSION = 1;
+    private static DatabaseHelper instance;
 
     /**
      * @param context the app the database is a part of
      *
      * Initialize database.
      */
-    public DatabaseHelper(Context context) {
+    private DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    /**
+     * @param context the app the database is a part of
+     * @return the instance of the database
+     */
+    public static synchronized DatabaseHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new DatabaseHelper(context);
+        }
+        return instance;
     }
 
     // Define Coffee table columns
@@ -25,8 +44,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FLAVORS_TABLE = "CREATE TABLE flavors (flavor_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL)";
 
     // Define user table columns
-    private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
-    private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
+    private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
+    private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
 
     // Define transaction table columns
         // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to Order Coffee table.
@@ -227,20 +246,62 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * @param db
+     *
+     * Populates empty Users table with tuples
+     */
+    private void insertInitialDataToUsers(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("username", "john");
+        values.put("password", "coffee");
+        values.put("email", "johnjones@mail.com");
+        values.put("firstName", "John");
+        values.put("lastName", "Jones");
+        db.insert("users", null, values);
+        values.clear();
+
+        values = new ContentValues();
+        values.put("username", "terry");
+        values.put("password", "terrycruz123");
+        values.put("email", "tcruz@gmail.com");
+        values.put("firstName", "Terry");
+        values.put("lastName", "Cruz");
+        db.insert("users", null, values);
+        values.clear();
+    }
+
+    /**
+     * @param db
+     *
+     * Populates empty Employees table with tuples
+     */
+    private void insertInitialDataToEmployees(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("username", "cjcj55");
+        values.put("password", "coffee123");
+        values.put("email", "cmp189@pitt.edu");
+        values.put("firstName", "Chris");
+        values.put("lastName", "Perrone");
+        db.insert("employees", null, values);
+        values.clear();
+    }
+
+    /**
      * @param name The name of the coffee to be added
      * @param description The description of the coffee to be added
      * @param price The price of the coffee to be added
      *
      * Insert a Coffee tuple into the Coffee table
      */
-    public void insertCoffee(String name, String description, double price) {
+    public long insertCoffee(String name, String description, double price) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("description", description);
         values.put("price", price);
-        db.insert("coffee", null, values);
-        db.close();
+        long id = db.insert("coffee", null, values);
+//        db.close();
+        return id;
     }
 
     /**
@@ -250,14 +311,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * Insert a Topping tuple into the Toppings table
      */
-    public void insertTopping(String name, String description, double price) {
+    public long insertTopping(String name, String description, double price) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("description", description);
         values.put("price", price);
-        db.insert("toppings", null, values);
-        db.close();
+        long id = db.insert("toppings", null, values);
+//        db.close();
+        return id;
     }
 
     /**
@@ -267,34 +329,55 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * Insert a Flavor tuple into the Flavors table
      */
-    public void insertFlavor(String name, String description, double price) {
+    public long insertFlavor(String name, String description, double price) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("name", name);
         values.put("description", description);
         values.put("price", price);
-        db.insert("flavors", null, values);
-        db.close();
+        long id = db.insert("flavors", null, values);
+//        db.close();
+        return id;
     }
 
     /**
      * @param username The unique username for a customer
      * @param password The password for a customer
+     * @param email The email for a customer
      * @param firstName The customer's first name
      * @param lastName The customer's last name
      *
      * For registration, adds a new user to the Users table.
      * Consists of username, password, first name, and last name.
      */
-    public void insertUser(String username, String password, String firstName, String lastName) {
+    public long insertUser(String username, String password, String email, String firstName, String lastName) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", username);
         values.put("password", password);
+        values.put("email", email);
         values.put("firstName", firstName);
         values.put("lastName", lastName);
-        db.insert("users", null, values);
-        db.close();
+        long id = db.insert("users", null, values);
+//        db.close();
+        return id;
+    }
+
+    /**
+     * @param email
+     * @param password
+     * @return true or false if the user successfully logged in
+     */
+    public boolean userLogin(String email, String password) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = {"user_id", "username", "firstName", "lastName"};
+        String selection = "email=? AND password=?";
+        String[] selectionArgs = {email, password};
+        Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+//        db.close();
+        return count > 0;
     }
 
     /**
@@ -306,15 +389,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * For registration, adds a new employee to the Employees table.
      * Consists of username, password, first name, and last name.
      */
-    public void insertEmployee(String username, String password, String firstName, String lastName) {
+    public long insertEmployee(String username, String password, String email, String firstName, String lastName) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("username", username);
         values.put("password", password);
+        values.put("email", email);
         values.put("firstName", firstName);
         values.put("lastName", lastName);
-        db.insert("employees", null, values);
-        db.close();
+        long id = db.insert("employees", null, values);
+//        db.close();
+        return id;
     }
 
     /**
@@ -322,12 +407,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * Removes a Coffee from the Coffee table, provided a valid id is given.
      */
-    public void deleteCoffee(int coffeeId) {
+    public int deleteCoffee(int coffeeId) {
         SQLiteDatabase db = getWritableDatabase();
-        String whereClause = "id=?";
+        String whereClause = "coffee_id=?";
         String[] whereArgs = { Integer.toString(coffeeId) };
-        db.delete("coffee", whereClause, whereArgs);
-        db.close();
+        int rowDeleted = db.delete("coffee", whereClause, whereArgs);
+//        db.close();
+        return rowDeleted;
+    }
+
+    /**
+     * @param coffee the coffee name from the Coffee table in the database
+     *
+     * Removes a Coffee from the Coffee table, provided a valid coffee name is given.
+     */
+    public int deleteCoffee(String coffee) {
+        SQLiteDatabase db = getWritableDatabase();
+        String whereClause = "name=?";
+        String[] whereArgs = { coffee };
+        int rowDeleted = db.delete("coffee", whereClause, whereArgs);
+//        db.close();
+        return rowDeleted;
     }
 
     /**
@@ -335,12 +435,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * Removes a Topping from the Toppings table, provided a valid id is given.
      */
-    public void deleteTopping(int toppingId) {
+    public int deleteTopping(int toppingId) {
         SQLiteDatabase db = getWritableDatabase();
-        String whereClause = "id=?";
+        String whereClause = "topping_id=?";
         String[] whereArgs = { Integer.toString(toppingId) };
-        db.delete("toppings", whereClause, whereArgs);
-        db.close();
+        int rowDeleted = db.delete("toppings", whereClause, whereArgs);
+//        db.close();
+        return rowDeleted;
+    }
+
+    /**
+     * @param topping the topping name from the Toppings table in the database
+     *
+     * Removes a Topping from the Toppings table, provided a valid topping name is given.
+     */
+    public int deleteTopping(String topping) {
+        SQLiteDatabase db = getWritableDatabase();
+        String whereClause = "name=?";
+        String[] whereArgs = { topping };
+        int rowDeleted = db.delete("toppings", whereClause, whereArgs);
+//        db.close();
+        return rowDeleted;
     }
 
     /**
@@ -348,42 +463,96 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      *
      * Removes a Flavor from the Flavors table, provided a valid id is given.
      */
-    public void deleteFlavor(int flavorId) {
+    public int deleteFlavor(int flavorId) {
         SQLiteDatabase db = getWritableDatabase();
-        String whereClause = "id=?";
+        String whereClause = "flavor_id=?";
         String[] whereArgs = { Integer.toString(flavorId) };
-        db.delete("flavors", whereClause, whereArgs);
-        db.close();
+        int rowDeleted = db.delete("flavors", whereClause, whereArgs);
+//        db.close();
+        return rowDeleted;
     }
 
     /**
-     * @return list of all coffees
+     * @param flavor the flavor name from the Flavors table in the database
      *
-     *
+     * Removes a Flavor from the Flavors table, provided a valid flavor name is given.
      */
-    public Cursor getAllCoffees() {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.query("coffee", null, null, null, null, null, null);
+    public int deleteFlavor(String flavor) {
+        SQLiteDatabase db = getWritableDatabase();
+        String whereClause = "name=?";
+        String[] whereArgs = { flavor };
+        int rowDeleted = db.delete("flavors", whereClause, whereArgs);
+//        db.close();
+        return rowDeleted;
     }
 
-    /**
-     * @return list of all toppings
-     *
-     *
-     */
-    public Cursor getAllToppings() {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.query("toppings", null, null, null, null, null, null);
+    public static List<Coffee> getAllCoffeeTypes(DatabaseHelper db) {
+        SQLiteDatabase sqLiteDB = db.getReadableDatabase();
+        List<Coffee> coffeeTypes = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM coffee";
+        Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                double price = cursor.getDouble(3);
+
+                Coffee coffee = new Coffee(id, name, description, price);
+                coffeeTypes.add(coffee);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return coffeeTypes;
     }
 
-    /**
-     * @return list of all flavors
-     *
-     *
-     */
-    public Cursor getAllFlavors() {
-        SQLiteDatabase db = getReadableDatabase();
-        return db.query("flavors", null, null, null, null, null, null);
+    public static List<Topping> getAllToppingTypes(DatabaseHelper db) {
+        SQLiteDatabase sqLiteDB = db.getReadableDatabase();
+        List<Topping> toppingTypes = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM toppings";
+        Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                double price = cursor.getDouble(3);
+
+                Topping topping = new Topping(id, name, description, price);
+                toppingTypes.add(topping);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return toppingTypes;
+    }
+
+    public static List<Flavor> getAllFlavorTypes(DatabaseHelper db) {
+        SQLiteDatabase sqLiteDB = db.getReadableDatabase();
+        List<Flavor> flavorTypes = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM flavors";
+        Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                double price = cursor.getDouble(3);
+
+                Flavor flavor = new Flavor(id, name, description, price);
+                flavorTypes.add(flavor);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return flavorTypes;
     }
 
     /**
@@ -393,7 +562,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Passwords are not returned.
      */
     public Cursor getAllUsers() {
-        String[] columns = { "username", "firstName", "lastName" };
+        String[] columns = { "username", "email", "firstName", "lastName" };
         SQLiteDatabase db = getReadableDatabase();
         return db.query("users", columns, null, null, null, null, null);
     }
@@ -405,7 +574,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * Passwords are not returned.
      */
     public Cursor getAllEmployees() {
-        String[] columns = { "username", "firstName", "lastName" };
+        String[] columns = { "username", "email", "firstName", "lastName" };
         SQLiteDatabase db = getReadableDatabase();
         return db.query("employees", columns, null, null, null, null, null);
     }
