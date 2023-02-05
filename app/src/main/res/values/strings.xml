@@ -8,6 +8,8 @@
     <string name="next">Next</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
     <string name="newemail">New Email</string>
     <string name="previous">Previous</string>
     <string name="login">Login</string>

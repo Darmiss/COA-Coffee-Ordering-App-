@@ -43,6 +43,8 @@ public class AccountCreationScreen extends Fragment {
 
         String newEmail = binding.editTextTextNewEmailAddress.getText().toString();
         String newPassword = binding.editTextTextNewPassword.getText().toString();
+        String firstName = binding.editTextTextFirstName.getText().toString();
+        String lastName = binding.editTextTextLastName.getText().toString();
         }
 
 
