@@ -32,6 +32,7 @@ public class LoginScreen extends Fragment {
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //boolean check = isInDatabase(...)
                 if(true) //<<// login info in database
                 {
                    NavHostFragment.findNavController(LoginScreen.this)
@@ -59,7 +60,13 @@ public class LoginScreen extends Fragment {
         String email = binding.editTextTextEmailAddress.getText().toString();
         String password = binding.editTextTextPassword.getText().toString();
         //Examples to use both in logic^
+    }
 
+    //method to return true if user is in database
+    private boolean isInDatabase(String email,String password){
+
+
+        return true;
     }
 
     @Override

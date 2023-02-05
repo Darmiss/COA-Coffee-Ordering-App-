@@ -4,35 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderScreen">
+    tools:context=".OrderHasBeenPlacedScreen">
 
     <TextView
-        android:id="@+id/textview_second"
+        android:id="@+id/CongratsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/itemSelectedButton"
+        android:layout_marginTop="168dp"
+        android:text="Your Order Has been Placed!"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/itemSelectedButton"
+        android:id="@+id/OrderScreenOkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PlaceHolder to itemSelection Screen"
+        android:layout_marginBottom="88dp"
+        android:text="OK"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="243dp"
-        android:layout_height="15dp"
-        android:text="TODO:ORDERSCREEN"
-        app:layout_constraintBottom_toTopOf="@+id/itemSelectedButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
