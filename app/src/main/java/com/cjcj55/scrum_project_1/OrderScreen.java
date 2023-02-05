@@ -36,6 +36,14 @@ public class OrderScreen extends Fragment {
                         .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);
             }
         });
+
+        binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(OrderScreen.this)
+                        .navigate(R.id.action_OrderScreen_to_PreviousOrderScreen);
+            }
+        });
     }
 
     @Override
