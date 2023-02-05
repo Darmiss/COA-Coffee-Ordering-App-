@@ -21,8 +21,26 @@
         android:id="@+id/OrderScreen"
         android:name="com.cjcj55.scrum_project_1.OrderScreen"
         android:label="@string/order_screen_label"
-        tools:layout="@layout/orderui"/>
+        tools:layout="@layout/orderui">
+        <action
+            android:id="@+id/action_OrderScreen_to_ItemSelectionScreen"
+            app:destination="@id/ItemSelectionScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/ItemSelectionScreen"
+        android:name="com.cjcj55.scrum_project_1.ItemSelectionScreen"
+        android:label="@string/itemselection_screen_label"
+        tools:layout="@layout/itemselectionui">
+        <action
+            android:id="@+id/action_ItemSelectionScreen_to_OrderHasBeenPlacedScreen"
+            app:destination="@id/OrderHasBeenPlacedScreen" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/OrderHasBeenPlacedScreen"
+        android:name="com.cjcj55.scrum_project_1.OrderHasBeenPlacedScreen"
+        android:label="@string/orderplaced_screen_label"
+        tools:layout="@layout/orderhasbeenplacedui"/>
     <fragment
         android:id="@+id/AccountCreationScreen"
         android:name="com.cjcj55.scrum_project_1.AccountCreationScreen"

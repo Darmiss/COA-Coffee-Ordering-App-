@@ -10,8 +10,6 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AccountcreationuiBinding;
-import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
-
 public class AccountCreationScreen extends Fragment {
 
     private AccountcreationuiBinding binding;
