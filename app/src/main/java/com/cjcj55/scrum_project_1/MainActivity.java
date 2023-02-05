@@ -31,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
         // The coffee.db file can be opened to view tables with DB Browser for SQLite.
     private DatabaseHelper db;
 
-    List<Coffee> coffeeTypes;
-    List<Topping> toppingTypes;
-    List<Flavor> flavorTypes;
+    // 3 lists to store all coffee, topping, and flavor types from database
+    public List<Coffee> coffeeTypes;
+    public List<Topping> toppingTypes;
+    public List<Flavor> flavorTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
