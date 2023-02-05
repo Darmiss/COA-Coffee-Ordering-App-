@@ -43,8 +43,8 @@ public class LoginScreen extends Fragment {
         binding.createAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override //Will need to go to create account screen
             public void onClick(View view) {
-                //NavHostFragment.findNavController(LoginScreen.this)
-                  //      .navigate(R.id.action_LoginScreen_to_OrderScreen);
+                NavHostFragment.findNavController(LoginScreen.this)
+                      .navigate(R.id.action_LoginScreen_to_AccountCreationScreen);
             }
         });
 
