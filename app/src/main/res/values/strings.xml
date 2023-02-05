@@ -11,6 +11,7 @@
     <string name="password">Password</string>
     <string name="placeorder">Place Order</string>
     <string name="email">Email</string>
+    <string name="pastorders">View Past Orders</string>
     <string name="firstname">First Name</string>
     <string name="lastname">Last Name</string>
     <string name="newemail">New Email</string>

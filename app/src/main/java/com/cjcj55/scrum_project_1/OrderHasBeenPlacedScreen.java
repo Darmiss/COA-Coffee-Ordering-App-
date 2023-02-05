@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
+
 import com.cjcj55.scrum_project_1.databinding.OrderhasbeenplaceduiBinding;
-import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+
 
 //Scene after you have placed an order showcasing details
 public class OrderHasBeenPlacedScreen extends Fragment {
@@ -38,8 +38,8 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         binding.OrderScreenOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   NavHostFragment.findNavController(ItemSelectionScreen.this)
-                 //       .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
+               NavHostFragment.findNavController(OrderHasBeenPlacedScreen.this)
+                       .navigate(R.id.action_OrderHasBeenPlacedScreen_to_OrderScreen);
             }
         });
 

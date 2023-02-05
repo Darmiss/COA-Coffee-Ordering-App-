@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_OrderScreen_to_ItemSelectionScreen"
             app:destination="@id/ItemSelectionScreen" />
+        <action
+            android:id="@+id/action_OrderScreen_to_PreviousOrderScreen"
+            app:destination="@id/PreviousOrderScreen" />
     </fragment>
     <fragment
         android:id="@+id/ItemSelectionScreen"
@@ -40,7 +43,18 @@
         android:id="@+id/OrderHasBeenPlacedScreen"
         android:name="com.cjcj55.scrum_project_1.OrderHasBeenPlacedScreen"
         android:label="@string/orderplaced_screen_label"
-        tools:layout="@layout/orderhasbeenplacedui"/>
+        tools:layout="@layout/orderhasbeenplacedui">
+        <action
+            android:id="@+id/action_OrderHasBeenPlacedScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/PreviousOrderScreen"
+        android:name="com.cjcj55.scrum_project_1.PreviousOrderScreen"
+        android:label="Past Orders"
+        tools:layout="@layout/viewpastorderui"/>
+
+
     <fragment
         android:id="@+id/AccountCreationScreen"
         android:name="com.cjcj55.scrum_project_1.AccountCreationScreen"
