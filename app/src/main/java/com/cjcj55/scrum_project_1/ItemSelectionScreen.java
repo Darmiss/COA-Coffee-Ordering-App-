@@ -9,19 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
 
-public class OrderScreen extends Fragment {
+//Screen shown after selecting a item from the menu(toppings here etc)
+public class ItemSelectionScreen extends Fragment{
 
-    private OrderuiBinding binding;
 
-    @Override
+    private ItemselectionuiBinding binding;
+
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
-        binding =OrderuiBinding.inflate(inflater, container, false);
+        binding = ItemselectionuiBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -29,19 +30,21 @@ public class OrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.itemSelectedButton.setOnClickListener(new View.OnClickListener() {
+
+        binding.placeorderbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);
+                    NavHostFragment.findNavController(ItemSelectionScreen.this)
+                            .navigate(R.id.action_ItemSelectionScreen_to_OrderHasBeenPlacedScreen);
             }
         });
+
     }
+
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
     }
-
 }
