@@ -45,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // Define user table columns
     private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
-    private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
+    private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
 
     // Define transaction table columns
         // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to Order Coffee table.
@@ -343,7 +343,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param username The unique username for a customer
      * @param password The password for a customer
      * @param email The email for a customer
      * @param firstName The customer's first name
@@ -352,10 +351,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * For registration, adds a new user to the Users table.
      * Consists of username, password, first name, and last name.
      */
-    public long insertUser(String username, String password, String email, String firstName, String lastName) {
+    public long insertUser(String password, String email, String firstName, String lastName) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("username", username);
+        //values.put("username", username);
         values.put("password", password);
         values.put("email", email);
         values.put("firstName", firstName);
@@ -372,7 +371,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public boolean userLogin(String email, String password) {
         SQLiteDatabase db = getWritableDatabase();
-        String[] columns = {"user_id", "username", "firstName", "lastName"};
+        String[] columns = {"user_id", "firstName", "lastName"};
         String selection = "email=? AND password=?";
         String[] selectionArgs = {email, password};
         Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
@@ -383,7 +382,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * @param username The employee's unique username
      * @param password The password for an employee
      * @param firstName The employee's first name
      * @param lastName The employee's last name
@@ -391,10 +389,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * For registration, adds a new employee to the Employees table.
      * Consists of username, password, first name, and last name.
      */
-    public long insertEmployee(String username, String password, String email, String firstName, String lastName) {
+    public long insertEmployee(String password, String email, String firstName, String lastName) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("username", username);
+        //values.put("username", username);
         values.put("password", password);
         values.put("email", email);
         values.put("firstName", firstName);
