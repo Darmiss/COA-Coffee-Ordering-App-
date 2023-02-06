@@ -1,6 +1,8 @@
 package com.cjcj55.scrum_project_1;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 
 import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -31,9 +34,10 @@ public class MainActivity extends AppCompatActivity {
         // The coffee.db file can be opened to view tables with DB Browser for SQLite.
     private DatabaseHelper db;
 
-    List<Coffee> coffeeTypes;
-    List<Topping> toppingTypes;
-    List<Flavor> flavorTypes;
+    // 3 lists to store all coffee, topping, and flavor types from database
+    public List<Coffee> coffeeTypes;
+    public List<Topping> toppingTypes;
+    public List<Flavor> flavorTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent= new Intent(MainActivity.this, AccountsSettingsScreen.class);
+            startActivity(intent);
+            return true;
+        }
+        else
+            if(id == R.id.logout){
+                Intent intent= new Intent(MainActivity.this, Logout.class);
+                startActivity(intent);
             return true;
         }
 
