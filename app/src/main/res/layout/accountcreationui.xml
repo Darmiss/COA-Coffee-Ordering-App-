@@ -83,10 +83,10 @@
         android:id="@+id/imageView2"
         android:layout_width="193dp"
         android:layout_height="155dp"
-        android:layout_marginTop="72dp"
+        android:contentDescription="placeholder"
+        android:src="@android:drawable/btn_star"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextFirstName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
