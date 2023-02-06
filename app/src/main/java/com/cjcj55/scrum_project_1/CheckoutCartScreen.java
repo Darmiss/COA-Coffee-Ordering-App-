@@ -1,5 +1,4 @@
 package com.cjcj55.scrum_project_1;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,20 +8,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
+import com.cjcj55.scrum_project_1.databinding.CheckoutcartuiBinding;
 
-//Screen shown after selecting a item from the menu(toppings here etc)
-public class ItemSelectionScreen extends Fragment{
-
-
-    private ItemselectionuiBinding binding;
+public class CheckoutCartScreen extends Fragment {
+    private CheckoutcartuiBinding binding;
 
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
 
-        binding = ItemselectionuiBinding.inflate(inflater, container, false);
+        binding = CheckoutcartuiBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -31,19 +27,19 @@ public class ItemSelectionScreen extends Fragment{
         super.onViewCreated(view, savedInstanceState);
 
 
-        binding.addtocartButton.setOnClickListener(new View.OnClickListener() {
+        binding.placeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    NavHostFragment.findNavController(ItemSelectionScreen.this)
-                            .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);
+                NavHostFragment.findNavController(CheckoutCartScreen.this)
+                        .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
             }
         });
 
-        binding.discardButton.setOnClickListener(new View.OnClickListener() {
+        binding.checkoutBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(ItemSelectionScreen.this)
-                        .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);
+                NavHostFragment.findNavController(CheckoutCartScreen.this)
+                        .navigate(R.id.action_CheckoutCartScreen_to_OrderScreen);
             }
         });
 

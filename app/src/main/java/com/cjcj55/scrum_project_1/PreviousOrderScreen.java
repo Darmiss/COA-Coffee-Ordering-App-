@@ -31,11 +31,11 @@ public class PreviousOrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.button.setOnClickListener(new View.OnClickListener() {
+        binding.pastBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-             //   NavHostFragment.findNavController(OrderScreen.this)
-               //         .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);
+                NavHostFragment.findNavController(PreviousOrderScreen.this)
+                    .navigate(R.id.action_PreviousOrderScreen_to_OrderScreen);
             }
         });
     }
