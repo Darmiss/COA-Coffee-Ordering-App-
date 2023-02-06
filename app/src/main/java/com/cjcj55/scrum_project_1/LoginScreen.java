@@ -1,18 +1,20 @@
 package com.cjcj55.scrum_project_1;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.LoginuiBinding;
+import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
 public class LoginScreen extends Fragment {
-
     private LoginuiBinding binding;
 
     @Override
@@ -26,17 +28,29 @@ public class LoginScreen extends Fragment {
 
     }
 
+
+    private String getEmail(){
+        return binding.editTextTextEmailAddress.getText().toString();
+    }
+
+    private String getPassword(){
+       return binding.editTextTextPassword.getText().toString();
+    }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //boolean check = isInDatabase(...)
-                if(true) //<<// login info in database
+                Context context = getContext();
+                boolean check = DatabaseHelper.getInstance(context).userLogin(getEmail(),getPassword());
+                if(check)
                 {
                    NavHostFragment.findNavController(LoginScreen.this)
                             .navigate(R.id.action_LoginScreen_to_OrderScreen);
+                }
+                else{
+                    Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -62,12 +76,6 @@ public class LoginScreen extends Fragment {
         //Examples to use both in logic^
     }
 
-    //method to return true if user is in database
-    private boolean isInDatabase(String email,String password){
-
-
-        return true;
-    }
 
     @Override
     public void onDestroyView() {
