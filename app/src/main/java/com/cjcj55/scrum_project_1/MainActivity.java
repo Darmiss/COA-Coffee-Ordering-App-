@@ -12,9 +12,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cjcj55.scrum_project_1.databinding.ActivityMainBinding;
-import com.cjcj55.scrum_project_1.objects.Coffee;
-import com.cjcj55.scrum_project_1.objects.Flavor;
-import com.cjcj55.scrum_project_1.objects.Topping;
+import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper db;
 
     // 3 lists to store all coffee, topping, and flavor types from database
-    public List<Coffee> coffeeTypes;
-    public List<Topping> toppingTypes;
-    public List<Flavor> flavorTypes;
+    public List<CoffeeItemInCatalog> coffeeItemInCatalogTypes;
+    public List<ToppingItemInCatalog> toppingItemInCatalogTypes;
+    public List<FlavorItemInCatalog> flavorItemInCatalogTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,21 +44,21 @@ public class MainActivity extends AppCompatActivity {
         // Pass this to the fragments.
         db = DatabaseHelper.getInstance(this);
 
-        coffeeTypes = DatabaseHelper.getAllCoffeeTypes(db);
-        toppingTypes = DatabaseHelper.getAllToppingTypes(db);
-        flavorTypes = DatabaseHelper.getAllFlavorTypes(db);
+        coffeeItemInCatalogTypes = DatabaseHelper.getAllCoffeeTypes(db);
+        toppingItemInCatalogTypes = DatabaseHelper.getAllToppingTypes(db);
+        flavorItemInCatalogTypes = DatabaseHelper.getAllFlavorTypes(db);
 
         System.out.println("-------------------------------\nCoffee:\n-------------------------------");
-        for (Coffee coffee : coffeeTypes) {
-            System.out.println(coffee.toString());
+        for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
+            System.out.println(coffeeItemInCatalog.toString());
         }
         System.out.println("-------------------------------\nToppings:\n-------------------------------");
-        for (Topping topping : toppingTypes) {
-            System.out.println(topping.toString());
+        for (ToppingItemInCatalog toppingItemInCatalog : toppingItemInCatalogTypes) {
+            System.out.println(toppingItemInCatalog.toString());
         }
         System.out.println("-------------------------------\nFlavors:\n-------------------------------");
-        for (Flavor flavor : flavorTypes) {
-            System.out.println(flavor.toString());
+        for (FlavorItemInCatalog flavorItemInCatalog : flavorItemInCatalogTypes) {
+            System.out.println(flavorItemInCatalog.toString());
         }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

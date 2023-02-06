@@ -1,18 +1,16 @@
-package com.cjcj55.scrum_project_1.objects;
+package com.cjcj55.scrum_project_1.objects.catalog;
 
 import androidx.annotation.NonNull;
 
 import java.util.List;
 
-public class Coffee {
+public class CoffeeItemInCatalog {
     private int id;
     private String name;
     private String description;
     private double price;
-    private List<Topping> toppings;
-    private List<Flavor> flavors;
 
-    public Coffee(int id, String name, String description, double price) {
+    public CoffeeItemInCatalog(int id, String name, String description, double price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -23,47 +21,16 @@ public class Coffee {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public double getPrice() {
         return this.price;
-    }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public List<Topping> getToppings() {
-        return toppings;
-    }
-
-    public void setToppings(List<Topping> toppings) {
-        this.toppings = toppings;
-    }
-
-    public List<Flavor> getFlavors() {
-        return flavors;
-    }
-
-    public void setFlavors(List<Flavor> flavors) {
-        this.flavors = flavors;
     }
 
     @NonNull

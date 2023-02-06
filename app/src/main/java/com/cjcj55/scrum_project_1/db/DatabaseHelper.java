@@ -6,9 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.cjcj55.scrum_project_1.objects.Coffee;
-import com.cjcj55.scrum_project_1.objects.Flavor;
-import com.cjcj55.scrum_project_1.objects.Topping;
+import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -486,9 +486,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowDeleted;
     }
 
-    public static List<Coffee> getAllCoffeeTypes(DatabaseHelper db) {
+    public static List<CoffeeItemInCatalog> getAllCoffeeTypes(DatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
-        List<Coffee> coffeeTypes = new ArrayList<>();
+        List<CoffeeItemInCatalog> coffeeItemInCatalogTypes = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM coffee";
         Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
@@ -500,18 +500,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
                 double price = cursor.getDouble(3);
 
-                Coffee coffee = new Coffee(id, name, description, price);
-                coffeeTypes.add(coffee);
+                CoffeeItemInCatalog coffeeItemInCatalog = new CoffeeItemInCatalog(id, name, description, price);
+                coffeeItemInCatalogTypes.add(coffeeItemInCatalog);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        return coffeeTypes;
+        return coffeeItemInCatalogTypes;
     }
 
-    public static List<Topping> getAllToppingTypes(DatabaseHelper db) {
+    public static List<ToppingItemInCatalog> getAllToppingTypes(DatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
-        List<Topping> toppingTypes = new ArrayList<>();
+        List<ToppingItemInCatalog> toppingItemInCatalogTypes = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM toppings";
         Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
@@ -523,18 +523,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
                 double price = cursor.getDouble(3);
 
-                Topping topping = new Topping(id, name, description, price);
-                toppingTypes.add(topping);
+                ToppingItemInCatalog toppingItemInCatalog = new ToppingItemInCatalog(id, name, description, price);
+                toppingItemInCatalogTypes.add(toppingItemInCatalog);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        return toppingTypes;
+        return toppingItemInCatalogTypes;
     }
 
-    public static List<Flavor> getAllFlavorTypes(DatabaseHelper db) {
+    public static List<FlavorItemInCatalog> getAllFlavorTypes(DatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
-        List<Flavor> flavorTypes = new ArrayList<>();
+        List<FlavorItemInCatalog> flavorItemInCatalogTypes = new ArrayList<>();
 
         String selectQuery = "SELECT * FROM flavors";
         Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
@@ -546,13 +546,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
                 double price = cursor.getDouble(3);
 
-                Flavor flavor = new Flavor(id, name, description, price);
-                flavorTypes.add(flavor);
+                FlavorItemInCatalog flavorItemInCatalog = new FlavorItemInCatalog(id, name, description, price);
+                flavorItemInCatalogTypes.add(flavorItemInCatalog);
             } while (cursor.moveToNext());
         }
 
         cursor.close();
-        return flavorTypes;
+        return flavorItemInCatalogTypes;
     }
 
     /**
