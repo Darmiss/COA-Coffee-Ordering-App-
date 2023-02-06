@@ -28,7 +28,9 @@
         <action
             android:id="@+id/action_OrderScreen_to_PreviousOrderScreen"
             app:destination="@id/PreviousOrderScreen" />
-
+        <action
+            android:id="@+id/action_OrderScreen_to_CheckoutCartScreen"
+            app:destination="@id/CheckoutCartScreen" />
     </fragment>
     <fragment
         android:id="@+id/ItemSelectionScreen"
@@ -36,9 +38,8 @@
         android:label="@string/itemselection_screen_label"
         tools:layout="@layout/itemselectionui">
         <action
-            android:id="@+id/action_ItemSelectionScreen_to_OrderHasBeenPlacedScreen"
-            app:destination="@id/OrderHasBeenPlacedScreen" />
-
+            android:id="@+id/action_ItemSelectionScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
     </fragment>
 
     <fragment
@@ -49,17 +50,38 @@
         <action
             android:id="@+id/action_OrderHasBeenPlacedScreen_to_OrderScreen"
             app:destination="@id/OrderScreen" />
-
     </fragment>
     <fragment
         android:id="@+id/PreviousOrderScreen"
         android:name="com.cjcj55.scrum_project_1.PreviousOrderScreen"
         android:label="Past Orders"
         tools:layout="@layout/viewpastorderui">
-
+        <action
+            android:id="@+id/action_PreviousOrderScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
     </fragment>
-
-
+    <fragment
+        android:id="@+id/CheckoutCartScreen"
+        android:name="com.cjcj55.scrum_project_1.CheckoutCartScreen"
+        android:label="Checkout"
+        tools:layout="@layout/checkoutcartui">
+        <action
+            android:id="@+id/action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen"
+            app:destination="@id/OrderHasBeenPlacedScreen" />
+        <action
+            android:id="@+id/action_CheckoutCartScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
+    </fragment>
+    <fragment
+        android:id="@+id/WorkerOrderScreen"
+        android:name="com.cjcj55.scrum_project_1.WorkerOrderScreen"
+        android:label="Orders"
+        tools:layout="@layout/workescreenui"/>
+    <fragment
+        android:id="@+id/SysAdminScreen"
+        android:name="com.cjcj55.scrum_project_1.SysAdminScreen"
+        android:label="Adminstration"
+        tools:layout="@layout/sysadminui"/>
 
 
     <fragment
@@ -71,6 +93,4 @@
             android:id="@+id/action_AccountCreationScreen_to_LoginScreen"
             app:destination="@id/LoginScreen" />
     </fragment>
-
-
 </navigation>
