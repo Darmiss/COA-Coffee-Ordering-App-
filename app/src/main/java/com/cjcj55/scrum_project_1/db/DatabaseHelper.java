@@ -44,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String FLAVORS_TABLE = "CREATE TABLE flavors (flavor_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL)";
 
     // Define user table columns
-    private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
+    private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
     private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
 
     // Define transaction table columns
@@ -92,7 +92,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         insertInitialDataToFlavors(db);
 
         db.execSQL(USERS_TABLE);
+        insertInitialDataToUsers(db);
         db.execSQL(EMPLOYEES_TABLE);
+        insertInitialDataToEmployees(db);
 
         db.execSQL(TRANSACTIONS_TABLE);
         db.execSQL(ORDER_COFFEE);
