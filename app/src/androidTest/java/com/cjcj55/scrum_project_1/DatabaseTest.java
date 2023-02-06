@@ -181,15 +181,14 @@ public class DatabaseTest {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
-        long id = dbHelper.insertUser("username1", "password1", "email1@gmail.com", "FirstName1", "LastName1");
+        long id = dbHelper.insertUser("password1", "email1@gmail.com", "FirstName1", "LastName1");
 
         // Check if insertion was successful
         assertNotEquals(-1, id);
 
         // Query the database to verify data was inserted
-        Cursor cursor = db.query("users", null, "username=?", new String[]{ "username1" }, null, null, null);
+        Cursor cursor = db.query("users", null, "password=?", new String[]{ "password1" }, null, null, null);
         assertTrue(cursor.moveToFirst());
-        assertEquals("username1", cursor.getString(cursor.getColumnIndex("username")));
         assertEquals("password1", cursor.getString(cursor.getColumnIndex("password")));
         assertEquals("email1@gmail.com", cursor.getString(cursor.getColumnIndex("email")));
         assertEquals("FirstName1", cursor.getString(cursor.getColumnIndex("firstName")));
@@ -206,15 +205,14 @@ public class DatabaseTest {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
-        long id = dbHelper.insertUser("username2", "password2", "email2@gmail.com", "FirstName2", "LastName2");
+        long id = dbHelper.insertUser("password2", "email2@gmail.com", "FirstName2", "LastName2");
 
         // Check if insertion was successful
         assertNotEquals(-1, id);
 
         // Query the database to verify data was inserted
-        Cursor cursor = db.query("users", null, "username=?", new String[]{ "username2" }, null, null, null);
+        Cursor cursor = db.query("users", null, "password=?", new String[]{ "password2" }, null, null, null);
         assertTrue(cursor.moveToFirst());
-        assertEquals("username2", cursor.getString(cursor.getColumnIndex("username")));
         assertEquals("password2", cursor.getString(cursor.getColumnIndex("password")));
         assertEquals("email2@gmail.com", cursor.getString(cursor.getColumnIndex("email")));
         assertEquals("FirstName2", cursor.getString(cursor.getColumnIndex("firstName")));
@@ -237,15 +235,14 @@ public class DatabaseTest {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
-        long id = dbHelper.insertUser("username3", "password3", "email3@gmail.com", "FirstName3", "LastName3");
+        long id = dbHelper.insertUser( "password3", "email3@gmail.com", "FirstName3", "LastName3");
 
         // Check if insertion was successful
         assertNotEquals(-1, id);
 
         // Query the database to verify data was inserted
-        Cursor cursor = db.query("users", null, "username=?", new String[]{ "username3" }, null, null, null);
+        Cursor cursor = db.query("users", null, "password=?", new String[]{ "password3" }, null, null, null);
         assertTrue(cursor.moveToFirst());
-        assertEquals("username3", cursor.getString(cursor.getColumnIndex("username")));
         assertEquals("password3", cursor.getString(cursor.getColumnIndex("password")));
         assertEquals("email3@gmail.com", cursor.getString(cursor.getColumnIndex("email")));
         assertEquals("FirstName3", cursor.getString(cursor.getColumnIndex("firstName")));
