@@ -5,8 +5,8 @@
     <string name="login_screen_label">Login</string>
     <string name="order_screen_label">Order</string>
     <string name="itemselection_screen_label">Item Selection</string>
-    <string name ="accountcreation_screen_label">Account Creation</string>
-    <string name ="orderplaced_screen_label">Your Order has been placed</string>
+    <string name="accountcreation_screen_label">Account Creation</string>
+    <string name="orderplaced_screen_label">Your Order has been placed</string>
     <string name="next">Next</string>
     <string name="password">Password</string>
     <string name="placeorder">Place Order</string>

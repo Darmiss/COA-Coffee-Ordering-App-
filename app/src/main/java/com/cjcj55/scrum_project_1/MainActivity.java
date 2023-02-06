@@ -1,6 +1,8 @@
 package com.cjcj55.scrum_project_1;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 
 import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
@@ -8,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -89,6 +92,14 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent= new Intent(MainActivity.this, AccountsSettingsScreen.class);
+            startActivity(intent);
+            return true;
+        }
+        else
+            if(id == R.id.logout){
+                Intent intent= new Intent(MainActivity.this, Logout.class);
+                startActivity(intent);
             return true;
         }
 
