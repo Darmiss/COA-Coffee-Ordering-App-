@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Scrum-Project-1</string>
+    <string name="app_name">Coffee Ordering App</string>
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="login_screen_label">Login</string>

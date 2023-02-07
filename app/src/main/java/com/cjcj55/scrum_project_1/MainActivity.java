@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -91,14 +90,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent= new Intent(MainActivity.this, AccountsSettingsScreen.class);
+        if (id == R.id.WorkerViewButton) {
+            Intent intent= new Intent(MainActivity.this, WorkerOrderScreen.class);
             startActivity(intent);
             return true;
         }
         else
-            if(id == R.id.logout){
-                Intent intent= new Intent(MainActivity.this, Logout.class);
+            if(id == R.id.SysAdminViewButton){
+                Intent intent= new Intent(MainActivity.this, SysAdminScreen.class);
                 startActivity(intent);
             return true;
         }
