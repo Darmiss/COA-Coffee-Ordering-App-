@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedin;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class LogoutScreen extends Fragment {
         binding.LogoutOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setLoggedin(false);
                 NavHostFragment.findNavController(LogoutScreen.this)
                         .navigate(R.id.action_LogOutScreen_to_LoginScreen);
             }
