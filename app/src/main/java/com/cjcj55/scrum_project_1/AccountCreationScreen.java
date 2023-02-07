@@ -77,7 +77,7 @@ public class AccountCreationScreen extends Fragment {
         private boolean checkInputs (String e, String p, String f, String l)
         {
             boolean check = true;
-            if (e.equals("") || p.equals("") || f.equals("") || l.equals("")) {
+            if (e.isBlank() || p.isBlank() || f.isBlank() || l.isBlank()) {
                 check = false;
             }
             return check;
