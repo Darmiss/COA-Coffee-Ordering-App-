@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.cjcj55.scrum_project_1.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/WorkerViewButton"
         android:orderInCategory="100"
-        android:title="Account Settings"
+        android:title="WorkerView"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/logout"
+        android:id="@+id/SysAdminViewButton"
         android:orderInCategory="100"
-        android:title="Logout"
+        android:title="SysAdminView"
         app:showAsAction="never" />
 </menu>

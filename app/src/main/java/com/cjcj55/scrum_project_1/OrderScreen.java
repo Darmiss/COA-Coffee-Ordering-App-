@@ -37,6 +37,14 @@ public class OrderScreen extends Fragment {
             }
         });
 
+        binding.logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(OrderScreen.this)
+                        .navigate(R.id.action_OrderScreen_to_LogOutScreen);
+            }
+        });
+
         binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,15 +1,19 @@
 package com.cjcj55.scrum_project_1;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AccountcreationuiBinding;
+import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+
 public class AccountCreationScreen extends Fragment {
 
     private AccountcreationuiBinding binding;
@@ -31,26 +35,59 @@ public class AccountCreationScreen extends Fragment {
         binding.createNewAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(true) //<<// Add login info in database, back to login screen
-                {
+                Context context = getContext();
+                if (checkInputs(getnewEmail(), getnewPassword(), getFirstName(), getLastName())) {
+                    DatabaseHelper.getInstance(context).insertUser(getnewPassword(), getnewEmail(), getFirstName(), getLastName());
                     NavHostFragment.findNavController(AccountCreationScreen.this)
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
+                } else {
+                    Toast newToast = Toast.makeText(getContext(), "Invalid Input",Toast.LENGTH_SHORT);
+
+                    newToast.show();
                 }
             }
         });
 
-        String newEmail = binding.editTextTextNewEmailAddress.getText().toString();
-        String newPassword = binding.editTextTextNewPassword.getText().toString();
-        String firstName = binding.editTextTextFirstName.getText().toString();
-        String lastName = binding.editTextTextLastName.getText().toString();
+
+        binding.backtologbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(AccountCreationScreen.this)
+                        .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
+
+            }
+        });
+
+    }
+        private String getnewEmail () {
+            return binding.editTextTextNewEmailAddress.getText().toString();
+        }
+        private String getnewPassword () {
+            return binding.editTextTextNewPassword.getText().toString();
+        }
+        private String getFirstName () {
+            return binding.editTextTextFirstName.getText().toString();
+        }
+        private String getLastName () {
+            return binding.editTextTextLastName.getText().toString();
+        }
+
+        private boolean checkInputs (String e, String p, String f, String l)
+        {
+            boolean check = true;
+            if (e.equals("") || p.equals("") || f.equals("") || l.equals("")) {
+                check = false;
+            }
+            return check;
+        }
+        @Override
+        public void onDestroyView () {
+            super.onDestroyView();
+            binding = null;
         }
 
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-
 }
+
+
 
