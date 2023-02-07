@@ -193,7 +193,7 @@ public class CartTransactionTest {
         flavorItemList.add(new FlavorItem(flavorItemInCatalogTypes.get(3)));
         coffeeItem1.setToppingItemList(toppingItemList);
         coffeeItem1.setFlavorItemList(flavorItemList);
-        userCart.addCoffeeToCart(coffeeItem);
+        userCart.addCoffeeToCart(coffeeItem1);
 
         CoffeeItem coffeeItem2 = new CoffeeItem(coffeeItemInCatalogTypes.get(2));
         userCart.addCoffeeToCart(coffeeItem2);

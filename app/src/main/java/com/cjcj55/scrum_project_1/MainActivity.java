@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static List<FlavorItemInCatalog> flavorItemInCatalogTypes;
 
     // CoffeeItem List to store user's shopping cart
-    public UserCart userCart;
+    public static UserCart userCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

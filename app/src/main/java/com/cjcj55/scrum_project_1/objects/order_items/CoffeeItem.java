@@ -1,5 +1,7 @@
 package com.cjcj55.scrum_project_1.objects.order_items;
 
+import androidx.annotation.NonNull;
+
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 
 import java.util.ArrayList;
@@ -72,5 +74,11 @@ public class CoffeeItem {
 
     public void setFlavorItemList(List<FlavorItem> flavorItemList) {
         this.flavorItemList = flavorItemList;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.name + ", " + this.description + ", " + this.price + ", " + this.amount;
     }
 }
