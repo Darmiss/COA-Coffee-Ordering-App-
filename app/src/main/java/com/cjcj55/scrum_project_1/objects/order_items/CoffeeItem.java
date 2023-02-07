@@ -1,5 +1,8 @@
 package com.cjcj55.scrum_project_1.objects.order_items;
 
+import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class CoffeeItem {
@@ -8,14 +11,27 @@ public class CoffeeItem {
     private String description;
     private double price;
 
+    private int amount;
+
     private List<ToppingItem> toppingItemList;
     private List<FlavorItem> flavorItemList;
 
-    public CoffeeItem(int id, String name, String description, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
+    public CoffeeItem(CoffeeItemInCatalog coffeeItemInCatalog) {
+        this.id = coffeeItemInCatalog.getId();
+        this.name = coffeeItemInCatalog.getName();
+        this.description = coffeeItemInCatalog.getDescription();
+        this.price = coffeeItemInCatalog.getPrice();
+        this.amount = 1;
+        this.toppingItemList = new ArrayList<>();
+        this.flavorItemList = new ArrayList<>();
+    }
+
+    public CoffeeItem(CoffeeItemInCatalog coffeeItemInCatalog, int amount) {
+        this.id = coffeeItemInCatalog.getId();
+        this.name = coffeeItemInCatalog.getName();
+        this.description = coffeeItemInCatalog.getDescription();
+        this.price = coffeeItemInCatalog.getPrice();
+        this.amount = amount;
     }
 
     public int getId() {
@@ -32,6 +48,14 @@ public class CoffeeItem {
 
     public double getPrice() {
         return price;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public List<ToppingItem> getToppingItemList() {

@@ -1,16 +1,18 @@
 package com.cjcj55.scrum_project_1.objects.order_items;
 
+import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
+
 public class ToppingItem {
     private int id;
     private String name;
     private String description;
     private double price;
 
-    public ToppingItem(int id, String name, String description, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
+    public ToppingItem(ToppingItemInCatalog toppingItemInCatalog) {
+        this.id = toppingItemInCatalog.getId();
+        this.name = toppingItemInCatalog.getName();
+        this.description = toppingItemInCatalog.getDescription();
+        this.price = toppingItemInCatalog.getPrice();
     }
 
     public int getId() {

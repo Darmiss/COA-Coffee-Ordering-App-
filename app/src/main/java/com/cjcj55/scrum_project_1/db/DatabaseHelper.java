@@ -6,11 +6,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -135,31 +141,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void insertInitialDataToCoffee(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put("name", "Espresso");
-        values.put("description", "");
+        values.put("description", "A concentrated coffee served in a small, strong shot");
         values.put("price", 3.99);
         db.insert("coffee", null, values);
         values.clear();
 
         values.put("name", "Latte");
-        values.put("description", "");
+        values.put("description", "A milk coffee with silky foam and a shot of espresso");
         values.put("price", 4.99);
         db.insert("coffee", null, values);
         values.clear();
 
         values.put("name", "Americano");
-        values.put("description", "");
+        values.put("description", "A watered-down espresso");
         values.put("price", 4.99);
         db.insert("coffee", null, values);
         values.clear();
 
         values.put("name", "Cappuccino");
-        values.put("description", "");
+        values.put("description", "A single espresso shot topped with equal parts steamed and frothed milk");
         values.put("price", 3.99);
         db.insert("coffee", null, values);
         values.clear();
 
         values.put("name", "Iced Coffee");
-        values.put("description", "");
+        values.put("description", "A cold coffee with chilled milk");
         values.put("price", 4.99);
         db.insert("coffee", null, values);
         values.clear();
@@ -173,31 +179,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void insertInitialDataToToppings(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put("name", "Whipped Cream");
-        values.put("description", "");
+        values.put("description", "A light and fluffy cream");
         values.put("price", 0.50);
         db.insert("toppings", null, values);
         values.clear();
 
         values.put("name", "Cinnamon");
-        values.put("description", "");
+        values.put("description", "A spice");
         values.put("price", 0.10);
         db.insert("toppings", null, values);
         values.clear();
 
         values.put("name", "Sprinkles");
-        values.put("description", "");
+        values.put("description", "Small, colorful pieces of confectionery");
         values.put("price", 0.15);
         db.insert("toppings", null, values);
         values.clear();
 
         values.put("name", "Marshmallows");
-        values.put("description", "");
+        values.put("description", "Squishy, fluffy, chewy sweetness");
         values.put("price", 0.50);
         db.insert("toppings", null, values);
         values.clear();
 
         values.put("name", "Ice Cream");
-        values.put("description", "");
+        values.put("description", "Cold vanilla dairy");
         values.put("price", 1.00);
         db.insert("toppings", null, values);
         values.clear();
@@ -211,37 +217,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private void insertInitialDataToFlavors(SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put("name", "Caramel");
-        values.put("description", "");
+        values.put("description", "Rich, sweet, and sticky");
         values.put("price", 0.99);
         db.insert("flavors", null, values);
         values.clear();
 
         values.put("name", "Mocha");
-        values.put("description", "");
+        values.put("description", "Chocolate that adds sweetness and velvety smoothness");
         values.put("price", 0.99);
         db.insert("flavors", null, values);
         values.clear();
 
         values.put("name", "Hazelnut");
-        values.put("description", "");
+        values.put("description", "A nutty and creamy addition");
         values.put("price", 0.99);
         db.insert("flavors", null, values);
         values.clear();
 
         values.put("name", "Vanilla");
-        values.put("description", "");
+        values.put("description", "Sweet, vanilla-y goodness");
         values.put("price", 0.99);
         db.insert("flavors", null, values);
         values.clear();
 
         values.put("name", "Chocolate");
-        values.put("description", "");
+        values.put("description", "Chocolatey chocolate");
         values.put("price", 0.99);
         db.insert("flavors", null, values);
         values.clear();
 
         values.put("name", "Brown Sugar Cinnamon");
-        values.put("description", "");
+        values.put("description", "Cinnamon sugar cookie");
         values.put("price", 0.99);
         db.insert("flavors", null, values);
         values.clear();
@@ -342,6 +348,46 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public long insertTransactionFromCart(int userId, UserCart userCart, Timestamp pickupTime, double totalPrice) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues transactionValues= new ContentValues();
+        transactionValues.put("user_id", userId);
+        transactionValues.put("pickup_time", pickupTime.getTime());
+        transactionValues.put("price", totalPrice);
+        long transactionId = db.insert("transactions", null, transactionValues);
+
+        List<CoffeeItem> coffeeItemList = userCart.getUserCart();
+
+        for (CoffeeItem coffeeItem : coffeeItemList) {
+            ContentValues orderCoffeeValues = new ContentValues();
+            orderCoffeeValues.put("transaction_id", transactionId);
+            orderCoffeeValues.put("coffee_id", coffeeItem.getId());
+            orderCoffeeValues.put("beverage_count", coffeeItem.getAmount());
+            long orderCoffeeId = db.insert("order_coffee", null, orderCoffeeValues);
+
+            List<ToppingItem> toppingItemList = coffeeItem.getToppingItemList();
+            if (toppingItemList.size() > 0) {
+                for (ToppingItem topping : toppingItemList) {
+                    ContentValues orderToppingValues = new ContentValues();
+                    orderToppingValues.put("order_coffee_id", orderCoffeeId);
+                    orderToppingValues.put("topping_id", topping.getId());
+                    db.insert("order_toppings_coffee", null, orderToppingValues);
+                }
+            }
+
+            List<FlavorItem> flavorItemList = coffeeItem.getFlavorItemList();
+            if (flavorItemList.size() > 0) {
+                for (FlavorItem flavor : flavorItemList) {
+                    ContentValues orderFlavorValues = new ContentValues();
+                    orderFlavorValues.put("order_coffee_id", orderCoffeeId);
+                    orderFlavorValues.put("flavor_id", flavor.getId());
+                    db.insert("order_flavors_coffee", null, orderFlavorValues);
+                }
+            }
+        }
+        return transactionId;
+    }
+
     /**
      * @param password The password for a customer
      * @param email The email for a customer
@@ -400,6 +446,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id = db.insert("employees", null, values);
 //        db.close();
         return id;
+    }
+
+    /**
+     * @param email
+     * @param password
+     * @return true or false if the employee successfully logged in
+     */
+    public boolean employeeLogin(String email, String password) {
+        SQLiteDatabase db = getWritableDatabase();
+        String[] columns = {"employee_id", "firstName", "lastName"};
+        String selection = "email=? AND password=?";
+        String[] selectionArgs = {email, password};
+        Cursor cursor = db.query("employees", columns, selection, selectionArgs, null, null, null);
+        int count = cursor.getCount();
+        cursor.close();
+//        db.close();
+        return count > 0;
     }
 
     /**

@@ -1,7 +1,5 @@
 package com.cjcj55.scrum_project_1;
 
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

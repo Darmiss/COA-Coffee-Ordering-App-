@@ -1,16 +1,18 @@
 package com.cjcj55.scrum_project_1.objects.order_items;
 
+import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
+
 public class FlavorItem {
     private int id;
     private String name;
     private String description;
     private double price;
 
-    public FlavorItem(int id, String name, String description, double price) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
+    public FlavorItem(FlavorItemInCatalog flavorItemInCatalog) {
+        this.id = flavorItemInCatalog.getId();
+        this.name = flavorItemInCatalog.getName();
+        this.description = flavorItemInCatalog.getDescription();
+        this.price = flavorItemInCatalog.getPrice();
     }
 
     public int getId() {

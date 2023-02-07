@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cjcj55.scrum_project_1.databinding.ActivityMainBinding;
+import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
@@ -22,6 +22,7 @@ import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -35,9 +36,12 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper db;
 
     // 3 lists to store all coffee, topping, and flavor types from database
-    public List<CoffeeItemInCatalog> coffeeItemInCatalogTypes;
-    public List<ToppingItemInCatalog> toppingItemInCatalogTypes;
-    public List<FlavorItemInCatalog> flavorItemInCatalogTypes;
+    public static List<CoffeeItemInCatalog> coffeeItemInCatalogTypes;
+    public static List<ToppingItemInCatalog> toppingItemInCatalogTypes;
+    public static List<FlavorItemInCatalog> flavorItemInCatalogTypes;
+
+    // CoffeeItem List to store user's shopping cart
+    public UserCart userCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         coffeeItemInCatalogTypes = DatabaseHelper.getAllCoffeeTypes(db);
         toppingItemInCatalogTypes = DatabaseHelper.getAllToppingTypes(db);
         flavorItemInCatalogTypes = DatabaseHelper.getAllFlavorTypes(db);
+        userCart = new UserCart();
 
         System.out.println("-------------------------------\nCoffee:\n-------------------------------");
         for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
