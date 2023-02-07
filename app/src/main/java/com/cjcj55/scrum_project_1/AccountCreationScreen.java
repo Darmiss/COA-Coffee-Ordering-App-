@@ -1,5 +1,8 @@
 package com.cjcj55.scrum_project_1;
 
+import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedin;
+
+import android.accounts.Account;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +16,8 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AccountcreationuiBinding;
 import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+
+
 
 public class AccountCreationScreen extends Fragment {
 
@@ -38,13 +43,12 @@ public class AccountCreationScreen extends Fragment {
                 Context context = getContext();
                 if (checkInputs(getnewEmail(), getnewPassword(), getFirstName(), getLastName())) {
                     DatabaseHelper.getInstance(context).insertUser(getnewPassword(), getnewEmail(), getFirstName(), getLastName());
-                    Toast newToast = Toast.makeText(getContext(), "Account Succesfully Added",Toast.LENGTH_SHORT);
-                    newToast.show();
+                    setLoggedin(true);  //Makes it so when going back to the login "Account created" popup is made
                     NavHostFragment.findNavController(AccountCreationScreen.this)
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 
                 } else {
-                    Toast newToast = Toast.makeText(getContext(), "Invalid Input",Toast.LENGTH_SHORT);
+                    Toast newToast = Toast.makeText(getContext(), "One or more field left blank.",Toast.LENGTH_SHORT);
                     newToast.show();
                 }
             }
@@ -54,6 +58,7 @@ public class AccountCreationScreen extends Fragment {
         binding.backtologbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                setLoggedin(false); //Makes it so when going back to the loginscreen the "Account created" popup wont popup
                 NavHostFragment.findNavController(AccountCreationScreen.this)
                         .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 
@@ -77,7 +82,7 @@ public class AccountCreationScreen extends Fragment {
         private boolean checkInputs (String e, String p, String f, String l)
         {
             boolean check = true;
-            if (e.equals("") || p.equals("") || f.equals("") || l.equals("")) {
+            if (e.isBlank() || p.isBlank() || f.isBlank() || l.isBlank()) {
                 check = false;
             }
             return check;
