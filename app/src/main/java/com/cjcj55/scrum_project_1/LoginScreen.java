@@ -63,17 +63,6 @@ public class LoginScreen extends Fragment {
             }
         });
 
-        binding.workerViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override //will need to go to worker screen
-            public void onClick(View view) { //Will go to create account screen
-               // NavHostFragment.findNavController(LoginScreen.this)
-                  //    .navigate(R.id.action_LoginScreen_to_OrderScreen);
-            }
-        });
-
-        String email = binding.editTextTextEmailAddress.getText().toString();
-        String password = binding.editTextTextPassword.getText().toString();
-        //Examples to use both in logic^
     }
 
 
