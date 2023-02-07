@@ -38,11 +38,13 @@ public class AccountCreationScreen extends Fragment {
                 Context context = getContext();
                 if (checkInputs(getnewEmail(), getnewPassword(), getFirstName(), getLastName())) {
                     DatabaseHelper.getInstance(context).insertUser(getnewPassword(), getnewEmail(), getFirstName(), getLastName());
+                    Toast newToast = Toast.makeText(getContext(), "Account Succesfully Added",Toast.LENGTH_SHORT);
+                    newToast.show();
                     NavHostFragment.findNavController(AccountCreationScreen.this)
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
+
                 } else {
                     Toast newToast = Toast.makeText(getContext(), "Invalid Input",Toast.LENGTH_SHORT);
-
                     newToast.show();
                 }
             }
