@@ -2,7 +2,6 @@ package com.cjcj55.scrum_project_1;
 
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedin;
 
-import android.accounts.Account;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
