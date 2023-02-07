@@ -24,7 +24,6 @@ import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
@@ -37,9 +36,9 @@ public class CartTransactionTest {
     public void initData() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
-        coffeeItemInCatalogTypes = DatabaseHelper.getAllCoffeeTypes(dbHelper);
-        toppingItemInCatalogTypes = DatabaseHelper.getAllToppingTypes(dbHelper);
-        flavorItemInCatalogTypes = DatabaseHelper.getAllFlavorTypes(dbHelper);
+        coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(dbHelper);
+        toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(dbHelper);
+        flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(dbHelper);
     }
 
     @Test

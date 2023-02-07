@@ -17,12 +17,11 @@ import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "coffee.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
     private static DatabaseHelper instance;
 
     /**
@@ -46,9 +45,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // Define Coffee table columns
-    private static final String COFFEE_TABLE = "CREATE TABLE coffee (coffee_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL)";
-    private static final String TOPPINGS_TABLE = "CREATE TABLE toppings (topping_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL)";
-    private static final String FLAVORS_TABLE = "CREATE TABLE flavors (flavor_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL)";
+    private static final String COFFEE_TABLE = "CREATE TABLE coffee (coffee_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL, isActive BOOLEAN NOT NULL DEFAULT 1)";
+    private static final String TOPPINGS_TABLE = "CREATE TABLE toppings (topping_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL, isActive BOOLEAN NOT NULL DEFAULT 1)";
+    private static final String FLAVORS_TABLE = "CREATE TABLE flavors (flavor_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL, isActive BOOLEAN NOT NULL DEFAULT 1)";
 
     // Define user table columns
     private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
@@ -502,6 +501,51 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * @param coffee Coffee name
+     * @param isActive 0=False, 1=True
+     * @return
+     */
+    public int updateCoffeeActive(String coffee, int isActive) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isActive", isActive);
+        String whereClause = "name=?";
+        String[] whereArgs = {coffee};
+        int rowsUpdated = db.update("coffee", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+
+    /**
+     * @param topping Topping name
+     * @param isActive 0=False, 1=True
+     * @return
+     */
+    public int updateToppingActive(String topping, int isActive) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isActive", isActive);
+        String whereClause = "name=?";
+        String[] whereArgs = {topping};
+        int rowsUpdated = db.update("toppings", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+
+    /**
+     * @param flavor Flavor name
+     * @param isActive 0=False, 1=True
+     * @return
+     */
+    public int updateFlavorActive(String flavor, int isActive) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isActive", isActive);
+        String whereClause = "name=?";
+        String[] whereArgs = {flavor};
+        int rowsUpdated = db.update("flavors", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+
+    /**
      * @param toppingId the topping_id from the Toppings table in the database
      *
      * Removes a Topping from the Toppings table, provided a valid id is given.
@@ -557,6 +601,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowDeleted;
     }
 
+    public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(DatabaseHelper db) {
+        SQLiteDatabase sqLiteDB = db.getReadableDatabase();
+        List<CoffeeItemInCatalog> coffeeItemInCatalogTypes = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM coffee WHERE isActive IS NOT 0";
+        Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                double price = cursor.getDouble(3);
+
+                CoffeeItemInCatalog coffeeItemInCatalog = new CoffeeItemInCatalog(id, name, description, price);
+                coffeeItemInCatalogTypes.add(coffeeItemInCatalog);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return coffeeItemInCatalogTypes;
+    }
+
     public static List<CoffeeItemInCatalog> getAllCoffeeTypes(DatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<CoffeeItemInCatalog> coffeeItemInCatalogTypes = new ArrayList<>();
@@ -580,6 +647,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return coffeeItemInCatalogTypes;
     }
 
+    public static List<ToppingItemInCatalog> getAllActiveToppingTypes(DatabaseHelper db) {
+        SQLiteDatabase sqLiteDB = db.getReadableDatabase();
+        List<ToppingItemInCatalog> toppingItemInCatalogTypes = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM toppings WHERE isActive IS NOT 0";
+        Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                double price = cursor.getDouble(3);
+
+                ToppingItemInCatalog toppingItemInCatalog = new ToppingItemInCatalog(id, name, description, price);
+                toppingItemInCatalogTypes.add(toppingItemInCatalog);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return toppingItemInCatalogTypes;
+    }
+
     public static List<ToppingItemInCatalog> getAllToppingTypes(DatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<ToppingItemInCatalog> toppingItemInCatalogTypes = new ArrayList<>();
@@ -601,6 +691,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cursor.close();
         return toppingItemInCatalogTypes;
+    }
+
+    public static List<FlavorItemInCatalog> getAllActiveFlavorTypes(DatabaseHelper db) {
+        SQLiteDatabase sqLiteDB = db.getReadableDatabase();
+        List<FlavorItemInCatalog> flavorItemInCatalogTypes = new ArrayList<>();
+
+        String selectQuery = "SELECT * FROM flavors WHERE isActive IS NOT 0";
+        Cursor cursor = sqLiteDB.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                int id = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String description = cursor.getString(2);
+                double price = cursor.getDouble(3);
+
+                FlavorItemInCatalog flavorItemInCatalog = new FlavorItemInCatalog(id, name, description, price);
+                flavorItemInCatalogTypes.add(flavorItemInCatalog);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        return flavorItemInCatalogTypes;
     }
 
     public static List<FlavorItemInCatalog> getAllFlavorTypes(DatabaseHelper db) {

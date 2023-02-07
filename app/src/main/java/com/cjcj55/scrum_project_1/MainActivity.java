@@ -18,11 +18,11 @@ import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     // Stores USERID when a user is logged in.  Otherwise, -1
     public static int user = -1;
 
+    public static CoffeeItem currentCoffee;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         // Pass this to the fragments.
         db = DatabaseHelper.getInstance(this);
 
-        coffeeItemInCatalogTypes = DatabaseHelper.getAllCoffeeTypes(db);
-        toppingItemInCatalogTypes = DatabaseHelper.getAllToppingTypes(db);
-        flavorItemInCatalogTypes = DatabaseHelper.getAllFlavorTypes(db);
+        coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(db);
+        toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
+        flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
         userCart = new UserCart();
 
         System.out.println("-------------------------------\nCoffee:\n-------------------------------");

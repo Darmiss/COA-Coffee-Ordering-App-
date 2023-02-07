@@ -20,6 +20,7 @@ import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 
+import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.List;
 
@@ -61,9 +62,11 @@ public class OrderScreen extends Fragment {
             coffeeName.setTextSize(30);
 
             TextView coffeePrice = new TextView(getContext());
-            coffeePrice.setText("$" + Double.toString(coffeeItem.getPrice()));
+            DecimalFormat df = new DecimalFormat("0.00");
+            coffeePrice.setText("$" + df.format(coffeeItem.getPrice()));
             coffeePrice.setTextColor(Color.parseColor("#006400"));
             coffeePrice.setTextSize(30);
+            coffeePrice.setGravity(Gravity.END);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -94,15 +97,10 @@ public class OrderScreen extends Fragment {
                         }
                     }
 
-                    MainActivity.userCart.addCoffeeToCart(new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(cid)));
+                    MainActivity.currentCoffee = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(cid));
                     NavHostFragment.findNavController(OrderScreen.this)
                             .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);
-                    List<CoffeeItem> coffees = MainActivity.userCart.getUserCart();
-                    Iterator<CoffeeItem> coffeeIterator = coffees.listIterator();
-                    while (coffeeIterator.hasNext()) {
-                        CoffeeItem c = coffeeIterator.next();
-                        System.out.println(c.toString() + " ID:" + c.getId());
-                    }
+                    System.out.println(MainActivity.currentCoffee.toString() + " ID:" + MainActivity.currentCoffee.getId());
                 }
             });
             container.addView(buttonLayout);
