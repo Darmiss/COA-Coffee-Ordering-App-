@@ -61,6 +61,7 @@ public class OrderScreen extends Fragment {
 
             TextView coffeePrice = new TextView(getContext());
             coffeePrice.setText("$" + Double.toString(coffeeItem.getPrice()));
+            coffeePrice.setTextColor(Color.parseColor("#006400"));
             coffeePrice.setTextSize(30);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
