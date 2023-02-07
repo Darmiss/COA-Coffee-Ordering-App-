@@ -16,12 +16,26 @@ import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
 public class LoginScreen extends Fragment {
     private LoginuiBinding binding;
+    private static boolean popuploggedin = false;  //Used in AccountCreationScreen
 
+    public static void setLoggedin(boolean set) //Used in AccountCreationScreen
+    {
+        popuploggedin=set;
+    }
     @Override
     public View onCreateView(
+
+
+
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+
+        if(popuploggedin) { //shows the popup message "Account created" if flag set in accountcreationscreen
+            MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Account Successfully Created");
+            messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+        }
+
 
         binding = LoginuiBinding.inflate(inflater, container, false);
         return binding.getRoot();
@@ -50,7 +64,8 @@ public class LoginScreen extends Fragment {
                             .navigate(R.id.action_LoginScreen_to_OrderScreen);
                 }
                 else{
-                    Toast.makeText(getContext(),"Invalid Credentials",Toast.LENGTH_SHORT).show();
+                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Invalid Credentials");
+                    messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
             }
         });
