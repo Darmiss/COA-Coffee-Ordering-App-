@@ -47,7 +47,7 @@ public class AccountCreationScreen extends Fragment {
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 
                 } else {
-                    Toast newToast = Toast.makeText(getContext(), "One or more field left blank.",Toast.LENGTH_SHORT);
+                    Toast newToast = Toast.makeText(getContext(), "One or more field(s) left blank.",Toast.LENGTH_SHORT);
                     newToast.show();
                 }
             }
