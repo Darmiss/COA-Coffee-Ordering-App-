@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 
@@ -110,6 +111,9 @@ public class OrderScreen extends Fragment {
         binding.logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.user = -1;
+                MainActivity.userCart = new UserCart();
+                System.out.println("User logged out.  User now " + MainActivity.user);
                 NavHostFragment.findNavController(OrderScreen.this)
                         .navigate(R.id.action_OrderScreen_to_LogOutScreen);
             }

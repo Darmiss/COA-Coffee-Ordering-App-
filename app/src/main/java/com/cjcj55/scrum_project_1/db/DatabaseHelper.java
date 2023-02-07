@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.cjcj55.scrum_project_1.MainActivity;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
@@ -422,9 +423,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] selectionArgs = {email, password};
         Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
         int count = cursor.getCount();
+        if (count > 0) {
+            cursor.moveToFirst();
+            int userIdIndex = cursor.getColumnIndex("user_id");
+            MainActivity.user = cursor.getInt(userIdIndex);
+            System.out.println("User logged in.  User now " + MainActivity.user);
+            cursor.close();
+            return true;
+        }
         cursor.close();
-//        db.close();
-        return count > 0;
+        return false;
     }
 
     /**

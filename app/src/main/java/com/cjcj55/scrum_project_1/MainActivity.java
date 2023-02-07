@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     // CoffeeItem List to store user's shopping cart
     public static UserCart userCart;
 
+    // Stores USERID when a user is logged in.  Otherwise, -1
+    public static int user = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
