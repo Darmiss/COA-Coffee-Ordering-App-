@@ -49,7 +49,7 @@ public class OrderScreen extends Fragment {
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
             layoutParams.setMargins(10, 10, 10, 10);
@@ -57,15 +57,27 @@ public class OrderScreen extends Fragment {
 
             TextView coffeeName = new TextView(getContext());
             coffeeName.setText(coffeeItem.getName());
-            coffeeName.setGravity(Gravity.LEFT);
-            coffeeName.setTextSize(20);
+            coffeeName.setTextSize(30);
 
             TextView coffeePrice = new TextView(getContext());
             coffeePrice.setText("$" + Double.toString(coffeeItem.getPrice()));
-            coffeePrice.setTextSize(20);
+            coffeePrice.setTextSize(30);
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1.0f
+            );
 
             buttonLayout.setId(coffeeItem.getId());
+            buttonLayout.setWeightSum(2);
+
+            params.gravity = Gravity.LEFT;
+            coffeeName.setLayoutParams(params);
             buttonLayout.addView(coffeeName);
+
+            params.gravity = Gravity.END;
+            coffeePrice.setLayoutParams(params);
             buttonLayout.addView(coffeePrice);
 
             buttonLayout.setOnClickListener(new View.OnClickListener() {
