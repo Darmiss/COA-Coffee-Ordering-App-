@@ -2,6 +2,8 @@ package com.cjcj55.scrum_project_1;
 
 
 
+import static android.graphics.Color.BLACK;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -142,6 +144,11 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         } catch(NullPointerException e){
                 System.out.println("Empty cart found");
         }
+        TextView totalView = view.findViewById(R.id.totalView);
+        DecimalFormat df = new DecimalFormat("0.00");
+        totalView.setText("TOTAL: " + df.format(total));
+        totalView.setTextSize(40);
+        totalView.setTextColor(BLACK);
 
         binding.OrderScreenOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
