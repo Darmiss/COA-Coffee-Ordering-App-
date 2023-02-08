@@ -30,6 +30,14 @@ public class AddFlavorScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
        //BINDINGS
+
+        binding.addFlBackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(AddFlavorScreen.this)
+                        .navigate(R.id.action_AddFlavorScreen_to_SysAdminScreen);
+            }
+        });
     }
 
     @Override
