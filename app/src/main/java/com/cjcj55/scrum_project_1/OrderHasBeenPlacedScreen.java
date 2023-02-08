@@ -2,6 +2,8 @@ package com.cjcj55.scrum_project_1;
 
 
 
+import static android.graphics.Color.BLACK;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,7 +23,7 @@ import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 
-
+//Thing
 //Scene after you have placed an order showcasing details
 public class OrderHasBeenPlacedScreen extends Fragment {
 
@@ -142,6 +144,12 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         } catch(NullPointerException e){
                 System.out.println("Empty cart found");
         }
+        //Should add the totalView to the push
+        TextView totalView = view.findViewById(R.id.totalView);
+        DecimalFormat df = new DecimalFormat("0.00");
+        totalView.setText("TOTAL: " + df.format(total));
+        totalView.setTextSize(40);
+        totalView.setTextColor(BLACK);
 
         binding.OrderScreenOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
