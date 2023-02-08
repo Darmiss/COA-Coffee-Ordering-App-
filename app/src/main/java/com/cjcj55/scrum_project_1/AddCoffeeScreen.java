@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AddcoffeeuiBinding;
 
@@ -30,6 +31,14 @@ public class AddCoffeeScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //BINDINGS
+
+        binding.AddCBackToSysAd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(AddCoffeeScreen.this)
+                        .navigate(R.id.action_AddCoffeeScreen_to_SysAdminScreen);
+            }
+        });
     }
 
     @Override
