@@ -129,8 +129,15 @@ public class OrderScreen extends Fragment {
         binding.checkOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_CheckoutCartScreen);
+                if(MainActivity.userCart.getUserCart().isEmpty())
+                {
+                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is Empty.");
+                   messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                }
+                else {
+                    NavHostFragment.findNavController(OrderScreen.this)
+                            .navigate(R.id.action_OrderScreen_to_CheckoutCartScreen);
+                }
             }
         });
     }
