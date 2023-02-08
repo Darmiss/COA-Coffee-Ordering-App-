@@ -1,5 +1,7 @@
 package com.cjcj55.scrum_project_1.objects.order_items;
 
+import androidx.annotation.NonNull;
+
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 
 public class FlavorItem {
@@ -29,5 +31,11 @@ public class FlavorItem {
 
     public double getPrice() {
         return price;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return this.name + ", " + this.description + ", " + this.price;
     }
 }
