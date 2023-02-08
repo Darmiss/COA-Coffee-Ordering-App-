@@ -153,6 +153,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         binding.OrderScreenOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.userCart.clearCart();
                NavHostFragment.findNavController(OrderHasBeenPlacedScreen.this)
                        .navigate(R.id.action_OrderHasBeenPlacedScreen_to_OrderScreen);
             }

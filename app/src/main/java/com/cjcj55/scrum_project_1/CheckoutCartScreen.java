@@ -30,6 +30,11 @@ public class CheckoutCartScreen extends Fragment {
         binding.placeOrderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Insert entire order to database
+
+                // Clear cart
+                //MainActivity.userCart.clearCart();
+
                 NavHostFragment.findNavController(CheckoutCartScreen.this)
                         .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
             }
