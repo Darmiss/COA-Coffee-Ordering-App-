@@ -1,5 +1,8 @@
 package com.cjcj55.scrum_project_1;
 
+import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
+import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -112,8 +115,10 @@ public class OrderScreen extends Fragment {
                 MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
                 System.out.println("User logged out.  User now " + MainActivity.user);
+                setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
+                setAccountCreationPopup(false); //disables account creation popup
                 NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_LogOutScreen);
+                        .navigate(R.id.action_OrderScreen_to_LoginScreen);
             }
         });
 
@@ -125,12 +130,34 @@ public class OrderScreen extends Fragment {
             }
         });
 
+        binding.WorkerViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(OrderScreen.this)
+                        .navigate(R.id.action_OrderScreen_to_WorkerOrderScreen);
+            }
+        });
+
+        binding.SysAdminViewBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(OrderScreen.this)
+                        .navigate(R.id.action_OrderScreen_to_SysAdminScreen);
+            }
+        });
 
         binding.checkOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_CheckoutCartScreen);
+                if(MainActivity.userCart.getUserCart().isEmpty())
+                {
+                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is Empty.");
+                   messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                }
+                else {
+                    NavHostFragment.findNavController(OrderScreen.this)
+                            .navigate(R.id.action_OrderScreen_to_CheckoutCartScreen);
+                }
             }
         });
     }

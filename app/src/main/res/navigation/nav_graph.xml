@@ -32,8 +32,14 @@
             android:id="@+id/action_OrderScreen_to_CheckoutCartScreen"
             app:destination="@id/CheckoutCartScreen" />
         <action
-            android:id="@+id/action_OrderScreen_to_LogOutScreen"
-            app:destination="@id/LogOutScreen" />
+            android:id="@+id/action_OrderScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
+        <action
+            android:id="@+id/action_OrderScreen_to_SysAdminScreen"
+            app:destination="@id/SysAdminScreen" />
+        <action
+            android:id="@+id/action_OrderScreen_to_WorkerOrderScreen"
+            app:destination="@id/WorkerOrderScreen" />
     </fragment>
     <fragment
         android:id="@+id/ItemSelectionScreen"
@@ -79,21 +85,74 @@
         android:id="@+id/WorkerOrderScreen"
         android:name="com.cjcj55.scrum_project_1.WorkerOrderScreen"
         android:label="Orders"
-        tools:layout="@layout/workescreenui"/>
+        tools:layout="@layout/workescreenui">
+        <action
+            android:id="@+id/action_WorkerOrderScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
+    </fragment>
     <fragment
         android:id="@+id/SysAdminScreen"
         android:name="com.cjcj55.scrum_project_1.SysAdminScreen"
         android:label="Adminstration"
-        tools:layout="@layout/sysadminui"/>
-    <fragment
-        android:id="@+id/LogOutScreen"
-        android:name="com.cjcj55.scrum_project_1.LogoutScreen"
-        android:label="Logout"
-        tools:layout="@layout/activity_logout">
+        tools:layout="@layout/sysadminui">
         <action
-            android:id="@+id/action_LogOutScreen_to_LoginScreen"
-            app:destination="@id/LoginScreen" />
+            android:id="@+id/action_SysAdminScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_AddFlavorScreen"
+            app:destination="@id/AddFlavorScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_RemoveToppingScreen"
+            app:destination="@id/RemoveToppingScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_RemoveCoffeeScreen"
+            app:destination="@id/RemoveCoffeeScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_AddCoffeeScreen"
+            app:destination="@id/AddCoffeeScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_AddToppingScreen"
+            app:destination="@id/AddToppingScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_RemoveFlavorScreen"
+            app:destination="@id/RemoveFlavorScreen" />
     </fragment>
+
+    <fragment
+        android:id="@+id/AddCoffeeScreen"
+        android:name="com.cjcj55.scrum_project_1.AddCoffeeScreen"
+        android:label="Add Coffee(s)"
+        tools:layout="@layout/addcoffeeui"/>
+
+    <fragment
+        android:id="@+id/RemoveCoffeeScreen"
+        android:name="com.cjcj55.scrum_project_1.RemoveCoffeeScreen"
+        android:label="Remove Coffee(s)"
+        tools:layout="@layout/removecoffeeui"/>
+
+    <fragment
+        android:id="@+id/AddToppingScreen"
+        android:name="com.cjcj55.scrum_project_1.AddToppingScreen"
+        android:label="Add Topping(s)"
+        tools:layout="@layout/addtoppingui"/>
+
+    <fragment
+        android:id="@+id/RemoveToppingScreen"
+        android:name="com.cjcj55.scrum_project_1.RemoveToppingScreen"
+        android:label="Remove Topping(s)"
+        tools:layout="@layout/removetoppingui"/>
+
+    <fragment
+        android:id="@+id/AddFlavorScreen"
+        android:name="com.cjcj55.scrum_project_1.AddFlavorScreen"
+        android:label="Add Flavor(s)"
+        tools:layout="@layout/addflavorui"/>
+
+    <fragment
+        android:id="@+id/RemoveFlavorScreen"
+        android:name="com.cjcj55.scrum_project_1.RemoveFlavorScreen"
+        android:label="Remove Flavor(s)"
+        tools:layout="@layout/removeflavorui"/>
 
 
     <fragment

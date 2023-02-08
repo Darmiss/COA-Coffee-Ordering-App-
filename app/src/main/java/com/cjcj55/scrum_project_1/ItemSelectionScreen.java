@@ -12,21 +12,26 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
+import com.cjcj55.scrum_project_1.objects.FlavorButton;
+import com.cjcj55.scrum_project_1.objects.ToppingButton;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
 import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 //Screen shown after selecting a item from the menu(toppings here etc)
-public class ItemSelectionScreen extends Fragment{
+public class ItemSelectionScreen extends Fragment {
 
 
     private ItemselectionuiBinding binding;
@@ -52,7 +57,7 @@ public class ItemSelectionScreen extends Fragment{
         LinearLayout toppingContainer = view.findViewById(R.id.toppingContainer);
 
         for (ToppingItemInCatalog toppingItem : MainActivity.toppingItemInCatalogTypes) {
-            LinearLayout buttonLayout = new LinearLayout(getContext());
+            ToppingButton buttonLayout = new ToppingButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
@@ -105,6 +110,14 @@ public class ItemSelectionScreen extends Fragment{
                     }
 
                     // Checkbox toggle this item.  handle all selected on form submit
+                    // Toggle the selected state
+                    buttonLayout.setSelected(!buttonLayout.isSelected());
+
+                    // Update the background color based on the selected state
+                    buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
+                            buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
+
+                    printAllActiveToppings();
                 }
             });
             toppingContainer.addView(buttonLayout);
@@ -119,7 +132,7 @@ public class ItemSelectionScreen extends Fragment{
         LinearLayout flavorContainer = view.findViewById(R.id.flavorContainer);
 
         for (FlavorItemInCatalog flavorItem : MainActivity.flavorItemInCatalogTypes) {
-            LinearLayout buttonLayout = new LinearLayout(getContext());
+            FlavorButton buttonLayout = new FlavorButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
@@ -172,6 +185,14 @@ public class ItemSelectionScreen extends Fragment{
                     }
 
                     // Checkbox toggle this item.  handle all selected on form submit
+                    // Toggle the selected state
+                    buttonLayout.setSelected(!buttonLayout.isSelected());
+
+                    // Update the background color based on the selected state
+                    buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
+                            buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
+
+                    printAllActiveFlavors();
                 }
             });
             flavorContainer.addView(buttonLayout);
@@ -180,6 +201,10 @@ public class ItemSelectionScreen extends Fragment{
         binding.addtocartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<ToppingItem> toppings = new ArrayList<>();
+                List<FlavorItem> flavors = new ArrayList<>();
+
+
                     NavHostFragment.findNavController(ItemSelectionScreen.this)
                             .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);
             }
@@ -193,6 +218,24 @@ public class ItemSelectionScreen extends Fragment{
             }
         });
 
+    }
+
+    public void printAllActiveToppings() {
+        for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {
+            ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);
+            if (topping.isSelected()) {
+                System.out.println(topping.getId());
+            }
+        }
+    }
+
+    public void printAllActiveFlavors() {
+        for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {
+            FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);
+            if (flavor.isSelected()) {
+                System.out.println(flavor.getId());
+            }
+        }
     }
 
 

@@ -8,8 +8,11 @@ import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -24,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,19 +52,20 @@ public class MainActivity extends AppCompatActivity {
 
     public static CoffeeItem currentCoffee;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         // Create single instance of DatabaseHelper.
         // Pass this to the fragments.
+
         db = DatabaseHelper.getInstance(this);
 
         coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(db);
         toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
         flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
         userCart = new UserCart();
-
         System.out.println("-------------------------------\nCoffee:\n-------------------------------");
         for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
             System.out.println(coffeeItemInCatalog.toString());
@@ -75,21 +80,22 @@ public class MainActivity extends AppCompatActivity {
         }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
+       setSupportActionBar(binding.toolbar);
+            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+            appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        }
 
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
 
-
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -101,17 +107,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.WorkerViewButton) {
-            Intent intent= new Intent(MainActivity.this, WorkerOrderScreen.class);
-            startActivity(intent);
-            return true;
-        }
-        else
-            if(id == R.id.SysAdminViewButton){
-                Intent intent= new Intent(MainActivity.this, SysAdminScreen.class);
-                startActivity(intent);
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -121,5 +117,5 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, appBarConfiguration)
                 || super.onSupportNavigateUp();
-    }
+   }
 }
