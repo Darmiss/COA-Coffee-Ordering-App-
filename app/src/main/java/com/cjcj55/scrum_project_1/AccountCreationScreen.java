@@ -1,6 +1,7 @@
 package com.cjcj55.scrum_project_1;
 
-import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedin;
+import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
+import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -42,7 +43,8 @@ public class AccountCreationScreen extends Fragment {
                 Context context = getContext();
                 if (checkInputs(getnewEmail(), getnewPassword(), getFirstName(), getLastName())) {
                     DatabaseHelper.getInstance(context).insertUser(getnewPassword(), getnewEmail(), getFirstName(), getLastName());
-                    setLoggedin(true);  //Makes it so when going back to the login "Account created" popup is made
+                    setAccountCreationPopup(true);  //Makes it so when going back to the login "Account created" popup is made
+                    setLoggedOutPopup(false); //disables "you have been logged out" popup
                     NavHostFragment.findNavController(AccountCreationScreen.this)
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 
@@ -57,7 +59,8 @@ public class AccountCreationScreen extends Fragment {
         binding.backtologbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setLoggedin(false); //Makes it so when going back to the loginscreen the "Account created" popup wont popup
+                setAccountCreationPopup(false); //Makes it so when going back to the loginscreen the "Account created" popup wont popup
+                setLoggedOutPopup(false); //Likewise
                 NavHostFragment.findNavController(AccountCreationScreen.this)
                         .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 

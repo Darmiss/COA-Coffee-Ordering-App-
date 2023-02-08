@@ -32,8 +32,8 @@
             android:id="@+id/action_OrderScreen_to_CheckoutCartScreen"
             app:destination="@id/CheckoutCartScreen" />
         <action
-            android:id="@+id/action_OrderScreen_to_LogOutScreen"
-            app:destination="@id/LogOutScreen" />
+            android:id="@+id/action_OrderScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
     </fragment>
     <fragment
         android:id="@+id/ItemSelectionScreen"
@@ -85,15 +85,6 @@
         android:name="com.cjcj55.scrum_project_1.SysAdminScreen"
         android:label="Adminstration"
         tools:layout="@layout/sysadminui"/>
-    <fragment
-        android:id="@+id/LogOutScreen"
-        android:name="com.cjcj55.scrum_project_1.LogoutScreen"
-        android:label="Logout"
-        tools:layout="@layout/activity_logout">
-        <action
-            android:id="@+id/action_LogOutScreen_to_LoginScreen"
-            app:destination="@id/LoginScreen" />
-    </fragment>
 
 
     <fragment
