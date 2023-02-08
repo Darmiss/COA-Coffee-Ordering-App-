@@ -21,7 +21,7 @@ import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 
-
+//Thing
 //Scene after you have placed an order showcasing details
 public class OrderHasBeenPlacedScreen extends Fragment {
 
