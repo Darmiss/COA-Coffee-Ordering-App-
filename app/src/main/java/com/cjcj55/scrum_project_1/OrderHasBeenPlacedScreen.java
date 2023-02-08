@@ -41,6 +41,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //TODO
+        double total = 0;
         LinearLayout container = view.findViewById(R.id.recieptContainer);
         try{
             for(int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
@@ -70,13 +71,36 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                 recLayout.addView(coffeePrice);
 
                 container.addView(recLayout);
+                total = total + MainActivity.userCart.getCoffeeAt(i).getPrice();
                 //This will
                 try {
                     for (int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); j++) {
                         LinearLayout recLayoutF = new LinearLayout(getContext());
                         recLayoutF.setOrientation(LinearLayout.HORIZONTAL);
                         recLayoutF.setPadding(40,20,40,20);
-                        
+                        ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        recLayoutF.setLayoutParams(layoutF);
+                        //Add flavor name format to the container
+                        TextView flavorName = new TextView(getContext());
+                        flavorName.setText(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getName());
+                        flavorName.setTextSize(20);
+                        //Add flavor price format to container
+                        TextView flavorPrice = new TextView(getContext());
+                        flavorPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
+                        flavorPrice.setTextSize(20);
+                        flavorPrice.setGravity(Gravity.END);
+                        //Add container to container
+                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+                        params1.gravity = Gravity.LEFT;
+                        flavorName.setLayoutParams(params1);
+                        recLayoutF.addView(flavorName);
+
+                        params1.gravity = Gravity.END;
+                        flavorPrice.setLayoutParams(params1);
+                        recLayoutF.addView(flavorPrice);
+                        container.addView(recLayoutF);
+
+                        total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
                     }
                 } catch(NullPointerException e){
                     System.out.println("Flavor list is empty");
