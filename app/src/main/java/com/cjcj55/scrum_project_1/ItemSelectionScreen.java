@@ -117,7 +117,7 @@ public class ItemSelectionScreen extends Fragment {
                     buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
                             buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
 
-                    printAllActiveToppings();
+//                    printAllActiveToppings();
                 }
             });
             toppingContainer.addView(buttonLayout);
@@ -192,7 +192,7 @@ public class ItemSelectionScreen extends Fragment {
                     buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
                             buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
 
-                    printAllActiveFlavors();
+//                    printAllActiveFlavors();
                 }
             });
             flavorContainer.addView(buttonLayout);
@@ -204,6 +204,31 @@ public class ItemSelectionScreen extends Fragment {
                 List<ToppingItem> toppings = new ArrayList<>();
                 List<FlavorItem> flavors = new ArrayList<>();
 
+                for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {
+                    ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);
+                    if (topping.isSelected()) {
+                        toppings.add(new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(i)));
+                    }
+                }
+                for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {
+                    FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);
+                    if (flavor.isSelected()) {
+                        flavors.add(new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(i)));
+                    }
+                }
+                MainActivity.currentCoffee.setToppingItemList(toppings);
+                MainActivity.currentCoffee.setFlavorItemList(flavors);
+                MainActivity.userCart.addCoffeeToCart(MainActivity.currentCoffee);
+                for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
+                    System.out.println(MainActivity.userCart.getCoffeeAt(i).toString());
+                    for (int t = 0; t < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); t++) {
+                        System.out.println("\t" + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(t).toString());
+                    }
+                    for (int f = 0; f < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); f++) {
+                        System.out.println("\t" + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(f).toString());
+                    }
+                }
+
 
                     NavHostFragment.findNavController(ItemSelectionScreen.this)
                             .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);
@@ -213,6 +238,7 @@ public class ItemSelectionScreen extends Fragment {
         binding.discardButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity.currentCoffee = null;
                 NavHostFragment.findNavController(ItemSelectionScreen.this)
                         .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);
             }
