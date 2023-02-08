@@ -107,17 +107,7 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.WorkerViewButton) {
-            NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-            navController.navigate(R.id.destinationto_workerfragment);
-            return true;
-        }
-        else
-            if(id == R.id.SysAdminViewButton){
-                NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-                navController.navigate(R.id.destinationto_sysadminfragment);
-            return true;
-        }
+
 
         return super.onOptionsItemSelected(item);
     }

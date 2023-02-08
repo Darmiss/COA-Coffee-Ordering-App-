@@ -33,6 +33,14 @@ public class WorkerOrderScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
+        binding.BacktoMenuWorkerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(WorkerOrderScreen.this)
+                        .navigate(R.id.action_WorkerOrderScreen_to_OrderScreen);
+            }
+        });
+
     }
 
     @Override
