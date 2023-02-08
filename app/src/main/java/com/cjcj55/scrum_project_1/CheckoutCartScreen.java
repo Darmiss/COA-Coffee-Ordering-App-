@@ -33,7 +33,7 @@ public class CheckoutCartScreen extends Fragment {
                 // Insert entire order to database
 
                 // Clear cart
-                MainActivity.userCart.clearCart();
+                //MainActivity.userCart.clearCart();
 
                 NavHostFragment.findNavController(CheckoutCartScreen.this)
                         .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
