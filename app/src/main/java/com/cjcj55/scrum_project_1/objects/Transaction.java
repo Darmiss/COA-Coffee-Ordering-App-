@@ -6,6 +6,7 @@ import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 import java.util.List;
 
 public class Transaction {
+    //Not used but used as a reference
     private List<CoffeeItem> coffeeItems;
     double total;
     public Transaction(List<CoffeeItem> coffees){
