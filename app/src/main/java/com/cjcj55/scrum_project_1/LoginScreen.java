@@ -8,11 +8,14 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.LoginuiBinding;
 import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+
+import java.util.Objects;
 
 public class LoginScreen extends Fragment {
     private LoginuiBinding binding;
@@ -35,7 +38,6 @@ public class LoginScreen extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         if(popupaccountcreation) { //shows the popup message "Account created" if flag set in accountcreationscreen
             MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Account Successfully Created");
             messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
@@ -26,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 
 //Screen shown after selecting a item from the menu(toppings here etc)
-public class ItemSelectionScreen extends Fragment{
+public class ItemSelectionScreen extends Fragment {
 
 
     private ItemselectionuiBinding binding;
