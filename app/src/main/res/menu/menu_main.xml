@@ -1,15 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.cjcj55.scrum_project_1.MainActivity">
-    <item
-        android:id="@+id/WorkerViewButton"
-        android:orderInCategory="100"
-        android:title="WorkerView"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/SysAdminViewButton"
-        android:orderInCategory="100"
-        android:title="SysAdminView"
-        app:showAsAction="never" />
-</menu>
+    tools:context="com.cjcj55.scrum_project_1.MainActivity"/>

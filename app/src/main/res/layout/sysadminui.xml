@@ -69,11 +69,11 @@
         app:layout_constraintTop_toBottomOf="@+id/RemoveToppingBtn" />
 
     <Button
-        android:id="@+id/BackBtn"
+        android:id="@+id/BacktoMenuBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
-        android:text="Back"
+        android:text="Back to Menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
