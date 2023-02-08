@@ -16,6 +16,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
+import com.cjcj55.scrum_project_1.objects.FlavorButton;
+import com.cjcj55.scrum_project_1.objects.ToppingButton;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
@@ -55,7 +57,7 @@ public class ItemSelectionScreen extends Fragment {
         LinearLayout toppingContainer = view.findViewById(R.id.toppingContainer);
 
         for (ToppingItemInCatalog toppingItem : MainActivity.toppingItemInCatalogTypes) {
-            LinearLayout buttonLayout = new LinearLayout(getContext());
+            ToppingButton buttonLayout = new ToppingButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
@@ -96,7 +98,6 @@ public class ItemSelectionScreen extends Fragment {
             buttonLayout.addView(toppingPrice);
 
             buttonLayout.setOnClickListener(new View.OnClickListener() {
-                private boolean isSelected = false;
                 @Override
                 public void onClick(View view) {
                     // Locate the id from the catalog
@@ -110,11 +111,13 @@ public class ItemSelectionScreen extends Fragment {
 
                     // Checkbox toggle this item.  handle all selected on form submit
                     // Toggle the selected state
-                    isSelected = !isSelected;
+                    buttonLayout.setSelected(!buttonLayout.isSelected());
 
                     // Update the background color based on the selected state
                     buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
-                            isSelected ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
+                            buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
+
+                    printAllActiveToppings();
                 }
             });
             toppingContainer.addView(buttonLayout);
@@ -129,7 +132,7 @@ public class ItemSelectionScreen extends Fragment {
         LinearLayout flavorContainer = view.findViewById(R.id.flavorContainer);
 
         for (FlavorItemInCatalog flavorItem : MainActivity.flavorItemInCatalogTypes) {
-            LinearLayout buttonLayout = new LinearLayout(getContext());
+            FlavorButton buttonLayout = new FlavorButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
@@ -169,9 +172,7 @@ public class ItemSelectionScreen extends Fragment {
             flavorPrice.setLayoutParams(params);
             buttonLayout.addView(flavorPrice);
 
-            final View.OnClickListener listener;
-            buttonLayout.setOnClickListener(listener = new View.OnClickListener() {
-                private boolean isSelected = false;
+            buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     // Locate the id from the catalog
@@ -185,11 +186,13 @@ public class ItemSelectionScreen extends Fragment {
 
                     // Checkbox toggle this item.  handle all selected on form submit
                     // Toggle the selected state
-                    isSelected = !isSelected;
+                    buttonLayout.setSelected(!buttonLayout.isSelected());
 
                     // Update the background color based on the selected state
                     buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
-                            isSelected ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
+                            buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
+
+                    printAllActiveFlavors();
                 }
             });
             flavorContainer.addView(buttonLayout);
@@ -215,6 +218,24 @@ public class ItemSelectionScreen extends Fragment {
             }
         });
 
+    }
+
+    public void printAllActiveToppings() {
+        for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {
+            ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);
+            if (topping.isSelected()) {
+                System.out.println(topping.getId());
+            }
+        }
+    }
+
+    public void printAllActiveFlavors() {
+        for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {
+            FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);
+            if (flavor.isSelected()) {
+                System.out.println(flavor.getId());
+            }
+        }
     }
 
 
