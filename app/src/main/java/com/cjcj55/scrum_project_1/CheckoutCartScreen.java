@@ -1,10 +1,16 @@
 package com.cjcj55.scrum_project_1;
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.RED;
+
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +39,7 @@ public class CheckoutCartScreen extends Fragment {
         try {
             for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
                 //This already calculates the carts total so this should just be an initialize to the cart view as well
-                LinearLayout cartLayout = new LinearLayout(getContext());
+                LinearLayout cartLayout = new TableLayout(getContext());
                 cartLayout.setOrientation(LinearLayout.HORIZONTAL);
                 cartLayout.setPadding(40, 20, 40, 20);
                 ViewGroup.LayoutParams layoutC = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
@@ -50,7 +56,18 @@ public class CheckoutCartScreen extends Fragment {
                 coffeePrice.setGravity(Gravity.CENTER);
                 //Create the button for the cart to remove the coffee as a total
                 //Uhhh if I push enough buttons it'll have to work right
+                Button removeBtn = new Button(getContext());
+                removeBtn.setBackgroundColor(RED);
+                removeBtn.setText("X");
+                removeBtn.setTextColor(Color.rgb(255, 204, 203));
 
+                removeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        System.out.print("HI HI HI");
+                        cartLayout.removeAllViewsInLayout();
+                    }
+                });
 
                 //Add it all to the GUI
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -63,6 +80,8 @@ public class CheckoutCartScreen extends Fragment {
                 cartLayout.addView(coffeePrice);
 
                 params.gravity = Gravity.END;
+                removeBtn.setLayoutParams(params);
+                cartLayout.addView(removeBtn);
                 //Add the button stuff here
 
                 container.addView(cartLayout);
@@ -141,6 +160,11 @@ public class CheckoutCartScreen extends Fragment {
         }catch(NullPointerException e){
             System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
         }
+        TextView totalView = view.findViewById(R.id.totalCost);
+        DecimalFormat df = new DecimalFormat("0.00");
+        totalView.setText("TOTAL: " + df.format(total));
+        totalView.setTextSize(40);
+        totalView.setTextColor(BLACK);
 
 
         binding.placeOrderButton.setOnClickListener(new View.OnClickListener() {
