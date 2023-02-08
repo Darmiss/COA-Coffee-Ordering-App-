@@ -144,6 +144,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         } catch(NullPointerException e){
                 System.out.println("Empty cart found");
         }
+        //Should add the totalView to the push
         TextView totalView = view.findViewById(R.id.totalView);
         DecimalFormat df = new DecimalFormat("0.00");
         totalView.setText("TOTAL: " + df.format(total));
