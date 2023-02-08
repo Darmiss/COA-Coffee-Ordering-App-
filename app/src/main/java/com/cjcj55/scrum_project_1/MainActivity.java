@@ -14,9 +14,11 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cjcj55.scrum_project_1.databinding.ActivityMainBinding;
-import com.cjcj55.scrum_project_1.objects.Coffee;
-import com.cjcj55.scrum_project_1.objects.Flavor;
-import com.cjcj55.scrum_project_1.objects.Topping;
+import com.cjcj55.scrum_project_1.objects.UserCart;
+import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,9 +36,17 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseHelper db;
 
     // 3 lists to store all coffee, topping, and flavor types from database
-    public List<Coffee> coffeeTypes;
-    public List<Topping> toppingTypes;
-    public List<Flavor> flavorTypes;
+    public static List<CoffeeItemInCatalog> coffeeItemInCatalogTypes;
+    public static List<ToppingItemInCatalog> toppingItemInCatalogTypes;
+    public static List<FlavorItemInCatalog> flavorItemInCatalogTypes;
+
+    // CoffeeItem List to store user's shopping cart
+    public static UserCart userCart;
+
+    // Stores USERID when a user is logged in.  Otherwise, -1
+    public static int user = -1;
+
+    public static CoffeeItem currentCoffee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +56,22 @@ public class MainActivity extends AppCompatActivity {
         // Pass this to the fragments.
         db = DatabaseHelper.getInstance(this);
 
-        coffeeTypes = DatabaseHelper.getAllCoffeeTypes(db);
-        toppingTypes = DatabaseHelper.getAllToppingTypes(db);
-        flavorTypes = DatabaseHelper.getAllFlavorTypes(db);
+        coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(db);
+        toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
+        flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
+        userCart = new UserCart();
 
         System.out.println("-------------------------------\nCoffee:\n-------------------------------");
-        for (Coffee coffee : coffeeTypes) {
-            System.out.println(coffee.toString());
+        for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
+            System.out.println(coffeeItemInCatalog.toString());
         }
         System.out.println("-------------------------------\nToppings:\n-------------------------------");
-        for (Topping topping : toppingTypes) {
-            System.out.println(topping.toString());
+        for (ToppingItemInCatalog toppingItemInCatalog : toppingItemInCatalogTypes) {
+            System.out.println(toppingItemInCatalog.toString());
         }
         System.out.println("-------------------------------\nFlavors:\n-------------------------------");
-        for (Flavor flavor : flavorTypes) {
-            System.out.println(flavor.toString());
+        for (FlavorItemInCatalog flavorItemInCatalog : flavorItemInCatalogTypes) {
+            System.out.println(flavorItemInCatalog.toString());
         }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());

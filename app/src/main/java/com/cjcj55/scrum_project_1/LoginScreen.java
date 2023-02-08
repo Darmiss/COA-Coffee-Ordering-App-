@@ -58,6 +58,7 @@ public class LoginScreen extends Fragment {
             public void onClick(View view) {
                 Context context = getContext();
                 boolean check = DatabaseHelper.getInstance(context).userLogin(getEmail(),getPassword());
+//                boolean check = DatabaseHelper.getInstance(context).userLogin("johnjones@mail.com","coffee");
                 if(check)
                 {
                    NavHostFragment.findNavController(LoginScreen.this)
