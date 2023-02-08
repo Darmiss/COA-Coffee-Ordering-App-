@@ -9,6 +9,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WORKER"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="222dp" />
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="93dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="144dp"
+        android:layout_height="65dp"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="298dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

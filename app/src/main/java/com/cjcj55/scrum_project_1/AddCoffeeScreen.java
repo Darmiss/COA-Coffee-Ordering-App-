@@ -1,22 +1,19 @@
 package com.cjcj55.scrum_project_1;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.fragment.NavHostFragment;
 
-import com.cjcj55.scrum_project_1.databinding.ViewpastorderuiBinding;
-import com.cjcj55.scrum_project_1.databinding.WorkescreenuiBinding;
+import com.cjcj55.scrum_project_1.databinding.AddcoffeeuiBinding;
 
-public class WorkerOrderScreen extends Fragment {
+public class AddCoffeeScreen extends Fragment {
 
-    private WorkescreenuiBinding binding;
+
+    private AddcoffeeuiBinding binding;
 
     @Override
     public View onCreateView(
@@ -24,7 +21,7 @@ public class WorkerOrderScreen extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding =WorkescreenuiBinding.inflate(inflater, container, false);
+        binding =AddcoffeeuiBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -32,7 +29,7 @@ public class WorkerOrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        //BINDINGS
     }
 
     @Override
@@ -42,5 +39,7 @@ public class WorkerOrderScreen extends Fragment {
     }
 
 }
+
+
 
 

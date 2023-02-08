@@ -8,19 +8,27 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.LoginuiBinding;
 import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
+import java.util.Objects;
+
 public class LoginScreen extends Fragment {
     private LoginuiBinding binding;
-    private static boolean popuploggedin = false;  //Used in AccountCreationScreen
-
-    public static void setLoggedin(boolean set) //Used in AccountCreationScreen
+    private static boolean popupaccountcreation = false;  //Used in AccountCreationScreen
+    private static boolean popuploggedout= false; //Used in Order Screen when clicking log out
+    public static void setAccountCreationPopup(boolean set) //Used in AccountCreationScreen
     {
-        popuploggedin=set;
+        popupaccountcreation=set;
+    }
+
+    public static void setLoggedOutPopup(boolean b)
+    {
+        popuploggedout=b;
     }
     @Override
     public View onCreateView(
@@ -30,9 +38,13 @@ public class LoginScreen extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
-        if(popuploggedin) { //shows the popup message "Account created" if flag set in accountcreationscreen
+        if(popupaccountcreation) { //shows the popup message "Account created" if flag set in accountcreationscreen
             MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Account Successfully Created");
+            messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+        }
+        if(popuploggedout)
+        {
+            MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("You have been logged out.");
             messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
         }
 
