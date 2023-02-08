@@ -84,26 +84,7 @@
         android:id="@+id/SysAdminScreen"
         android:name="com.cjcj55.scrum_project_1.SysAdminScreen"
         android:label="Adminstration"
-        tools:layout="@layout/sysadminui">
-        <action
-            android:id="@+id/action_SysAdminScreen_to_RemoveCoffeeScreen"
-            app:destination="@id/RemoveCoffeeScreen" />
-        <action
-            android:id="@+id/action_SysAdminScreen_to_AddCoffeeScreen"
-            app:destination="@id/AddCoffeeScreen" />
-        <action
-            android:id="@+id/action_SysAdminScreen_to_RemoveToppingScreen"
-            app:destination="@id/RemoveToppingScreen" />
-        <action
-            android:id="@+id/action_SysAdminScreen_to_AddFlavorScreen"
-            app:destination="@id/AddFlavorScreen" />
-        <action
-            android:id="@+id/action_SysAdminScreen_to_RemoveFlavorScreen"
-            app:destination="@id/RemoveFlavorScreen" />
-        <action
-            android:id="@+id/action_SysAdminScreen_to_AddToppingScreen"
-            app:destination="@id/AddToppingScreen" />
-    </fragment>
+        tools:layout="@layout/sysadminui"/>
 
     <fragment
         android:id="@+id/AddCoffeeScreen"
@@ -154,6 +135,24 @@
         <action
             android:id="@+id/action_destinationto_sysadminfragment_to_SysAdminScreen"
             app:destination="@id/SysAdminScreen" />
+        <action
+            android:id="@+id/action_destinationto_sysadminfragment_to_AddToppingScreen"
+            app:destination="@id/AddToppingScreen" />
+        <action
+            android:id="@+id/action_destinationto_sysadminfragment_to_RemoveFlavorScreen"
+            app:destination="@id/RemoveFlavorScreen" />
+        <action
+            android:id="@+id/action_destinationto_sysadminfragment_to_RemoveCoffeeScreen"
+            app:destination="@id/RemoveCoffeeScreen" />
+        <action
+            android:id="@+id/action_destinationto_sysadminfragment_to_RemoveToppingScreen"
+            app:destination="@id/RemoveToppingScreen" />
+        <action
+            android:id="@+id/action_destinationto_sysadminfragment_to_AddFlavorScreen"
+            app:destination="@id/AddFlavorScreen" />
+        <action
+            android:id="@+id/action_destinationto_sysadminfragment_to_AddCoffeeScreen"
+            app:destination="@id/AddCoffeeScreen" />
     </fragment>
 
     <fragment

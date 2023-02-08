@@ -32,12 +32,12 @@ public class SysAdminScreen extends Fragment {
 
         public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
-
+            NavController navController = Navigation.findNavController(view);
             binding.AddCoffeeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     NavHostFragment.findNavController(SysAdminScreen.this)
-                            .navigate(R.id.action_SysAdminScreen_to_AddCoffeeScreen);
+                            .navigate(R.id.action_destinationto_sysadminfragment_to_AddCoffeeScreen);
                 }
             });
 
@@ -45,7 +45,7 @@ public class SysAdminScreen extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NavHostFragment.findNavController(SysAdminScreen.this)
-                            .navigate(R.id.action_SysAdminScreen_to_RemoveCoffeeScreen);
+                            .navigate(R.id.action_destinationto_sysadminfragment_to_RemoveCoffeeScreen);
                 }
             });
 
@@ -53,7 +53,7 @@ public class SysAdminScreen extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NavHostFragment.findNavController(SysAdminScreen.this)
-                            .navigate(R.id.action_SysAdminScreen_to_AddFlavorScreen);
+                            .navigate(R.id.action_destinationto_sysadminfragment_to_AddFlavorScreen);
                 }
             });
 
@@ -61,7 +61,7 @@ public class SysAdminScreen extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NavHostFragment.findNavController(SysAdminScreen.this)
-                            .navigate(R.id.action_SysAdminScreen_to_RemoveFlavorScreen);
+                            .navigate(R.id.action_destinationto_sysadminfragment_to_RemoveFlavorScreen);
                 }
             });
 
@@ -69,7 +69,7 @@ public class SysAdminScreen extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NavHostFragment.findNavController(SysAdminScreen.this)
-                            .navigate(R.id.action_SysAdminScreen_to_AddToppingScreen);
+                            .navigate(R.id.action_destinationto_sysadminfragment_to_AddToppingScreen);
                 }
             });
 
@@ -77,7 +77,7 @@ public class SysAdminScreen extends Fragment {
                 @Override
                 public void onClick(View view) {
                     NavHostFragment.findNavController(SysAdminScreen.this)
-                            .navigate(R.id.action_SysAdminScreen_to_RemoveToppingScreen);
+                            .navigate(R.id.action_destinationto_sysadminfragment_to_RemoveToppingScreen);
                 }
             });
 
