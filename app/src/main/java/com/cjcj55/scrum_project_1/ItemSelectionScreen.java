@@ -19,9 +19,11 @@ import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
 import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -93,6 +95,7 @@ public class ItemSelectionScreen extends Fragment{
             buttonLayout.addView(toppingPrice);
 
             buttonLayout.setOnClickListener(new View.OnClickListener() {
+                private boolean isSelected = false;
                 @Override
                 public void onClick(View view) {
                     // Locate the id from the catalog
@@ -105,6 +108,12 @@ public class ItemSelectionScreen extends Fragment{
                     }
 
                     // Checkbox toggle this item.  handle all selected on form submit
+                    // Toggle the selected state
+                    isSelected = !isSelected;
+
+                    // Update the background color based on the selected state
+                    buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
+                            isSelected ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
                 }
             });
             toppingContainer.addView(buttonLayout);
@@ -159,7 +168,9 @@ public class ItemSelectionScreen extends Fragment{
             flavorPrice.setLayoutParams(params);
             buttonLayout.addView(flavorPrice);
 
-            buttonLayout.setOnClickListener(new View.OnClickListener() {
+            final View.OnClickListener listener;
+            buttonLayout.setOnClickListener(listener = new View.OnClickListener() {
+                private boolean isSelected = false;
                 @Override
                 public void onClick(View view) {
                     // Locate the id from the catalog
@@ -172,6 +183,12 @@ public class ItemSelectionScreen extends Fragment{
                     }
 
                     // Checkbox toggle this item.  handle all selected on form submit
+                    // Toggle the selected state
+                    isSelected = !isSelected;
+
+                    // Update the background color based on the selected state
+                    buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),
+                            isSelected ? R.drawable.rounded_background_selected : R.drawable.rounded_background));
                 }
             });
             flavorContainer.addView(buttonLayout);
@@ -180,6 +197,10 @@ public class ItemSelectionScreen extends Fragment{
         binding.addtocartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                List<ToppingItem> toppings = new ArrayList<>();
+                List<FlavorItem> flavors = new ArrayList<>();
+
+
                     NavHostFragment.findNavController(ItemSelectionScreen.this)
                             .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);
             }

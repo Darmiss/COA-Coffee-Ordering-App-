@@ -32,4 +32,8 @@ public class UserCart {
     public List<CoffeeItem> getUserCart() {
         return this.coffeeItemList;
     }
+
+    public boolean isEmpty() {
+        return coffeeItemList.isEmpty();
+    }
 }
