@@ -42,33 +42,48 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //TODO
         LinearLayout container = view.findViewById(R.id.recieptContainer);
-        for(int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
-            LinearLayout recLayout = new LinearLayout(getContext());
-            recLayout.setOrientation(LinearLayout.HORIZONTAL);
-            recLayout.setPadding(40,20,40,20);
-            ViewGroup.LayoutParams layoutP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            recLayout.setLayoutParams(layoutP);
-            //Add the coffee name
-            TextView coffeeName = new TextView(getContext());
-            coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
-            coffeeName.setTextSize(30);
+        try{
+            for(int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
+                LinearLayout recLayout = new LinearLayout(getContext());
+                recLayout.setOrientation(LinearLayout.HORIZONTAL);
+                recLayout.setPadding(40, 20, 40, 20);
+                ViewGroup.LayoutParams layoutP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                recLayout.setLayoutParams(layoutP);
+                //Add the coffee name
+                TextView coffeeName = new TextView(getContext());
+                coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
+                coffeeName.setTextSize(30);
+                //Add the coffee price
+                TextView coffeePrice = new TextView(getContext());
+                DecimalFormat df = new DecimalFormat("0.00");
+                coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
+                coffeePrice.setTextSize(30);
+                coffeePrice.setGravity(Gravity.END);
+                //Add the views to the container
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+                params.gravity = Gravity.LEFT;
+                coffeeName.setLayoutParams(params);
+                recLayout.addView(coffeeName);
 
-            TextView coffeePrice = new TextView(getContext());
-            DecimalFormat df = new DecimalFormat("0.00");
-            coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
-            coffeePrice.setTextSize(30);
-            coffeePrice.setGravity(Gravity.END);
+                params.gravity = Gravity.END;
+                coffeePrice.setLayoutParams(params);
+                recLayout.addView(coffeePrice);
 
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-            params.gravity = Gravity.LEFT;
-            coffeeName.setLayoutParams(params);
-            recLayout.addView(coffeeName);
-
-            params.gravity = Gravity.END;
-            coffeePrice.setLayoutParams(params);
-            recLayout.addView(coffeePrice);
-            container.addView(recLayout);
-            //Add 2 for loops one to do all the format setting for toppings and one to do all the format settings for
+                container.addView(recLayout);
+                //This will
+                try {
+                    for (int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); j++) {
+                        LinearLayout recLayoutF = new LinearLayout(getContext());
+                        recLayoutF.setOrientation(LinearLayout.HORIZONTAL);
+                        recLayoutF.setPadding(40,20,40,20);
+                        
+                    }
+                } catch(NullPointerException e){
+                    System.out.println("Flavor list is empty");
+                }
+            }
+        } catch(NullPointerException e){
+                System.out.println("Empty cart found");
         }
 
         binding.OrderScreenOkButton.setOnClickListener(new View.OnClickListener() {
