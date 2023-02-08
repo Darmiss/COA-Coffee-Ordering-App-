@@ -105,6 +105,39 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                 } catch(NullPointerException e){
                     System.out.println("Flavor list is empty");
                 }
+                try{
+                    for(int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); j++){
+                        LinearLayout recLayoutT = new LinearLayout(getContext());
+                        recLayoutT.setOrientation(LinearLayout.HORIZONTAL);
+                        recLayoutT.setPadding(40,20,40,20);
+                        ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                        recLayoutT.setLayoutParams(layoutT);
+                        //Add toppings name format to container
+                        TextView toppingsName = new TextView(getContext());
+                        toppingsName.setText(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getName());
+                        toppingsName.setTextSize(20);
+                        //Add toppings price format to container
+                        TextView toppingsPrice = new TextView(getContext());
+                        toppingsPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
+                        toppingsPrice.setTextSize(20);
+                        toppingsPrice.setGravity(Gravity.END);
+                        //Add container to container
+                        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+                        params2.gravity = Gravity.LEFT;
+                        toppingsName.setLayoutParams(params2);
+                        recLayoutT.addView(toppingsName);
+
+                        params2.gravity = Gravity.END;
+                        toppingsPrice.setLayoutParams(params2);
+                        recLayoutT.addView(toppingsPrice);
+                        container.addView(recLayoutT);
+
+                        total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();
+
+                    }
+                } catch(NullPointerException e){
+                    System.out.println("Toppings list is empty");
+                }
             }
         } catch(NullPointerException e){
                 System.out.println("Empty cart found");
