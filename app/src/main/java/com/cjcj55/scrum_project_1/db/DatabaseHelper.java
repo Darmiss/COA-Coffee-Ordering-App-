@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.cjcj55.scrum_project_1.MainActivity;
+import com.cjcj55.scrum_project_1.objects.Transaction;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
@@ -346,6 +347,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id = db.insert("flavors", null, values);
 //        db.close();
         return id;
+    }
+
+    public String getPreviousOrdersForUser(int userId) {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT transactions.*, order_coffee.*, coffee.*, order_toppings_coffee.*, toppings.*, order_flavors_coffee.*, flavors.* " +
+                "FROM transactions " +
+                "JOIN order_coffee ON transactions.transaction_id = order_coffee.transaction_id " +
+                "JOIN coffee ON order_coffee.coffee_id = coffee.coffee_id " +
+                "LEFT JOIN order_toppings_coffee ON order_coffee.order_coffee_id = order_toppings_coffee.order_coffee_id " +
+                "LEFT JOIN toppings ON order_toppings_coffee.topping_id = toppings.topping_id " +
+                "LEFT JOIN order_flavors_coffee ON order_coffee.order_coffee_id = order_flavors_coffee.order_coffee_id " +
+                "LEFT JOIN flavors ON order_flavors_coffee.flavor_id = flavors.flavor_id " +
+                "WHERE transactions.user_id = ?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId)});
+
+        while (cursor.moveToNext()) {
+
+        }
+        return "";
     }
 
     public long insertTransactionFromCart(int userId, UserCart userCart, Timestamp pickupTime, double totalPrice) {

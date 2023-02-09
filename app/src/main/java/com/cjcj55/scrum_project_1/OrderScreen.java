@@ -99,7 +99,6 @@ public class OrderScreen extends Fragment {
             params.gravity = Gravity.END;
             coffeePrice.setLayoutParams(params);
             buttonLayout.addView(coffeePrice);
-
             buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
