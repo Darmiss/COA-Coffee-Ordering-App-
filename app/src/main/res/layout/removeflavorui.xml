@@ -6,13 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".RemoveFlavorScreen">
 
+
+    <EditText
+        android:id="@+id/removeFlavor_text"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="160dp"
+        android:ems="10"
+
+        android:hint="Name of Flavor to remove"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/removeNewFlavorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove Flavor"
+
+        app:layout_constraintBottom_toTopOf="@+id/RemoveFlavorBackBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removeFlavor_text"
+        tools:ignore="MissingConstraints" />
+
     <Button
         android:id="@+id/RemoveFlavorBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
-        android:text="Back"
         android:background="@drawable/roundedbutton"
+        android:text="Back"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
