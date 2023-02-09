@@ -43,6 +43,9 @@ public class RemoveCoffeeScreen extends Fragment {
                     Toast newToast = Toast.makeText(getContext(), "Coffee successfully removed from catalog!",Toast.LENGTH_SHORT);
                     newToast.show();
                     MainActivity.coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(DatabaseHelper.getInstance(context));
+
+                NavHostFragment.findNavController(RemoveCoffeeScreen.this)
+                        .navigate(R.id.action_RemoveCoffeeScreen_to_SysAdminScreen);
             }
         });
 
