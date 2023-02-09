@@ -147,7 +147,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         //Should add the totalView to the push
         TextView totalView = view.findViewById(R.id.totalView);
         DecimalFormat df = new DecimalFormat("0.00");
-        totalView.setText("TOTAL: " + df.format(total));
+        totalView.setText("TOTAL: $" + df.format(total));
         totalView.setTextSize(40);
         totalView.setTextColor(BLACK);
 
