@@ -39,7 +39,7 @@ public class LoginScreen extends Fragment {
             Bundle savedInstanceState
     ) {
         MainActivity.user = -1;
-        System.out.println("User now " + MainActivity.user);
+//        System.out.println("User now " + MainActivity.user);
 
         if(popupaccountcreation) { //shows the popup message "Account created" if flag set in accountcreationscreen
             MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Account Successfully Created");

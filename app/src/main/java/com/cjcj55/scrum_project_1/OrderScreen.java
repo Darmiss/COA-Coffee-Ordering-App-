@@ -114,7 +114,7 @@ public class OrderScreen extends Fragment {
                     MainActivity.currentCoffee = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(cid));
                     NavHostFragment.findNavController(OrderScreen.this)
                             .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);
-                    System.out.println(MainActivity.currentCoffee.toString() + " ID:" + MainActivity.currentCoffee.getId());
+//                    System.out.println(MainActivity.currentCoffee.toString() + " ID:" + MainActivity.currentCoffee.getId());
                 }
             });
             container.addView(buttonLayout);
@@ -125,7 +125,7 @@ public class OrderScreen extends Fragment {
             public void onClick(View view) {
                 MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
-                System.out.println("User logged out.  User now " + MainActivity.user);
+//                System.out.println("User logged out.  User now " + MainActivity.user);
                 setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
                 setAccountCreationPopup(false); //disables account creation popup
                 NavHostFragment.findNavController(OrderScreen.this)
