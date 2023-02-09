@@ -349,6 +349,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public long fulfillTransaction(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("fulfilled", 1);
+        long rowsUpdated = db.insert("transactions", null, values);
+        return rowsUpdated;
+    }
+
+    public List<UserCart> getAllUnfulfilledTransactions() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<UserCart> transactions = new ArrayList<>();
+
+        String query = "SELECT * FROM transactions WHERE fulfilled=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(0)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
+                int userId = cursor.getInt(cursor.getColumnIndex("user_id"));
+                String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
+                String pickupTime = cursor.getString(cursor.getColumnIndex("pickup_time"));
+                double price = cursor.getDouble(cursor.getColumnIndex("price"));
+
+                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transactionId);
+
+                UserCart userCart = new UserCart();
+                for (CoffeeItem coffee : coffeeItems) {
+                    userCart.addCoffeeToCart(coffee);
+                }
+                userCart.setTimeOrdered(timeOrdered);
+                userCart.setPickupTime(pickupTime);
+                userCart.setPrice(price);
+                userCart.setUserId(userId);
+
+                transactions.add(userCart);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return transactions;
+    }
+
     public List<UserCart> getAllTransactionsForUser(int userId) {
         SQLiteDatabase db = getReadableDatabase();
         List<UserCart> transactions = new ArrayList<>();
@@ -405,6 +446,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 CoffeeItem coffeeItem = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(coffeeIndex), beverageCount);
                 coffeeItem.setToppingItemList(toppingItems);
                 coffeeItem.setFlavorItemList(flavorItems);
+                coffeeItems.add(coffeeItem);
             } while (cursor.moveToNext());
         }
         cursor.close();
