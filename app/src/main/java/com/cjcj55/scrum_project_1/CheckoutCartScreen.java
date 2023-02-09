@@ -203,9 +203,15 @@ public class CheckoutCartScreen extends Fragment {
             public void onClick(View view) {
                 // Insert entire order to database
                 DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, new Timestamp(168135474), calcTotal());
-
-                NavHostFragment.findNavController(CheckoutCartScreen.this)
-                        .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
+                if(calcTotal()==0)
+                {
+                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is now empty.");
+                 messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                }
+                else {
+                    NavHostFragment.findNavController(CheckoutCartScreen.this)
+                            .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
+                }
             }
         });
 
