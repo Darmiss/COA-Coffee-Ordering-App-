@@ -41,7 +41,9 @@ public class RemoveFlavorScreen extends Fragment {
             public void onClick(View view) {
                 //remove flavor
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).deleteFlavor(getNewFlavorName());
+                DatabaseHelper.getInstance(context).updateFlavorActive(getNewFlavorName(), 0);
+                DatabaseHelper db = DatabaseHelper.getInstance(getContext());
+                MainActivity.flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
                 Toast newToast = Toast.makeText(getContext(), "Flavor successfully removed!",Toast.LENGTH_SHORT);
                 newToast.show();
 
