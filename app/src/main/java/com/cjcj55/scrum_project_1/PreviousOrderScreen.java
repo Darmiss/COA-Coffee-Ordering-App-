@@ -3,6 +3,7 @@ package com.cjcj55.scrum_project_1;
 
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -41,39 +43,63 @@ public class PreviousOrderScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         List<UserCart> transactionList = DatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(MainActivity.user);
-        ListIterator<UserCart> iterate = transactionList.listIterator();
+        //ListIterator<UserCart> iterate = transactionList.listIterator();
         LinearLayout dynamic = view.findViewById(R.id.previousOrder);
-        int i = 0;
         try{
-            while(iterate.hasNext() == true) {
-                //Sets up the order for adding to the scroll view
+            for(int i =0; i < transactionList.size(); i++) {
+                //This will contain the orders made
+                LinearLayout contain = new LinearLayout(getContext());
+                contain.setOrientation(LinearLayout.VERTICAL);
+                contain.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+                contain.setPadding(40,20,40,20);
+                contain.setId(i);
+                //This part should create the title for the previous order it will contain the total and the first coffee of the list
                 LinearLayout fCart = new LinearLayout(getContext());
                 fCart.setOrientation(LinearLayout.HORIZONTAL);
                 fCart.setPadding(40,20,40,20);
                 ViewGroup.LayoutParams layoutC = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 fCart.setLayoutParams(layoutC);
-                //Adds the first coffee name in the transaction
-                TextView ummTest = new TextView(getContext());
-                ummTest.setText(transactionList.get(i).getCoffeeAt(0).getName() + " " + transactionList.get(i).getCoffeeAt(0).getFlavorItemList().get(0).getName());
-                ummTest.setTextSize(30);
-                //Add the price total of the transaction
-                TextView priceTest = new TextView(getContext());
-                priceTest.setText(""+transactionList.get(i).getPrice());
-                priceTest.setTextSize(30);
-                priceTest.setGravity(Gravity.END);
+                //Title formatting
+                TextView title = new TextView(getContext());
+                title.setText(transactionList.get(i).getCoffeeAt(0).getName());
+                title.setTextSize(30);
+                //Total formatting
+                TextView priceTotal = new TextView(getContext());
+                priceTotal.setText(""+transactionList.get(i).getPrice());
+                priceTotal.setTextSize(30);
+                priceTotal.setGravity(Gravity.END);
 
-                //Add it all together and test
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                 params.gravity = Gravity.LEFT;
-                ummTest.setLayoutParams(params);
-                fCart.addView(ummTest);
+                title.setLayoutParams(params);
+                fCart.addView(title);
 
                 params.gravity = Gravity.END;
-                priceTest.setLayoutParams(params);
-                fCart.addView(priceTest);
+                priceTotal.setLayoutParams(params);
+                fCart.addView(priceTotal);
 
-                dynamic.addView(fCart);
-                i++;
+                contain.addView(fCart);
+                try{
+                    for(int j = 0; j < transactionList.get(i).getUserCart().size(); j++){
+                        try {
+                            for (int q = 0; q < transactionList.get(i).getUserCart().get(j).getFlavorItemList().size(); q++) {
+
+                            }
+                        }catch(NullPointerException e){
+
+                        }
+                        try {
+                            for (int q = 0; q < transactionList.get(i).getUserCart().get(j).getToppingItemList().size(); q++) {
+
+                            }
+                        }catch(NullPointerException e){
+
+                        }
+                    }
+                }catch(NullPointerException e){
+
+                }
+                dynamic.addView(contain);
             }
         } catch(NullPointerException e){
             System.out.println("Hello World");
