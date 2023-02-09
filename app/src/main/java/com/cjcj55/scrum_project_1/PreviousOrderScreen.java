@@ -13,6 +13,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ViewpastorderuiBinding;
+import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.objects.UserCart;
+
+import java.util.List;
+
 //Get to this screen from button, will showcase past orders
 public class PreviousOrderScreen extends Fragment {
     private ViewpastorderuiBinding binding;
@@ -30,6 +35,8 @@ public class PreviousOrderScreen extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        List<UserCart> transactionList = DatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(MainActivity.user);
 
         binding.pastBackButton.setOnClickListener(new View.OnClickListener() {
             @Override

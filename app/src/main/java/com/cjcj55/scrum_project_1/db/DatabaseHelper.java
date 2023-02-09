@@ -349,30 +349,94 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public List<UserCart> getPreviousOrdersForUser(int userId) {
+    public List<UserCart> getAllTransactionsForUser(int userId) {
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT transactions.*, order_coffee.*, coffee.*, order_toppings_coffee.*, toppings.*, order_flavors_coffee.*, flavors.* " +
-                "FROM transactions " +
-                "JOIN order_coffee ON transactions.transaction_id = order_coffee.transaction_id " +
-                "JOIN coffee ON order_coffee.coffee_id = coffee.coffee_id " +
-                "LEFT JOIN order_toppings_coffee ON order_coffee.order_coffee_id = order_toppings_coffee.order_coffee_id " +
-                "LEFT JOIN toppings ON order_toppings_coffee.topping_id = toppings.topping_id " +
-                "LEFT JOIN order_flavors_coffee ON order_coffee.order_coffee_id = order_flavors_coffee.order_coffee_id " +
-                "LEFT JOIN flavors ON order_flavors_coffee.flavor_id = flavors.flavor_id " +
-                "WHERE transactions.user_id = ?";
+        List<UserCart> transactions = new ArrayList<>();
+
+        String query = "SELECT * FROM transactions WHERE user_id=?";
         Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId)});
 
-        List<UserCart> transactionList = new ArrayList<>();
+        if (cursor.moveToFirst()) {
+            do {
+                int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
+                String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
+                double price = cursor.getDouble(cursor.getColumnIndex("price"));
 
-        while (cursor.moveToNext()) {
-            int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
-            String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
-            double price = cursor.getDouble(cursor.getColumnIndex("price"));
-            boolean fulfilled = cursor.getInt(cursor.getColumnIndex("fulfilled")) == 1;
-            boolean cancelledByCustomer = cursor.getInt(cursor.getColumnIndex("cancelled_by_customer")) == 1;
+                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transactionId);
 
+                UserCart userCart = new UserCart();
+                for (CoffeeItem coffee : coffeeItems) {
+                    userCart.addCoffeeToCart(coffee);
+                }
+                userCart.setTimeOrdered(timeOrdered);
+                userCart.setPrice(price);
+
+                transactions.add(userCart);
+            } while (cursor.moveToNext());
         }
-        return transactionList;
+        cursor.close();
+        return transactions;
+    }
+
+    private List<CoffeeItem> getCoffeeItemsForTransaction(int transactionId) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<CoffeeItem> coffeeItems = new ArrayList<>();
+
+        String query = "SELECT * FROM order_coffee WHERE transaction_id=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(transactionId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int coffeeId = cursor.getInt(cursor.getColumnIndex("coffee_id"));
+                int beverageCount = cursor.getInt(cursor.getColumnIndex("beverage_count"));
+                int orderCoffeeId = cursor.getInt(cursor.getColumnIndex("order_coffee_id"));
+
+                List<ToppingItem> toppingItems = getToppingItemsForOrderCoffee(orderCoffeeId);
+                List<FlavorItem> flavorItems = getFlavorItemsForOrderCoffee(orderCoffeeId);
+
+                CoffeeItem coffeeItem = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(coffeeId), beverageCount);
+                coffeeItem.setToppingItemList(toppingItems);
+                coffeeItem.setFlavorItemList(flavorItems);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return coffeeItems;
+    }
+
+    private List<ToppingItem> getToppingItemsForOrderCoffee(int orderCoffeeId) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<ToppingItem> toppingItems = new ArrayList<>();
+
+        String query = "SELECT * FROM order_toppings_coffee WHERE order_coffee_id=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(orderCoffeeId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int toppingId = cursor.getInt(cursor.getColumnIndex("topping_id"));
+                ToppingItem toppingItem = new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(toppingId));
+                toppingItems.add(toppingItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return toppingItems;
+    }
+
+    private List<FlavorItem> getFlavorItemsForOrderCoffee(int orderCoffeeId) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<FlavorItem> flavorItems = new ArrayList<>();
+
+        String query = "SELECT * FROM order_flavors_coffee WHERE order_coffee_id=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(orderCoffeeId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int flavorId = cursor.getInt(cursor.getColumnIndex("flavor_id"));
+                FlavorItem flavorItem = new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(flavorId));
+                flavorItems.add(flavorItem);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return flavorItems;
     }
 
     public long insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice) {
