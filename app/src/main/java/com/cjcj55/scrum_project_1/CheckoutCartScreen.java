@@ -92,20 +92,20 @@ public class CheckoutCartScreen extends Fragment {
                     public void onClick(View view) {
                         System.out.print("HI HI HI");
                         double tChange = 0;
-                        tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();
+                        tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getPrice();
 
-                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().size(); w++) {
-                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().get(w).getPrice();
+                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(dynamic.getId()).getFlavorItemList().size(); w++) {
+                            tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getFlavorItemList().get(w).getPrice();
                         }
-                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getToppingItemList().size(); w++) {
-                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getToppingItemList().get(w).getPrice();
+                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(dynamic.getId()).getToppingItemList().size(); w++) {
+                            tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getToppingItemList().get(w).getPrice();
                         }
                         total = total - tChange;
                         DecimalFormat df = new DecimalFormat("0.00");
                         totalView.setText("TOTAL: " + df.format(total));
                         totalView.setTextSize(40);
                         totalView.setTextColor(BLACK);
-                        MainActivity.userCart.getUserCart().remove(MainActivity.userCart.getCoffeeAt(q));
+                        MainActivity.userCart.getUserCart().remove(MainActivity.userCart.getCoffeeAt(dynamic.getId()));
                         container.removeView(dynamic);
 
 
