@@ -41,13 +41,14 @@
         android:id="@+id/imageView"
         android:layout_width="300dp"
         android:layout_height="215dp"
-        android:contentDescription="placeholder pic"
         android:autofillHints="true"
+        android:contentDescription="placeholder pic"
         android:src="@android:drawable/sym_def_app_icon"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
 
     <Button
         android:id="@+id/loginButton"
