@@ -28,11 +28,13 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+//TODO:  Create an ArrayList<LinearLayout> to store all 'dynamic' LinearLayouts in an array.
+// TODO:  When the user removes a coffee from the cart (a 'dynamic'), loop and check all IDs of the LinearLayouts to see which have an ID greater than the ID of the coffee being removed.
+// TODO:  Remove the coffee and decrement all IDs greater than that coffee's ID.
 public class CheckoutCartScreen extends Fragment {
     private CheckoutcartuiBinding binding;
 
@@ -89,11 +91,12 @@ public class CheckoutCartScreen extends Fragment {
                     public void onClick(View view) {
                         System.out.print("HI HI HI");
                         double tChange = 0;
-                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();
-                        for(int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().size(); w++){
+                        tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();
+
+                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().size(); w++) {
                             tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().get(w).getPrice();
                         }
-                        for(int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getToppingItemList().size(); w++){
+                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getToppingItemList().size(); w++) {
                             tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getToppingItemList().get(w).getPrice();
                         }
                         total = total - tChange;
@@ -214,7 +217,7 @@ public class CheckoutCartScreen extends Fragment {
                 if(calcTotal()==0)
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is now empty.");
-                 messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                    messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
                 else {
                     NavHostFragment.findNavController(CheckoutCartScreen.this)
@@ -230,6 +233,13 @@ public class CheckoutCartScreen extends Fragment {
                         .navigate(R.id.action_CheckoutCartScreen_to_OrderScreen);
             }
         });
+
+
+
+
+
+
+
 
 
 
@@ -265,6 +275,25 @@ public class CheckoutCartScreen extends Fragment {
                 // handle nothing selected
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
