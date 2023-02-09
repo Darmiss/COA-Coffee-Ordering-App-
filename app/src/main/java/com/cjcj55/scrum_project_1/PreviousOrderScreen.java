@@ -37,6 +37,18 @@ public class PreviousOrderScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         List<UserCart> transactionList = DatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(MainActivity.user);
+        for (int i = 0; i < transactionList.size(); i++) {
+            System.out.println("Transaction: " + transactionList.get(i).getUserCart().size());
+            for (int c = 0; c < transactionList.get(i).getUserCart().size(); c++) {
+                System.out.println(transactionList.get(i).getCoffeeAt(c).getName());
+                for (int t = 0; t < transactionList.get(i).getCoffeeAt(c).getToppingItemList().size(); t++) {
+                    System.out.println("\n" + transactionList.get(i).getCoffeeAt(c).getToppingItemList().get(t).getName());
+                }
+                for (int f = 0; f < transactionList.get(i).getCoffeeAt(c).getFlavorItemList().size(); f++) {
+                    System.out.println("\n" + transactionList.get(i).getCoffeeAt(c).getFlavorItemList().get(f).getName());
+                }
+            }
+        }
 
         binding.pastBackButton.setOnClickListener(new View.OnClickListener() {
             @Override

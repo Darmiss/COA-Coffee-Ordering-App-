@@ -349,6 +349,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public long fulfillTransaction(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("fulfilled", 1);
+        long rowsUpdated = db.insert("transactions", null, values);
+        return rowsUpdated;
+    }
+
     public List<UserCart> getAllUnfulfilledTransactions() {
         SQLiteDatabase db = getReadableDatabase();
         List<UserCart> transactions = new ArrayList<>();
@@ -438,6 +446,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 CoffeeItem coffeeItem = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(coffeeIndex), beverageCount);
                 coffeeItem.setToppingItemList(toppingItems);
                 coffeeItem.setFlavorItemList(flavorItems);
+                coffeeItems.add(coffeeItem);
             } while (cursor.moveToNext());
         }
         cursor.close();
