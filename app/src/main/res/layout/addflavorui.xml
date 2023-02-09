@@ -7,13 +7,61 @@
     tools:context=".AddFlavorScreen">
 
     <Button
-        android:id="@+id/addFlBackBtn"
+        android:id="@+id/AddFBackToSysAd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="72dp"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/addNewFlavor"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:ems="10"
+        android:hint="Flavor Name"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/newFlavorDesc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/newFlavorDesc"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/newFlavorPrice"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/newFlavorPrice"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:layout_marginBottom="32dp"
+        android:ems="10"
+        android:hint="Cost (decimal)"
+        android:inputType="numberDecimal"
+        app:layout_constraintBottom_toTopOf="@+id/addNewFlavorBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/addNewFlavorBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="168dp"
+        android:text="Add New Flavor"
+        app:layout_constraintBottom_toTopOf="@+id/AddFBackToSysAd"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
