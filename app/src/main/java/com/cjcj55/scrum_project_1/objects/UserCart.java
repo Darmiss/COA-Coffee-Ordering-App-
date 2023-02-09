@@ -8,6 +8,8 @@ import java.util.List;
 public class UserCart {
     private List<CoffeeItem> coffeeItemList;
     String timeOrdered;
+    String pickupTime;
+    int userId;
     double price;
 
     public UserCart() {
@@ -53,5 +55,21 @@ public class UserCart {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getPickupTime() {
+        return pickupTime;
+    }
+
+    public void setPickupTime(String pickupTime) {
+        this.pickupTime = pickupTime;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }
