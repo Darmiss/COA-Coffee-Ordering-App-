@@ -394,7 +394,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 List<ToppingItem> toppingItems = getToppingItemsForOrderCoffee(orderCoffeeId);
                 List<FlavorItem> flavorItems = getFlavorItemsForOrderCoffee(orderCoffeeId);
 
-                CoffeeItem coffeeItem = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(coffeeId), beverageCount);
+                int coffeeIndex = -1;
+                // Loop to find which coffee has id = coffeeId
+                for (int i = 0; i < MainActivity.coffeeItemInCatalogTypes.size(); i++) {
+                    if (MainActivity.coffeeItemInCatalogTypes.get(i).getId() == coffeeId) {
+                        coffeeIndex = i;
+                    }
+                }
+
+                CoffeeItem coffeeItem = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(coffeeIndex), beverageCount);
                 coffeeItem.setToppingItemList(toppingItems);
                 coffeeItem.setFlavorItemList(flavorItems);
             } while (cursor.moveToNext());
@@ -413,7 +421,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int toppingId = cursor.getInt(cursor.getColumnIndex("topping_id"));
-                ToppingItem toppingItem = new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(toppingId));
+
+                int toppingIndex = -1;
+                // Loop to find which topping has id = toppingId
+                for (int i = 0; i < MainActivity.toppingItemInCatalogTypes.size(); i++) {
+                    if (MainActivity.toppingItemInCatalogTypes.get(i).getId() == toppingId) {
+                        toppingIndex = i;
+                    }
+                }
+                ToppingItem toppingItem = new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(toppingIndex));
                 toppingItems.add(toppingItem);
             } while (cursor.moveToNext());
         }
@@ -431,7 +447,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 int flavorId = cursor.getInt(cursor.getColumnIndex("flavor_id"));
-                FlavorItem flavorItem = new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(flavorId));
+
+                int flavorIndex = -1;
+                // Loop to find which flavor has id = flavorId
+                for (int i = 0; i < MainActivity.flavorItemInCatalogTypes.size(); i++) {
+                    if (MainActivity.flavorItemInCatalogTypes.get(i).getId() == flavorId) {
+                        flavorIndex = i;
+                    }
+                }
+                FlavorItem flavorItem = new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(flavorIndex));
                 flavorItems.add(flavorItem);
             } while (cursor.moveToNext());
         }
