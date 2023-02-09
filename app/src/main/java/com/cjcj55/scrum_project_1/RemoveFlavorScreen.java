@@ -39,6 +39,7 @@ public class RemoveFlavorScreen extends Fragment {
         binding.removeNewFlavorBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //remove flavor
                 Context context = getContext();
                 DatabaseHelper.getInstance(context).deleteFlavor(getNewFlavorName());
                 Toast newToast = Toast.makeText(getContext(), "Flavor successfully removed!",Toast.LENGTH_SHORT);

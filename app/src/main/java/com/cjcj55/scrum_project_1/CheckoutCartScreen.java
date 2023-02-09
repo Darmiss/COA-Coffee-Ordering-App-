@@ -43,7 +43,7 @@ public class CheckoutCartScreen extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         //Calculate the total when you open the cart
         LinearLayout container = view.findViewById(R.id.cartUI);
-        TextView totalView = view.findViewById(R.id.totalCost);
+       TextView totalView = view.findViewById(R.id.totalCost);
         try {
             for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
                 int q = i;

@@ -36,7 +36,7 @@ public class RemoveCoffeeScreen extends Fragment {
         binding.removeNewCoffeeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //remove coffee
                     Context context = getContext();
                     DatabaseHelper.getInstance(context).deleteCoffee(getCoffeeName());
 
