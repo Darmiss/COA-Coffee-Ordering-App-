@@ -7,8 +7,8 @@
 
     <Button
         android:id="@+id/AddCoffeeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="216dp"
         android:text="Add Coffee(s)"
@@ -19,22 +19,22 @@
 
     <Button
         android:id="@+id/RemoveCoffeeBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginTop="216dp"
-        android:text="Remove Coffee(s)"
         android:background="@drawable/roundedbutton"
+        android:text="Remove Coffee(s)"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.826"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/AddCoffeeBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/AddToppingBtn"
-        android:layout_width="131dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="20dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:background="@drawable/roundedbutton"
         android:text="Add Topping(s)"
@@ -44,39 +44,39 @@
 
     <Button
         android:id="@+id/RemoveToppingBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginTop="48dp"
-        android:text="Remove Topping(s)"
         android:background="@drawable/roundedbutton"
+        android:text="Remove Topping(s)"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.619"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/AddToppingBtn"
         app:layout_constraintTop_toBottomOf="@+id/RemoveCoffeeBtn" />
 
     <Button
         android:id="@+id/AddFlavorBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="40dp"
-        android:text="Add Flavor(s)"
         android:background="@drawable/roundedbutton"
+        android:text="Add Flavor(s)"
         android:textColor="@android:color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/AddToppingBtn" />
 
     <Button
         android:id="@+id/RemoveFlavorBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
         android:layout_marginTop="40dp"
-        android:text="Remove Flavor(s)"
         android:background="@drawable/roundedbutton"
+        android:text="Remove Flavor(s)"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.743"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toEndOf="@+id/AddFlavorBtn"
         app:layout_constraintTop_toBottomOf="@+id/RemoveToppingBtn" />
 
