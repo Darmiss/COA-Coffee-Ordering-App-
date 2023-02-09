@@ -6,6 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".RemoveCoffeeScreen">
 
+    <EditText
+        android:id="@+id/removeCoffee_text"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:ems="10"
+        android:hint="Cost (decimal)"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/removeNewCoffeeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove Coffee"
+        app:layout_constraintBottom_toTopOf="@+id/RemoveCofBackBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removeCoffee_text" />
+
     <Button
         android:id="@+id/RemoveCofBackBtn"
         android:layout_width="wrap_content"
