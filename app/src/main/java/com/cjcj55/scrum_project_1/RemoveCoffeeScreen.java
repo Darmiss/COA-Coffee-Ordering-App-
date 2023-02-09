@@ -37,12 +37,14 @@ public class RemoveCoffeeScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 //remove coffee
-                    Context context = getContext();
-                    DatabaseHelper.getInstance(context).deleteCoffee(getCoffeeName());
+                Context context = getContext();
+                DatabaseHelper.getInstance(context).updateCoffeeActive(getCoffeeName(), 0);
+                DatabaseHelper db = DatabaseHelper.getInstance(getContext());
+                MainActivity.coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(db);
 
-                    Toast newToast = Toast.makeText(getContext(), "Coffee successfully removed from catalog!",Toast.LENGTH_SHORT);
-                    newToast.show();
-                    MainActivity.coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(DatabaseHelper.getInstance(context));
+                Toast newToast = Toast.makeText(getContext(), "Coffee successfully removed from catalog!",Toast.LENGTH_SHORT);
+                newToast.show();
+                MainActivity.coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(DatabaseHelper.getInstance(context));
 
                 NavHostFragment.findNavController(RemoveCoffeeScreen.this)
                         .navigate(R.id.action_RemoveCoffeeScreen_to_SysAdminScreen);

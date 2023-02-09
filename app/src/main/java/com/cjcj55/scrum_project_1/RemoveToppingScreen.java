@@ -38,7 +38,9 @@ public class RemoveToppingScreen extends Fragment {
             public void onClick(View view) {
                 //remove Topping
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).deleteTopping(getToppingName());
+                DatabaseHelper.getInstance(context).updateToppingActive(getToppingName(), 0);
+                DatabaseHelper db = DatabaseHelper.getInstance(getContext());
+                MainActivity.toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
                 Toast newToast = Toast.makeText(getContext(), "Topping successfully removed!",Toast.LENGTH_SHORT);
                 newToast.show();
 
