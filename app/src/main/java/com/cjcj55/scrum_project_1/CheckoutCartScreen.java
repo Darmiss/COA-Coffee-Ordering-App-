@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -24,10 +26,15 @@ import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 import java.sql.Timestamp;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 //TODO:  Create an ArrayList<LinearLayout> to store all 'dynamic' LinearLayouts in an array.
-    // TODO:  When the user removes a coffee from the cart (a 'dynamic'), loop and check all IDs of the LinearLayouts to see which have an ID greater than the ID of the coffee being removed.
-    // TODO:  Remove the coffee and decrement all IDs greater than that coffee's ID.
+// TODO:  When the user removes a coffee from the cart (a 'dynamic'), loop and check all IDs of the LinearLayouts to see which have an ID greater than the ID of the coffee being removed.
+// TODO:  Remove the coffee and decrement all IDs greater than that coffee's ID.
 public class CheckoutCartScreen extends Fragment {
     private CheckoutcartuiBinding binding;
 
@@ -210,7 +217,7 @@ public class CheckoutCartScreen extends Fragment {
                 if(calcTotal()==0)
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is now empty.");
-                 messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                    messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
                 else {
                     NavHostFragment.findNavController(CheckoutCartScreen.this)
@@ -226,6 +233,67 @@ public class CheckoutCartScreen extends Fragment {
                         .navigate(R.id.action_CheckoutCartScreen_to_OrderScreen);
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MINUTE, (calendar.get(Calendar.MINUTE) / 15) * 15);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        List<String> pickupTimeList= new ArrayList<>();
+        for (int i = 0; i < 8; i++) { //Change for loop iterations to increase/decrease number of dropdown items
+            SimpleDateFormat format = new SimpleDateFormat("h:mm a", Locale.getDefault());
+            String pickupTime = format.format(calendar.getTime());
+            pickupTimeList.add(pickupTime);
+            calendar.add(Calendar.MINUTE, 15);
+        }
+        pickupTimeList.remove(0);
+        pickupTimeList.remove(0);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, pickupTimeList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.SpinnerPickupTime.setAdapter(adapter);
+
+        binding.SpinnerPickupTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedPickupTime = parent.getItemAtPosition(position).toString();
+                //TODO: ADD THIS PICKUP TIME TO DATABASE
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // handle nothing selected
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     }
 
