@@ -114,7 +114,7 @@ public class OrderScreen extends Fragment {
                     MainActivity.currentCoffee = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(cid));
                     NavHostFragment.findNavController(OrderScreen.this)
                             .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);
-                    System.out.println(MainActivity.currentCoffee.toString() + " ID:" + MainActivity.currentCoffee.getId());
+//                    System.out.println(MainActivity.currentCoffee.toString() + " ID:" + MainActivity.currentCoffee.getId());
                 }
             });
             container.addView(buttonLayout);
