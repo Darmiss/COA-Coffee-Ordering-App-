@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
@@ -44,6 +45,17 @@ public class OrderScreen extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        TextView textView = view.findViewById(R.id.CustomWelcomeName);
+        String customText = DatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);
+        if(customText.length()>=7)
+        {
+            customText = customText.substring(0, 7) + "..";
+        }
+        customText+="!";
+        textView.setText(customText);
+
+
 
         LinearLayout container = view.findViewById(R.id.container);
 
