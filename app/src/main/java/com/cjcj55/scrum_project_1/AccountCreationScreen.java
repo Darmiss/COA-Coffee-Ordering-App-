@@ -83,9 +83,14 @@ public class AccountCreationScreen extends Fragment {
 
         private boolean checkInputs (String e, String p, String f, String l)
         {
-            boolean check = true;
-            if (e.isBlank() || p.isBlank() || f.isBlank() || l.isBlank()) {
+            boolean check=true;
+            if (e.isBlank() || p.isBlank() || f.isBlank() || l.isBlank() || e.contains(" ") || !e.contains("@") || !e.contains(".") || p.contains(" ")|| p.length()<=7) {
+                Toast newToast = Toast.makeText(getContext(), "Invalid Credentials, try again.",Toast.LENGTH_SHORT);
+                newToast.show();
                 check = false;
+            }
+            else{
+                check = true;
             }
             return check;
         }
