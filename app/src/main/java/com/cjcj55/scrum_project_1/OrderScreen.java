@@ -125,7 +125,7 @@ public class OrderScreen extends Fragment {
             public void onClick(View view) {
                 MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
-                System.out.println("User logged out.  User now " + MainActivity.user);
+//                System.out.println("User logged out.  User now " + MainActivity.user);
                 setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
                 setAccountCreationPopup(false); //disables account creation popup
                 NavHostFragment.findNavController(OrderScreen.this)

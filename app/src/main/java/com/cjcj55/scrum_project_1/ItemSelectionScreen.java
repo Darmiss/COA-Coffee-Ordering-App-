@@ -219,15 +219,15 @@ public class ItemSelectionScreen extends Fragment {
                 MainActivity.currentCoffee.setToppingItemList(toppings);
                 MainActivity.currentCoffee.setFlavorItemList(flavors);
                 MainActivity.userCart.addCoffeeToCart(MainActivity.currentCoffee);
-                for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
-                    System.out.println(MainActivity.userCart.getCoffeeAt(i).toString());
-                    for (int t = 0; t < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); t++) {
-                        System.out.println("\t" + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(t).toString());
-                    }
-                    for (int f = 0; f < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); f++) {
-                        System.out.println("\t" + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(f).toString());
-                    }
-                }
+//                for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
+//                    System.out.println(MainActivity.userCart.getCoffeeAt(i).toString());
+//                    for (int t = 0; t < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); t++) {
+//                        System.out.println("\t" + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(t).toString());
+//                    }
+//                    for (int f = 0; f < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); f++) {
+//                        System.out.println("\t" + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(f).toString());
+//                    }
+//                }
 
 
                     NavHostFragment.findNavController(ItemSelectionScreen.this)

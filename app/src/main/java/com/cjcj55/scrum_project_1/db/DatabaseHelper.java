@@ -517,7 +517,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             int userIdIndex = cursor.getColumnIndex("user_id");
             MainActivity.user = cursor.getInt(userIdIndex);
-            System.out.println("User logged in.  User now " + MainActivity.user);
+//            System.out.println("User logged in.  User now " + MainActivity.user);
             cursor.close();
             return true;
         }

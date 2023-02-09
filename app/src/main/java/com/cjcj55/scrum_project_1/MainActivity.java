@@ -66,18 +66,18 @@ public class MainActivity extends AppCompatActivity {
         toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
         flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
         userCart = new UserCart();
-        System.out.println("-------------------------------\nCoffee:\n-------------------------------");
-        for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
-            System.out.println(coffeeItemInCatalog.toString());
-        }
-        System.out.println("-------------------------------\nToppings:\n-------------------------------");
-        for (ToppingItemInCatalog toppingItemInCatalog : toppingItemInCatalogTypes) {
-            System.out.println(toppingItemInCatalog.toString());
-        }
-        System.out.println("-------------------------------\nFlavors:\n-------------------------------");
-        for (FlavorItemInCatalog flavorItemInCatalog : flavorItemInCatalogTypes) {
-            System.out.println(flavorItemInCatalog.toString());
-        }
+//        System.out.println("-------------------------------\nCoffee:\n-------------------------------");
+//        for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
+//            System.out.println(coffeeItemInCatalog.toString());
+//        }
+//        System.out.println("-------------------------------\nToppings:\n-------------------------------");
+//        for (ToppingItemInCatalog toppingItemInCatalog : toppingItemInCatalogTypes) {
+//            System.out.println(toppingItemInCatalog.toString());
+//        }
+//        System.out.println("-------------------------------\nFlavors:\n-------------------------------");
+//        for (FlavorItemInCatalog flavorItemInCatalog : flavorItemInCatalogTypes) {
+//            System.out.println(flavorItemInCatalog.toString());
+//        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
