@@ -60,7 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String TRANSACTIONS_TABLE = "CREATE TABLE transactions (transaction_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "user_id INTEGER NOT NULL, " +
             "time_ordered DATETIME DEFAULT CURRENT_TIMESTAMP, " +
-            "pickup_time DATETIME NOT NULL, " +
+            "pickup_time TEXT NOT NULL, " +
             "price REAL NOT NULL, " +
             "fulfilled BOOLEAN NOT NULL DEFAULT 0, " +
             "cancelled_by_customer BOOLEAN NOT NULL DEFAULT 0, " +
@@ -349,7 +349,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return id;
     }
 
-    public String getPreviousOrdersForUser(int userId) {
+    public List<UserCart> getPreviousOrdersForUser(int userId) {
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT transactions.*, order_coffee.*, coffee.*, order_toppings_coffee.*, toppings.*, order_flavors_coffee.*, flavors.* " +
                 "FROM transactions " +
@@ -362,17 +362,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "WHERE transactions.user_id = ?";
         Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId)});
 
+        List<UserCart> transactionList = new ArrayList<>();
+
         while (cursor.moveToNext()) {
+            int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
+            String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
+            double price = cursor.getDouble(cursor.getColumnIndex("price"));
+            boolean fulfilled = cursor.getInt(cursor.getColumnIndex("fulfilled")) == 1;
+            boolean cancelledByCustomer = cursor.getInt(cursor.getColumnIndex("cancelled_by_customer")) == 1;
 
         }
-        return "";
+        return transactionList;
     }
 
-    public long insertTransactionFromCart(int userId, UserCart userCart, Timestamp pickupTime, double totalPrice) {
+    public long insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues transactionValues= new ContentValues();
         transactionValues.put("user_id", userId);
-        transactionValues.put("pickup_time", pickupTime.getTime());
+        transactionValues.put("pickup_time", pickupTime);
         transactionValues.put("price", totalPrice);
         long transactionId = db.insert("transactions", null, transactionValues);
 
