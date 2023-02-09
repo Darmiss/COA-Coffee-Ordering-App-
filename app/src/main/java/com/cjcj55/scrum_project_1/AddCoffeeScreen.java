@@ -38,7 +38,7 @@ public class AddCoffeeScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).insertCoffee(getNewCoffeeName(), getnewCoffeeDescription(), getNewCoffeeCost());
+                DatabaseHelper.getInstance(context).insertCoffee(getNewCoffeeName(), getNewCoffeeDescription(), getNewCoffeeCost());
 
                 Toast newToast = Toast.makeText(getContext(), "Coffee successfully added to catalog!",Toast.LENGTH_SHORT);
                 newToast.show();
@@ -60,7 +60,7 @@ public class AddCoffeeScreen extends Fragment {
         return binding.addNewCoffee.getText().toString();
     }
 
-    private String getnewCoffeeDescription() {
+    private String getNewCoffeeDescription() {
         return binding.newCoffeeDesc.getText().toString();
     }
 
