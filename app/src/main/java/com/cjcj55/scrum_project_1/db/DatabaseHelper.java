@@ -533,7 +533,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String getUserFirstName(int userId) {
         String firstName = null;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query("users", new String[] {"firstName"}, "userId=?", new String[] {String.valueOf(userId)}, null, null, null);
+        Cursor cursor = db.query("users", new String[] {"firstName"}, "user_id=?", new String[] {String.valueOf(userId)}, null, null, null);
         if (cursor.moveToFirst()) {
             firstName = cursor.getString(0);
         }
