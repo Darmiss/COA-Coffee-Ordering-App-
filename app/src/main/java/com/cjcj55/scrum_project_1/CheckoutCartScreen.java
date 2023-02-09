@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -24,6 +26,12 @@ import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 import java.sql.Timestamp;
 
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Locale;
 
 public class CheckoutCartScreen extends Fragment {
     private CheckoutcartuiBinding binding;
@@ -81,7 +89,7 @@ public class CheckoutCartScreen extends Fragment {
                     public void onClick(View view) {
                         System.out.print("HI HI HI");
                         double tChange = 0;
-                        tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();
+                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();
                         for(int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().size(); w++){
                             tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().get(w).getPrice();
                         }
@@ -220,6 +228,41 @@ public class CheckoutCartScreen extends Fragment {
             public void onClick(View view) {
                 NavHostFragment.findNavController(CheckoutCartScreen.this)
                         .navigate(R.id.action_CheckoutCartScreen_to_OrderScreen);
+            }
+        });
+
+
+
+
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.MINUTE, (calendar.get(Calendar.MINUTE) / 15) * 15);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        List<String> pickupTimeList= new ArrayList<>();
+        for (int i = 0; i < 8; i++) { //Change for loop iterations to increase/decrease number of dropdown items
+            SimpleDateFormat format = new SimpleDateFormat("h:mm a", Locale.getDefault());
+            String pickupTime = format.format(calendar.getTime());
+            pickupTimeList.add(pickupTime);
+            calendar.add(Calendar.MINUTE, 15);
+        }
+        pickupTimeList.remove(0);
+        pickupTimeList.remove(0);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, pickupTimeList);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.SpinnerPickupTime.setAdapter(adapter);
+
+        binding.SpinnerPickupTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedPickupTime = parent.getItemAtPosition(position).toString();
+                //TODO: ADD THIS PICKUP TIME TO DATABASE
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // handle nothing selected
             }
         });
 
