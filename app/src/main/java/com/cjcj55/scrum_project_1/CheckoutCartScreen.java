@@ -37,6 +37,7 @@ import java.util.Locale;
 // TODO:  Remove the coffee and decrement all IDs greater than that coffee's ID.
 public class CheckoutCartScreen extends Fragment {
     private CheckoutcartuiBinding binding;
+    String selectedPickupTime;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = CheckoutcartuiBinding.inflate(inflater, container, false);
@@ -204,7 +205,7 @@ public class CheckoutCartScreen extends Fragment {
         }
 
         DecimalFormat df = new DecimalFormat("0.00");
-        totalView.setText("TOTAL: " + df.format(total));
+        totalView.setText("TOTAL: $" + df.format(total));
         totalView.setTextSize(40);
         totalView.setTextColor(BLACK);
 
@@ -213,7 +214,7 @@ public class CheckoutCartScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 // Insert entire order to database
-                DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, new Timestamp(168135474), calcTotal());
+                DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, selectedPickupTime, calcTotal());
                 if(calcTotal()==0)
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is now empty.");
@@ -266,13 +267,14 @@ public class CheckoutCartScreen extends Fragment {
         binding.SpinnerPickupTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedPickupTime = parent.getItemAtPosition(position).toString();
-                //TODO: ADD THIS PICKUP TIME TO DATABASE
+                selectedPickupTime = parent.getItemAtPosition(position).toString();
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 // handle nothing selected
+                MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Please select a pickup time");
+                messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
             }
         });
 

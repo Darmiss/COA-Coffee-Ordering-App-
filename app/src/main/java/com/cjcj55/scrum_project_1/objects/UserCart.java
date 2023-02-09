@@ -7,6 +7,8 @@ import java.util.List;
 
 public class UserCart {
     private List<CoffeeItem> coffeeItemList;
+    String timeOrdered;
+    double price;
 
     public UserCart() {
         coffeeItemList = new ArrayList<>();
@@ -35,5 +37,21 @@ public class UserCart {
 
     public boolean isEmpty() {
         return coffeeItemList.isEmpty();
+    }
+
+    public String getTimeOrdered() {
+        return timeOrdered;
+    }
+
+    public void setTimeOrdered(String timeOrdered) {
+        this.timeOrdered = timeOrdered;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }

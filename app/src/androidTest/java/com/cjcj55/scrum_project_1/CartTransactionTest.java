@@ -177,7 +177,7 @@ public class CartTransactionTest {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         int userId = 0;
-        Timestamp pickupTime = new Timestamp(19830576);
+        String pickupTime = "12:45 PM";
 
         UserCart userCart = new UserCart();
         CoffeeItem coffeeItem = new CoffeeItem(coffeeItemInCatalogTypes.get(2));
@@ -207,7 +207,7 @@ public class CartTransactionTest {
         Cursor cursor = db.query("transactions", null, "transaction_id=?", new String[]{ Long.toString(id) }, null, null, null);
         assertTrue(cursor.moveToFirst());
         assertEquals(userId, Integer.parseInt(cursor.getString(cursor.getColumnIndex("user_id"))));
-        assertEquals(pickupTime.getTime(), Long.parseLong(cursor.getString(cursor.getColumnIndex("pickup_time"))));
+        assertEquals(pickupTime, cursor.getString(cursor.getColumnIndex("pickup_time")));
         assertEquals(totalPrice, Double.parseDouble(cursor.getString(cursor.getColumnIndex("price"))), 0.01);
         assertEquals(false, Boolean.getBoolean(cursor.getString(cursor.getColumnIndex("fulfilled"))));
         assertEquals(false, Boolean.getBoolean(cursor.getString(cursor.getColumnIndex("cancelled_by_customer"))));
