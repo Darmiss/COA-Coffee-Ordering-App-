@@ -2,6 +2,7 @@ package com.cjcj55.scrum_project_1;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.RED;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -30,14 +31,24 @@ public class CheckoutCartScreen extends Fragment {
         return binding.getRoot();
 
     }
-
+    static double total;
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        total = 0;
         super.onViewCreated(view, savedInstanceState);
-        double total = 0;
         //Calculate the total when you open the cart
         LinearLayout container = view.findViewById(R.id.cartUI);
+        TextView totalView = view.findViewById(R.id.totalCost);
         try {
             for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
+                int q = i;
+                //using int q as a test for something else
+                //Slight Test real quick
+                LinearLayout dynamic = new LinearLayout(getContext());
+                dynamic.setOrientation(LinearLayout.VERTICAL);
+                dynamic.setPadding(40,20,40,20);
+                dynamic.setId(i);
+
+
                 //This already calculates the carts total so this should just be an initialize to the cart view as well
                 LinearLayout cartLayout = new TableLayout(getContext());
                 cartLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -61,11 +72,28 @@ public class CheckoutCartScreen extends Fragment {
                 removeBtn.setText("X");
                 removeBtn.setTextColor(Color.rgb(255, 204, 203));
 
+
                 removeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         System.out.print("HI HI HI");
-                        cartLayout.removeAllViewsInLayout();
+                        double tChange = 0;
+                        tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();
+                        for(int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().size(); w++){
+                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().get(w).getPrice();
+                        }
+                        for(int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getToppingItemList().size(); w++){
+                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getToppingItemList().get(w).getPrice();
+                        }
+                        total = total - tChange;
+                        DecimalFormat df = new DecimalFormat("0.00");
+                        totalView.setText("TOTAL: " + df.format(total));
+                        totalView.setTextSize(40);
+                        totalView.setTextColor(BLACK);
+                        MainActivity.userCart.getUserCart().remove(MainActivity.userCart.getCoffeeAt(q));
+                        container.removeView(dynamic);
+
+
                     }
                 });
 
@@ -84,7 +112,7 @@ public class CheckoutCartScreen extends Fragment {
                 cartLayout.addView(removeBtn);
                 //Add the button stuff here
 
-                container.addView(cartLayout);
+                dynamic.addView(cartLayout);
                 total = total + MainActivity.userCart.getCoffeeAt(i).getPrice();
                 //Add Flavor calculation to total
                 try {
@@ -114,8 +142,7 @@ public class CheckoutCartScreen extends Fragment {
                         flavorPrice.setLayoutParams(params);
                         cartLayoutF.addView(flavorPrice);
 
-                        container.addView(cartLayoutF);
-
+                        dynamic.addView(cartLayoutF);
                         total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
                     }
                 } catch (NullPointerException e) {
@@ -149,18 +176,19 @@ public class CheckoutCartScreen extends Fragment {
                         params.gravity = Gravity.CENTER_HORIZONTAL;
                         toppingsPrice.setLayoutParams(params);
                         cartLayoutT.addView(toppingsPrice);
-                        container.addView(cartLayoutT);
 
+                        dynamic.addView(cartLayoutT);
                         total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();
                     }
                 }catch(NullPointerException e){
                     System.out.println("No toppings ");
                 }
+                container.addView(dynamic);
             }
         }catch(NullPointerException e){
             System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
         }
-        TextView totalView = view.findViewById(R.id.totalCost);
+
         DecimalFormat df = new DecimalFormat("0.00");
         totalView.setText("TOTAL: " + df.format(total));
         totalView.setTextSize(40);
