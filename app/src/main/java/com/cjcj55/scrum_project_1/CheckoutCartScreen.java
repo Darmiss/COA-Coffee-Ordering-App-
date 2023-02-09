@@ -19,6 +19,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.CheckoutcartuiBinding;
+import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+
+import java.sql.Timestamp;
 
 import java.text.DecimalFormat;
 
@@ -199,9 +202,7 @@ public class CheckoutCartScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 // Insert entire order to database
-
-                // Clear cart
-                //MainActivity.userCart.clearCart();
+                DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, new Timestamp(168135474), calcTotal());
 
                 NavHostFragment.findNavController(CheckoutCartScreen.this)
                         .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
@@ -216,6 +217,22 @@ public class CheckoutCartScreen extends Fragment {
             }
         });
 
+    }
+
+    public double calcTotal() {
+        double total = 0.0;
+        for (int c = 0; c < MainActivity.userCart.getUserCart().size(); c++) {
+            total += MainActivity.userCart.getCoffeeAt(c).getPrice();
+
+            for (int f = 0; f < MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().size(); f++) {
+                total += MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().get(f).getPrice();
+            }
+
+            for (int t = 0; t < MainActivity.userCart.getCoffeeAt(c).getToppingItemList().size(); t++) {
+                total += MainActivity.userCart.getCoffeeAt(c).getToppingItemList().get(t).getPrice();
+            }
+        }
+        return total;
     }
 
 
