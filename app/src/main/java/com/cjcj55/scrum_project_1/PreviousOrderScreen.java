@@ -72,7 +72,7 @@ public class PreviousOrderScreen extends Fragment {
                 title.setTextSize(30);
                 //Total formatting
                 TextView priceTotal = new TextView(getContext());
-                priceTotal.setText(df.format(transactionList.get(i).getPrice()));
+                priceTotal.setText(df.format(transactionList.get(i).getPrice()) + "$");
                 priceTotal.setTextSize(30);
                 priceTotal.setGravity(Gravity.END);
 
@@ -99,7 +99,7 @@ public class PreviousOrderScreen extends Fragment {
                         cofName.setText(transactionList.get(i).getUserCart().get(j).getName());
                         //Adds the coffee price to the thing
                         TextView cofPrice = new TextView(getContext());
-                        cofPrice.setText(df.format(transactionList.get(i).getUserCart().get(j).getPrice()));
+                        cofPrice.setText(df.format(transactionList.get(i).getUserCart().get(j).getPrice()) + "$");
                         cofPrice.setTextSize(20);
                         cofPrice.setGravity(Gravity.CENTER);
 
@@ -128,7 +128,7 @@ public class PreviousOrderScreen extends Fragment {
                                 flavorName.setText(transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView flavorPrice = new TextView(getContext());
-                                flavorPrice.setText(df.format(transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getPrice()));
+                                flavorPrice.setText(df.format(transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getPrice()) + "$");
                                 flavorPrice.setTextSize(15);
                                 flavorPrice.setGravity(Gravity.CENTER);
 
@@ -159,7 +159,7 @@ public class PreviousOrderScreen extends Fragment {
                                 topName.setText(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView topPrice = new TextView(getContext());
-                                topPrice.setText(df.format(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getPrice()));
+                                topPrice.setText(df.format(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getPrice()) + "$");
                                 topPrice.setTextSize(15);
                                 topPrice.setGravity(Gravity.CENTER);
 
