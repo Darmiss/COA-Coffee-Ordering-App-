@@ -113,18 +113,20 @@ public class CheckoutCartScreen extends Fragment {
                 });
 
                 //Add it all to the GUI
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1.0f);
                 params.gravity = Gravity.LEFT;
                 coffeeName.setLayoutParams(params);
                 cartLayout.addView(coffeeName);
 
-                params.gravity = Gravity.CENTER;
+                params.gravity = Gravity.END;
                 coffeePrice.setLayoutParams(params);
                 cartLayout.addView(coffeePrice);
 
                 params.gravity = Gravity.END;
                 removeBtn.setLayoutParams(params);
                 cartLayout.addView(removeBtn);
+
+
                 //Add the button stuff here
 
                 dynamic.addView(cartLayout);
