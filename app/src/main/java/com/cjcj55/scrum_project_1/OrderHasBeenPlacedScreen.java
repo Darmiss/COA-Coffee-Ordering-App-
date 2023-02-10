@@ -3,6 +3,7 @@ package com.cjcj55.scrum_project_1;
 
 
 import static android.graphics.Color.BLACK;
+import static android.graphics.Color.GREEN;
 
 import android.os.Bundle;
 import android.view.Gravity;
@@ -56,11 +57,13 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                 TextView coffeeName = new TextView(getContext());
                 coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
                 coffeeName.setTextSize(30);
+                coffeeName.setTextColor(BLACK);
                 //Add the coffee price
                 TextView coffeePrice = new TextView(getContext());
                 DecimalFormat df = new DecimalFormat("0.00");
                 coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
                 coffeePrice.setTextSize(30);
+                coffeePrice.setTextColor(GREEN);
                 coffeePrice.setGravity(Gravity.END);
                 //Add the views to the container
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -86,10 +89,12 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                         TextView flavorName = new TextView(getContext());
                         flavorName.setText(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getName());
                         flavorName.setTextSize(20);
+                        flavorName.setTextColor(BLACK);
                         //Add flavor price format to container
                         TextView flavorPrice = new TextView(getContext());
-                        flavorPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
+                        flavorPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
                         flavorPrice.setTextSize(20);
+                        flavorPrice.setTextColor(GREEN);
                         flavorPrice.setGravity(Gravity.END);
                         //Add container to container
                         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -118,10 +123,12 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                         TextView toppingsName = new TextView(getContext());
                         toppingsName.setText(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getName());
                         toppingsName.setTextSize(20);
+                        toppingsName.setTextColor(BLACK);
                         //Add toppings price format to container
                         TextView toppingsPrice = new TextView(getContext());
-                        toppingsPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
+                        toppingsPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
                         toppingsPrice.setTextSize(20);
+                        toppingsPrice.setTextColor(GREEN);
                         toppingsPrice.setGravity(Gravity.END);
                         //Add container to container
                         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);

@@ -3,6 +3,9 @@ package com.cjcj55.scrum_project_1;
 
 
 
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -70,10 +73,12 @@ public class PreviousOrderScreen extends Fragment {
                 TextView title = new TextView(getContext());
                 title.setText(transactionList.get(i).getTimeOrdered());
                 title.setTextSize(30);
+                title.setTextColor(BLACK);
                 //Total formatting
                 TextView priceTotal = new TextView(getContext());
                 priceTotal.setText("$ " + df.format(transactionList.get(i).getPrice()));
                 priceTotal.setTextSize(30);
+                priceTotal.setTextColor(BLACK);
                 priceTotal.setGravity(Gravity.END);
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -96,11 +101,13 @@ public class PreviousOrderScreen extends Fragment {
                         //Adds the thing to the thing
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
+                        cofName.setTextColor(WHITE);
                         cofName.setText(transactionList.get(i).getUserCart().get(j).getName());
                         //Adds the coffee price to the thing
                         TextView cofPrice = new TextView(getContext());
                         cofPrice.setText("$ " + df.format(transactionList.get(i).getUserCart().get(j).getPrice()));
                         cofPrice.setTextSize(20);
+                        cofPrice.setTextColor(WHITE);
                         cofPrice.setGravity(Gravity.CENTER);
 
                         LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -125,11 +132,13 @@ public class PreviousOrderScreen extends Fragment {
                                 //Adds the thing to the thing
                                 TextView flavorName = new TextView(getContext());
                                 flavorName.setTextSize(15);
+                                flavorName.setTextColor(WHITE);
                                 flavorName.setText(transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView flavorPrice = new TextView(getContext());
                                 flavorPrice.setText("$ " + transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getPrice());
                                 flavorPrice.setTextSize(17);
+                                flavorPrice.setTextColor(WHITE);
                                 flavorPrice.setGravity(Gravity.CENTER);
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -156,11 +165,13 @@ public class PreviousOrderScreen extends Fragment {
                                 //Adds the thing to the thing
                                 TextView topName = new TextView(getContext());
                                 topName.setTextSize(17);
+                                topName.setTextColor(WHITE);
                                 topName.setText(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView topPrice = new TextView(getContext());
                                 topPrice.setText("$ " + df.format(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getPrice()));
                                 topPrice.setTextSize(15);
+                                topPrice.setTextColor(WHITE);
                                 topPrice.setGravity(Gravity.CENTER);
 
                                 LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
