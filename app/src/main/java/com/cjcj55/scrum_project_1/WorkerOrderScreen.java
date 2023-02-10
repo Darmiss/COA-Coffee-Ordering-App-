@@ -154,7 +154,7 @@ public class WorkerOrderScreen extends Fragment {
                          * TOPPINGS
                          */
                         try {
-                            for (int f = 0; f < transactionList.get(i).getUserCart().get(c).getFlavorItemList().size(); f++) {
+                            for (int t = 0; t < transactionList.get(i).getUserCart().get(c).getToppingItemList().size(); t++) {
                                 LinearLayout toppingTemp = new LinearLayout(getContext());
                                 toppingTemp.setOrientation(LinearLayout.HORIZONTAL);
                                 toppingTemp.setPadding(40,10,40,10);
@@ -164,7 +164,7 @@ public class WorkerOrderScreen extends Fragment {
                                 // Flavor name
                                 TextView toppingName = new TextView(getContext());
                                 toppingName.setTextSize(15);
-                                toppingName.setText(transactionList.get(i).getUserCart().get(c).getFlavorItemList().get(f).getName());
+                                toppingName.setText(transactionList.get(i).getUserCart().get(c).getToppingItemList().get(t).getName());
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                                 param2.gravity = Gravity.LEFT;
