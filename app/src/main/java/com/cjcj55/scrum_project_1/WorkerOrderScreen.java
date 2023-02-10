@@ -1,5 +1,8 @@
 package com.cjcj55.scrum_project_1;
 
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.WHITE;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -74,7 +77,8 @@ public class WorkerOrderScreen extends Fragment {
                 // Title
                 TextView title = new TextView(getContext());
                 title.setText("Order #" + transactionList.get(i).getTransactionId());
-                title.setTextSize(30);
+                title.setTextSize(20);
+                title.setTextColor(BLACK);
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                 params.gravity = Gravity.LEFT;
@@ -84,6 +88,7 @@ public class WorkerOrderScreen extends Fragment {
                 TextView pickupTime = new TextView(getContext());
                 pickupTime.setText("Pickup: " + transactionList.get(i).getPickupTime());
                 pickupTime.setTextSize(25);
+                pickupTime.setTextColor(BLACK);
                 pickupTime.setGravity(Gravity.END);
                 orderContainer.addView(pickupTime);
 
@@ -92,12 +97,13 @@ public class WorkerOrderScreen extends Fragment {
                 // Display user's name (that purchased this order)
                 LinearLayout userNameContainer = new LinearLayout(getContext());
                 userNameContainer.setOrientation(LinearLayout.HORIZONTAL);
-                userNameContainer.setPadding(60,20,40,20);
+                userNameContainer.setPadding(40,20,40,10);
 
                 // User's name
                 TextView userName = new TextView(getContext());
                 userName.setText("Ordered by: " + DatabaseHelper.getInstance(getContext()).getUsersFullName(transactionList.get(i).getUserId()));
                 userName.setTextSize(25);
+                userName.setTextColor(BLACK);
                 userName.setGravity(Gravity.CENTER_HORIZONTAL);
                 userNameContainer.addView(userName);
 
@@ -107,13 +113,14 @@ public class WorkerOrderScreen extends Fragment {
                     for (int c = 0; c < transactionList.get(i).getUserCart().size(); c++) {
                         LinearLayout coffeeTemp = new LinearLayout(getContext());
                         coffeeTemp.setOrientation(LinearLayout.HORIZONTAL);
-                        coffeeTemp.setPadding(40,20,40,20);
+                        coffeeTemp.setPadding(40,10,40,20);
                         ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         coffeeTemp.setLayoutParams(layoutT);
 
                         // Coffee name
                         TextView cofName = new TextView(getContext());
-                        cofName.setTextSize(20);
+                        cofName.setTextSize(30);
+                        cofName.setTextColor(WHITE);
                         cofName.setText(transactionList.get(i).getUserCart().get(c).getName());
 
                         LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -130,14 +137,15 @@ public class WorkerOrderScreen extends Fragment {
                             for (int f = 0; f < transactionList.get(i).getUserCart().get(c).getFlavorItemList().size(); f++) {
                                 LinearLayout flavorTemp = new LinearLayout(getContext());
                                 flavorTemp.setOrientation(LinearLayout.HORIZONTAL);
-                                flavorTemp.setPadding(40,10,40,10);
+                                flavorTemp.setPadding(60,10,40,10);
                                 ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 flavorTemp.setLayoutParams(layoutF);
 
                                 // Flavor name
                                 TextView flavorName = new TextView(getContext());
-                                flavorName.setTextSize(15);
-                                flavorName.setText(transactionList.get(i).getUserCart().get(c).getFlavorItemList().get(f).getName());
+                                flavorName.setTextSize(20);
+                                flavorName.setTextColor(WHITE);
+                                flavorName.setText("+" + transactionList.get(i).getUserCart().get(c).getFlavorItemList().get(f).getName());
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                                 param2.gravity = Gravity.LEFT;
@@ -157,14 +165,15 @@ public class WorkerOrderScreen extends Fragment {
                             for (int f = 0; f < transactionList.get(i).getUserCart().get(c).getToppingItemList().size(); f++) {
                                 LinearLayout toppingTemp = new LinearLayout(getContext());
                                 toppingTemp.setOrientation(LinearLayout.HORIZONTAL);
-                                toppingTemp.setPadding(40,10,40,10);
+                                toppingTemp.setPadding(60,10,40,10);
                                 ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 toppingTemp.setLayoutParams(layoutF);
 
                                 // Flavor name
                                 TextView toppingName = new TextView(getContext());
-                                toppingName.setTextSize(15);
-                                toppingName.setText(transactionList.get(i).getUserCart().get(c).getToppingItemList().get(f).getName());
+                                toppingName.setTextSize(20);
+                                toppingName.setTextColor(WHITE);
+                                toppingName.setText("+" + transactionList.get(i).getUserCart().get(c).getToppingItemList().get(f).getName());
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                                 param2.gravity = Gravity.LEFT;
