@@ -1,0 +1,240 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ /dev/null	(revision c8cf082305340580766ac94590c5f2087cda17de)
+@@ -1,14 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]" date="1675909685473" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2/8/2023 9:28 PM [Changes]" />
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/src/main/res/drawable/logo_with_border.png" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/logo_with_border.png" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/src/main/res/drawable/logo_without_border.png" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/logo_without_border.png" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ /dev/null	(revision c8cf082305340580766ac94590c5f2087cda17de)
+@@ -1,41 +0,0 @@
+-Index: app/src/main/res/layout/loginui.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".LoginScreen\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextPassword\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"48dp\"\r\n        android:autofillHints=\"true\"\r\n        android:layout_marginBottom=\"188dp\"\r\n        android:ems=\"10\"\r\n        android:hint=\"@string/password\"\r\n        android:inputType=\"textPassword\"\r\n        android:textColorHint=\"#7E7878\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.497\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editTextTextEmailAddress\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextEmailAddress\"\r\n        android:layout_width=\"300dp\"\r\n        android:autofillHints=\"true\"\r\n        android:layout_height=\"48dp\"\r\n        android:layout_marginTop=\"376dp\"\r\n        android:ems=\"10\"\r\n        android:hint=\"@string/email\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:textColorHint=\"#7E7878\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.495\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"215dp\"\r\n        android:autofillHints=\"true\"\r\n        android:contentDescription=\"placeholder pic\"\r\n        android:src=\"@android:drawable/sym_def_app_icon\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/editTextTextEmailAddress\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        tools:src=\"@tools:sample/avatars\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/loginButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"72dp\"\r\n        android:text=\"@string/login\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editTextTextPassword\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/createAccountButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"4dp\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:text=\"@string/createaccount\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/loginButton\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/loginui.xml b/app/src/main/res/layout/loginui.xml
+---- a/app/src/main/res/layout/loginui.xml	(revision 283020474d61a30d36bc18fa2ef0dcdf744e2295)
+-+++ b/app/src/main/res/layout/loginui.xml	(date 1675909410978)
+-@@ -39,16 +39,18 @@
+- 
+-     <ImageView
+-         android:id="@+id/imageView"
+--        android:layout_width="300dp"
+--        android:layout_height="215dp"
+-+        android:layout_width="446dp"
+-+        android:layout_height="359dp"
+-         android:autofillHints="true"
+-         android:contentDescription="placeholder pic"
+--        android:src="@android:drawable/sym_def_app_icon"
+-+        android:src="@drawable/americano"
+-         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+-         app:layout_constraintEnd_toEndOf="parent"
+-+        app:layout_constraintHorizontal_bias="0.405"
+-         app:layout_constraintStart_toStartOf="parent"
+-         app:layout_constraintTop_toTopOf="parent"
+--        tools:src="@tools:sample/avatars" />
+-+        app:layout_constraintVertical_bias="0.503"
+-+        tools:src="@drawable/logo_without_border" />
+- 
+-     <Button
+-         android:id="@+id/loginButton"
+-@@ -62,6 +64,7 @@
+-         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+- 
+- 
+-+
+-     <TextView
+-         android:id="@+id/createAccountButton"
+-         android:layout_width="wrap_content"
+Index: .idea/androidTestResultsUserPreferences.xml
+===================================================================
+diff --git a/.idea/androidTestResultsUserPreferences.xml b/.idea/androidTestResultsUserPreferences.xml
+deleted file mode 100644
+--- a/.idea/androidTestResultsUserPreferences.xml	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ /dev/null	(revision c8cf082305340580766ac94590c5f2087cda17de)
+@@ -1,36 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AndroidTestResultsUserPreferences">
+-    <option name="androidTestResultsTableState">
+-      <map>
+-        <entry key="28629151">
+-          <value>
+-            <AndroidTestResultsTableState>
+-              <option name="preferredColumnWidths">
+-                <map>
+-                  <entry key="Duration" value="90" />
+-                  <entry key="Pixel_6_API_30" value="120" />
+-                  <entry key="Pixel_6_Pro_API_30" value="120" />
+-                  <entry key="Tests" value="360" />
+-                </map>
+-              </option>
+-            </AndroidTestResultsTableState>
+-          </value>
+-        </entry>
+-        <entry key="1827314477">
+-          <value>
+-            <AndroidTestResultsTableState>
+-              <option name="preferredColumnWidths">
+-                <map>
+-                  <entry key="Duration" value="90" />
+-                  <entry key="Pixel_6_Pro_API_30" value="120" />
+-                  <entry key="Tests" value="360" />
+-                </map>
+-              </option>
+-            </AndroidTestResultsTableState>
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cjcj55.scrum_project_1;\r\n\r\nimport static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;\r\nimport static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;\r\n\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.view.Gravity;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.navigation.fragment.NavHostFragment;\r\n\r\nimport com.cjcj55.scrum_project_1.databinding.OrderuiBinding;\r\nimport com.cjcj55.scrum_project_1.db.DatabaseHelper;\r\nimport com.cjcj55.scrum_project_1.objects.UserCart;\r\nimport com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;\r\nimport com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;\r\n\r\nimport java.text.DecimalFormat;\r\nimport java.util.Iterator;\r\nimport java.util.List;\r\n\r\npublic class OrderScreen extends Fragment {\r\n\r\n    private OrderuiBinding binding;\r\n\r\n    @Override\r\n    public View onCreateView(\r\n            LayoutInflater inflater, ViewGroup container,\r\n            Bundle savedInstanceState\r\n    ) {\r\n\r\n        binding =OrderuiBinding.inflate(inflater, container, false);\r\n        return binding.getRoot();\r\n\r\n    }\r\n\r\n    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        TextView textView = view.findViewById(R.id.CustomWelcomeName);\r\n        String customText = DatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);\r\n        if(customText.length()>=7)\r\n        {\r\n            customText = customText.substring(0, 7) + \"..\";\r\n        }\r\n        customText+=\"!\";\r\n        textView.setText(customText);\r\n\r\n\r\n\r\n        LinearLayout container = view.findViewById(R.id.container);\r\n\r\n        for (CoffeeItemInCatalog coffeeItem : MainActivity.coffeeItemInCatalogTypes) {\r\n            LinearLayout buttonLayout = new LinearLayout(getContext());\r\n            buttonLayout.setOrientation(LinearLayout.HORIZONTAL);\r\n            buttonLayout.setPadding(40, 20, 40, 20);\r\n            buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));\r\n\r\n            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(\r\n                    LinearLayout.LayoutParams.MATCH_PARENT,\r\n                    LinearLayout.LayoutParams.WRAP_CONTENT\r\n            );\r\n            layoutParams.setMargins(10, 10, 10, 10);\r\n            buttonLayout.setLayoutParams(layoutParams);\r\n\r\n            TextView coffeeName = new TextView(getContext());\r\n            coffeeName.setText(coffeeItem.getName());\r\n            coffeeName.setTextSize(30);\r\n\r\n            TextView coffeePrice = new TextView(getContext());\r\n            DecimalFormat df = new DecimalFormat(\"0.00\");\r\n            coffeePrice.setText(\"$\" + df.format(coffeeItem.getPrice()));\r\n            coffeePrice.setTextColor(Color.parseColor(\"#006400\"));\r\n            coffeePrice.setTextSize(30);\r\n            coffeePrice.setGravity(Gravity.END);\r\n\r\n            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(\r\n                    ViewGroup.LayoutParams.MATCH_PARENT,\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT,\r\n                    1.0f\r\n            );\r\n\r\n            buttonLayout.setId(coffeeItem.getId());\r\n            buttonLayout.setWeightSum(2);\r\n\r\n            params.gravity = Gravity.LEFT;\r\n            coffeeName.setLayoutParams(params);\r\n            buttonLayout.addView(coffeeName);\r\n\r\n            params.gravity = Gravity.END;\r\n            coffeePrice.setLayoutParams(params);\r\n            buttonLayout.addView(coffeePrice);\r\n            buttonLayout.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n                    // Locate the id from the catalog\r\n                    int cid = -1;\r\n                    for (int i = 0; i < MainActivity.coffeeItemInCatalogTypes.size(); i++) {\r\n                        if (MainActivity.coffeeItemInCatalogTypes.get(i).getId() == buttonLayout.getId()) {\r\n                            cid = i;\r\n                            break;\r\n                        }\r\n                    }\r\n\r\n                    MainActivity.currentCoffee = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(cid));\r\n                    NavHostFragment.findNavController(OrderScreen.this)\r\n                            .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);\r\n                    System.out.println(MainActivity.currentCoffee.toString() + \" ID:\" + MainActivity.currentCoffee.getId());\r\n                }\r\n            });\r\n            container.addView(buttonLayout);\r\n        }\r\n\r\n        binding.logOutButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                MainActivity.user = -1;\r\n                MainActivity.userCart = new UserCart();\r\n                System.out.println(\"User logged out.  User now \" + MainActivity.user);\r\n                setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups\r\n                setAccountCreationPopup(false); //disables account creation popup\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_LoginScreen);\r\n            }\r\n        });\r\n\r\n        binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_PreviousOrderScreen);\r\n            }\r\n        });\r\n\r\n        binding.WorkerViewBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_WorkerOrderScreen);\r\n            }\r\n        });\r\n\r\n        binding.SysAdminViewBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_SysAdminScreen);\r\n            }\r\n        });\r\n\r\n        binding.checkOutButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                if(MainActivity.userCart.getUserCart().isEmpty())\r\n                {\r\n                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance(\"Your Cart is Empty.\");\r\n                   messageDialog.show(getChildFragmentManager(), \"MessagePopupFragment\");\r\n                }\r\n                else {\r\n                    NavHostFragment.findNavController(OrderScreen.this)\r\n                            .navigate(R.id.action_OrderScreen_to_CheckoutCartScreen);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java b/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java
+--- a/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ b/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java	(date 1675926380884)
+@@ -62,24 +62,25 @@
+         for (CoffeeItemInCatalog coffeeItem : MainActivity.coffeeItemInCatalogTypes) {
+             LinearLayout buttonLayout = new LinearLayout(getContext());
+             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
+-            buttonLayout.setPadding(40, 20, 40, 20);
++            buttonLayout.setPadding(40, 0, 40, 20);
+             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+ 
+             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                     LinearLayout.LayoutParams.MATCH_PARENT,
+                     LinearLayout.LayoutParams.WRAP_CONTENT
+             );
+-            layoutParams.setMargins(10, 10, 10, 10);
++            layoutParams.setMargins(400, 50, 10, 10);
+             buttonLayout.setLayoutParams(layoutParams);
+ 
+             TextView coffeeName = new TextView(getContext());
+             coffeeName.setText(coffeeItem.getName());
+-            coffeeName.setTextSize(30);
++            coffeeName.setTextSize(20);
++            coffeeName.setTextColor(Color.parseColor("white"));
+ 
+             TextView coffeePrice = new TextView(getContext());
+             DecimalFormat df = new DecimalFormat("0.00");
+             coffeePrice.setText("$" + df.format(coffeeItem.getPrice()));
+-            coffeePrice.setTextColor(Color.parseColor("#006400"));
++            coffeePrice.setTextColor(Color.parseColor("white"));
+             coffeePrice.setTextSize(30);
+             coffeePrice.setGravity(Gravity.END);
+ 
+Index: app/src/main/res/drawable/rounded_background.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><shape xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:shape=\"rectangle\">\r\n    <corners android:radius=\"25dp\" />\r\n    <solid android:color=\"#a0522d\" />\r\n</shape>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/rounded_background.xml b/app/src/main/res/drawable/rounded_background.xml
+--- a/app/src/main/res/drawable/rounded_background.xml	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ b/app/src/main/res/drawable/rounded_background.xml	(date 1675926356387)
+@@ -1,5 +1,5 @@
+ <shape xmlns:android="http://schemas.android.com/apk/res/android"
+     android:shape="rectangle">
+-    <corners android:radius="25dp" />
+-    <solid android:color="#a0522d" />
++    <corners android:radius="15dp" />
++    <solid android:color="#c46c30" />
+ </shape>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ b/.idea/vcs.xml	(date 1675970582264)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++    <mapping directory="" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ b/.idea/misc.xml	(date 1675970582255)
+@@ -1,6 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
++  <component name="ProjectType">
++    <option name="id" value="Android" />
++  </component>
+ </project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleHome\" value=\"$PROJECT_DIR$/../../../../../../../../Gradle/gradle-7.3.3\" />\r\n        <option name=\"gradleJvm\" value=\"11\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision c8cf082305340580766ac94590c5f2087cda17de)
++++ b/.idea/gradle.xml	(date 1675970582284)
+@@ -1,14 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="testRunner" value="GRADLE" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../../../../Gradle/gradle-7.3.3" />
+-        <option name="gradleJvm" value="11" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
