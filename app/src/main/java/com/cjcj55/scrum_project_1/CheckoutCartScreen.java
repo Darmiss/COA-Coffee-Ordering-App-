@@ -73,12 +73,13 @@ public class CheckoutCartScreen extends Fragment {
                 TextView coffeeName = new TextView(getContext());
                 coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
                 coffeeName.setTextSize(30);
+                coffeeName.setGravity(Gravity.LEFT);
                 //Add the coffee price to formatting
                 TextView coffeePrice = new TextView(getContext());
                 DecimalFormat df = new DecimalFormat("0.00");
                 coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
                 coffeePrice.setTextSize(30);
-                coffeePrice.setGravity(Gravity.RIGHT);
+                coffeePrice.setGravity(Gravity.END);
                 //Create the button for the cart to remove the coffee as a total
                 //Uhhh if I push enough buttons it'll have to work right
                 Button removeBtn = new Button(getContext());
@@ -116,15 +117,22 @@ public class CheckoutCartScreen extends Fragment {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                 params.gravity = Gravity.LEFT;
                 coffeeName.setLayoutParams(params);
-                cartLayout.addView(coffeeName);
 
-                params.gravity = Gravity.CENTER;
+                params.gravity = Gravity.END;
                 coffeePrice.setLayoutParams(params);
-                cartLayout.addView(coffeePrice);
 
                 params.gravity = Gravity.END;
                 removeBtn.setLayoutParams(params);
+
                 cartLayout.addView(removeBtn);
+
+                LinearLayout coffeeNameAndPrice = new LinearLayout(getContext());
+                coffeeNameAndPrice.setOrientation(LinearLayout.HORIZONTAL);
+                coffeeNameAndPrice.addView(coffeeName);
+                coffeeNameAndPrice.addView(coffeePrice);
+
+                cartLayout.addView(coffeeNameAndPrice);
+
                 //Add the button stuff here
 
                 dynamic.addView(cartLayout);
