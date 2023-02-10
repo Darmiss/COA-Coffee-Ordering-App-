@@ -66,17 +66,18 @@ public class ItemSelectionScreen extends Fragment {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(10, 10, 10, 10);
+            layoutParams.setMargins(200, 50, 200, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
             TextView toppingName = new TextView(getContext());
             toppingName.setText(toppingItem.getName());
-            toppingName.setTextSize(30);
+            toppingName.setTextSize(20);
+            toppingName.setTextColor(Color.parseColor("white"));
 
             TextView toppingPrice = new TextView(getContext());
             DecimalFormat df = new DecimalFormat("0.00");
-            toppingPrice.setText("$" + df.format(toppingItem.getPrice()));
-            toppingPrice.setTextColor(Color.parseColor("#006400"));
+            toppingPrice.setText("+$" + df.format(toppingItem.getPrice()));
+            toppingPrice.setTextColor(Color.parseColor("white"));
             toppingPrice.setTextSize(30);
             toppingPrice.setGravity(Gravity.END);
 
@@ -141,17 +142,18 @@ public class ItemSelectionScreen extends Fragment {
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(10, 10, 10, 10);
+            layoutParams.setMargins(200, 50, 200, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
             TextView flavorName = new TextView(getContext());
             flavorName.setText(flavorItem.getName());
-            flavorName.setTextSize(30);
+            flavorName.setTextSize(20);
+            flavorName.setTextColor(Color.parseColor("white"));
 
             TextView flavorPrice = new TextView(getContext());
             DecimalFormat df = new DecimalFormat("0.00");
-            flavorPrice.setText("$" + df.format(flavorItem.getPrice()));
-            flavorPrice.setTextColor(Color.parseColor("#006400"));
+            flavorPrice.setText("+$" + df.format(flavorItem.getPrice()));
+            flavorPrice.setTextColor(Color.parseColor("white"));
             flavorPrice.setTextSize(30);
             flavorPrice.setGravity(Gravity.END);
 
