@@ -1,0 +1,752 @@
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch b/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ /dev/null	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
+@@ -1,41 +0,0 @@
+-Index: app/src/main/res/layout/loginui.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".LoginScreen\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextPassword\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"48dp\"\r\n        android:autofillHints=\"true\"\r\n        android:layout_marginBottom=\"188dp\"\r\n        android:ems=\"10\"\r\n        android:hint=\"@string/password\"\r\n        android:inputType=\"textPassword\"\r\n        android:textColorHint=\"#7E7878\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.497\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editTextTextEmailAddress\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextEmailAddress\"\r\n        android:layout_width=\"300dp\"\r\n        android:autofillHints=\"true\"\r\n        android:layout_height=\"48dp\"\r\n        android:layout_marginTop=\"376dp\"\r\n        android:ems=\"10\"\r\n        android:hint=\"@string/email\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:textColorHint=\"#7E7878\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.495\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"215dp\"\r\n        android:autofillHints=\"true\"\r\n        android:contentDescription=\"placeholder pic\"\r\n        android:src=\"@android:drawable/sym_def_app_icon\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/editTextTextEmailAddress\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        tools:src=\"@tools:sample/avatars\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/loginButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"72dp\"\r\n        android:text=\"@string/login\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editTextTextPassword\" />\r\n\r\n\r\n    <TextView\r\n        android:id=\"@+id/createAccountButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"4dp\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:text=\"@string/createaccount\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/loginButton\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/app/src/main/res/layout/loginui.xml b/app/src/main/res/layout/loginui.xml
+---- a/app/src/main/res/layout/loginui.xml	(revision 283020474d61a30d36bc18fa2ef0dcdf744e2295)
+-+++ b/app/src/main/res/layout/loginui.xml	(date 1675909410978)
+-@@ -39,16 +39,18 @@
+- 
+-     <ImageView
+-         android:id="@+id/imageView"
+--        android:layout_width="300dp"
+--        android:layout_height="215dp"
+-+        android:layout_width="446dp"
+-+        android:layout_height="359dp"
+-         android:autofillHints="true"
+-         android:contentDescription="placeholder pic"
+--        android:src="@android:drawable/sym_def_app_icon"
+-+        android:src="@drawable/americano"
+-         app:layout_constraintBottom_toTopOf="@+id/editTextTextEmailAddress"
+-         app:layout_constraintEnd_toEndOf="parent"
+-+        app:layout_constraintHorizontal_bias="0.405"
+-         app:layout_constraintStart_toStartOf="parent"
+-         app:layout_constraintTop_toTopOf="parent"
+--        tools:src="@tools:sample/avatars" />
+-+        app:layout_constraintVertical_bias="0.503"
+-+        tools:src="@drawable/logo_without_border" />
+- 
+-     <Button
+-         android:id="@+id/loginButton"
+-@@ -62,6 +64,7 @@
+-         app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
+- 
+- 
+-+
+-     <TextView
+-         android:id="@+id/createAccountButton"
+-         android:layout_width="wrap_content"
+Index: .idea/androidTestResultsUserPreferences.xml
+===================================================================
+diff --git a/.idea/androidTestResultsUserPreferences.xml b/.idea/androidTestResultsUserPreferences.xml
+deleted file mode 100644
+--- a/.idea/androidTestResultsUserPreferences.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ /dev/null	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
+@@ -1,36 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="AndroidTestResultsUserPreferences">
+-    <option name="androidTestResultsTableState">
+-      <map>
+-        <entry key="28629151">
+-          <value>
+-            <AndroidTestResultsTableState>
+-              <option name="preferredColumnWidths">
+-                <map>
+-                  <entry key="Duration" value="90" />
+-                  <entry key="Pixel_6_API_30" value="120" />
+-                  <entry key="Pixel_6_Pro_API_30" value="120" />
+-                  <entry key="Tests" value="360" />
+-                </map>
+-              </option>
+-            </AndroidTestResultsTableState>
+-          </value>
+-        </entry>
+-        <entry key="1827314477">
+-          <value>
+-            <AndroidTestResultsTableState>
+-              <option name="preferredColumnWidths">
+-                <map>
+-                  <entry key="Duration" value="90" />
+-                  <entry key="Pixel_6_Pro_API_30" value="120" />
+-                  <entry key="Tests" value="360" />
+-                </map>
+-              </option>
+-            </AndroidTestResultsTableState>
+-          </value>
+-        </entry>
+-      </map>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml
+===================================================================
+diff --git a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml b/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml
+deleted file mode 100644
+--- a/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM__Changes_.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ /dev/null	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
+@@ -1,14 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]" date="1675909685473" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2/8/2023 9:28 PM [Changes]" />
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/src/main/res/drawable/logo_with_border.png" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/logo_with_border.png" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" />
+-    <option name="AFTER_PATH" value="app/src/main/res/drawable/logo_without_border.png" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2_8_2023_9_28_PM_[Changes]/logo_without_border.png" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: app/src/main/res/layout/orderui.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:id=\"@+id/WelcomeText\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".OrderScreen\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"484dp\"\r\n        android:layout_marginTop=\"60dp\"\r\n        android:layout_marginBottom=\"187dp\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/container\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n    <Button\r\n        android:id=\"@+id/viewPastOrdersButton\"\r\n        android:layout_width=\"147dp\"\r\n        android:layout_height=\"56dp\"\r\n        android:layout_marginBottom=\"40dp\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:text=\"@string/pastorders\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.497\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/checkOutButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginBottom=\"36dp\"\r\n        android:text=\"Checkout\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/viewPastOrdersButton\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/logOutButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"12dp\"\r\n        android:text=\"Logout\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.949\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/SysAdminViewBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginBottom=\"104dp\"\r\n        android:text=\"S\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/WorkerViewBtn\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginEnd=\"16dp\"\r\n        android:layout_marginBottom=\"104dp\"\r\n        android:text=\"W\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/textView3\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"16dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:scrollbarSize=\"4sp\"\r\n        android:text=\"Welcome\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/CustomWelcomeName\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginStart=\"8dp\"\r\n        android:layout_marginTop=\"16dp\"\r\n        android:text=\"User!\"\r\n        android:textSize=\"32sp\"\r\n        app:layout_constraintStart_toEndOf=\"@+id/textView3\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/orderui.xml b/app/src/main/res/layout/orderui.xml
+--- a/app/src/main/res/layout/orderui.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/res/layout/orderui.xml	(date 1675977927924)
+@@ -8,10 +8,13 @@
+     tools:context=".OrderScreen">
+ 
+     <ScrollView
++        android:id="@+id/scrollView5"
+         android:layout_width="match_parent"
+         android:layout_height="484dp"
+         android:layout_marginTop="60dp"
+         android:layout_marginBottom="187dp"
++        android:background="#dddddd"
++        android:scrollbarStyle="outsideOverlay"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent">
+@@ -20,31 +23,16 @@
+             android:id="@+id/container"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:orientation="vertical">
+-
+-        </LinearLayout>
++            android:orientation="vertical" />
+     </ScrollView>
+ 
+-    <Button
+-        android:id="@+id/viewPastOrdersButton"
+-        android:layout_width="147dp"
+-        android:layout_height="56dp"
+-        android:layout_marginBottom="40dp"
+-        android:background="@drawable/roundedbutton"
+-        android:text="@string/pastorders"
+-        android:textColor="@android:color/white"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.497"
+-        app:layout_constraintStart_toStartOf="parent" />
+-
+     <Button
+         android:id="@+id/checkOutButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="36dp"
+-        android:text="Checkout"
+         android:background="@drawable/roundedbutton"
++        android:text="Checkout"
+         android:textColor="@android:color/white"
+         app:layout_constraintBottom_toTopOf="@+id/viewPastOrdersButton"
+         app:layout_constraintEnd_toEndOf="parent"
+@@ -52,62 +40,90 @@
+         app:layout_constraintStart_toStartOf="parent" />
+ 
+     <Button
+-        android:id="@+id/logOutButton"
++        android:id="@+id/viewPastOrdersButton"
++        android:layout_width="147dp"
++        android:layout_height="56dp"
++        android:layout_marginBottom="20dp"
++        android:background="@drawable/roundedbutton"
++        android:text="@string/pastorders"
++        android:textColor="@android:color/white"
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.496"
++        app:layout_constraintStart_toStartOf="parent" />
++
++    <Button
++        android:id="@+id/WorkerViewBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginTop="12dp"
+-        android:text="Logout"
++        android:layout_marginEnd="16dp"
++        android:layout_marginBottom="84dp"
+         android:background="@drawable/roundedbutton"
++        android:text="W"
+         android:textColor="@android:color/white"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.949"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent" />
++        app:layout_constraintBottom_toBottomOf="parent"
++        app:layout_constraintEnd_toEndOf="parent" />
+ 
+     <Button
+         android:id="@+id/SysAdminViewBtn"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_marginStart="16dp"
+-        android:layout_marginBottom="104dp"
+-        android:text="S"
++        android:layout_marginBottom="84dp"
+         android:background="@drawable/roundedbutton"
++        android:text="S"
+         android:textColor="@android:color/white"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintStart_toStartOf="parent" />
+ 
+     <Button
+-        android:id="@+id/WorkerViewBtn"
++        android:id="@+id/logOutButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginEnd="16dp"
+-        android:layout_marginBottom="104dp"
+-        android:text="W"
++        android:layout_marginTop="12dp"
+         android:background="@drawable/roundedbutton"
++        android:text="Logout"
+         android:textColor="@android:color/white"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent" />
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.949"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
+ 
+     <TextView
+-        android:id="@+id/textView3"
++        android:id="@+id/CustomWelcomeName"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginStart="16dp"
+-        android:layout_marginTop="16dp"
++        android:layout_marginTop="8dp"
++        android:layout_marginEnd="124dp"
++        android:text="User!"
++        android:textSize="16sp"
++        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/textView3"
++        android:layout_width="68dp"
++        android:layout_height="22dp"
++        android:layout_marginTop="8dp"
+         android:scrollbarSize="4sp"
+         android:text="Welcome"
+-        android:textSize="32sp"
++        android:textSize="16sp"
++        app:layout_constraintEnd_toStartOf="@+id/CustomWelcomeName"
++        app:layout_constraintHorizontal_bias="0.904"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
+ 
+     <TextView
+-        android:id="@+id/CustomWelcomeName"
++        android:id="@+id/customWelcomeName"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginStart="8dp"
+-        android:layout_marginTop="16dp"
+-        android:text="User!"
+-        android:textSize="32sp"
+-        app:layout_constraintStart_toEndOf="@+id/textView3"
++        android:layout_marginTop="32dp"
++        android:layout_marginEnd="47dp"
++        android:text="Select a coffee type to get started!"
++        android:textSize="16sp"
++        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
++        app:layout_constraintHorizontal_bias="1.0"
++        app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent" />
++
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: app/src/main/res/layout/loginui.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".LoginScreen\">\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextPassword\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"48dp\"\r\n        android:layout_marginBottom=\"188dp\"\r\n        android:autofillHints=\"true\"\r\n        android:ems=\"10\"\r\n        android:hint=\"@string/password\"\r\n        android:inputType=\"textPassword\"\r\n        android:textColorHint=\"#7E7878\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.497\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editTextTextEmailAddress\" />\r\n\r\n    <EditText\r\n        android:id=\"@+id/editTextTextEmailAddress\"\r\n        android:layout_width=\"300dp\"\r\n        android:layout_height=\"48dp\"\r\n        android:layout_marginTop=\"376dp\"\r\n        android:autofillHints=\"true\"\r\n        android:ems=\"10\"\r\n        android:hint=\"@string/email\"\r\n        android:inputType=\"textEmailAddress\"\r\n        android:textColorHint=\"#7E7878\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.495\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\" />\r\n\r\n\r\n    <Button\r\n        android:id=\"@+id/loginButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"48dp\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:textColor=\"@android:color/white\"\r\n        android:text=\"@string/login\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/editTextTextPassword\" />\r\n\r\n    <TextView\r\n        android:id=\"@+id/createAccountButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginTop=\"12dp\"\r\n        android:clickable=\"true\"\r\n        android:focusable=\"true\"\r\n        android:text=\"@string/createaccount\"\r\n        android:textSize=\"18sp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.498\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/loginButton\" />\r\n\r\n    <ImageView\r\n        android:id=\"@+id/imageView\"\r\n        android:layout_width=\"338dp\"\r\n        android:layout_height=\"400dp\"\r\n        android:src=\"@drawable/logo_without_border\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.493\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\"\r\n        app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/loginui.xml b/app/src/main/res/layout/loginui.xml
+--- a/app/src/main/res/layout/loginui.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/res/layout/loginui.xml	(date 1675972819626)
+@@ -46,6 +46,7 @@
+         android:background="@drawable/roundedbutton"
+         android:textColor="@android:color/white"
+         android:text="@string/login"
++
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintStart_toStartOf="parent"
+Index: app/src/main/java/com/cjcj55/scrum_project_1/ItemSelectionScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cjcj55.scrum_project_1;\r\n\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.view.Gravity;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentActivity;\r\nimport androidx.navigation.fragment.NavHostFragment;\r\n\r\nimport com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;\r\nimport com.cjcj55.scrum_project_1.objects.FlavorButton;\r\nimport com.cjcj55.scrum_project_1.objects.ToppingButton;\r\nimport com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;\r\nimport com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;\r\nimport com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;\r\nimport com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;\r\nimport com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;\r\nimport com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;\r\n\r\nimport java.text.DecimalFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Iterator;\r\nimport java.util.List;\r\n\r\n//Screen shown after selecting a item from the menu(toppings here etc)\r\npublic class ItemSelectionScreen extends Fragment {\r\n\r\n\r\n    private ItemselectionuiBinding binding;\r\n\r\n    public View onCreateView(\r\n            LayoutInflater inflater, ViewGroup container,\r\n            Bundle savedInstanceState\r\n    ) {\r\n\r\n        binding = ItemselectionuiBinding.inflate(inflater, container, false);\r\n        return binding.getRoot();\r\n\r\n    }\r\n\r\n    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        /**\r\n         * -----------------------------------------------------\r\n         * TOPPINGS\r\n         * -----------------------------------------------------\r\n         */\r\n        LinearLayout toppingContainer = view.findViewById(R.id.toppingContainer);\r\n\r\n        for (ToppingItemInCatalog toppingItem : MainActivity.toppingItemInCatalogTypes) {\r\n            ToppingButton buttonLayout = new ToppingButton(getContext());\r\n            buttonLayout.setOrientation(LinearLayout.HORIZONTAL);\r\n            buttonLayout.setPadding(40, 20, 40, 20);\r\n            buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));\r\n\r\n            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(\r\n                    LinearLayout.LayoutParams.MATCH_PARENT,\r\n                    LinearLayout.LayoutParams.WRAP_CONTENT\r\n            );\r\n            layoutParams.setMargins(10, 10, 10, 10);\r\n            buttonLayout.setLayoutParams(layoutParams);\r\n\r\n            TextView toppingName = new TextView(getContext());\r\n            toppingName.setText(toppingItem.getName());\r\n            toppingName.setTextSize(30);\r\n\r\n            TextView toppingPrice = new TextView(getContext());\r\n            DecimalFormat df = new DecimalFormat(\"0.00\");\r\n            toppingPrice.setText(\"$\" + df.format(toppingItem.getPrice()));\r\n            toppingPrice.setTextColor(Color.parseColor(\"#006400\"));\r\n            toppingPrice.setTextSize(30);\r\n            toppingPrice.setGravity(Gravity.END);\r\n\r\n            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(\r\n                    ViewGroup.LayoutParams.MATCH_PARENT,\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT,\r\n                    1.0f\r\n            );\r\n\r\n            buttonLayout.setId(toppingItem.getId());\r\n            buttonLayout.setWeightSum(2);\r\n\r\n            params.gravity = Gravity.LEFT;\r\n            toppingName.setLayoutParams(params);\r\n            buttonLayout.addView(toppingName);\r\n\r\n            params.gravity = Gravity.END;\r\n            toppingPrice.setLayoutParams(params);\r\n            buttonLayout.addView(toppingPrice);\r\n\r\n            buttonLayout.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n                    // Locate the id from the catalog\r\n                    int tid = -1;\r\n                    for (int i = 0; i < MainActivity.toppingItemInCatalogTypes.size(); i++) {\r\n                        if (MainActivity.toppingItemInCatalogTypes.get(i).getId() == buttonLayout.getId()) {\r\n                            tid = i;\r\n                            break;\r\n                        }\r\n                    }\r\n\r\n                    // Checkbox toggle this item.  handle all selected on form submit\r\n                    // Toggle the selected state\r\n                    buttonLayout.setSelected(!buttonLayout.isSelected());\r\n\r\n                    // Update the background color based on the selected state\r\n                    buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),\r\n                            buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));\r\n\r\n//                    printAllActiveToppings();\r\n                }\r\n            });\r\n            toppingContainer.addView(buttonLayout);\r\n        }\r\n\r\n\r\n        /**\r\n         * -----------------------------------------------------\r\n         * FLAVORS\r\n         * -----------------------------------------------------\r\n         */\r\n        LinearLayout flavorContainer = view.findViewById(R.id.flavorContainer);\r\n\r\n        for (FlavorItemInCatalog flavorItem : MainActivity.flavorItemInCatalogTypes) {\r\n            FlavorButton buttonLayout = new FlavorButton(getContext());\r\n            buttonLayout.setOrientation(LinearLayout.HORIZONTAL);\r\n            buttonLayout.setPadding(40, 20, 40, 20);\r\n            buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));\r\n\r\n            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(\r\n                    LinearLayout.LayoutParams.MATCH_PARENT,\r\n                    LinearLayout.LayoutParams.WRAP_CONTENT\r\n            );\r\n            layoutParams.setMargins(10, 10, 10, 10);\r\n            buttonLayout.setLayoutParams(layoutParams);\r\n\r\n            TextView flavorName = new TextView(getContext());\r\n            flavorName.setText(flavorItem.getName());\r\n            flavorName.setTextSize(30);\r\n\r\n            TextView flavorPrice = new TextView(getContext());\r\n            DecimalFormat df = new DecimalFormat(\"0.00\");\r\n            flavorPrice.setText(\"$\" + df.format(flavorItem.getPrice()));\r\n            flavorPrice.setTextColor(Color.parseColor(\"#006400\"));\r\n            flavorPrice.setTextSize(30);\r\n            flavorPrice.setGravity(Gravity.END);\r\n\r\n            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(\r\n                    ViewGroup.LayoutParams.MATCH_PARENT,\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT,\r\n                    1.0f\r\n            );\r\n\r\n            buttonLayout.setId(flavorItem.getId());\r\n            buttonLayout.setWeightSum(2);\r\n\r\n            params.gravity = Gravity.LEFT;\r\n            flavorName.setLayoutParams(params);\r\n            buttonLayout.addView(flavorName);\r\n\r\n            params.gravity = Gravity.END;\r\n            flavorPrice.setLayoutParams(params);\r\n            buttonLayout.addView(flavorPrice);\r\n\r\n            buttonLayout.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n                    // Locate the id from the catalog\r\n                    int fid = -1;\r\n                    for (int i = 0; i < MainActivity.flavorItemInCatalogTypes.size(); i++) {\r\n                        if (MainActivity.flavorItemInCatalogTypes.get(i).getId() == buttonLayout.getId()) {\r\n                            fid = i;\r\n                            break;\r\n                        }\r\n                    }\r\n\r\n                    // Checkbox toggle this item.  handle all selected on form submit\r\n                    // Toggle the selected state\r\n                    buttonLayout.setSelected(!buttonLayout.isSelected());\r\n\r\n                    // Update the background color based on the selected state\r\n                    buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),\r\n                            buttonLayout.isSelected() ? R.drawable.rounded_background_selected : R.drawable.rounded_background));\r\n\r\n//                    printAllActiveFlavors();\r\n                }\r\n            });\r\n            flavorContainer.addView(buttonLayout);\r\n        }\r\n\r\n        binding.addtocartButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                List<ToppingItem> toppings = new ArrayList<>();\r\n                List<FlavorItem> flavors = new ArrayList<>();\r\n\r\n                for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {\r\n                    ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);\r\n                    if (topping.isSelected()) {\r\n                        toppings.add(new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(i)));\r\n                    }\r\n                }\r\n                for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {\r\n                    FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);\r\n                    if (flavor.isSelected()) {\r\n                        flavors.add(new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(i)));\r\n                    }\r\n                }\r\n                MainActivity.currentCoffee.setToppingItemList(toppings);\r\n                MainActivity.currentCoffee.setFlavorItemList(flavors);\r\n                MainActivity.userCart.addCoffeeToCart(MainActivity.currentCoffee);\r\n//                for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {\r\n//                    System.out.println(MainActivity.userCart.getCoffeeAt(i).toString());\r\n//                    for (int t = 0; t < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); t++) {\r\n//                        System.out.println(\"\\t\" + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(t).toString());\r\n//                    }\r\n//                    for (int f = 0; f < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); f++) {\r\n//                        System.out.println(\"\\t\" + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(f).toString());\r\n//                    }\r\n//                }\r\n\r\n\r\n                    NavHostFragment.findNavController(ItemSelectionScreen.this)\r\n                            .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);\r\n            }\r\n        });\r\n\r\n        binding.discardButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                MainActivity.currentCoffee = null;\r\n                NavHostFragment.findNavController(ItemSelectionScreen.this)\r\n                        .navigate(R.id.action_ItemSelectionScreen_to_OrderScreen);\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    public void printAllActiveToppings() {\r\n        for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {\r\n            ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);\r\n            if (topping.isSelected()) {\r\n                System.out.println(topping.getId());\r\n            }\r\n        }\r\n    }\r\n\r\n    public void printAllActiveFlavors() {\r\n        for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {\r\n            FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);\r\n            if (flavor.isSelected()) {\r\n                System.out.println(flavor.getId());\r\n            }\r\n        }\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/cjcj55/scrum_project_1/ItemSelectionScreen.java b/app/src/main/java/com/cjcj55/scrum_project_1/ItemSelectionScreen.java
+--- a/app/src/main/java/com/cjcj55/scrum_project_1/ItemSelectionScreen.java	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/java/com/cjcj55/scrum_project_1/ItemSelectionScreen.java	(date 1675980300733)
+@@ -66,17 +66,18 @@
+                     LinearLayout.LayoutParams.MATCH_PARENT,
+                     LinearLayout.LayoutParams.WRAP_CONTENT
+             );
+-            layoutParams.setMargins(10, 10, 10, 10);
++            layoutParams.setMargins(200, 50, 200, 10);
+             buttonLayout.setLayoutParams(layoutParams);
+ 
+             TextView toppingName = new TextView(getContext());
+             toppingName.setText(toppingItem.getName());
+-            toppingName.setTextSize(30);
++            toppingName.setTextSize(20);
++            toppingName.setTextColor(Color.parseColor("white"));
+ 
+             TextView toppingPrice = new TextView(getContext());
+             DecimalFormat df = new DecimalFormat("0.00");
+-            toppingPrice.setText("$" + df.format(toppingItem.getPrice()));
+-            toppingPrice.setTextColor(Color.parseColor("#006400"));
++            toppingPrice.setText("+$" + df.format(toppingItem.getPrice()));
++            toppingPrice.setTextColor(Color.parseColor("white"));
+             toppingPrice.setTextSize(30);
+             toppingPrice.setGravity(Gravity.END);
+ 
+@@ -141,17 +142,18 @@
+                     LinearLayout.LayoutParams.MATCH_PARENT,
+                     LinearLayout.LayoutParams.WRAP_CONTENT
+             );
+-            layoutParams.setMargins(10, 10, 10, 10);
++            layoutParams.setMargins(200, 50, 200, 10);
+             buttonLayout.setLayoutParams(layoutParams);
+ 
+             TextView flavorName = new TextView(getContext());
+             flavorName.setText(flavorItem.getName());
+-            flavorName.setTextSize(30);
++            flavorName.setTextSize(20);
++            flavorName.setTextColor(Color.parseColor("white"));
+ 
+             TextView flavorPrice = new TextView(getContext());
+             DecimalFormat df = new DecimalFormat("0.00");
+-            flavorPrice.setText("$" + df.format(flavorItem.getPrice()));
+-            flavorPrice.setTextColor(Color.parseColor("#006400"));
++            flavorPrice.setText("+$" + df.format(flavorItem.getPrice()));
++            flavorPrice.setTextColor(Color.parseColor("white"));
+             flavorPrice.setTextSize(30);
+             flavorPrice.setGravity(Gravity.END);
+ 
+Index: app/src/main/java/com/cjcj55/scrum_project_1/CheckoutCartScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cjcj55.scrum_project_1;\r\nimport static android.graphics.Color.BLACK;\r\nimport static android.graphics.Color.RED;\r\n\r\nimport android.content.Intent;\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.view.Gravity;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.AdapterView;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TableLayout;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.navigation.fragment.NavHostFragment;\r\n\r\nimport com.cjcj55.scrum_project_1.databinding.CheckoutcartuiBinding;\r\nimport com.cjcj55.scrum_project_1.db.DatabaseHelper;\r\n\r\nimport java.sql.Timestamp;\r\n\r\nimport java.text.DecimalFormat;\r\nimport java.text.SimpleDateFormat;\r\nimport java.util.ArrayList;\r\nimport java.util.Calendar;\r\nimport java.util.List;\r\nimport java.util.Locale;\r\n\r\n//TODO:  Create an ArrayList<LinearLayout> to store all 'dynamic' LinearLayouts in an array.\r\n// TODO:  When the user removes a coffee from the cart (a 'dynamic'), loop and check all IDs of the LinearLayouts to see which have an ID greater than the ID of the coffee being removed.\r\n// TODO:  Remove the coffee and decrement all IDs greater than that coffee's ID.\r\npublic class CheckoutCartScreen extends Fragment {\r\n    private CheckoutcartuiBinding binding;\r\n    String selectedPickupTime;\r\n\r\n    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {\r\n        binding = CheckoutcartuiBinding.inflate(inflater, container, false);\r\n\r\n        return binding.getRoot();\r\n\r\n    }\r\n    static double total;\r\n    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {\r\n        total = 0;\r\n        super.onViewCreated(view, savedInstanceState);\r\n        //Calculate the total when you open the cart\r\n        LinearLayout container = view.findViewById(R.id.cartUI);\r\n       TextView totalView = view.findViewById(R.id.totalCost);\r\n        try {\r\n            for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {\r\n                int q = i;\r\n                //using int q as a test for something else\r\n                //Slight Test real quick\r\n                LinearLayout dynamic = new LinearLayout(getContext());\r\n                dynamic.setOrientation(LinearLayout.VERTICAL);\r\n                dynamic.setPadding(40,20,40,20);\r\n                dynamic.setId(i);\r\n\r\n\r\n                //This already calculates the carts total so this should just be an initialize to the cart view as well\r\n                LinearLayout cartLayout = new TableLayout(getContext());\r\n                cartLayout.setOrientation(LinearLayout.HORIZONTAL);\r\n                cartLayout.setPadding(40, 20, 40, 20);\r\n                ViewGroup.LayoutParams layoutC = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);\r\n                cartLayout.setLayoutParams(layoutC);\r\n                //Add the coffee name to formatting\r\n                TextView coffeeName = new TextView(getContext());\r\n                coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());\r\n                coffeeName.setTextSize(30);\r\n                //Add the coffee price to formatting\r\n                TextView coffeePrice = new TextView(getContext());\r\n                DecimalFormat df = new DecimalFormat(\"0.00\");\r\n                coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));\r\n                coffeePrice.setTextSize(30);\r\n                coffeePrice.setGravity(Gravity.CENTER);\r\n                //Create the button for the cart to remove the coffee as a total\r\n                //Uhhh if I push enough buttons it'll have to work right\r\n                Button removeBtn = new Button(getContext());\r\n                removeBtn.setBackgroundColor(RED);\r\n                removeBtn.setText(\"X\");\r\n                removeBtn.setTextColor(Color.rgb(255, 204, 203));\r\n\r\n\r\n                removeBtn.setOnClickListener(new View.OnClickListener() {\r\n                    @Override\r\n                    public void onClick(View view) {\r\n                        System.out.print(\"HI HI HI\");\r\n                        double tChange = 0;\r\n                        tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getPrice();\r\n\r\n                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().size(); w++) {\r\n                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getFlavorItemList().get(w).getPrice();\r\n                        }\r\n                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(q).getToppingItemList().size(); w++) {\r\n                            tChange = tChange + MainActivity.userCart.getCoffeeAt(q).getToppingItemList().get(w).getPrice();\r\n                        }\r\n                        total = total - tChange;\r\n                        DecimalFormat df = new DecimalFormat(\"0.00\");\r\n                        totalView.setText(\"TOTAL: \" + df.format(total));\r\n                        totalView.setTextSize(40);\r\n                        totalView.setTextColor(BLACK);\r\n                        MainActivity.userCart.getUserCart().remove(MainActivity.userCart.getCoffeeAt(q));\r\n                        container.removeView(dynamic);\r\n\r\n\r\n                    }\r\n                });\r\n\r\n                //Add it all to the GUI\r\n                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);\r\n                params.gravity = Gravity.LEFT;\r\n                coffeeName.setLayoutParams(params);\r\n                cartLayout.addView(coffeeName);\r\n\r\n                params.gravity = Gravity.CENTER;\r\n                coffeePrice.setLayoutParams(params);\r\n                cartLayout.addView(coffeePrice);\r\n\r\n                params.gravity = Gravity.END;\r\n                removeBtn.setLayoutParams(params);\r\n                cartLayout.addView(removeBtn);\r\n                //Add the button stuff here\r\n\r\n                dynamic.addView(cartLayout);\r\n                total = total + MainActivity.userCart.getCoffeeAt(i).getPrice();\r\n                //Add Flavor calculation to total\r\n                try {\r\n                    for (int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); j++) {\r\n                        LinearLayout cartLayoutF = new LinearLayout(getContext());\r\n                        cartLayoutF.setOrientation(LinearLayout.HORIZONTAL);\r\n                        cartLayoutF.setPadding(40, 20, 40, 20);\r\n                        ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);\r\n                        cartLayoutF.setLayoutParams(layoutF);\r\n                        //Add flavor name to format\r\n                        TextView flavorName = new TextView(getContext());\r\n                        flavorName.setText(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getName());\r\n                        flavorName.setTextSize(20);\r\n                        //Add flavor price to format\r\n                        TextView flavorPrice = new TextView(getContext());\r\n                        flavorPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));\r\n                        flavorPrice.setTextSize(20);\r\n                        flavorPrice.setGravity(Gravity.CENTER_HORIZONTAL);\r\n                        //Add remove button to format\r\n\r\n                        //Add it all to the GUI\r\n                        params.gravity = Gravity.LEFT;\r\n                        flavorName.setLayoutParams(params);\r\n                        cartLayoutF.addView(flavorName);\r\n\r\n                        params.gravity = Gravity.CENTER_HORIZONTAL;\r\n                        flavorPrice.setLayoutParams(params);\r\n                        cartLayoutF.addView(flavorPrice);\r\n\r\n                        dynamic.addView(cartLayoutF);\r\n                        total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();\r\n                    }\r\n                } catch (NullPointerException e) {\r\n                    System.out.println(\"Empty Flavor List\");\r\n                }\r\n                //Add Toppings calculation to total\r\n                try {\r\n                    for (int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); j++) {\r\n                        LinearLayout cartLayoutT = new LinearLayout(getContext());\r\n                        cartLayoutT.setOrientation(LinearLayout.HORIZONTAL);\r\n                        cartLayoutT.setPadding(40,20,40,20);\r\n                        ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);\r\n                        cartLayoutT.setLayoutParams(layoutT);\r\n                        //Add toppings name to format\r\n                        TextView toppingsName = new TextView(getContext());\r\n                        toppingsName.setText(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getName());\r\n                        toppingsName.setTextSize(20);\r\n                        //Add toppings price to format\r\n                        TextView toppingsPrice = new TextView(getContext());\r\n                        toppingsPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));\r\n                        toppingsPrice.setTextSize(20);\r\n                        toppingsPrice.setGravity(Gravity.CENTER_HORIZONTAL);\r\n                        //Add the button functionality\r\n                        //Uhhh we will do this yes push more buttons\r\n\r\n                        //Add the formatting to the container\r\n                        params.gravity = Gravity.LEFT;\r\n                        toppingsName.setLayoutParams(params);\r\n                        cartLayoutT.addView(toppingsName);\r\n\r\n                        params.gravity = Gravity.CENTER_HORIZONTAL;\r\n                        toppingsPrice.setLayoutParams(params);\r\n                        cartLayoutT.addView(toppingsPrice);\r\n\r\n                        dynamic.addView(cartLayoutT);\r\n                        total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();\r\n                    }\r\n                }catch(NullPointerException e){\r\n                    System.out.println(\"No toppings \");\r\n                }\r\n                container.addView(dynamic);\r\n            }\r\n        }catch(NullPointerException e){\r\n            System.out.println(\"No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN\");\r\n        }\r\n\r\n        DecimalFormat df = new DecimalFormat(\"0.00\");\r\n        totalView.setText(\"TOTAL: $\" + df.format(total));\r\n        totalView.setTextSize(40);\r\n        totalView.setTextColor(BLACK);\r\n\r\n\r\n        binding.placeOrderButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                // Insert entire order to database\r\n                DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, selectedPickupTime, calcTotal());\r\n                if(calcTotal()==0)\r\n                {\r\n                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance(\"Your Cart is now empty.\");\r\n                    messageDialog.show(getChildFragmentManager(), \"MessagePopupFragment\");\r\n                }\r\n                else {\r\n                    NavHostFragment.findNavController(CheckoutCartScreen.this)\r\n                            .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);\r\n                }\r\n            }\r\n        });\r\n\r\n        binding.checkoutBackButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(CheckoutCartScreen.this)\r\n                        .navigate(R.id.action_CheckoutCartScreen_to_OrderScreen);\r\n            }\r\n        });\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n        Calendar calendar = Calendar.getInstance();\r\n        calendar.set(Calendar.MINUTE, (calendar.get(Calendar.MINUTE) / 15) * 15);\r\n        calendar.set(Calendar.SECOND, 0);\r\n        calendar.set(Calendar.MILLISECOND, 0);\r\n        List<String> pickupTimeList= new ArrayList<>();\r\n        for (int i = 0; i < 8; i++) { //Change for loop iterations to increase/decrease number of dropdown items\r\n            SimpleDateFormat format = new SimpleDateFormat(\"h:mm a\", Locale.getDefault());\r\n            String pickupTime = format.format(calendar.getTime());\r\n            pickupTimeList.add(pickupTime);\r\n            calendar.add(Calendar.MINUTE, 15);\r\n        }\r\n        pickupTimeList.remove(0);\r\n        pickupTimeList.remove(0);\r\n        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, pickupTimeList);\r\n        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        binding.SpinnerPickupTime.setAdapter(adapter);\r\n\r\n        binding.SpinnerPickupTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {\r\n                selectedPickupTime = parent.getItemAtPosition(position).toString();\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(AdapterView<?> parent) {\r\n                // handle nothing selected\r\n                MessagePopupFragment messageDialog = MessagePopupFragment.newInstance(\"Please select a pickup time\");\r\n                messageDialog.show(getChildFragmentManager(), \"MessagePopupFragment\");\r\n            }\r\n        });\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n    }\r\n\r\n    public double calcTotal() {\r\n        double total = 0.0;\r\n        for (int c = 0; c < MainActivity.userCart.getUserCart().size(); c++) {\r\n            total += MainActivity.userCart.getCoffeeAt(c).getPrice();\r\n\r\n            for (int f = 0; f < MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().size(); f++) {\r\n                total += MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().get(f).getPrice();\r\n            }\r\n\r\n            for (int t = 0; t < MainActivity.userCart.getCoffeeAt(c).getToppingItemList().size(); t++) {\r\n                total += MainActivity.userCart.getCoffeeAt(c).getToppingItemList().get(t).getPrice();\r\n            }\r\n        }\r\n        return total;\r\n    }\r\n\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/cjcj55/scrum_project_1/CheckoutCartScreen.java b/app/src/main/java/com/cjcj55/scrum_project_1/CheckoutCartScreen.java
+--- a/app/src/main/java/com/cjcj55/scrum_project_1/CheckoutCartScreen.java	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/java/com/cjcj55/scrum_project_1/CheckoutCartScreen.java	(date 1675982121988)
+@@ -78,7 +78,7 @@
+                 DecimalFormat df = new DecimalFormat("0.00");
+                 coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
+                 coffeePrice.setTextSize(30);
+-                coffeePrice.setGravity(Gravity.CENTER);
++                coffeePrice.setGravity(Gravity.RIGHT);
+                 //Create the button for the cart to remove the coffee as a total
+                 //Uhhh if I push enough buttons it'll have to work right
+                 Button removeBtn = new Button(getContext());
+@@ -143,9 +143,9 @@
+                         flavorName.setTextSize(20);
+                         //Add flavor price to format
+                         TextView flavorPrice = new TextView(getContext());
+-                        flavorPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
++                        flavorPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
+                         flavorPrice.setTextSize(20);
+-                        flavorPrice.setGravity(Gravity.CENTER_HORIZONTAL);
++                        flavorPrice.setGravity(Gravity.RIGHT);
+                         //Add remove button to format
+ 
+                         //Add it all to the GUI
+@@ -153,7 +153,7 @@
+                         flavorName.setLayoutParams(params);
+                         cartLayoutF.addView(flavorName);
+ 
+-                        params.gravity = Gravity.CENTER_HORIZONTAL;
++                        params.gravity = Gravity.RIGHT;
+                         flavorPrice.setLayoutParams(params);
+                         cartLayoutF.addView(flavorPrice);
+ 
+@@ -177,9 +177,9 @@
+                         toppingsName.setTextSize(20);
+                         //Add toppings price to format
+                         TextView toppingsPrice = new TextView(getContext());
+-                        toppingsPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
++                        toppingsPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
+                         toppingsPrice.setTextSize(20);
+-                        toppingsPrice.setGravity(Gravity.CENTER_HORIZONTAL);
++                        toppingsPrice.setGravity(Gravity.RIGHT);
+                         //Add the button functionality
+                         //Uhhh we will do this yes push more buttons
+ 
+@@ -188,7 +188,7 @@
+                         toppingsName.setLayoutParams(params);
+                         cartLayoutT.addView(toppingsName);
+ 
+-                        params.gravity = Gravity.CENTER_HORIZONTAL;
++                        params.gravity = Gravity.RIGHT;
+                         toppingsPrice.setLayoutParams(params);
+                         cartLayoutT.addView(toppingsPrice);
+ 
+Index: app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.cjcj55.scrum_project_1;\r\n\r\nimport static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;\r\nimport static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;\r\n\r\nimport android.graphics.Color;\r\nimport android.os.Bundle;\r\nimport android.view.Gravity;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.core.content.ContextCompat;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.navigation.fragment.NavHostFragment;\r\n\r\nimport com.cjcj55.scrum_project_1.databinding.OrderuiBinding;\r\nimport com.cjcj55.scrum_project_1.db.DatabaseHelper;\r\nimport com.cjcj55.scrum_project_1.objects.UserCart;\r\nimport com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;\r\nimport com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;\r\n\r\nimport java.text.DecimalFormat;\r\nimport java.util.Iterator;\r\nimport java.util.List;\r\n\r\npublic class OrderScreen extends Fragment {\r\n\r\n    private OrderuiBinding binding;\r\n\r\n    @Override\r\n    public View onCreateView(\r\n            LayoutInflater inflater, ViewGroup container,\r\n            Bundle savedInstanceState\r\n    ) {\r\n\r\n        binding =OrderuiBinding.inflate(inflater, container, false);\r\n        return binding.getRoot();\r\n\r\n    }\r\n\r\n    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {\r\n        super.onViewCreated(view, savedInstanceState);\r\n\r\n        TextView textView = view.findViewById(R.id.CustomWelcomeName);\r\n        String customText = DatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);\r\n        if(customText.length()>=7)\r\n        {\r\n            customText = customText.substring(0, 7) + \"..\";\r\n        }\r\n        customText+=\"!\";\r\n        textView.setText(customText);\r\n\r\n\r\n\r\n        LinearLayout container = view.findViewById(R.id.container);\r\n\r\n        for (CoffeeItemInCatalog coffeeItem : MainActivity.coffeeItemInCatalogTypes) {\r\n            LinearLayout buttonLayout = new LinearLayout(getContext());\r\n            buttonLayout.setOrientation(LinearLayout.HORIZONTAL);\r\n            buttonLayout.setPadding(40, 20, 40, 20);\r\n            buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));\r\n\r\n            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(\r\n                    LinearLayout.LayoutParams.MATCH_PARENT,\r\n                    LinearLayout.LayoutParams.WRAP_CONTENT\r\n            );\r\n            layoutParams.setMargins(10, 10, 10, 10);\r\n            buttonLayout.setLayoutParams(layoutParams);\r\n\r\n            TextView coffeeName = new TextView(getContext());\r\n            coffeeName.setText(coffeeItem.getName());\r\n            coffeeName.setTextSize(30);\r\n\r\n            TextView coffeePrice = new TextView(getContext());\r\n            DecimalFormat df = new DecimalFormat(\"0.00\");\r\n            coffeePrice.setText(\"$\" + df.format(coffeeItem.getPrice()));\r\n            coffeePrice.setTextColor(Color.parseColor(\"#006400\"));\r\n            coffeePrice.setTextSize(30);\r\n            coffeePrice.setGravity(Gravity.END);\r\n\r\n            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(\r\n                    ViewGroup.LayoutParams.MATCH_PARENT,\r\n                    ViewGroup.LayoutParams.WRAP_CONTENT,\r\n                    1.0f\r\n            );\r\n\r\n            buttonLayout.setId(coffeeItem.getId());\r\n            buttonLayout.setWeightSum(2);\r\n\r\n            params.gravity = Gravity.LEFT;\r\n            coffeeName.setLayoutParams(params);\r\n            buttonLayout.addView(coffeeName);\r\n\r\n            params.gravity = Gravity.END;\r\n            coffeePrice.setLayoutParams(params);\r\n            buttonLayout.addView(coffeePrice);\r\n            buttonLayout.setOnClickListener(new View.OnClickListener() {\r\n                @Override\r\n                public void onClick(View view) {\r\n                    // Locate the id from the catalog\r\n                    int cid = -1;\r\n                    for (int i = 0; i < MainActivity.coffeeItemInCatalogTypes.size(); i++) {\r\n                        if (MainActivity.coffeeItemInCatalogTypes.get(i).getId() == buttonLayout.getId()) {\r\n                            cid = i;\r\n                            break;\r\n                        }\r\n                    }\r\n\r\n                    MainActivity.currentCoffee = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(cid));\r\n                    NavHostFragment.findNavController(OrderScreen.this)\r\n                            .navigate(R.id.action_OrderScreen_to_ItemSelectionScreen);\r\n//                    System.out.println(MainActivity.currentCoffee.toString() + \" ID:\" + MainActivity.currentCoffee.getId());\r\n                }\r\n            });\r\n            container.addView(buttonLayout);\r\n        }\r\n\r\n        binding.logOutButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                MainActivity.user = -1;\r\n                MainActivity.userCart = new UserCart();\r\n//                System.out.println(\"User logged out.  User now \" + MainActivity.user);\r\n                setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups\r\n                setAccountCreationPopup(false); //disables account creation popup\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_LoginScreen);\r\n            }\r\n        });\r\n\r\n        binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_PreviousOrderScreen);\r\n            }\r\n        });\r\n\r\n        binding.WorkerViewBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_WorkerOrderScreen);\r\n            }\r\n        });\r\n\r\n        binding.SysAdminViewBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                NavHostFragment.findNavController(OrderScreen.this)\r\n                        .navigate(R.id.action_OrderScreen_to_SysAdminScreen);\r\n            }\r\n        });\r\n\r\n        binding.checkOutButton.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                if(MainActivity.userCart.getUserCart().isEmpty())\r\n                {\r\n                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance(\"Your Cart is Empty.\");\r\n                   messageDialog.show(getChildFragmentManager(), \"MessagePopupFragment\");\r\n                }\r\n                else {\r\n                    NavHostFragment.findNavController(OrderScreen.this)\r\n                            .navigate(R.id.action_OrderScreen_to_CheckoutCartScreen);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    @Override\r\n    public void onDestroyView() {\r\n        super.onDestroyView();\r\n        binding = null;\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java b/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java
+--- a/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/java/com/cjcj55/scrum_project_1/OrderScreen.java	(date 1675980107929)
+@@ -62,31 +62,33 @@
+         for (CoffeeItemInCatalog coffeeItem : MainActivity.coffeeItemInCatalogTypes) {
+             LinearLayout buttonLayout = new LinearLayout(getContext());
+             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
+-            buttonLayout.setPadding(40, 20, 40, 20);
++            buttonLayout.setPadding(40, 0, 40, 20);
+             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+ 
+             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                     LinearLayout.LayoutParams.MATCH_PARENT,
+                     LinearLayout.LayoutParams.WRAP_CONTENT
+             );
+-            layoutParams.setMargins(10, 10, 10, 10);
++            layoutParams.setMargins(200, 50, 200, 10);
+             buttonLayout.setLayoutParams(layoutParams);
+ 
+             TextView coffeeName = new TextView(getContext());
++
+             coffeeName.setText(coffeeItem.getName());
+-            coffeeName.setTextSize(30);
++            coffeeName.setTextSize(20);
++            coffeeName.setTextColor(Color.parseColor("white"));
+ 
+             TextView coffeePrice = new TextView(getContext());
+             DecimalFormat df = new DecimalFormat("0.00");
+             coffeePrice.setText("$" + df.format(coffeeItem.getPrice()));
+-            coffeePrice.setTextColor(Color.parseColor("#006400"));
++            coffeePrice.setTextColor(Color.parseColor("white"));
+             coffeePrice.setTextSize(30);
+             coffeePrice.setGravity(Gravity.END);
+ 
+             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                     ViewGroup.LayoutParams.MATCH_PARENT,
+                     ViewGroup.LayoutParams.WRAP_CONTENT,
+-                    1.0f
++                    1f
+             );
+ 
+             buttonLayout.setId(coffeeItem.getId());
+Index: app/src/main/res/drawable/roundedbutton.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<shape xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:shape=\"rectangle\">\r\n\r\n    <solid android:color=\"@color/brown\"/>\r\n    <corners android:radius=\"10dp\"></corners>\r\n\r\n</shape>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/roundedbutton.xml b/app/src/main/res/drawable/roundedbutton.xml
+--- a/app/src/main/res/drawable/roundedbutton.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/res/drawable/roundedbutton.xml	(date 1675972401764)
+@@ -5,4 +5,5 @@
+     <solid android:color="@color/brown"/>
+     <corners android:radius="10dp"></corners>
+ 
++
+ </shape>
+\ No newline at end of file
+Index: app/src/main/res/drawable/rounded_background.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><shape xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:shape=\"rectangle\">\r\n    <corners android:radius=\"25dp\" />\r\n    <solid android:color=\"#a0522d\" />\r\n</shape>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/rounded_background.xml b/app/src/main/res/drawable/rounded_background.xml
+--- a/app/src/main/res/drawable/rounded_background.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/res/drawable/rounded_background.xml	(date 1675974178114)
+@@ -1,5 +1,6 @@
+ <shape xmlns:android="http://schemas.android.com/apk/res/android"
+     android:shape="rectangle">
+-    <corners android:radius="25dp" />
+-    <solid android:color="#a0522d" />
++    <corners android:radius="15dp" />
++    <solid android:color="#c46c30" />
++    <stroke android:width="2dp" android:color="#D0CFCC" />
+ </shape>
+\ No newline at end of file
+Index: app/src/main/res/drawable/shadow.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/shadow.xml b/app/src/main/res/drawable/shadow.xml
+new file mode 100644
+--- /dev/null	(date 1675978925965)
++++ b/app/src/main/res/drawable/shadow.xml	(date 1675978925965)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="utf-8"?>
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape android:shape="rectangle">
++            <solid android:color="#dddddd"/>
++            <corners android:radius="2dp" />
++        </shape>
++    </item>
++
++</layer-list>
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"VcsDirectoryMappings\">\r\n    <mapping directory=\"$PROJECT_DIR$\" vcs=\"Git\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+--- a/.idea/vcs.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/.idea/vcs.xml	(date 1675972401786)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="VcsDirectoryMappings">
+-    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++    <mapping directory="" vcs="Git" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/res/layout/itemselectionui.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".ItemSelectionScreen\">\r\n\r\n    <ScrollView\r\n        android:id=\"@+id/scrollView1\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"295dp\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/rectangle_view\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/toppingContainer\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\"></LinearLayout>\r\n    </ScrollView>\r\n\r\n    <View\r\n        android:id=\"@+id/rectangle_view\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"5dp\"\r\n        android:background=\"#333\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/scrollView2\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/scrollView1\"/>\r\n\r\n    <ScrollView\r\n        android:id=\"@+id/scrollView2\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"295dp\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintHorizontal_bias=\"0.508\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toBottomOf=\"@+id/rectangle_view\"\r\n        app:layout_constraintBottom_toTopOf=\"@+id/addtocartButton\"\r\n        tools:layout_editor_absoluteY=\"308dp\">\r\n\r\n        <LinearLayout\r\n            android:id=\"@+id/flavorContainer\"\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n    <Button\r\n        android:id=\"@+id/addtocartButton\"\r\n        android:layout_width=\"103dp\"\r\n        android:layout_height=\"48dp\"\r\n        android:layout_marginEnd=\"60dp\"\r\n        android:layout_marginBottom=\"80dp\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:text=\"Add to Cart\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/discardButton\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_marginBottom=\"80dp\"\r\n        android:text=\"Discard\"\r\n        android:background=\"@drawable/roundedbutton\"\r\n        android:textColor=\"@android:color/white\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toStartOf=\"@+id/addtocartButton\"\r\n        app:layout_constraintHorizontal_bias=\"0.413\"\r\n        app:layout_constraintStart_toStartOf=\"parent\" />\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/itemselectionui.xml b/app/src/main/res/layout/itemselectionui.xml
+--- a/app/src/main/res/layout/itemselectionui.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/app/src/main/res/layout/itemselectionui.xml	(date 1675981893383)
+@@ -8,15 +8,16 @@
+ 
+     <ScrollView
+         android:id="@+id/scrollView1"
+-        android:layout_width="match_parent"
+-        android:layout_height="295dp"
++        android:layout_width="414dp"
++        android:layout_height="250dp"
++        android:background="@drawable/shadow"
+         app:layout_constraintBottom_toTopOf="@+id/rectangle_view"
+-        app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toTopOf="parent">
++        app:layout_constraintTop_toTopOf="parent"
++        app:layout_constraintVertical_bias="1.0"
++        tools:layout_editor_absoluteX="0dp">
+ 
+         <LinearLayout
+-            android:id="@+id/toppingContainer"
++            android:id="@+id/flavorContainer"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"></LinearLayout>
+@@ -26,53 +27,79 @@
+         android:id="@+id/rectangle_view"
+         android:layout_width="match_parent"
+         android:layout_height="5dp"
+-        android:background="#333"
+-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
++        android:layout_marginTop="308dp"
++        android:background="@color/brown"
++        android:alpha="0"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintStart_toStartOf="parent"
+-        app:layout_constraintTop_toBottomOf="@+id/scrollView1"/>
++        app:layout_constraintTop_toTopOf="parent" />
+ 
+     <ScrollView
+         android:id="@+id/scrollView2"
+-        android:layout_width="match_parent"
+-        android:layout_height="295dp"
++        android:layout_width="414dp"
++        android:layout_height="257dp"
++        android:layout_marginTop="46dp"
++        android:background="@drawable/shadow"
++        app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+-        app:layout_constraintHorizontal_bias="0.508"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/rectangle_view"
+-        app:layout_constraintBottom_toTopOf="@+id/addtocartButton"
+-        tools:layout_editor_absoluteY="308dp">
++        app:layout_constraintVertical_bias="0.0">
+ 
+         <LinearLayout
+-            android:id="@+id/flavorContainer"
++            android:id="@+id/toppingContainer"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+-            android:orientation="vertical">
+-        </LinearLayout>
++            android:orientation="vertical"></LinearLayout>
++
++
+     </ScrollView>
+ 
+     <Button
+         android:id="@+id/addtocartButton"
+         android:layout_width="103dp"
+         android:layout_height="48dp"
+-        android:layout_marginEnd="60dp"
+-        android:layout_marginBottom="80dp"
++        android:layout_marginTop="34dp"
+         android:background="@drawable/roundedbutton"
+         android:text="Add to Cart"
+         android:textColor="@android:color/white"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toEndOf="parent" />
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.746"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+ 
+     <Button
+         android:id="@+id/discardButton"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+-        android:layout_marginBottom="80dp"
+-        android:text="Discard"
++        android:layout_marginTop="34dp"
+         android:background="@drawable/roundedbutton"
++        android:text="Discard"
+         android:textColor="@android:color/white"
+-        app:layout_constraintBottom_toBottomOf="parent"
+-        app:layout_constraintEnd_toStartOf="@+id/addtocartButton"
+-        app:layout_constraintHorizontal_bias="0.413"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.244"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
++
++    <TextView
++        android:id="@+id/textView5"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:text="Flavors:"
++        android:textSize="25dp"
++        app:layout_constraintBottom_toTopOf="@+id/scrollView1"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintStart_toStartOf="parent"
++        app:layout_constraintTop_toTopOf="parent" />
++
++    <TextView
++        android:id="@+id/textView6"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginBottom="12dp"
++        android:text="Toppings:"
++        android:textSize="25dp"
++        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
++        app:layout_constraintEnd_toEndOf="parent"
++        app:layout_constraintHorizontal_bias="0.498"
+         app:layout_constraintStart_toStartOf="parent" />
+ </androidx.constraintlayout.widget.ConstraintLayout>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_11\" default=\"true\" project-jdk-name=\"11\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/.idea/misc.xml	(date 1675972401792)
+@@ -1,6 +1,10 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
++  <component name="ExternalStorageConfigurationManager" enabled="true" />
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
++  <component name="ProjectType">
++    <option name="id" value="Android" />
++  </component>
+ </project>
+\ No newline at end of file
+Index: .idea/gradle.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"GradleMigrationSettings\" migrationVersion=\"1\" />\r\n  <component name=\"GradleSettings\">\r\n    <option name=\"linkedExternalProjectsSettings\">\r\n      <GradleProjectSettings>\r\n        <option name=\"testRunner\" value=\"GRADLE\" />\r\n        <option name=\"distributionType\" value=\"DEFAULT_WRAPPED\" />\r\n        <option name=\"externalProjectPath\" value=\"$PROJECT_DIR$\" />\r\n        <option name=\"gradleHome\" value=\"$PROJECT_DIR$/../../../../../../../../Gradle/gradle-7.3.3\" />\r\n        <option name=\"gradleJvm\" value=\"11\" />\r\n        <option name=\"modules\">\r\n          <set>\r\n            <option value=\"$PROJECT_DIR$\" />\r\n            <option value=\"$PROJECT_DIR$/app\" />\r\n          </set>\r\n        </option>\r\n      </GradleProjectSettings>\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/gradle.xml b/.idea/gradle.xml
+--- a/.idea/gradle.xml	(revision 25d488b6fca0e9f0b019c407ed66e7e50b1fab57)
++++ b/.idea/gradle.xml	(date 1675972401796)
+@@ -1,14 +1,11 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="GradleMigrationSettings" migrationVersion="1" />
+   <component name="GradleSettings">
+     <option name="linkedExternalProjectsSettings">
+       <GradleProjectSettings>
+         <option name="testRunner" value="GRADLE" />
+         <option name="distributionType" value="DEFAULT_WRAPPED" />
+         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+-        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../../../../Gradle/gradle-7.3.3" />
+-        <option name="gradleJvm" value="11" />
+         <option name="modules">
+           <set>
+             <option value="$PROJECT_DIR$" />
+Index: app/src/main/res/drawable/fakeshadow.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/fakeshadow.xml b/app/src/main/res/drawable/fakeshadow.xml
+new file mode 100644
+--- /dev/null	(date 1675976247185)
++++ b/app/src/main/res/drawable/fakeshadow.xml	(date 1675976247185)
+@@ -0,0 +1,9 @@
++<?xml version="1.0" encoding="utf-8"?>
++<selector xmlns:android="http://schemas.android.com/apk/res/android">
++    <item>
++        <shape android:shape="rectangle">
++                <solid android:color="@color/black"> </solid>
++
++        </shape>
++    </item>
++</selector>
+\ No newline at end of file
