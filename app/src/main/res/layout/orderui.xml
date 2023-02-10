@@ -8,10 +8,13 @@
     tools:context=".OrderScreen">
 
     <ScrollView
+        android:id="@+id/scrollView5"
         android:layout_width="match_parent"
         android:layout_height="484dp"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="187dp"
+        android:background="#dddddd"
+        android:scrollbarStyle="outsideOverlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,31 +23,16 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical" />
     </ScrollView>
-
-    <Button
-        android:id="@+id/viewPastOrdersButton"
-        android:layout_width="147dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="40dp"
-        android:background="@drawable/roundedbutton"
-        android:text="@string/pastorders"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/checkOutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="36dp"
-        android:text="Checkout"
         android:background="@drawable/roundedbutton"
+        android:text="Checkout"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/viewPastOrdersButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,28 +40,16 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/logOutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="Logout"
+        android:id="@+id/viewPastOrdersButton"
+        android:layout_width="147dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/roundedbutton"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.949"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/SysAdminViewBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="104dp"
-        android:text="S"
-        android:background="@drawable/roundedbutton"
+        android:text="@string/pastorders"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -81,22 +57,35 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="104dp"
-        android:text="W"
+        android:layout_marginBottom="84dp"
         android:background="@drawable/roundedbutton"
+        android:text="W"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/textView3"
+    <Button
+        android:id="@+id/SysAdminViewBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:scrollbarSize="4sp"
-        android:text="Welcome"
-        android:textSize="32sp"
+        android:layout_marginBottom="84dp"
+        android:background="@drawable/roundedbutton"
+        android:text="S"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/logOutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Logout"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -104,10 +93,37 @@
         android:id="@+id/CustomWelcomeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="124dp"
         android:text="User!"
-        android:textSize="32sp"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="68dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:scrollbarSize="4sp"
+        android:text="Welcome"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/CustomWelcomeName"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/customWelcomeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="47dp"
+        android:text="Select a coffee type to get started!"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
