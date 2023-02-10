@@ -10,6 +10,7 @@ public class UserCart {
     String timeOrdered;
     String pickupTime;
     int userId;
+    int transactionId;
     double price;
 
     public UserCart() {
@@ -71,5 +72,13 @@ public class UserCart {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 }
