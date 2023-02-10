@@ -137,7 +137,7 @@ public class WorkerOrderScreen extends Fragment {
                                 // Flavor name
                                 TextView flavorName = new TextView(getContext());
                                 flavorName.setTextSize(15);
-                                flavorName.setText(transactionList.get(i).getUserCart().get(c).getToppingItemList().get(f).getName());
+                                flavorName.setText(transactionList.get(i).getUserCart().get(c).getFlavorItemList().get(f).getName());
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                                 param2.gravity = Gravity.LEFT;

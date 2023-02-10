@@ -923,9 +923,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public String getUsersFullName(int userId) {
-        String[] column = { "firstName", "lastName" };
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query("users", column, null, null, null, null, null);
+
+        String query = "SELECT firstName, lastName FROM users WHERE user_id=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId)});
 
         String firstName = "";
         String lastName = "";
