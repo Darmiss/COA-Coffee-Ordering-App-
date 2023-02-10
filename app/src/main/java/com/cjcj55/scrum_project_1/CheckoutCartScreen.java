@@ -78,7 +78,7 @@ public class CheckoutCartScreen extends Fragment {
                 DecimalFormat df = new DecimalFormat("0.00");
                 coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
                 coffeePrice.setTextSize(30);
-                coffeePrice.setGravity(Gravity.CENTER);
+                coffeePrice.setGravity(Gravity.RIGHT);
                 //Create the button for the cart to remove the coffee as a total
                 //Uhhh if I push enough buttons it'll have to work right
                 Button removeBtn = new Button(getContext());
@@ -143,9 +143,9 @@ public class CheckoutCartScreen extends Fragment {
                         flavorName.setTextSize(20);
                         //Add flavor price to format
                         TextView flavorPrice = new TextView(getContext());
-                        flavorPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
+                        flavorPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
                         flavorPrice.setTextSize(20);
-                        flavorPrice.setGravity(Gravity.CENTER_HORIZONTAL);
+                        flavorPrice.setGravity(Gravity.RIGHT);
                         //Add remove button to format
 
                         //Add it all to the GUI
@@ -153,7 +153,7 @@ public class CheckoutCartScreen extends Fragment {
                         flavorName.setLayoutParams(params);
                         cartLayoutF.addView(flavorName);
 
-                        params.gravity = Gravity.CENTER_HORIZONTAL;
+                        params.gravity = Gravity.RIGHT;
                         flavorPrice.setLayoutParams(params);
                         cartLayoutF.addView(flavorPrice);
 
@@ -177,9 +177,9 @@ public class CheckoutCartScreen extends Fragment {
                         toppingsName.setTextSize(20);
                         //Add toppings price to format
                         TextView toppingsPrice = new TextView(getContext());
-                        toppingsPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
+                        toppingsPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
                         toppingsPrice.setTextSize(20);
-                        toppingsPrice.setGravity(Gravity.CENTER_HORIZONTAL);
+                        toppingsPrice.setGravity(Gravity.RIGHT);
                         //Add the button functionality
                         //Uhhh we will do this yes push more buttons
 
@@ -188,7 +188,7 @@ public class CheckoutCartScreen extends Fragment {
                         toppingsName.setLayoutParams(params);
                         cartLayoutT.addView(toppingsName);
 
-                        params.gravity = Gravity.CENTER_HORIZONTAL;
+                        params.gravity = Gravity.RIGHT;
                         toppingsPrice.setLayoutParams(params);
                         cartLayoutT.addView(toppingsPrice);
 
@@ -217,7 +217,7 @@ public class CheckoutCartScreen extends Fragment {
                 DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, selectedPickupTime, calcTotal());
                 if(calcTotal()==0)
                 {
-                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is now empty.");
+                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Cart is empty.");
                     messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
                 else {
