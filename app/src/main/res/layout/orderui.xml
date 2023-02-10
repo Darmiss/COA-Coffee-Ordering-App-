@@ -28,8 +28,8 @@
 
     <Button
         android:id="@+id/checkOutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="194dp"
+        android:layout_height="68dp"
         android:layout_marginBottom="36dp"
         android:background="@drawable/roundedbutton"
         android:text="Checkout"
@@ -54,26 +54,24 @@
 
     <Button
         android:id="@+id/WorkerViewBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="84dp"
-        android:background="@drawable/roundedbutton"
-        android:text="W"
+        android:layout_width="92dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/workerv3"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/SysAdminViewBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="84dp"
-        android:background="@drawable/roundedbutton"
-        android:text="S"
+        android:layout_width="92dp"
+        android:layout_height="85dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/sysaddv2"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
