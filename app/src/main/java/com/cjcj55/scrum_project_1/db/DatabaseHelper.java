@@ -353,7 +353,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("fulfilled", 1);
-        long rowsUpdated = db.insert("transactions", null, values);
+        String whereClause = "transaction_id=?";
+        String[] whereArgs = {String.valueOf(transactionId)};
+        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
         return rowsUpdated;
     }
 
@@ -382,6 +384,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 userCart.setPickupTime(pickupTime);
                 userCart.setPrice(price);
                 userCart.setUserId(userId);
+                userCart.setTransactionId(transactionId);
 
                 transactions.add(userCart);
             } while (cursor.moveToNext());
@@ -917,6 +920,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] columns = { "username", "email", "firstName", "lastName" };
         SQLiteDatabase db = getReadableDatabase();
         return db.query("users", columns, null, null, null, null, null);
+    }
+
+    public String getUsersFullName(int userId) {
+        String[] column = { "firstName", "lastName" };
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("users", column, null, null, null, null, null);
+
+        String firstName = "";
+        String lastName = "";
+
+        if (cursor.moveToFirst()) {
+            firstName = cursor.getString(cursor.getColumnIndex("firstName"));
+            lastName = cursor.getString(cursor.getColumnIndex("lastName"));
+        }
+
+        return firstName + " " + lastName;
     }
 
     /**
