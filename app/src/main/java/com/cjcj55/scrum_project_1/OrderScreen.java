@@ -62,31 +62,33 @@ public class OrderScreen extends Fragment {
         for (CoffeeItemInCatalog coffeeItem : MainActivity.coffeeItemInCatalogTypes) {
             LinearLayout buttonLayout = new LinearLayout(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
-            buttonLayout.setPadding(40, 20, 40, 20);
+            buttonLayout.setPadding(40, 0, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(10, 10, 10, 10);
+            layoutParams.setMargins(200, 50, 200, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
             TextView coffeeName = new TextView(getContext());
+
             coffeeName.setText(coffeeItem.getName());
-            coffeeName.setTextSize(30);
+            coffeeName.setTextSize(20);
+            coffeeName.setTextColor(Color.parseColor("white"));
 
             TextView coffeePrice = new TextView(getContext());
             DecimalFormat df = new DecimalFormat("0.00");
             coffeePrice.setText("$" + df.format(coffeeItem.getPrice()));
-            coffeePrice.setTextColor(Color.parseColor("#006400"));
+            coffeePrice.setTextColor(Color.parseColor("white"));
             coffeePrice.setTextSize(30);
             coffeePrice.setGravity(Gravity.END);
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
-                    1.0f
+                    1f
             );
 
             buttonLayout.setId(coffeeItem.getId());
