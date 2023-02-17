@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AddtoppinguiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class AddToppingScreen extends Fragment {
 
@@ -38,12 +38,12 @@ public class AddToppingScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).insertTopping(getNewToppingName(), getNewToppingDescription(), getNewToppingCost());
+                SQLiteDatabaseHelper.getInstance(context).insertTopping(getNewToppingName(), getNewToppingDescription(), getNewToppingCost());
 
                 Toast newToast = Toast.makeText(getContext(), "Topping successfully added to catalog!",Toast.LENGTH_SHORT);
                 newToast.show();
 
-                MainActivity.toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(DatabaseHelper.getInstance(context));
+                MainActivity.toppingItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveToppingTypes(SQLiteDatabaseHelper.getInstance(context));
             }
         });
 

@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,10 +14,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.WorkescreenuiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class WorkerOrderScreen extends Fragment {
@@ -39,7 +37,7 @@ public class WorkerOrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<UserCart> transactionList = DatabaseHelper.getInstance(getContext()).getAllUnfulfilledTransactions();
+        List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllUnfulfilledTransactions();
 
         LinearLayout dynamic = view.findViewById(R.id.pendingOrders);
 
@@ -57,7 +55,7 @@ public class WorkerOrderScreen extends Fragment {
                 orderButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        DatabaseHelper.getInstance(getContext()).fulfillTransaction(orderButton.getId());
+                        SQLiteDatabaseHelper.getInstance(getContext()).fulfillTransaction(orderButton.getId());
                         orderButton.setVisibility(View.INVISIBLE);
 
                         // Popup MessageFragment
@@ -96,7 +94,7 @@ public class WorkerOrderScreen extends Fragment {
 
                 // User's name
                 TextView userName = new TextView(getContext());
-                userName.setText("Ordered by: " + DatabaseHelper.getInstance(getContext()).getUsersFullName(transactionList.get(i).getUserId()));
+                userName.setText("Ordered by: " + SQLiteDatabaseHelper.getInstance(getContext()).getUsersFullName(transactionList.get(i).getUserId()));
                 userName.setTextSize(25);
                 userName.setGravity(Gravity.CENTER_HORIZONTAL);
                 userNameContainer.addView(userName);

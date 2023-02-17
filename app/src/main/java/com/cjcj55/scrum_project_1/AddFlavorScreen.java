@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AddflavoruiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class AddFlavorScreen extends Fragment {
 
@@ -37,12 +37,12 @@ public class AddFlavorScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).insertFlavor(getNewFlavorName(), getNewFlavorDescription(), getNewFlavorCost());
+                SQLiteDatabaseHelper.getInstance(context).insertFlavor(getNewFlavorName(), getNewFlavorDescription(), getNewFlavorCost());
 
                 Toast newToast = Toast.makeText(getContext(), "Flavor successfully added to catalog!",Toast.LENGTH_SHORT);
                 newToast.show();
 
-                MainActivity.flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(DatabaseHelper.getInstance(context));
+                MainActivity.flavorItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveFlavorTypes(SQLiteDatabaseHelper.getInstance(context));
             }
         });
 

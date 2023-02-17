@@ -62,6 +62,22 @@
         app:layout_constraintVertical_bias="0.872" />
 
     <EditText
+        android:id="@+id/editTextTextUsername"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:autofillHints="true"
+        android:ems="10"
+        android:hint="@string/username"
+        android:inputType="text"
+        android:textColorHint="#7E7878"
+        app:layout_constraintBottom_toTopOf="@+id/editTextTextFirstName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.841" />
+
+    <EditText
         android:id="@+id/editTextTextNewPassword"
         android:layout_width="300dp"
         android:layout_height="48dp"

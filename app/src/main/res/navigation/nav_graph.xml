@@ -14,6 +14,12 @@
             android:id="@+id/action_LoginScreen_to_OrderScreen"
             app:destination="@id/OrderScreen" />
         <action
+            android:id="@+id/action_LoginScreen_to_WorkerOrderScreen"
+            app:destination="@id/WorkerOrderScreen" />
+        <action
+            android:id="@+id/action_LoginScreen_to_SysAdminScreen"
+            app:destination="@id/SysAdminScreen" />
+        <action
             android:id="@+id/action_LoginScreen_to_AccountCreationScreen"
             app:destination="@id/AccountCreationScreen" />
     </fragment>

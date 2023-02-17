@@ -11,11 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.cjcj55.scrum_project_1.databinding.RemovecoffeeuiBinding;
 import com.cjcj55.scrum_project_1.databinding.RemoveflavoruiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
-import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class RemoveFlavorScreen extends Fragment {
 
@@ -41,13 +38,13 @@ public class RemoveFlavorScreen extends Fragment {
             public void onClick(View view) {
                 //remove flavor
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).updateFlavorActive(getNewFlavorName(), 0);
-                DatabaseHelper db = DatabaseHelper.getInstance(getContext());
-                MainActivity.flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
+                SQLiteDatabaseHelper.getInstance(context).updateFlavorActive(getNewFlavorName(), 0);
+                SQLiteDatabaseHelper db = SQLiteDatabaseHelper.getInstance(getContext());
+                MainActivity.flavorItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveFlavorTypes(db);
                 Toast newToast = Toast.makeText(getContext(), "Flavor successfully removed!",Toast.LENGTH_SHORT);
                 newToast.show();
 
-                MainActivity.flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(DatabaseHelper.getInstance(context));
+                MainActivity.flavorItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveFlavorTypes(SQLiteDatabaseHelper.getInstance(context));
 
                 NavHostFragment.findNavController(RemoveFlavorScreen.this)
                         .navigate(R.id.action_RemoveFlavorScreen_to_SysAdminScreen);

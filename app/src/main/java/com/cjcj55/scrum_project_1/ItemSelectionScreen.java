@@ -57,6 +57,8 @@ public class ItemSelectionScreen extends Fragment {
         LinearLayout toppingContainer = view.findViewById(R.id.toppingContainer);
 
         for (ToppingItemInCatalog toppingItem : MainActivity.toppingItemInCatalogTypes) {
+            System.out.println(toppingItem.getName() + " " + toppingItem.getDescription() + " " + toppingItem.getPrice() + " " + toppingItem.getId());
+
             ToppingButton buttonLayout = new ToppingButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
