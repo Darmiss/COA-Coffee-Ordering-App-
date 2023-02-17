@@ -1,21 +1,17 @@
 package com.cjcj55.scrum_project_1;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.SysadminuiBinding;
-import com.cjcj55.scrum_project_1.databinding.WorkescreenuiBinding;
 
 public class SysAdminScreen extends Fragment {
     private SysadminuiBinding binding;

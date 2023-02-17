@@ -20,7 +20,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.LoginuiBinding;
-import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 import org.json.JSONException;
 import org.json.JSONObject;

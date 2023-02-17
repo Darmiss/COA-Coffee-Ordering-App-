@@ -1,27 +1,23 @@
 package com.cjcj55.scrum_project_1;
 
 import android.os.Bundle;
-
-
-import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
-import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cjcj55.scrum_project_1.databinding.ActivityMainBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
-
-import android.view.Menu;
-import android.view.MenuItem;
 
 import java.util.List;
 

@@ -1,20 +1,13 @@
 package com.cjcj55.scrum_project_1.db;
 
-import static com.cjcj55.scrum_project_1.MainActivity.coffeeItemInCatalogTypes;
-
 import android.content.Context;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.MainActivity;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
@@ -27,9 +20,7 @@ import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MySQLDatabaseHelper {
     public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
