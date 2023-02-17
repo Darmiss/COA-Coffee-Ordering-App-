@@ -6,7 +6,6 @@ package com.cjcj55.scrum_project_1;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,14 +20,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ViewpastorderuiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.ListIterator;
 
 //Get to this screen from button, will showcase past orders
 public class PreviousOrderScreen extends Fragment {
@@ -48,7 +44,7 @@ public class PreviousOrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<UserCart> transactionList = DatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(MainActivity.user);
+        List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(MainActivity.user);
         //ListIterator<UserCart> iterate = transactionList.listIterator();
         LinearLayout dynamic = view.findViewById(R.id.previousOrder);
         try{

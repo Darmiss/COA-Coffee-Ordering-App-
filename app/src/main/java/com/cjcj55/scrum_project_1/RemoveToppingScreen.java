@@ -12,8 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.RemovetoppinguiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
-import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class RemoveToppingScreen extends Fragment {
     private RemovetoppinguiBinding binding;
@@ -38,13 +37,13 @@ public class RemoveToppingScreen extends Fragment {
             public void onClick(View view) {
                 //remove Topping
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).updateToppingActive(getToppingName(), 0);
-                DatabaseHelper db = DatabaseHelper.getInstance(getContext());
-                MainActivity.toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
+                SQLiteDatabaseHelper.getInstance(context).updateToppingActive(getToppingName(), 0);
+                SQLiteDatabaseHelper db = SQLiteDatabaseHelper.getInstance(getContext());
+                MainActivity.toppingItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveToppingTypes(db);
                 Toast newToast = Toast.makeText(getContext(), "Topping successfully removed!",Toast.LENGTH_SHORT);
                 newToast.show();
 
-                MainActivity.flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(DatabaseHelper.getInstance(context));
+                MainActivity.flavorItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveFlavorTypes(SQLiteDatabaseHelper.getInstance(context));
 
                 NavHostFragment.findNavController(RemoveToppingScreen.this)
                         .navigate(R.id.action_RemoveToppingScreen_to_SysAdminScreen);

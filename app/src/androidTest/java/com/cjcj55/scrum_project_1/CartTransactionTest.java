@@ -13,7 +13,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
@@ -22,7 +22,6 @@ import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
 import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,16 +34,16 @@ public class CartTransactionTest {
     @Before
     public void initData() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
-        coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(dbHelper);
-        toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(dbHelper);
-        flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(dbHelper);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
+        coffeeItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveCoffeeTypes(dbHelper);
+        toppingItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveToppingTypes(dbHelper);
+        flavorItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveFlavorTypes(dbHelper);
     }
 
     @Test
     public void testAddCoffeeToCart() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         UserCart userCart = new UserCart();
@@ -57,7 +56,7 @@ public class CartTransactionTest {
     @Test
     public void testRemoveCoffeeFromCart() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         UserCart userCart = new UserCart();
@@ -81,7 +80,7 @@ public class CartTransactionTest {
     @Test
     public void testAddMultipleCoffeesToCart() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         UserCart userCart = new UserCart();
@@ -100,7 +99,7 @@ public class CartTransactionTest {
     @Test
     public void testAddToppingsToCoffee() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         UserCart userCart = new UserCart();
@@ -122,7 +121,7 @@ public class CartTransactionTest {
     @Test
     public void testAddFlavorsToCoffee() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         UserCart userCart = new UserCart();
@@ -144,7 +143,7 @@ public class CartTransactionTest {
     @Test
     public void testAddToppingsAndFlavorsToCoffee() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         UserCart userCart = new UserCart();
@@ -173,7 +172,7 @@ public class CartTransactionTest {
     @Test
     public void testInsertTransaction() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         int userId = 0;

@@ -12,22 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
 import com.cjcj55.scrum_project_1.objects.FlavorButton;
 import com.cjcj55.scrum_project_1.objects.ToppingButton;
-import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
 import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 //Screen shown after selecting a item from the menu(toppings here etc)
@@ -57,6 +53,8 @@ public class ItemSelectionScreen extends Fragment {
         LinearLayout toppingContainer = view.findViewById(R.id.toppingContainer);
 
         for (ToppingItemInCatalog toppingItem : MainActivity.toppingItemInCatalogTypes) {
+            System.out.println(toppingItem.getName() + " " + toppingItem.getDescription() + " " + toppingItem.getPrice() + " " + toppingItem.getId());
+
             ToppingButton buttonLayout = new ToppingButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);

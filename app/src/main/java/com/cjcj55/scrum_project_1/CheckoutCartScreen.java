@@ -2,7 +2,6 @@ package com.cjcj55.scrum_project_1;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.RED;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -21,9 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.CheckoutcartuiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
-
-import java.sql.Timestamp;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -222,7 +219,7 @@ public class CheckoutCartScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 // Insert entire order to database
-                DatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, selectedPickupTime, calcTotal());
+                SQLiteDatabaseHelper.getInstance(getContext()).insertTransactionFromCart(MainActivity.user, MainActivity.userCart, selectedPickupTime, calcTotal());
                 if(calcTotal()==0)
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Cart is empty.");

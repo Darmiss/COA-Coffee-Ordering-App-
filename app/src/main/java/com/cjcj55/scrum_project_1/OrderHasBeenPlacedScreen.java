@@ -1,7 +1,6 @@
 package com.cjcj55.scrum_project_1;
 
 
-
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.GREEN;
 
@@ -17,10 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-
 import com.cjcj55.scrum_project_1.databinding.OrderhasbeenplaceduiBinding;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 

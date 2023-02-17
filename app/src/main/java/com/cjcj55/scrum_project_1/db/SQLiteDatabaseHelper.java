@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.cjcj55.scrum_project_1.MainActivity;
-import com.cjcj55.scrum_project_1.objects.Transaction;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
@@ -16,21 +15,20 @@ import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
 import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseHelper extends SQLiteOpenHelper {
+public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "coffee.db";
     private static final int DATABASE_VERSION = 2;
-    private static DatabaseHelper instance;
+    private static SQLiteDatabaseHelper instance;
 
     /**
      * @param context the app the database is a part of
      *
      * Initialize database.
      */
-    private DatabaseHelper(Context context) {
+    private SQLiteDatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -38,9 +36,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param context the app the database is a part of
      * @return the instance of the database
      */
-    public static synchronized DatabaseHelper getInstance(Context context) {
+    public static synchronized SQLiteDatabaseHelper getInstance(Context context) {
         if (instance == null) {
-            instance = new DatabaseHelper(context);
+            instance = new SQLiteDatabaseHelper(context);
         }
         return instance;
     }
@@ -772,7 +770,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return rowDeleted;
     }
 
-    public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(DatabaseHelper db) {
+    public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(SQLiteDatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<CoffeeItemInCatalog> coffeeItemInCatalogTypes = new ArrayList<>();
 
@@ -795,7 +793,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return coffeeItemInCatalogTypes;
     }
 
-    public static List<CoffeeItemInCatalog> getAllCoffeeTypes(DatabaseHelper db) {
+    public static List<CoffeeItemInCatalog> getAllCoffeeTypes(SQLiteDatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<CoffeeItemInCatalog> coffeeItemInCatalogTypes = new ArrayList<>();
 
@@ -818,7 +816,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return coffeeItemInCatalogTypes;
     }
 
-    public static List<ToppingItemInCatalog> getAllActiveToppingTypes(DatabaseHelper db) {
+    public static List<ToppingItemInCatalog> getAllActiveToppingTypes(SQLiteDatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<ToppingItemInCatalog> toppingItemInCatalogTypes = new ArrayList<>();
 
@@ -841,7 +839,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return toppingItemInCatalogTypes;
     }
 
-    public static List<ToppingItemInCatalog> getAllToppingTypes(DatabaseHelper db) {
+    public static List<ToppingItemInCatalog> getAllToppingTypes(SQLiteDatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<ToppingItemInCatalog> toppingItemInCatalogTypes = new ArrayList<>();
 
@@ -864,7 +862,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return toppingItemInCatalogTypes;
     }
 
-    public static List<FlavorItemInCatalog> getAllActiveFlavorTypes(DatabaseHelper db) {
+    public static List<FlavorItemInCatalog> getAllActiveFlavorTypes(SQLiteDatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<FlavorItemInCatalog> flavorItemInCatalogTypes = new ArrayList<>();
 
@@ -887,7 +885,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return flavorItemInCatalogTypes;
     }
 
-    public static List<FlavorItemInCatalog> getAllFlavorTypes(DatabaseHelper db) {
+    public static List<FlavorItemInCatalog> getAllFlavorTypes(SQLiteDatabaseHelper db) {
         SQLiteDatabase sqLiteDB = db.getReadableDatabase();
         List<FlavorItemInCatalog> flavorItemInCatalogTypes = new ArrayList<>();
 

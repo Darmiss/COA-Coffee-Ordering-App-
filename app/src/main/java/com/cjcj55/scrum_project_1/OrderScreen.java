@@ -3,30 +3,34 @@ package com.cjcj55.scrum_project_1;
 import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 
 import java.text.DecimalFormat;
-import java.util.Iterator;
-import java.util.List;
 
 public class OrderScreen extends Fragment {
 
@@ -46,20 +50,21 @@ public class OrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        TextView textView = view.findViewById(R.id.CustomWelcomeName);
-        String customText = DatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);
-        if(customText.length()>=7)
-        {
-            customText = customText.substring(0, 7) + "..";
-        }
-        customText+="!";
-        textView.setText(customText);
+//        TextView textView = view.findViewById(R.id.CustomWelcomeName);
+//        String customText = SQLiteDatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);
+//        if(customText.length()>=7)
+//        {
+//            customText = customText.substring(0, 7) + "..";
+//        }
+//        customText+="!";
+//        textView.setText(customText);
 
 
 
         LinearLayout container = view.findViewById(R.id.container);
 
         for (CoffeeItemInCatalog coffeeItem : MainActivity.coffeeItemInCatalogTypes) {
+//                System.out.println(coffeeItem.getName() + " " + coffeeItem.getDescription() + " " + coffeeItem.getPrice() + " " + coffeeItem.getId());
             LinearLayout buttonLayout = new LinearLayout(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 0, 40, 20);
@@ -125,13 +130,30 @@ public class OrderScreen extends Fragment {
         binding.logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Context context = getContext();
+
                 MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
-//                System.out.println("User logged out.  User now " + MainActivity.user);
-                setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
-                setAccountCreationPopup(false); //disables account creation popup
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_LoginScreen);
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/logout.php",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
+                                setAccountCreationPopup(false); //disables account creation popup
+                                NavHostFragment.findNavController(OrderScreen.this)
+                                        .navigate(R.id.action_OrderScreen_to_LoginScreen);
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(stringRequest);
             }
         });
 

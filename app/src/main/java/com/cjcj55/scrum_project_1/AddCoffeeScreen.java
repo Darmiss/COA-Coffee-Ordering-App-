@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AddcoffeeuiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class AddCoffeeScreen extends Fragment {
 
@@ -38,12 +38,12 @@ public class AddCoffeeScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                DatabaseHelper.getInstance(context).insertCoffee(getNewCoffeeName(), getNewCoffeeDescription(), getNewCoffeeCost());
+                SQLiteDatabaseHelper.getInstance(context).insertCoffee(getNewCoffeeName(), getNewCoffeeDescription(), getNewCoffeeCost());
 
                 Toast newToast = Toast.makeText(getContext(), "Coffee successfully added to catalog!",Toast.LENGTH_SHORT);
                 newToast.show();
 
-                MainActivity.coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(DatabaseHelper.getInstance(context));
+                MainActivity.coffeeItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveCoffeeTypes(SQLiteDatabaseHelper.getInstance(context));
             }
         });
 
