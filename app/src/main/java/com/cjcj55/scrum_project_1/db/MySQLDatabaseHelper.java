@@ -3,13 +3,20 @@ package com.cjcj55.scrum_project_1.db;
 import android.content.Context;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.cjcj55.scrum_project_1.AccountCreationScreen;
 import com.cjcj55.scrum_project_1.MainActivity;
+import com.cjcj55.scrum_project_1.R;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
@@ -20,7 +27,9 @@ import org.json.JSONObject;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MySQLDatabaseHelper {
     public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
@@ -132,6 +141,135 @@ public class MySQLDatabaseHelper {
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         requestQueue.add(jsonObjectRequest);
         return toppings;
+    }
+
+    public static void insertCoffee(String name, String description, double price, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/addCoffee.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(context, "Coffee successfully added to catalog!", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Unable to add coffee to catalog", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("description", description);
+                params.put("price", Double.toString(price));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        // Refresh coffee list in MainActivity
+        MainActivity.coffeeItemInCatalogTypes = getAllActiveCoffeeTypes(context);
+    }
+
+    public static void insertFlavor(String name, String description, double price, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/addFlavor.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(context, "Flavor successfully added to catalog!", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Unable to add flavor to catalog", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("description", description);
+                params.put("price", Double.toString(price));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        // Refresh flavor list in MainActivity
+        MainActivity.flavorItemInCatalogTypes = getAllActiveFlavorTypes(context);
+    }
+
+    public static void insertTopping(String name, String description, double price, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/addTopping.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(context, "Topping successfully added to catalog!", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Unable to add topping to catalog", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                params.put("description", description);
+                params.put("price", Double.toString(price));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        // Refresh topping list in MainActivity
+        MainActivity.toppingItemInCatalogTypes = getAllActiveToppingTypes(context);
     }
 
 
