@@ -100,8 +100,62 @@ public class AccountCreationScreen extends Fragment {
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 
                 } else {
-                    Toast newToast = Toast.makeText(getContext(), "One or more field(s) left blank.",Toast.LENGTH_SHORT);
-                    newToast.show();
+                    if(getFirstName().isBlank())
+                    {
+                        binding.firstnameErrorText.setText("This Field is Required");
+                        binding.firstnameErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else
+                    {
+                        binding.firstnameErrorText.setVisibility(view.INVISIBLE);
+                    }
+                    if(getLastName().isBlank())
+                    {
+                        binding.lastnameErrorText.setText("This Field is Required");
+                        binding.lastnameErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else
+                    {
+                        binding.lastnameErrorText.setVisibility(view.INVISIBLE);
+                    }
+                    if(getnewEmail().isBlank())
+                    {
+                        binding.emailErrorText.setText("This Field is Required");
+                        binding.emailErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else if(!getnewEmail().contains("@") || !getnewEmail().contains("."))
+                    {
+                        binding.emailErrorText.setText("Invalid Email Format");
+                        binding.emailErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else
+                    {
+                        binding.emailErrorText.setVisibility(view.INVISIBLE);
+                    }
+                    if(getUsername().isBlank())
+                    {
+                        binding.usernameErrorText.setText("This Field is Required");
+                        binding.usernameErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else
+                    {
+                        binding.usernameErrorText.setVisibility(view.INVISIBLE);
+                    }
+                    if(getnewPassword().isBlank())
+                    {
+                        binding.passwordErrorText.setText("This Field is Required");
+                        binding.passwordErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else if(false/*getnewPassword().length < 7 */)
+                    {
+                        //poopy(add in password requirments around here(remove false)
+                        //binding.passwordErrorText.setText("Invalid Password Format");
+                        //binding.passwordErrorText.setVisibility(view.VISIBLE);
+                    }
+                    else
+                    {
+                        binding.passwordErrorText.setVisibility(view.INVISIBLE);
+                    }
                 }
             }
         });
@@ -119,6 +173,11 @@ public class AccountCreationScreen extends Fragment {
         });
 
     }
+
+
+
+
+
         private String getUsername() {
             return binding.editTextTextUsername.getText().toString();
         }
@@ -135,12 +194,13 @@ public class AccountCreationScreen extends Fragment {
             return binding.editTextTextLastName.getText().toString();
         }
 
+
+
+
         private boolean checkInputs (String u, String e, String p, String f, String l)
         {
             boolean check=true;
             if (u.isBlank() || e.isBlank() || p.isBlank() || f.isBlank() || l.isBlank() || e.contains(" ") || !e.contains("@") || !e.contains(".") || p.contains(" ")) {
-                Toast newToast = Toast.makeText(getContext(), "Invalid Credentials, try again.",Toast.LENGTH_SHORT);
-                newToast.show();
                 check = false;
             }
             else{
