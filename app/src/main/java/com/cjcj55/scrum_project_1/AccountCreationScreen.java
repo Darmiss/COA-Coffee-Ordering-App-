@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -34,7 +35,11 @@ import java.util.Map;
 public class AccountCreationScreen extends Fragment {
 
     private AccountcreationuiBinding binding;
-
+    private EditText editUserName; // Reference to the EditText object
+    private EditText editEmail;
+    private EditText editPassword;
+    private EditText editFirstName;
+    private EditText editLastName;
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
@@ -47,8 +52,11 @@ public class AccountCreationScreen extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
+        editUserName=binding.editTextTextUsername;
+        editEmail=binding.editTextTextNewEmailAddress;
+        editPassword=binding.editTextTextNewPassword;
+        editFirstName=binding.editTextTextFirstName;
+        editLastName=binding.editTextTextLastName;
         binding.createNewAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,11 +92,11 @@ public class AccountCreationScreen extends Fragment {
                             @Override
                             protected Map<String, String> getParams() throws AuthFailureError {
                                 Map<String,String> params = new HashMap<>();
-                                params.put("username", getUsername());
-                                params.put("pass", getnewPassword());
-                                params.put("email", getnewEmail());
-                                params.put("firstName", getFirstName());
-                                params.put("lastName", getLastName());
+                                params.put("username", editUserName.getText().toString());
+                                params.put("pass", editPassword.getText().toString());
+                                params.put("email", editEmail.getText().toString());
+                                params.put("firstName", editFirstName.getText().toString());
+                                params.put("lastName", editLastName.getText().toString());
                                 return params;
                             }
                         };
