@@ -159,7 +159,7 @@ public class OrderScreen extends Fragment {
                 MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/logout.php",
+                        "http://" + MainActivity.LOCAL_IP + "/logout.php",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {

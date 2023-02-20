@@ -71,7 +71,7 @@ public class LoginScreen extends Fragment {
                 Context context = getContext();
 
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                        "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/login.php",
+                        "http://" + MainActivity.LOCAL_IP + "/login.php",
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
