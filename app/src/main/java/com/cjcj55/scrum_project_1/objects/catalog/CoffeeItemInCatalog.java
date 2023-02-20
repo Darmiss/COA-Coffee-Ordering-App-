@@ -1,20 +1,21 @@
 package com.cjcj55.scrum_project_1.objects.catalog;
 
 import androidx.annotation.NonNull;
-
-import java.util.List;
+import android.graphics.Bitmap;
 
 public class CoffeeItemInCatalog {
     private int id;
     private String name;
     private String description;
     private double price;
+    private Bitmap image;
 
-    public CoffeeItemInCatalog(int id, String name, String description, double price) {
+    public CoffeeItemInCatalog(int id, String name, String description, double price, Bitmap image) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.image = image;
     }
 
     public int getId() {
@@ -33,22 +34,14 @@ public class CoffeeItemInCatalog {
         return this.price;
     }
 
+    public Bitmap getImage() {
+        return this.image;
+    }
+
     @NonNull
     @Override
     public String toString() {
         String coffeeStr = getId() + ", " + getName() + ", " + getDescription() + ", $" + getPrice();
-//        if (!this.toppings.isEmpty()) {
-//            for (int i = 0; i < toppings.size(); i++)
-//            {
-//                coffeeStr += "\t" + toppings.get(i).toString();
-//            }
-//        }
-//        if (!this.flavors.isEmpty()) {
-//            for (int i = 0; i < flavors.size(); i++)
-//            {
-//                coffeeStr += "\t" + flavors.get(i).toString();
-//            }
-//        }
         return coffeeStr;
     }
 }

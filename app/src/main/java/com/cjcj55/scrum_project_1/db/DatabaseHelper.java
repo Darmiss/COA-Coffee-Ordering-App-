@@ -786,7 +786,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 String description = cursor.getString(2);
                 double price = cursor.getDouble(3);
 
-                CoffeeItemInCatalog coffeeItemInCatalog = new CoffeeItemInCatalog(id, name, description, price);
+
+                CoffeeItemInCatalog coffeeItemInCatalog = new CoffeeItemInCatalog(id, name, description, price, image);
                 coffeeItemInCatalogTypes.add(coffeeItemInCatalog);
             } while (cursor.moveToNext());
         }
