@@ -165,21 +165,9 @@ public class OrderScreen extends Fragment {
             }
         });
 
-        binding.WorkerViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_WorkerOrderScreen);
-            }
-        });
 
-        binding.SysAdminViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_SysAdminScreen);
-            }
-        });
+
+
 
         binding.checkOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
