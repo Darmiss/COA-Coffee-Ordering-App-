@@ -22,8 +22,7 @@ import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String LOCAL_IP = "192.168.0.4";
-//    public static final String LOCAL_IP = "10.217.72.33";
+    public static final String LOCAL_IP = "3.131.94.20";
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;

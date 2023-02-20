@@ -55,7 +55,7 @@ public class AccountCreationScreen extends Fragment {
                 Context context = getContext();
                 if (checkInputs(getUsername(), getnewEmail(), getnewPassword(), getFirstName(), getLastName())) {
                     StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                            "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/register.php",
+                            "http://" + MainActivity.LOCAL_IP + "/register.php",
                             new Response.Listener<String>() {
                                 @Override
                                 public void onResponse(String response) {

@@ -35,7 +35,7 @@ public class MySQLDatabaseHelper {
     public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
         List<CoffeeItemInCatalog> coffees = new ArrayList<>();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-            "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/getAllActiveCoffeeTypes.php",
+            "http://" + MainActivity.LOCAL_IP + "/getAllActiveCoffeeTypes.php",
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -72,7 +72,7 @@ public class MySQLDatabaseHelper {
     public static List<FlavorItemInCatalog> getAllActiveFlavorTypes(Context context) {
         List<FlavorItemInCatalog> flavors = new ArrayList<>();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/getAllActiveFlavorTypes.php",
+                "http://" + MainActivity.LOCAL_IP + "/getAllActiveFlavorTypes.php",
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -109,7 +109,7 @@ public class MySQLDatabaseHelper {
     public static List<ToppingItemInCatalog> getAllActiveToppingTypes(Context context) {
         List<ToppingItemInCatalog> toppings = new ArrayList<>();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/getAllActiveToppingTypes.php",
+                "http://" + MainActivity.LOCAL_IP + "/getAllActiveToppingTypes.php",
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -145,7 +145,7 @@ public class MySQLDatabaseHelper {
 
     public static void insertCoffee(String name, String description, double price, Context context) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/addCoffee.php",
+                "http://" + MainActivity.LOCAL_IP + "/addCoffee.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -188,7 +188,7 @@ public class MySQLDatabaseHelper {
 
     public static void insertFlavor(String name, String description, double price, Context context) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/addFlavor.php",
+                "http://" + MainActivity.LOCAL_IP + "/addFlavor.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -231,7 +231,7 @@ public class MySQLDatabaseHelper {
 
     public static void insertTopping(String name, String description, double price, Context context) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "http://" + MainActivity.LOCAL_IP + "/coffeeorderingappserver/addTopping.php",
+                "http://" + MainActivity.LOCAL_IP + "/addTopping.php",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
