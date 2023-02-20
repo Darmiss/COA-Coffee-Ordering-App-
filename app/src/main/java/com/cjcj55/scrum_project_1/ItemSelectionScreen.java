@@ -67,10 +67,26 @@ public class ItemSelectionScreen extends Fragment {
             layoutParams.setMargins(200, 50, 200, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
+            //New LinearLayout for nameAndDescription Layout
+            LinearLayout nameAndDescriptionLayout = new LinearLayout(getContext());
+            nameAndDescriptionLayout.setOrientation(LinearLayout.VERTICAL);
+            nameAndDescriptionLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+            ));
+
+            //UI things-
             TextView toppingName = new TextView(getContext());
             toppingName.setText(toppingItem.getName());
             toppingName.setTextSize(20);
             toppingName.setTextColor(Color.parseColor("white"));
+
+            TextView toppingDescription = new TextView(getContext());
+            toppingDescription.setText(toppingItem.getDescription());
+            toppingDescription.setTextSize(16);
+            toppingDescription.setTextColor(Color.parseColor("white"));
+
 
             TextView toppingPrice = new TextView(getContext());
             DecimalFormat df = new DecimalFormat("0.00");
@@ -78,19 +94,30 @@ public class ItemSelectionScreen extends Fragment {
             toppingPrice.setTextColor(Color.parseColor("white"));
             toppingPrice.setTextSize(30);
             toppingPrice.setGravity(Gravity.END);
+            //-
+
+
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     1.0f
             );
+            //Setting and adding  to the new linear layout(name+descritpion)
+            params.gravity = Gravity.LEFT;
+            nameAndDescriptionLayout.setLayoutParams(params);
+
+            nameAndDescriptionLayout.addView(toppingName);
+            nameAndDescriptionLayout.addView(toppingDescription);
+
+            //Adding linearlayout to button layout(so clickable)
+            buttonLayout.addView(nameAndDescriptionLayout);
 
             buttonLayout.setId(toppingItem.getId());
             buttonLayout.setWeightSum(2);
 
             params.gravity = Gravity.LEFT;
             toppingName.setLayoutParams(params);
-            buttonLayout.addView(toppingName);
 
             params.gravity = Gravity.END;
             toppingPrice.setLayoutParams(params);
@@ -143,10 +170,28 @@ public class ItemSelectionScreen extends Fragment {
             layoutParams.setMargins(200, 50, 200, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
+
+            //New LinearLayout for nameAndDescription Layout
+            LinearLayout nameAndDescriptionLayout = new LinearLayout(getContext());
+            nameAndDescriptionLayout.setOrientation(LinearLayout.VERTICAL);
+            nameAndDescriptionLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+            ));
+
+
+            //UI things-
             TextView flavorName = new TextView(getContext());
             flavorName.setText(flavorItem.getName());
             flavorName.setTextSize(20);
             flavorName.setTextColor(Color.parseColor("white"));
+
+            TextView flavorDescription = new TextView(getContext());
+            flavorDescription.setText(flavorItem.getDescription());
+            flavorDescription.setTextSize(16);
+            flavorDescription.setTextColor(Color.parseColor("white"));
+
 
             TextView flavorPrice = new TextView(getContext());
             DecimalFormat df = new DecimalFormat("0.00");
@@ -154,19 +199,28 @@ public class ItemSelectionScreen extends Fragment {
             flavorPrice.setTextColor(Color.parseColor("white"));
             flavorPrice.setTextSize(30);
             flavorPrice.setGravity(Gravity.END);
-
+            //-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     1.0f
             );
 
+            //Setting and adding  to the new linear layout(name+descritpion)
+            params.gravity = Gravity.LEFT;
+            nameAndDescriptionLayout.setLayoutParams(params);
+
+            nameAndDescriptionLayout.addView(flavorName);
+            nameAndDescriptionLayout.addView(flavorDescription);
+
+            //Adding linearlayout to button layout(so clickable)
+            buttonLayout.addView(nameAndDescriptionLayout);
+
             buttonLayout.setId(flavorItem.getId());
             buttonLayout.setWeightSum(2);
 
             params.gravity = Gravity.LEFT;
             flavorName.setLayoutParams(params);
-            buttonLayout.addView(flavorName);
 
             params.gravity = Gravity.END;
             flavorPrice.setLayoutParams(params);

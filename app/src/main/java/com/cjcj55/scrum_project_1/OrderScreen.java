@@ -77,11 +77,29 @@ public class OrderScreen extends Fragment {
             layoutParams.setMargins(200, 50, 200, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
-            TextView coffeeName = new TextView(getContext());
+            //New LinearLayout for nameAndDescription Layout
+            LinearLayout nameAndDescriptionLayout = new LinearLayout(getContext());
+            nameAndDescriptionLayout.setOrientation(LinearLayout.VERTICAL);
+            nameAndDescriptionLayout.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+            ));
 
+
+
+
+
+            //All the UI design text things ;)-
+            TextView coffeeName = new TextView(getContext());
             coffeeName.setText(coffeeItem.getName());
             coffeeName.setTextSize(20);
             coffeeName.setTextColor(Color.parseColor("white"));
+
+            TextView coffeeDescription = new TextView(getContext());
+            coffeeDescription.setText(coffeeItem.getDescription());
+            coffeeDescription.setTextSize(16);
+            coffeeDescription.setTextColor(Color.parseColor("white"));
 
             TextView coffeePrice = new TextView(getContext());
             DecimalFormat df = new DecimalFormat("0.00");
@@ -89,19 +107,25 @@ public class OrderScreen extends Fragment {
             coffeePrice.setTextColor(Color.parseColor("white"));
             coffeePrice.setTextSize(30);
             coffeePrice.setGravity(Gravity.END);
+            //-
 
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT,
                     1f
             );
+            //Setting and adding  to the new linear layout(name+descritpion)
+            params.gravity = Gravity.LEFT;
+            nameAndDescriptionLayout.setLayoutParams(params);
+
+            nameAndDescriptionLayout.addView(coffeeName);
+            nameAndDescriptionLayout.addView(coffeeDescription);
+
+            //Adding linearlayout to button layout(so clickable)
+            buttonLayout.addView(nameAndDescriptionLayout);
 
             buttonLayout.setId(coffeeItem.getId());
-            buttonLayout.setWeightSum(2);
-
-            params.gravity = Gravity.LEFT;
-            coffeeName.setLayoutParams(params);
-            buttonLayout.addView(coffeeName);
+            buttonLayout.setWeightSum(2);  //what is this
 
             params.gravity = Gravity.END;
             coffeePrice.setLayoutParams(params);
@@ -165,21 +189,9 @@ public class OrderScreen extends Fragment {
             }
         });
 
-        binding.WorkerViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_WorkerOrderScreen);
-            }
-        });
 
-        binding.SysAdminViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_SysAdminScreen);
-            }
-        });
+
+
 
         binding.checkOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
