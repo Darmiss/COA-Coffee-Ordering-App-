@@ -44,7 +44,7 @@ public class AddCoffeeScreen extends Fragment {
                     NavHostFragment.findNavController(AddCoffeeScreen.this)
                             .navigate(R.id.action_AddCoffeeScreen_to_SysAdminScreen);
                 }
-                }
+            }
         });
 
         binding.AddCBackToSysAd.setOnClickListener(new View.OnClickListener() {
@@ -72,21 +72,25 @@ public class AddCoffeeScreen extends Fragment {
     private boolean checkInputs (String n, String d, String c) {
         boolean check = true;
         if (n.isBlank()) {
-            binding.newCoffeePriceErrorText.setText("This field is required");
-            binding.newCoffeePriceErrorText.setVisibility(getView().VISIBLE);
+            binding.newCoffeeNameErrorText.setText("This field is required");
+            binding.newCoffeeNameErrorText.setVisibility(getView().VISIBLE);
             check = false;
+        } else {
+            binding.newCoffeeNameErrorText.setVisibility(getView().INVISIBLE);
         }
         if (d.isBlank()) {
-            binding.newCoffeePriceErrorText.setText("This field is required");
-            binding.newCoffeePriceErrorText.setVisibility(getView().VISIBLE);
+            binding.newCoffeeDescErrorText.setText("This field is required");
+            binding.newCoffeeDescErrorText.setVisibility(getView().VISIBLE);
             check = false;
+        } else {
+            binding.newCoffeeDescErrorText.setVisibility(getView().INVISIBLE);
         }
         if (c.isEmpty()) {
             binding.newCoffeePriceErrorText.setText("This field is required");
             binding.newCoffeePriceErrorText.setVisibility(getView().VISIBLE);
             check = false;
-        }else {
-            check = true;
+        } else {
+            binding.newCoffeePriceErrorText.setVisibility(getView().INVISIBLE);
         }
         return check;
     }
