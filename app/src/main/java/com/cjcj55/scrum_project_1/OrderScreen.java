@@ -4,6 +4,7 @@ import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -54,14 +55,19 @@ public class OrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        TextView textView = view.findViewById(R.id.CustomWelcomeName);
-//        String customText = SQLiteDatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);
-//        if(customText.length()>=7)
-//        {
-//            customText = customText.substring(0, 7) + "..";
-//        }
-//        customText+="!";
-//        textView.setText(customText);
+        TextView textView = view.findViewById(R.id.CustomWelcomeName);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+        int user_id = sharedPreferences.getInt("user_id", -1);
+        String username = sharedPreferences.getString("username", "");
+        String firstName = sharedPreferences.getString("firstName", "");
+        String lastName = sharedPreferences.getString("lastName", "");
+        if(firstName.length()>=7)
+        {
+            firstName = firstName.substring(0, 7) + "..";
+        }
+        firstName+="!";
+        textView.setText(firstName);
 
 
 
@@ -217,7 +223,6 @@ public class OrderScreen extends Fragment {
             public void onClick(View view) {
                 Context context = getContext();
 
-                MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
                         "http://" + MainActivity.LOCAL_IP + "/logout.php",
@@ -226,6 +231,12 @@ public class OrderScreen extends Fragment {
                             public void onResponse(String response) {
                                 setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
                                 setAccountCreationPopup(false); //disables account creation popup
+
+                                SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences1.edit();
+                                editor.clear();
+                                editor.apply();
+
                                 NavHostFragment.findNavController(OrderScreen.this)
                                         .navigate(R.id.action_OrderScreen_to_LoginScreen);
 
