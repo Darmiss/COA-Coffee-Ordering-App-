@@ -203,7 +203,7 @@ public class PreviousOrderScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(PreviousOrderScreen.this)
-                    .navigate(R.id.action_PreviousOrderScreen_to_OrderScreen);
+                    .navigate(R.id.action_PreviousOrderScreen_to_CurrentOrdersScreen);
             }
         });
     }

@@ -39,18 +39,18 @@
         android:background="@drawable/roundedbutton"
         android:text="Checkout"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toTopOf="@+id/viewPastOrdersButton"
+        app:layout_constraintBottom_toTopOf="@+id/OrderScreenBck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/viewPastOrdersButton"
+        android:id="@+id/OrderScreenBck"
         android:layout_width="147dp"
         android:layout_height="56dp"
         android:layout_marginBottom="20dp"
         android:background="@drawable/roundedbutton"
-        android:text="@string/pastorders"
+        android:text="Back"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -100,7 +100,7 @@ public class LoginScreen extends Fragment {
 
                                             // Login successful, navigate to home screen
                                             NavHostFragment.findNavController(LoginScreen.this)
-                                                    .navigate(R.id.action_LoginScreen_to_OrderScreen);
+                                                    .navigate(R.id.action_LoginScreen_to_CurrentOrdersScreen);
                                         } else if (userType.equals("worker")) {
                                             // Login successful, navigate to worker screen
                                             NavHostFragment.findNavController(LoginScreen.this)

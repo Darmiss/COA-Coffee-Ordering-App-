@@ -11,9 +11,6 @@
         android:label="@string/login_screen_label"
         tools:layout="@layout/loginui">
         <action
-            android:id="@+id/action_LoginScreen_to_OrderScreen"
-            app:destination="@id/OrderScreen" />
-        <action
             android:id="@+id/action_LoginScreen_to_WorkerOrderScreen"
             app:destination="@id/WorkerOrderScreen" />
         <action
@@ -22,6 +19,9 @@
         <action
             android:id="@+id/action_LoginScreen_to_AccountCreationScreen"
             app:destination="@id/AccountCreationScreen" />
+        <action
+            android:id="@+id/action_LoginScreen_to_CurrentOrdersScreen"
+            app:destination="@id/CurrentOrdersScreen" />
     </fragment>
     <fragment
         android:id="@+id/OrderScreen"
@@ -31,9 +31,6 @@
         <action
             android:id="@+id/action_OrderScreen_to_ItemSelectionScreen"
             app:destination="@id/ItemSelectionScreen" />
-        <action
-            android:id="@+id/action_OrderScreen_to_PreviousOrderScreen"
-            app:destination="@id/PreviousOrderScreen" />
         <action
             android:id="@+id/action_OrderScreen_to_CheckoutCartScreen"
             app:destination="@id/CheckoutCartScreen" />
@@ -46,6 +43,9 @@
         <action
             android:id="@+id/action_OrderScreen_to_WorkerOrderScreen"
             app:destination="@id/WorkerOrderScreen" />
+        <action
+            android:id="@+id/action_OrderScreen_to_CurrentOrdersScreen"
+            app:destination="@id/CurrentOrdersScreen" />
     </fragment>
     <fragment
         android:id="@+id/ItemSelectionScreen"
@@ -72,8 +72,8 @@
         android:label="Past Orders"
         tools:layout="@layout/viewpastorderui">
         <action
-            android:id="@+id/action_PreviousOrderScreen_to_OrderScreen"
-            app:destination="@id/OrderScreen" />
+            android:id="@+id/action_PreviousOrderScreen_to_CurrentOrdersScreen"
+            app:destination="@id/CurrentOrdersScreen" />
     </fragment>
     <fragment
         android:id="@+id/CheckoutCartScreen"
@@ -183,6 +183,36 @@
             android:id="@+id/action_RemoveFlavorScreen_to_SysAdminScreen"
             app:destination="@id/SysAdminScreen" />
     </fragment>
+
+    <fragment
+        android:id="@+id/CurrentOrdersScreen"
+        android:name="com.cjcj55.scrum_project_1.CurrentOrdersScreen"
+        android:label="Current Orders"
+        tools:layout="@layout/currentordersui">
+        <action
+            android:id="@+id/action_CurrentOrdersScreen_to_OrderScreen"
+            app:destination="@id/OrderScreen" />
+        <action
+            android:id="@+id/action_CurrentOrdersScreen_to_PreviousOrderScreen"
+            app:destination="@id/PreviousOrderScreen" />
+        <action
+            android:id="@+id/action_CurrentOrdersScreen_to_UserFavoritesScreen"
+            app:destination="@id/UserFavoritesScreen" />
+        <action
+            android:id="@+id/action_CurrentOrdersScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/UserFavoritesScreen"
+        android:name="com.cjcj55.scrum_project_1.UserFavoritesScreen"
+        android:label="Favorites"
+        tools:layout="@layout/userfavoritesui">
+    </fragment>
+
+
+
+
 
 
     <fragment

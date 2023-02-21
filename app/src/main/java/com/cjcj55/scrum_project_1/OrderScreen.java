@@ -255,11 +255,11 @@ public class OrderScreen extends Fragment {
 
 
 
-        binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {
+        binding.OrderScreenBck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_PreviousOrderScreen);
+                        .navigate(R.id.action_OrderScreen_to_CurrentOrdersScreen);
             }
         });
 
@@ -273,7 +273,7 @@ public class OrderScreen extends Fragment {
                 if(MainActivity.userCart.getUserCart().isEmpty())
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is Empty.");
-                   messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                    messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
                 else {
                     NavHostFragment.findNavController(OrderScreen.this)
