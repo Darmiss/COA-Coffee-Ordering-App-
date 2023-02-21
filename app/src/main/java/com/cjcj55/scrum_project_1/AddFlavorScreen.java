@@ -68,10 +68,26 @@ public class AddFlavorScreen extends Fragment {
 
     private boolean checkInputs (String n, String d, String c) {
         boolean check = true;
-        if (n.isBlank() || d.isBlank() || c.isEmpty()) {
+        if (n.isBlank()) {
+            binding.newFlavorNameErrorText.setText("This field is required");
+            binding.newFlavorNameErrorText.setVisibility(getView().VISIBLE);
             check = false;
         } else {
-            check = true;
+            binding.newFlavorNameErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (d.isBlank()) {
+            binding.newFlavorDescErrorText.setText("This field is required");
+            binding.newFlavorDescErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newFlavorDescErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (c.isEmpty()) {
+            binding.newFlavorPriceErrorText.setText("This field is required");
+            binding.newFlavorPriceErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newFlavorPriceErrorText.setVisibility(getView().INVISIBLE);
         }
         return check;
     }

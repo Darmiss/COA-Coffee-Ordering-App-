@@ -69,10 +69,26 @@ public class AddToppingScreen extends Fragment {
 
     private boolean checkInputs (String n, String d, String c) {
         boolean check = true;
-        if (n.isBlank() || d.isBlank() || c.isEmpty()) {
+        if (n.isBlank()) {
+            binding.newToppingNameErrorText.setText("This field is required");
+            binding.newToppingNameErrorText.setVisibility(getView().VISIBLE);
             check = false;
         } else {
-            check = true;
+            binding.newToppingNameErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (d.isBlank()) {
+            binding.newToppingDescErrorText.setText("This field is required");
+            binding.newToppingDescErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newToppingDescErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (c.isEmpty()) {
+            binding.newToppingPriceErrorText.setText("This field is required");
+            binding.newToppingPriceErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newToppingPriceErrorText.setVisibility(getView().INVISIBLE);
         }
         return check;
     }
