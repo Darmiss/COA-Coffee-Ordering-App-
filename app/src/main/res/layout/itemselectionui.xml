@@ -11,10 +11,16 @@
         android:layout_width="414dp"
         android:layout_height="250dp"
         android:background="@drawable/shadow"
+        android:fadeScrollbars="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/custom_scrollbar_track"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/rectangle_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="0dp">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:id="@+id/flavorContainer"
@@ -39,6 +45,11 @@
         android:layout_height="257dp"
         android:layout_marginTop="46dp"
         android:background="@drawable/shadow"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/custom_scrollbar_track"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
