@@ -1,20 +1,20 @@
-package com.cjcj55.scrum_project_1.objects.order_items;
+package com.cjcj55.scrum_project_1.objects.catalog.order_items;
 
 import androidx.annotation.NonNull;
 
-import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
 
-public class FlavorItem {
+public class ToppingItem {
     private int id;
     private String name;
     private String description;
     private double price;
 
-    public FlavorItem(FlavorItemInCatalog flavorItemInCatalog) {
-        this.id = flavorItemInCatalog.getId();
-        this.name = flavorItemInCatalog.getName();
-        this.description = flavorItemInCatalog.getDescription();
-        this.price = flavorItemInCatalog.getPrice();
+    public ToppingItem(ToppingItemInCatalog toppingItemInCatalog) {
+        this.id = toppingItemInCatalog.getId();
+        this.name = toppingItemInCatalog.getName();
+        this.description = toppingItemInCatalog.getDescription();
+        this.price = toppingItemInCatalog.getPrice();
     }
 
     public int getId() {

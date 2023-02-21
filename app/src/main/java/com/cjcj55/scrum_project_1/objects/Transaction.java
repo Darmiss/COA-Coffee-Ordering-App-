@@ -1,7 +1,7 @@
 package com.cjcj55.scrum_project_1.objects;
 
 
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
 
 import java.util.List;
 

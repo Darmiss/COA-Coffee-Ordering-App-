@@ -19,8 +19,8 @@ import com.cjcj55.scrum_project_1.objects.FlavorButton;
 import com.cjcj55.scrum_project_1.objects.ToppingButton;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
-import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.ToppingItem;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
