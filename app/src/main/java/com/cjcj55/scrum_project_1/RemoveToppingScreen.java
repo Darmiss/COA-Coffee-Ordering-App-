@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.RemovetoppinguiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class RemoveToppingScreen extends Fragment {
@@ -37,13 +38,7 @@ public class RemoveToppingScreen extends Fragment {
             public void onClick(View view) {
                 //remove Topping
                 Context context = getContext();
-                SQLiteDatabaseHelper.getInstance(context).updateToppingActive(getToppingName(), 0);
-                SQLiteDatabaseHelper db = SQLiteDatabaseHelper.getInstance(getContext());
-                MainActivity.toppingItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveToppingTypes(db);
-                Toast newToast = Toast.makeText(getContext(), "Topping successfully removed!",Toast.LENGTH_SHORT);
-                newToast.show();
-
-                MainActivity.flavorItemInCatalogTypes = SQLiteDatabaseHelper.getAllActiveFlavorTypes(SQLiteDatabaseHelper.getInstance(context));
+                MySQLDatabaseHelper.toggleDisableTopping(getToppingName(), context);
 
                 NavHostFragment.findNavController(RemoveToppingScreen.this)
                         .navigate(R.id.action_RemoveToppingScreen_to_SysAdminScreen);

@@ -272,6 +272,129 @@ public class MySQLDatabaseHelper {
         MainActivity.toppingItemInCatalogTypes = getAllActiveToppingTypes(context);
     }
 
+    public static void toggleDisableCoffee(String name, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/toggleDisableCoffee.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(context, name + " Coffee is no longer active", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Unable to make " + name + " inactive", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        // Refresh coffee list in MainActivity
+        MainActivity.coffeeItemInCatalogTypes = getAllActiveCoffeeTypes(context);
+    }
+
+    public static void toggleDisableTopping(String name, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/toggleDisableTopping.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(context, name + " Topping is no longer active", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Unable to make " + name + " inactive", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        // Refresh topping list in MainActivity
+        MainActivity.toppingItemInCatalogTypes = getAllActiveToppingTypes(context);
+    }
+
+    public static void toggleDisableFlavor(String name, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/toggleDisableFlavor.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                Toast.makeText(context, name + " Flavor is no longer active", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(context, "Unable to make " + name + " inactive", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("name", name);
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        // Refresh flavor list in MainActivity
+        MainActivity.flavorItemInCatalogTypes = getAllActiveFlavorTypes(context);
+    }
+
 
     private void setSessionId(HttpURLConnection connection, String sessionId) {
         if (sessionId != null) {
