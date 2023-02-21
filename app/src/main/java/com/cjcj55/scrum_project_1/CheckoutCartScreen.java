@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.CheckoutcartuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 import java.text.DecimalFormat;
@@ -225,13 +226,13 @@ public class CheckoutCartScreen extends Fragment {
                 SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
                 int user_id = sharedPreferences.getInt("user_id", -1);
 
-                SQLiteDatabaseHelper.getInstance(getContext()).insertTransactionFromCart(user_id, MainActivity.userCart, selectedPickupTime, calcTotal());
                 if(calcTotal()==0)
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Cart is empty.");
                     messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
                 else {
+                    MySQLDatabaseHelper.insertTransactionFromCart(user_id, MainActivity.userCart, selectedPickupTime, calcTotal(), getContext());
                     NavHostFragment.findNavController(CheckoutCartScreen.this)
                             .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
                 }

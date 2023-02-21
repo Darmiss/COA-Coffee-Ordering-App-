@@ -1,5 +1,6 @@
 package com.cjcj55.scrum_project_1.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.widget.Toast;
 
@@ -17,9 +18,13 @@ import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.AccountCreationScreen;
 import com.cjcj55.scrum_project_1.MainActivity;
 import com.cjcj55.scrum_project_1.R;
+import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.ToppingItem;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,10 +37,384 @@ import java.util.List;
 import java.util.Map;
 
 public class MySQLDatabaseHelper {
+    public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/insertTransactionFromCart.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                int transaction_id = jsonObject.getInt("transaction_id");
+                                Toast.makeText(context, "Transaction successfully inserted!", Toast.LENGTH_LONG).show();
+
+                                // Insert orders, toppings, and flavors for each coffee item
+                                List<CoffeeItem> coffeeItemList = userCart.getUserCart();
+                                for (CoffeeItem coffeeItem : coffeeItemList) {
+                                    insertOrderCoffee(transaction_id, coffeeItem, context);
+                                }
+                            } else {
+                                Toast.makeText(context, "Unable to insert transaction", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", Integer.toString(userId));
+                params.put("pickup_time", pickupTime);
+                params.put("total_price", Double.toString(totalPrice));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+    }
+
+    private static void insertOrderCoffee(int transactionId, CoffeeItem coffeeItem, Context context) {
+        StringRequest orderCoffeeRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/insertOrderCoffee.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (success.equals("1")) {
+                                int order_coffee_id = jsonObject.getInt("order_coffee_id");
+
+                                // Insert toppings for this coffee item
+                                List<ToppingItem> toppingItemList = coffeeItem.getToppingItemList();
+                                for (ToppingItem topping : toppingItemList) {
+                                    insertOrderTopping(order_coffee_id, topping, context);
+                                }
+
+                                // Insert flavors for this coffee item
+                                List<FlavorItem> flavorItemList = coffeeItem.getFlavorItemList();
+                                for (FlavorItem flavor : flavorItemList) {
+                                    insertOrderFlavor(order_coffee_id, flavor, context);
+                                }
+                            } else {
+                                Toast.makeText(context, "Unable to insert beverage to database", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("transaction_id", Integer.toString(transactionId));
+                params.put("coffee_id", Integer.toString(coffeeItem.getId()));
+                params.put("beverage_count", Integer.toString(coffeeItem.getAmount()));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(orderCoffeeRequest);
+    }
+
+    private static void insertOrderTopping(int order_coffee_id, ToppingItem toppingItem, Context context) {
+        StringRequest orderCoffeeToppingRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/insertOrderTopping.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (!success.equals("1")) {
+                                Toast.makeText(context, "Unable to insert beverage's topping to database", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("order_coffee_id", Integer.toString(order_coffee_id));
+                params.put("topping_id", Integer.toString(toppingItem.getId()));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(orderCoffeeToppingRequest);
+    }
+
+    private static void insertOrderFlavor(int order_coffee_id, FlavorItem flavorItem, Context context) {
+        StringRequest orderCoffeeFlavorRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/insertOrderFlavor.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            String success = jsonObject.getString("success");
+                            if (!success.equals("1")) {
+                                Toast.makeText(context, "Unable to insert beverage's flavor to database", Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("order_coffee_id", Integer.toString(order_coffee_id));
+                params.put("flavor_id", Integer.toString(flavorItem.getId()));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(orderCoffeeFlavorRequest);
+    }
+
+//    public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
+//        RequestQueue queue = Volley.newRequestQueue(context);
+//
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+//                "http://" + MainActivity.LOCAL_IP + "/insertTransactionFromCart.php",
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            String success = jsonObject.getString("success");
+//                            if (success.equals("1")) {
+//                                int transaction_id = jsonObject.getInt("transaction_id");
+//
+//                                // Each coffee in transaction
+//                                List<CoffeeItem> coffeeItemList = userCart.getUserCart();
+//                                for (CoffeeItem coffeeItem : coffeeItemList) {
+//                                    StringRequest orderCoffeeRequest = new StringRequest(Request.Method.POST,
+//                                            "http://" + MainActivity.LOCAL_IP + "/insertOrderCoffee.php",
+//                                            new Response.Listener<String>() {
+//                                                @Override
+//                                                public void onResponse(String response) {
+//                                                    try {
+//                                                        JSONObject jsonObject = new JSONObject(response);
+//                                                        String success = jsonObject.getString("success");
+//                                                        if (success.equals("1")) {
+//                                                            int order_coffee_id = jsonObject.getInt("order_coffee_id");
+//
+//                                                            // Toppings per coffee
+//                                                            List<ToppingItem> toppingItemList = coffeeItem.getToppingItemList();
+//                                                            if (toppingItemList.size() > 0) {
+//                                                                for (ToppingItem topping : toppingItemList) {
+//                                                                    StringRequest orderToppingRequest = new StringRequest(Request.Method.POST,
+//                                                                            "http://" + MainActivity.LOCAL_IP + "/insertOrderTopping.php",
+//                                                                            new Response.Listener<String>() {
+//                                                                                @Override
+//                                                                                public void onResponse(String response) {
+//                                                                                    try {
+//                                                                                        JSONObject jsonObject = new JSONObject(response);
+//                                                                                        String success = jsonObject.getString("success");
+//                                                                                        if (!success.equals("1")) {
+//                                                                                            Toast.makeText(context, "Unable to insert order topping item", Toast.LENGTH_LONG).show();
+//                                                                                        }
+//                                                                                    } catch (JSONException e) {
+//                                                                                        throw new RuntimeException(e);
+//                                                                                    }
+//                                                                                }
+//                                                                            }, new Response.ErrorListener() {
+//                                                                        @Override
+//                                                                        public void onErrorResponse(VolleyError error) {
+//                                                                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+//                                                                        }
+//                                                                    })
+//                                                                    {
+//                                                                        @Nullable
+//                                                                        @Override
+//                                                                        protected Map<String, String> getParams() throws AuthFailureError {
+//                                                                            Map<String, String> params = new HashMap<>();
+//                                                                            params.put("order_coffee_id", Integer.toString(order_coffee_id));
+//                                                                            params.put("topping_id", Integer.toString(topping.getId()));
+//                                                                            return params;
+//                                                                        }
+//                                                                    };
+//                                                                    queue.add(orderToppingRequest);
+//                                                                }
+//                                                            }
+//
+//                                                            // Flavors per coffee
+//                                                            List<FlavorItem> flavorItemList = coffeeItem.getFlavorItemList();
+//                                                            if (toppingItemList.size() > 0) {
+//                                                                for (FlavorItem flavor : flavorItemList) {
+//                                                                    StringRequest orderToppingRequest = new StringRequest(Request.Method.POST,
+//                                                                            "http://" + MainActivity.LOCAL_IP + "/insertOrderFlavor.php",
+//                                                                            new Response.Listener<String>() {
+//                                                                                @Override
+//                                                                                public void onResponse(String response) {
+//                                                                                    try {
+//                                                                                        JSONObject jsonObject = new JSONObject(response);
+//                                                                                        String success = jsonObject.getString("success");
+//                                                                                        if (!success.equals("1")) {
+//                                                                                            Toast.makeText(context, "Unable to insert order flavor item", Toast.LENGTH_LONG).show();
+//                                                                                        }
+//                                                                                    } catch (JSONException e) {
+//                                                                                        throw new RuntimeException(e);
+//                                                                                    }
+//                                                                                }
+//                                                                            }, new Response.ErrorListener() {
+//                                                                        @Override
+//                                                                        public void onErrorResponse(VolleyError error) {
+//                                                                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+//                                                                        }
+//                                                                    })
+//                                                                    {
+//                                                                        @Nullable
+//                                                                        @Override
+//                                                                        protected Map<String, String> getParams() throws AuthFailureError {
+//                                                                            Map<String, String> params = new HashMap<>();
+//                                                                            params.put("order_coffee_id", Integer.toString(order_coffee_id));
+//                                                                            params.put("flavor_id", Integer.toString(flavor.getId()));
+//                                                                            return params;
+//                                                                        }
+//                                                                    };
+//                                                                    queue.add(orderToppingRequest);
+//                                                                }
+//                                                            }
+//                                                        } else {
+//                                                            Toast.makeText(context, "Unable to insert order coffee item", Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                    } catch (JSONException e) {
+//                                                        throw new RuntimeException(e);
+//                                                    }
+//                                                }
+//                                            }, new Response.ErrorListener() {
+//                                        @Override
+//                                        public void onErrorResponse(VolleyError error) {
+//                                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+//                                        }
+//                                    })
+//                                    {
+//                                        @Nullable
+//                                        @Override
+//                                        protected Map<String, String> getParams() throws AuthFailureError {
+//                                            Map<String, String> params = new HashMap<>();
+//                                            params.put("transaction_id", Integer.toString(transaction_id));
+//                                            params.put("coffee_id", Integer.toString(coffeeItem.getId()));
+//                                            params.put("beverage_count", Integer.toString(coffeeItem.getAmount()));
+//                                            return params;
+//                                        }
+//                                    };
+//
+//                                    queue.add(orderCoffeeRequest);
+//
+//
+//                                }
+//
+//                                Toast.makeText(context, "Transaction successfully inserted!", Toast.LENGTH_LONG).show();
+//                            } else {
+//                                Toast.makeText(context, "Unable to insert transaction", Toast.LENGTH_LONG).show();
+//                            }
+//                        } catch (JSONException e) {
+//                            throw new RuntimeException(e);
+//                        }
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+//            }
+//        })
+//        {
+//            @Nullable
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("user_id", Integer.toString(userId));
+//                params.put("pickup_time", pickupTime);
+//                params.put("price", Double.toString(totalPrice));
+//                return params;
+//            }
+//        };
+//        queue.add(stringRequest);
+//    }
+//
+//
+//    public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
+//        List<CoffeeItemInCatalog> coffees = new ArrayList<>();
+//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+//            "http://" + MainActivity.LOCAL_IP + "/getAllActiveCoffeeTypes.php",
+//                null,
+//                new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            JSONArray coffeeItemsArray = response.getJSONArray("data");
+//                            for (int i = 0; i < coffeeItemsArray.length(); i++) {
+//                                JSONObject coffeeItemObject = coffeeItemsArray.getJSONObject(i);
+//                                int id = coffeeItemObject.getInt("coffee_id");
+//                                String name = coffeeItemObject.getString("name");
+//                                String description = coffeeItemObject.getString("description");
+//                                double price = coffeeItemObject.getDouble("price");
+//                                CoffeeItemInCatalog coffeeItemInCatalog = new CoffeeItemInCatalog(id, name, description, price);
+//                                coffees.add(coffeeItemInCatalog);
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//
+//        // Add the request to the request queue
+//        RequestQueue requestQueue = Volley.newRequestQueue(context);
+//        requestQueue.add(jsonObjectRequest);
+//        return coffees;
+//    }
+
     public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
         List<CoffeeItemInCatalog> coffees = new ArrayList<>();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-            "http://" + MainActivity.LOCAL_IP + "/getAllActiveCoffeeTypes.php",
+                "http://" + MainActivity.LOCAL_IP + "/getAllActiveCoffeeTypes.php",
                 null,
                 new Response.Listener<JSONObject>() {
                     @Override
