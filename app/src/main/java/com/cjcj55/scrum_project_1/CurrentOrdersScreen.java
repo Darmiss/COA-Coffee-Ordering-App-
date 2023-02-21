@@ -4,6 +4,7 @@ import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -24,7 +25,7 @@ import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+
 
 import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
@@ -94,7 +95,6 @@ public class CurrentOrdersScreen extends Fragment {
             public void onClick(View view) {
                 Context context = getContext();
 
-                MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
                         "http://" + MainActivity.LOCAL_IP + "/logout.php",
@@ -103,6 +103,12 @@ public class CurrentOrdersScreen extends Fragment {
                             public void onResponse(String response) {
                                 setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
                                 setAccountCreationPopup(false); //disables account creation popup
+
+                                SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences1.edit();
+                                editor.clear();
+                                editor.apply();
+
                                 NavHostFragment.findNavController(CurrentOrdersScreen.this)
                                         .navigate(R.id.action_CurrentOrdersScreen_to_LoginScreen);
 
