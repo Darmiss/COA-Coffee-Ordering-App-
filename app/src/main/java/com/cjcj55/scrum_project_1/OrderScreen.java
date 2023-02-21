@@ -73,6 +73,7 @@ public class OrderScreen extends Fragment {
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 0, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+            buttonLayout.setElevation(15);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
