@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
@@ -181,6 +182,8 @@ public class OrderScreen extends Fragment {
             }
         });
 
+
+
         binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,6 +210,13 @@ public class OrderScreen extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Context context = getContext();
+        MainActivity.coffeeItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveCoffeeTypes(context);
     }
 
     @Override
