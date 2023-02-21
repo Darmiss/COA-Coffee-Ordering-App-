@@ -3,10 +3,13 @@ package com.cjcj55.scrum_project_1;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,8 +24,8 @@ import com.cjcj55.scrum_project_1.objects.FlavorButton;
 import com.cjcj55.scrum_project_1.objects.ToppingButton;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
-import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.ToppingItem;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -61,12 +64,13 @@ public class ItemSelectionScreen extends Fragment {
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+            buttonLayout.setElevation(15);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(200, 50, 200, 10);
+            layoutParams.setMargins(100, 50, 100, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
             //New LinearLayout for nameAndDescription Layout
@@ -77,12 +81,66 @@ public class ItemSelectionScreen extends Fragment {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1f
             ));
+            //New LinearLayout for priceAndpic Layout
+            LinearLayout priceandpic = new LinearLayout(getContext());
+            priceandpic.setOrientation(LinearLayout.VERTICAL);
+            priceandpic.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+            ));
+
+            //img stuff
+
+            ImageView toppingImage = new ImageView(getContext());
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    switch (toppingItem.getName()) {
+                        case "Whipped Cream":
+                            toppingImage.setImageResource(R.drawable.whippedcream);
+                            System.out.println("shot shots shots");
+                            break;
+                        case "Cinnamon":
+                            toppingImage.setImageResource(R.drawable.cinnamon);
+                            System.out.println("milk drink");
+                            break;
+                        case "Sprinkles":
+                            toppingImage.setImageResource(R.drawable.sprinkles);
+                            System.out.println("Americano");
+                            break;
+                        case "Marshmallows":
+                            toppingImage.setImageResource(R.drawable.marshmellow);
+                            System.out.println("steamy");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    toppingImage.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+                    //buttonLayout.addView(coffeeImage);
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
 
             //UI things-
             TextView toppingName = new TextView(getContext());
             toppingName.setText(toppingItem.getName());
             toppingName.setTextSize(20);
             toppingName.setTextColor(Color.parseColor("white"));
+            toppingName.setShadowLayer(5, 0, 5, Color.BLACK);
 
             TextView toppingDescription = new TextView(getContext());
             toppingDescription.setText(toppingItem.getDescription());
@@ -112,8 +170,22 @@ public class ItemSelectionScreen extends Fragment {
             nameAndDescriptionLayout.addView(toppingName);
             nameAndDescriptionLayout.addView(toppingDescription);
 
+
+
+
+            //Setting and adding  to the new linear layout(price+pic)
+            params.gravity = Gravity.RIGHT;
+            priceandpic.setLayoutParams(params);
+
+            priceandpic.addView(toppingPrice);
+            priceandpic.addView(toppingImage);
+            priceandpic.setGravity(Gravity.END);
+
+
+
             //Adding linearlayout to button layout(so clickable)
             buttonLayout.addView(nameAndDescriptionLayout);
+            buttonLayout.addView(priceandpic);
 
             buttonLayout.setId(toppingItem.getId());
             buttonLayout.setWeightSum(2);
@@ -122,8 +194,8 @@ public class ItemSelectionScreen extends Fragment {
             toppingName.setLayoutParams(params);
 
             params.gravity = Gravity.END;
-            toppingPrice.setLayoutParams(params);
-            buttonLayout.addView(toppingPrice);
+            //toppingPrice.setLayoutParams(params);
+            //buttonLayout.addView(toppingPrice);
 
             buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -164,12 +236,13 @@ public class ItemSelectionScreen extends Fragment {
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 20, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+            buttonLayout.setElevation(15);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(200, 50, 200, 10);
+            layoutParams.setMargins(100, 50, 100, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
 
@@ -181,6 +254,63 @@ public class ItemSelectionScreen extends Fragment {
                     LinearLayout.LayoutParams.WRAP_CONTENT,
                     1f
             ));
+            //New LinearLayout for priceAndpic Layout
+            LinearLayout priceandpic = new LinearLayout(getContext());
+            priceandpic.setOrientation(LinearLayout.VERTICAL);
+            priceandpic.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    1f
+            ));
+
+            //img stuff
+
+            ImageView flavorImage = new ImageView(getContext());
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    switch (flavorItem.getName()) {
+                        case "Caramel":
+                            flavorImage.setImageResource(R.drawable.caramel);
+                            System.out.println("shot shots shots");
+                            break;
+                        case "Mocha":
+                            flavorImage.setImageResource(R.drawable.mocha);
+                            System.out.println("milk drink");
+                            break;
+                        case "Hazelnut":
+                            flavorImage.setImageResource(R.drawable.hazelnut);
+                            System.out.println("Americano");
+                            break;
+                        case "Vanilla":
+                            flavorImage.setImageResource(R.drawable.vanilla);
+                            System.out.println("steamy");
+                            break;
+                        case "Brown Sugar Cinnamon":
+                            flavorImage.setImageResource(R.drawable.chocolate);
+                            System.out.println("steamy");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    flavorImage.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+                    //buttonLayout.addView(coffeeImage);
+                }
+            });
+
+
+
+
+
+
+
+
+
+
+
 
 
             //UI things-
@@ -188,6 +318,7 @@ public class ItemSelectionScreen extends Fragment {
             flavorName.setText(flavorItem.getName());
             flavorName.setTextSize(20);
             flavorName.setTextColor(Color.parseColor("white"));
+            flavorName.setShadowLayer(5, 0, 5, Color.BLACK);
 
             TextView flavorDescription = new TextView(getContext());
             flavorDescription.setText(flavorItem.getDescription());
@@ -215,8 +346,18 @@ public class ItemSelectionScreen extends Fragment {
             nameAndDescriptionLayout.addView(flavorName);
             nameAndDescriptionLayout.addView(flavorDescription);
 
+
+            //Setting and adding  to the new linear layout(price+pic)
+            params.gravity = Gravity.RIGHT;
+            priceandpic.setLayoutParams(params);
+
+            priceandpic.addView(flavorPrice);
+            priceandpic.addView(flavorImage);
+            priceandpic.setGravity(Gravity.END);
+
             //Adding linearlayout to button layout(so clickable)
             buttonLayout.addView(nameAndDescriptionLayout);
+            buttonLayout.addView(priceandpic);
 
             buttonLayout.setId(flavorItem.getId());
             buttonLayout.setWeightSum(2);
@@ -225,8 +366,8 @@ public class ItemSelectionScreen extends Fragment {
             flavorName.setLayoutParams(params);
 
             params.gravity = Gravity.END;
-            flavorPrice.setLayoutParams(params);
-            buttonLayout.addView(flavorPrice);
+            //flavorPrice.setLayoutParams(params);
+            //buttonLayout.addView(flavorPrice);
 
             buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,4 +1,4 @@
-package com.cjcj55.scrum_project_1.objects.order_items;
+package com.cjcj55.scrum_project_1.objects.catalog.order_items;
 
 import androidx.annotation.NonNull;
 

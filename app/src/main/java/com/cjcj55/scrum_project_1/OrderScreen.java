@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -29,7 +32,7 @@ import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
 import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
 
 import java.text.DecimalFormat;
 
@@ -70,12 +73,13 @@ public class OrderScreen extends Fragment {
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 0, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+            buttonLayout.setElevation(15);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(200, 50, 200, 10);
+            layoutParams.setMargins(100, 50, 100, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
             //New LinearLayout for nameAndDescription Layout
@@ -87,6 +91,52 @@ public class OrderScreen extends Fragment {
                     1f
             ));
 
+            //New LinearLayout for priceandpic Layout
+            LinearLayout priceandpic = new LinearLayout(getContext());
+            priceandpic.setOrientation(LinearLayout.VERTICAL);
+            priceandpic.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    1f
+            ));
+
+
+            ImageView coffeeImage = new ImageView(getContext());
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    switch (coffeeItem.getName()) {
+                        case "Espresso":
+                            coffeeImage.setImageResource(R.drawable.espresso);
+                            System.out.println("shot shots shots");
+                            break;
+                        case "Latte":
+                            coffeeImage.setImageResource(R.drawable.latte);
+                            System.out.println("milk drink");
+                            break;
+                        case "Americano":
+                            coffeeImage.setImageResource(R.drawable.americano);
+                            System.out.println("Americano");
+                            break;
+                        case "Cappuccino":
+                            coffeeImage.setImageResource(R.drawable.cappuccino);
+                            System.out.println("steamy");
+                            break;
+                        case "Iced Coffee":
+                            coffeeImage.setImageResource(R.drawable.icedcoffee);
+                            System.out.println("and i oop");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    coffeeImage.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+                    //buttonLayout.addView(coffeeImage);
+                }
+            });
+
 
 
 
@@ -96,6 +146,7 @@ public class OrderScreen extends Fragment {
             coffeeName.setText(coffeeItem.getName());
             coffeeName.setTextSize(20);
             coffeeName.setTextColor(Color.parseColor("white"));
+            coffeeName.setShadowLayer(5, 0, 5, Color.BLACK);
 
             TextView coffeeDescription = new TextView(getContext());
             coffeeDescription.setText(coffeeItem.getDescription());
@@ -122,15 +173,24 @@ public class OrderScreen extends Fragment {
             nameAndDescriptionLayout.addView(coffeeName);
             nameAndDescriptionLayout.addView(coffeeDescription);
 
+            //Setting and adding  to the new linear layout(price+pic)
+            params.gravity = Gravity.RIGHT;
+            priceandpic.setLayoutParams(params);
+
+            priceandpic.addView(coffeePrice);
+            priceandpic.addView(coffeeImage);
+            priceandpic.setGravity(Gravity.END);
+
             //Adding linearlayout to button layout(so clickable)
             buttonLayout.addView(nameAndDescriptionLayout);
+            buttonLayout.addView(priceandpic);
 
             buttonLayout.setId(coffeeItem.getId());
             buttonLayout.setWeightSum(2);  //what is this
 
             params.gravity = Gravity.END;
-            coffeePrice.setLayoutParams(params);
-            buttonLayout.addView(coffeePrice);
+            //coffeePrice.setLayoutParams(params);
+            //buttonLayout.addView(coffeePrice);
             buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

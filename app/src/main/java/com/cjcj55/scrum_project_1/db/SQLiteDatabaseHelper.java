@@ -11,9 +11,9 @@ import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
-import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
-import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.ToppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
