@@ -4,6 +4,7 @@ import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -13,6 +14,9 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -26,9 +30,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
 
 import java.text.DecimalFormat;
 
@@ -50,14 +55,19 @@ public class OrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-//        TextView textView = view.findViewById(R.id.CustomWelcomeName);
-//        String customText = SQLiteDatabaseHelper.getInstance(getContext()).getUserFirstName(MainActivity.user);
-//        if(customText.length()>=7)
-//        {
-//            customText = customText.substring(0, 7) + "..";
-//        }
-//        customText+="!";
-//        textView.setText(customText);
+        TextView textView = view.findViewById(R.id.CustomWelcomeName);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+        int user_id = sharedPreferences.getInt("user_id", -1);
+        String username = sharedPreferences.getString("username", "");
+        String firstName = sharedPreferences.getString("firstName", "");
+        String lastName = sharedPreferences.getString("lastName", "");
+        if(firstName.length()>=7)
+        {
+            firstName = firstName.substring(0, 7) + "..";
+        }
+        firstName+="!";
+        textView.setText(firstName);
 
 
 
@@ -69,12 +79,13 @@ public class OrderScreen extends Fragment {
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
             buttonLayout.setPadding(40, 0, 40, 20);
             buttonLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+            buttonLayout.setElevation(15);
 
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT,
                     LinearLayout.LayoutParams.WRAP_CONTENT
             );
-            layoutParams.setMargins(200, 50, 200, 10);
+            layoutParams.setMargins(100, 50, 100, 10);
             buttonLayout.setLayoutParams(layoutParams);
 
             //New LinearLayout for nameAndDescription Layout
@@ -86,6 +97,52 @@ public class OrderScreen extends Fragment {
                     1f
             ));
 
+            //New LinearLayout for priceandpic Layout
+            LinearLayout priceandpic = new LinearLayout(getContext());
+            priceandpic.setOrientation(LinearLayout.VERTICAL);
+            priceandpic.setLayoutParams(new LinearLayout.LayoutParams(
+                    0,
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    1f
+            ));
+
+
+            ImageView coffeeImage = new ImageView(getContext());
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    switch (coffeeItem.getName()) {
+                        case "Espresso":
+                            coffeeImage.setImageResource(R.drawable.espresso);
+                            System.out.println("shot shots shots");
+                            break;
+                        case "Latte":
+                            coffeeImage.setImageResource(R.drawable.latte);
+                            System.out.println("milk drink");
+                            break;
+                        case "Americano":
+                            coffeeImage.setImageResource(R.drawable.americano);
+                            System.out.println("Americano");
+                            break;
+                        case "Cappuccino":
+                            coffeeImage.setImageResource(R.drawable.cappuccino);
+                            System.out.println("steamy");
+                            break;
+                        case "Iced Coffee":
+                            coffeeImage.setImageResource(R.drawable.icedcoffee);
+                            System.out.println("and i oop");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    coffeeImage.setLayoutParams(new LinearLayout.LayoutParams(300, 300));
+                    //buttonLayout.addView(coffeeImage);
+                }
+            });
+
 
 
 
@@ -95,6 +152,7 @@ public class OrderScreen extends Fragment {
             coffeeName.setText(coffeeItem.getName());
             coffeeName.setTextSize(20);
             coffeeName.setTextColor(Color.parseColor("white"));
+            coffeeName.setShadowLayer(5, 0, 5, Color.BLACK);
 
             TextView coffeeDescription = new TextView(getContext());
             coffeeDescription.setText(coffeeItem.getDescription());
@@ -121,15 +179,24 @@ public class OrderScreen extends Fragment {
             nameAndDescriptionLayout.addView(coffeeName);
             nameAndDescriptionLayout.addView(coffeeDescription);
 
+            //Setting and adding  to the new linear layout(price+pic)
+            params.gravity = Gravity.RIGHT;
+            priceandpic.setLayoutParams(params);
+
+            priceandpic.addView(coffeePrice);
+            priceandpic.addView(coffeeImage);
+            priceandpic.setGravity(Gravity.END);
+
             //Adding linearlayout to button layout(so clickable)
             buttonLayout.addView(nameAndDescriptionLayout);
+            buttonLayout.addView(priceandpic);
 
             buttonLayout.setId(coffeeItem.getId());
             buttonLayout.setWeightSum(2);  //what is this
 
             params.gravity = Gravity.END;
-            coffeePrice.setLayoutParams(params);
-            buttonLayout.addView(coffeePrice);
+            //coffeePrice.setLayoutParams(params);
+            //buttonLayout.addView(coffeePrice);
             buttonLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -156,7 +223,6 @@ public class OrderScreen extends Fragment {
             public void onClick(View view) {
                 Context context = getContext();
 
-                MainActivity.user = -1;
                 MainActivity.userCart = new UserCart();
                 StringRequest stringRequest = new StringRequest(Request.Method.POST,
                         "http://" + MainActivity.LOCAL_IP + "/logout.php",
@@ -165,6 +231,12 @@ public class OrderScreen extends Fragment {
                             public void onResponse(String response) {
                                 setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
                                 setAccountCreationPopup(false); //disables account creation popup
+
+                                SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences1.edit();
+                                editor.clear();
+                                editor.apply();
+
                                 NavHostFragment.findNavController(OrderScreen.this)
                                         .navigate(R.id.action_OrderScreen_to_LoginScreen);
 
@@ -180,6 +252,8 @@ public class OrderScreen extends Fragment {
                 queue.add(stringRequest);
             }
         });
+
+
 
         binding.OrderScreenBck.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,7 +273,7 @@ public class OrderScreen extends Fragment {
                 if(MainActivity.userCart.getUserCart().isEmpty())
                 {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Your Cart is Empty.");
-                   messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
+                    messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
                 else {
                     NavHostFragment.findNavController(OrderScreen.this)
@@ -207,6 +281,13 @@ public class OrderScreen extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Context context = getContext();
+        MainActivity.coffeeItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveCoffeeTypes(context);
     }
 
     @Override
