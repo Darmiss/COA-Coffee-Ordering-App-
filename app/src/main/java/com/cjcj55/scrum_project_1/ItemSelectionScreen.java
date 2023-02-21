@@ -1,5 +1,6 @@
 package com.cjcj55.scrum_project_1;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ItemselectionuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.FlavorButton;
 import com.cjcj55.scrum_project_1.objects.ToppingButton;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
@@ -298,6 +300,14 @@ public class ItemSelectionScreen extends Fragment {
             }
         });
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Context context = getContext();
+        MainActivity.flavorItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveFlavorTypes(context);
+        MainActivity.toppingItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveToppingTypes(context);
     }
 
     public void printAllActiveToppings() {
