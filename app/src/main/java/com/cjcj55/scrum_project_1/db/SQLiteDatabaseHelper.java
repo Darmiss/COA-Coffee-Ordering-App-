@@ -573,24 +573,24 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
      * @param password
      * @return true or false if the user successfully logged in
      */
-    public boolean userLogin(String email, String password) {
-        SQLiteDatabase db = getWritableDatabase();
-        String[] columns = {"user_id", "firstName", "lastName"};
-        String selection = "email=? AND password=?";
-        String[] selectionArgs = {email, password};
-        Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
-        int count = cursor.getCount();
-        if (count > 0) {
-            cursor.moveToFirst();
-            int userIdIndex = cursor.getColumnIndex("user_id");
-            MainActivity.user = cursor.getInt(userIdIndex);
-//            System.out.println("User logged in.  User now " + MainActivity.user);
-            cursor.close();
-            return true;
-        }
-        cursor.close();
-        return false;
-    }
+//    public boolean userLogin(String email, String password) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        String[] columns = {"user_id", "firstName", "lastName"};
+//        String selection = "email=? AND password=?";
+//        String[] selectionArgs = {email, password};
+//        Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
+//        int count = cursor.getCount();
+//        if (count > 0) {
+//            cursor.moveToFirst();
+//            int userIdIndex = cursor.getColumnIndex("user_id");
+//            MainActivity.user = cursor.getInt(userIdIndex);
+////            System.out.println("User logged in.  User now " + MainActivity.user);
+//            cursor.close();
+//            return true;
+//        }
+//        cursor.close();
+//        return false;
+//    }
 
     /**
      * @param password The password for an employee
