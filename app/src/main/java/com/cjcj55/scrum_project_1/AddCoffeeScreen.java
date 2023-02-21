@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -39,7 +38,12 @@ public class AddCoffeeScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                MySQLDatabaseHelper.insertCoffee(getNewCoffeeName(), getNewCoffeeDescription(), getNewCoffeeCost(), context);
+                if (checkInputs(getNewCoffeeName(),getNewCoffeeDescription(),getNewCoffeeCost())) {
+                    MySQLDatabaseHelper.insertCoffee(getNewCoffeeName(), getNewCoffeeDescription(), Double.parseDouble(getNewCoffeeCost()), context);
+
+                    NavHostFragment.findNavController(AddCoffeeScreen.this)
+                            .navigate(R.id.action_AddCoffeeScreen_to_SysAdminScreen);
+                }
             }
         });
 
@@ -60,9 +64,37 @@ public class AddCoffeeScreen extends Fragment {
         return binding.newCoffeeDesc.getText().toString();
     }
 
-    private double getNewCoffeeCost() {
-        return Double.parseDouble(binding.newCoffeePrice.getText().toString());
+    private String getNewCoffeeCost() {
+
+        return binding.newCoffeePrice.getText().toString();
     }
+
+    private boolean checkInputs (String n, String d, String c) {
+        boolean check = true;
+        if (n.isBlank()) {
+            binding.newCoffeeNameErrorText.setText("This field is required");
+            binding.newCoffeeNameErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newCoffeeNameErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (d.isBlank()) {
+            binding.newCoffeeDescErrorText.setText("This field is required");
+            binding.newCoffeeDescErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newCoffeeDescErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (c.isEmpty()) {
+            binding.newCoffeePriceErrorText.setText("This field is required");
+            binding.newCoffeePriceErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newCoffeePriceErrorText.setVisibility(getView().INVISIBLE);
+        }
+        return check;
+    }
+
 
     @Override
     public void onDestroyView() {

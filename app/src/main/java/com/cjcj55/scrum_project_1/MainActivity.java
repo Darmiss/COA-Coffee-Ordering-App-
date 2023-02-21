@@ -17,7 +17,7 @@ import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
 
 import java.util.List;
 
@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     // CoffeeItem List to store user's shopping cart
     public static UserCart userCart;
-
-    // Stores USERID when a user is logged in.  Otherwise, -1
-    public static int user = -1;
 
     public static CoffeeItem currentCoffee;
 

@@ -6,6 +6,8 @@ package com.cjcj55.scrum_project_1;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.WHITE;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -44,7 +46,10 @@ public class PreviousOrderScreen extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(MainActivity.user);
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+        int user_id = sharedPreferences.getInt("user_id", -1);
+
+        List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(user_id);
         //ListIterator<UserCart> iterate = transactionList.listIterator();
         LinearLayout dynamic = view.findViewById(R.id.previousOrder);
         try{

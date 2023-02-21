@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AddflavoruiBinding;
 import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
-import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class AddFlavorScreen extends Fragment {
 
@@ -38,7 +36,12 @@ public class AddFlavorScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                MySQLDatabaseHelper.insertFlavor(getNewFlavorName(), getNewFlavorDescription(), getNewFlavorCost(), context);
+                if (checkInputs(getNewFlavorName(),getNewFlavorDescription(),getNewFlavorCost())) {
+                    MySQLDatabaseHelper.insertFlavor(getNewFlavorName(), getNewFlavorDescription(),Double.parseDouble(getNewFlavorCost()), context);
+                    NavHostFragment.findNavController(AddFlavorScreen.this)
+                            .navigate(R.id.action_AddFlavorScreen_to_SysAdminScreen);
+                }
+
             }
         });
 
@@ -59,10 +62,35 @@ public class AddFlavorScreen extends Fragment {
         return binding.newFlavorDesc.getText().toString();
     }
 
-    private double getNewFlavorCost() {
-        return Double.parseDouble(binding.newFlavorPrice.getText().toString());
+    private String getNewFlavorCost() {
+        return binding.newFlavorPrice.getText().toString();
     }
 
+    private boolean checkInputs (String n, String d, String c) {
+        boolean check = true;
+        if (n.isBlank()) {
+            binding.newFlavorNameErrorText.setText("This field is required");
+            binding.newFlavorNameErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newFlavorNameErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (d.isBlank()) {
+            binding.newFlavorDescErrorText.setText("This field is required");
+            binding.newFlavorDescErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newFlavorDescErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (c.isEmpty()) {
+            binding.newFlavorPriceErrorText.setText("This field is required");
+            binding.newFlavorPriceErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newFlavorPriceErrorText.setVisibility(getView().INVISIBLE);
+        }
+        return check;
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

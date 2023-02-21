@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -13,7 +12,6 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.AddtoppinguiBinding;
 import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
-import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 public class AddToppingScreen extends Fragment {
 
@@ -39,7 +37,12 @@ public class AddToppingScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-                MySQLDatabaseHelper.insertTopping(getNewToppingName(), getNewToppingDescription(), getNewToppingCost(), context);
+                if (checkInputs(getNewToppingName(),getNewToppingDescription(),getNewToppingCost())) {
+                    MySQLDatabaseHelper.insertTopping(getNewToppingName(), getNewToppingDescription(), Double.parseDouble(getNewToppingCost()), context);
+                    NavHostFragment.findNavController(AddToppingScreen.this)
+                            .navigate(R.id.action_AddToppingScreen_to_SysAdminScreen);
+                }
+
             }
         });
 
@@ -60,10 +63,35 @@ public class AddToppingScreen extends Fragment {
         return binding.newToppingDesc.getText().toString();
     }
 
-    private double getNewToppingCost() {
-        return Double.parseDouble(binding.newToppingPrice.getText().toString());
+    private String getNewToppingCost() {
+        return binding.newToppingPrice.getText().toString();
     }
 
+    private boolean checkInputs (String n, String d, String c) {
+        boolean check = true;
+        if (n.isBlank()) {
+            binding.newToppingNameErrorText.setText("This field is required");
+            binding.newToppingNameErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newToppingNameErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (d.isBlank()) {
+            binding.newToppingDescErrorText.setText("This field is required");
+            binding.newToppingDescErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newToppingDescErrorText.setVisibility(getView().INVISIBLE);
+        }
+        if (c.isEmpty()) {
+            binding.newToppingPriceErrorText.setText("This field is required");
+            binding.newToppingPriceErrorText.setVisibility(getView().VISIBLE);
+            check = false;
+        } else {
+            binding.newToppingPriceErrorText.setVisibility(getView().INVISIBLE);
+        }
+        return check;
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

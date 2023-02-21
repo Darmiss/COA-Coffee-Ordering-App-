@@ -1,6 +1,7 @@
 package com.cjcj55.scrum_project_1;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +83,21 @@ public class LoginScreen extends Fragment {
                                     if (success.equals("1")) {
                                         String userType = jsonObject.getString("user_type");
                                         if (userType.equals("customer")) {
+                                            JSONObject sessionData = jsonObject.getJSONObject("sessionData");
+
+                                            int uid = sessionData.getInt("user_id");
+                                            String un = sessionData.getString("username");
+                                            String firstName = sessionData.getString("firstName");
+                                            String lastName = sessionData.getString("lastName");
+
+                                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putInt("user_id", uid);
+                                            editor.putString("username", un);
+                                            editor.putString("firstName", firstName);
+                                            editor.putString("lastName", lastName);
+                                            editor.apply();
+
                                             // Login successful, navigate to home screen
                                             NavHostFragment.findNavController(LoginScreen.this)
                                                     .navigate(R.id.action_LoginScreen_to_CurrentOrdersScreen);

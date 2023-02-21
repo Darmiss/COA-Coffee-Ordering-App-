@@ -11,9 +11,9 @@ import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
-import com.cjcj55.scrum_project_1.objects.order_items.FlavorItem;
-import com.cjcj55.scrum_project_1.objects.order_items.ToppingItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.FlavorItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.ToppingItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -573,24 +573,24 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
      * @param password
      * @return true or false if the user successfully logged in
      */
-    public boolean userLogin(String email, String password) {
-        SQLiteDatabase db = getWritableDatabase();
-        String[] columns = {"user_id", "firstName", "lastName"};
-        String selection = "email=? AND password=?";
-        String[] selectionArgs = {email, password};
-        Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
-        int count = cursor.getCount();
-        if (count > 0) {
-            cursor.moveToFirst();
-            int userIdIndex = cursor.getColumnIndex("user_id");
-            MainActivity.user = cursor.getInt(userIdIndex);
-//            System.out.println("User logged in.  User now " + MainActivity.user);
-            cursor.close();
-            return true;
-        }
-        cursor.close();
-        return false;
-    }
+//    public boolean userLogin(String email, String password) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        String[] columns = {"user_id", "firstName", "lastName"};
+//        String selection = "email=? AND password=?";
+//        String[] selectionArgs = {email, password};
+//        Cursor cursor = db.query("users", columns, selection, selectionArgs, null, null, null);
+//        int count = cursor.getCount();
+//        if (count > 0) {
+//            cursor.moveToFirst();
+//            int userIdIndex = cursor.getColumnIndex("user_id");
+//            MainActivity.user = cursor.getInt(userIdIndex);
+////            System.out.println("User logged in.  User now " + MainActivity.user);
+//            cursor.close();
+//            return true;
+//        }
+//        cursor.close();
+//        return false;
+//    }
 
     /**
      * @param password The password for an employee
