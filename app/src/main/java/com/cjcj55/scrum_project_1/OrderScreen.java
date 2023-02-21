@@ -181,11 +181,11 @@ public class OrderScreen extends Fragment {
             }
         });
 
-        binding.viewPastOrdersButton.setOnClickListener(new View.OnClickListener() {
+        binding.OrderScreenBck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(OrderScreen.this)
-                        .navigate(R.id.action_OrderScreen_to_PreviousOrderScreen);
+                        .navigate(R.id.action_OrderScreen_to_CurrentOrdersScreen);
             }
         });
 

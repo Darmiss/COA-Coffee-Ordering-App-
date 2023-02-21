@@ -103,7 +103,7 @@ public class AccountCreationScreen extends Fragment {
 
                     RequestQueue queue = Volley.newRequestQueue(context);
                     queue.add(stringRequest);
-
+                    setLoggedOutPopup(false);
                     NavHostFragment.findNavController(AccountCreationScreen.this)
                             .navigate(R.id.action_AccountCreationScreen_to_LoginScreen);
 
