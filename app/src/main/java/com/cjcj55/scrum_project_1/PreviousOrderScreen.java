@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.ViewpastorderuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 
@@ -49,11 +50,14 @@ public class PreviousOrderScreen extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
         int user_id = sharedPreferences.getInt("user_id", -1);
 
-        List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(user_id);
+        List<UserCart> transactionList = MySQLDatabaseHelper.getAllTransactionsForUser(user_id, getContext());
         //ListIterator<UserCart> iterate = transactionList.listIterator();
         LinearLayout dynamic = view.findViewById(R.id.previousOrder);
-        try{
+
+//        System.out.println("onViewCreated for PreviousOrderScreen, size: " + transactionList.size());
+        try {
             for(int i =0; i < transactionList.size(); i++) {
+//                System.out.println(i);
                 DecimalFormat df = new DecimalFormat("0.00");
                 //This will contain the orders made
                 LinearLayout contain = new LinearLayout(getContext());
@@ -92,6 +96,7 @@ public class PreviousOrderScreen extends Fragment {
                 fCart.addView(priceTotal);
 
                 contain.addView(fCart);
+
                 try{
                     for(int j = 0; j < transactionList.get(i).getUserCart().size(); j++){
                         LinearLayout coffeeTemp = new LinearLayout(getContext());
@@ -119,7 +124,6 @@ public class PreviousOrderScreen extends Fragment {
                         params.gravity = Gravity.END;
                         cofPrice.setLayoutParams(params);
                         coffeeTemp.addView(cofPrice);
-
 
 
                         contain.addView(coffeeTemp);
@@ -196,7 +200,7 @@ public class PreviousOrderScreen extends Fragment {
                 dynamic.addView(contain);
             }
         } catch(NullPointerException e){
-            System.out.println("Hello World");
+//            System.out.println("Hello World");
         }
 
         binding.pastBackButton.setOnClickListener(new View.OnClickListener() {

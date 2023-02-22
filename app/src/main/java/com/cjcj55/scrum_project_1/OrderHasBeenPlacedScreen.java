@@ -106,7 +106,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                         total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
                     }
                 } catch(NullPointerException e){
-                    System.out.println("Flavor list is empty");
+//                    System.out.println("Flavor list is empty");
                 }
                 try{
                     for(int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); j++){
@@ -141,11 +141,11 @@ public class OrderHasBeenPlacedScreen extends Fragment {
 
                     }
                 } catch(NullPointerException e){
-                    System.out.println("Toppings list is empty");
+//                    System.out.println("Toppings list is empty");
                 }
             }
         } catch(NullPointerException e){
-                System.out.println("Empty cart found");
+//                System.out.println("Empty cart found");
         }
         //Should add the totalView to the push
         TextView totalView = view.findViewById(R.id.totalView);
