@@ -90,6 +90,22 @@ public class CurrentOrdersScreen extends Fragment {
 //        textView.setText(customText);
 
 
+        TextView textView = view.findViewById(R.id.currOrderCustomWelcomeName);
+
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+        int user_id = sharedPreferences.getInt("user_id", -1);
+        String username = sharedPreferences.getString("username", "");
+        String firstName = sharedPreferences.getString("firstName", "");
+        String lastName = sharedPreferences.getString("lastName", "");
+        if(firstName.length()>=7)
+        {
+            firstName = firstName.substring(0, 7) + "..";
+        }
+        firstName+="!";
+        textView.setText(firstName);
+
+
+
         binding.currOrderLogoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
