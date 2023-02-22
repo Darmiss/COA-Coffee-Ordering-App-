@@ -5,6 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/workerLogoutBtn"
+        android:layout_width="109dp"
+        android:layout_height="49dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Logout"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/WorkerViewCompleteOrderBtn" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -17,15 +29,13 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/BacktoMenuWorkerBtn"
+        android:id="@+id/WorkerViewCompleteOrderBtn"
         android:layout_width="109dp"
         android:layout_height="49dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/roundedbutton"
-        android:text="Back to Menu"
+        android:text="View Completed Orders"
         android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ScrollView5" />
@@ -34,13 +44,7 @@
         android:id="@+id/ScrollView5"
         android:layout_width="409dp"
         android:layout_height="549dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="29dp"
-        app:layout_constraintBottom_toTopOf="@+id/BacktoMenuWorkerBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
@@ -48,7 +52,7 @@
             android:id="@+id/pendingOrders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
         </LinearLayout>
     </ScrollView>
