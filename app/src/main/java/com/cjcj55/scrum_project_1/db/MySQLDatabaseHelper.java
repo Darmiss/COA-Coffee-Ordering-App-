@@ -37,6 +37,235 @@ import java.util.List;
 import java.util.Map;
 
 public class MySQLDatabaseHelper {
+    public static List<UserCart> getAllTransactionsForUser(int userId, Context context) {
+        List<UserCart> transactions = new ArrayList<>();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/getAllTransactionsForUser.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                                int transaction_id = jsonObject.getInt("transaction_id");
+                                String timeOrdered = jsonObject.getString("time_ordered");
+                                double price = jsonObject.getDouble("price");
+
+//                                System.out.println(transaction_id + ": " + timeOrdered + ", $" + price);
+
+                                // Insert orders, toppings, and flavors of each coffee item
+                                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transaction_id, context);
+
+                                System.out.println("coffeeItems size: " + coffeeItems.size());
+
+                                UserCart userCart = new UserCart();
+                                for (CoffeeItem coffeeItem : coffeeItems) {
+                                    userCart.addCoffeeToCart(coffeeItem);
+                                }
+                                userCart.setTimeOrdered(timeOrdered);
+                                userCart.setPrice(price);
+                                userCart.setTransactionId(transaction_id);
+
+                                transactions.add(userCart);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", Integer.toString(userId));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        return transactions;
+    }
+
+    private static List<CoffeeItem> getCoffeeItemsForTransaction(int transactionId, Context context) {
+        List<CoffeeItem> coffeeItems = new ArrayList<>();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/getCoffeeItemsForTransaction.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                int coffee_id = jsonObject.getInt("coffee_id");
+                                int beverage_count = jsonObject.getInt("beverage_count");
+                                int order_coffee_id = jsonObject.getInt("order_coffee_id");
+
+//                                System.out.println(coffee_id + ": " + beverage_count + ", " + order_coffee_id);
+
+                                // Get toppings for this coffee item
+                                List<ToppingItem> toppingItems = getToppingItemsForOrderCoffee(order_coffee_id, context);
+
+                                // Get flavors for this coffee item
+                                List<FlavorItem> flavorItems = getFlavorItemsForOrderCoffee(order_coffee_id, context);
+
+                                int coffeeIndex = -1;
+                                // Loop to find which coffee has id = coffeeId
+                                for (int j = 0; j < MainActivity.coffeeItemInCatalogTypes.size(); j++) {
+                                    if (MainActivity.coffeeItemInCatalogTypes.get(j).getId() == coffee_id) {
+                                        coffeeIndex = j;
+                                    }
+                                }
+
+                                CoffeeItem coffeeItem = new CoffeeItem(MainActivity.coffeeItemInCatalogTypes.get(coffeeIndex), beverage_count);
+                                coffeeItem.setToppingItemList(toppingItems);
+                                coffeeItem.setFlavorItemList(flavorItems);
+                                coffeeItems.add(coffeeItem);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("transaction_id", Integer.toString(transactionId));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        return coffeeItems;
+    }
+
+    private static List<ToppingItem> getToppingItemsForOrderCoffee(int orderCoffeeId, Context context) {
+        List<ToppingItem> toppingItems = new ArrayList<>();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/getToppingItemsForOrderCoffee.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                int topping_id = jsonObject.getInt("topping_id");
+
+//                                System.out.println(topping_id);
+
+                                int toppingIndex = -1;
+                                // Loop to find which topping has id = toppingId
+                                for (int j = 0; j < MainActivity.toppingItemInCatalogTypes.size(); j++) {
+                                    if (MainActivity.toppingItemInCatalogTypes.get(j).getId() == topping_id) {
+                                        toppingIndex = j;
+                                    }
+                                }
+                                ToppingItem toppingItem = new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(toppingIndex));
+                                toppingItems.add(toppingItem);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("order_coffee_id", Integer.toString(orderCoffeeId));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        return toppingItems;
+    }
+
+    private static List<FlavorItem> getFlavorItemsForOrderCoffee(int orderCoffeeId, Context context) {
+        List<FlavorItem> flavorItems = new ArrayList<>();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/getFlavorItemsForOrderCoffee.php",
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                                int flavor_id = jsonObject.getInt("flavor_id");
+
+//                                System.out.println(flavor_id);
+
+                                int flavorIndex = -1;
+                                // Loop to find which topping has id = toppingId
+                                for (int j = 0; j < MainActivity.toppingItemInCatalogTypes.size(); j++) {
+                                    if (MainActivity.toppingItemInCatalogTypes.get(j).getId() == flavor_id) {
+                                        flavorIndex = j;
+                                    }
+                                }
+                                FlavorItem flavorItem = new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(flavorIndex));
+                                flavorItems.add(flavorItem);
+                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        })
+        {
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("order_coffee_id", Integer.toString(orderCoffeeId));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        return flavorItems;
+    }
+
     public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/insertTransactionFromCart.php",
