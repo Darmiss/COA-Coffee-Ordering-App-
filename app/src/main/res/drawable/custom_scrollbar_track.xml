@@ -2,4 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <size android:width="12dp" />
     <solid android:color="@color/scrollbar_track" />
+
 </shape>

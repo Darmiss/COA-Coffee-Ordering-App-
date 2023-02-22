@@ -316,7 +316,7 @@ public class ItemSelectionScreen extends Fragment {
             //UI things-
             TextView flavorName = new TextView(getContext());
             flavorName.setText(flavorItem.getName());
-            flavorName.setTextSize(20);
+            flavorName.setTextSize(30);
             flavorName.setTextColor(Color.parseColor("white"));
             flavorName.setShadowLayer(5, 0, 5, Color.BLACK);
 
@@ -332,6 +332,7 @@ public class ItemSelectionScreen extends Fragment {
             flavorPrice.setTextColor(Color.parseColor("white"));
             flavorPrice.setTextSize(30);
             flavorPrice.setGravity(Gravity.END);
+            flavorPrice.setShadowLayer(5, 0, 5, Color.BLACK);
             //-
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT,

@@ -150,7 +150,7 @@ public class OrderScreen extends Fragment {
             //All the UI design text things ;)-
             TextView coffeeName = new TextView(getContext());
             coffeeName.setText(coffeeItem.getName());
-            coffeeName.setTextSize(20);
+            coffeeName.setTextSize(30);
             coffeeName.setTextColor(Color.parseColor("white"));
             coffeeName.setShadowLayer(5, 0, 5, Color.BLACK);
 
@@ -164,6 +164,7 @@ public class OrderScreen extends Fragment {
             coffeePrice.setText("$" + df.format(coffeeItem.getPrice()));
             coffeePrice.setTextColor(Color.parseColor("white"));
             coffeePrice.setTextSize(30);
+            coffeePrice.setShadowLayer(5, 0, 5, Color.BLACK);
             coffeePrice.setGravity(Gravity.END);
             //-
 
