@@ -176,7 +176,7 @@ public class CheckoutCartScreen extends Fragment {
                         total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
                     }
                 } catch (NullPointerException e) {
-                    System.out.println("Empty Flavor List");
+//                    System.out.println("Empty Flavor List");
                 }
                 //Add Toppings calculation to total
                 try {
@@ -211,12 +211,12 @@ public class CheckoutCartScreen extends Fragment {
                         total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();
                     }
                 }catch(NullPointerException e){
-                    System.out.println("No toppings ");
+//                    System.out.println("No toppings ");
                 }
                 container.addView(dynamic);
             }
         }catch(NullPointerException e){
-            System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
+//            System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
         }
 
         DecimalFormat df = new DecimalFormat("0.00");

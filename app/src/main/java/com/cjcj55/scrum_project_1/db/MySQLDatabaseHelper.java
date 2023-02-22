@@ -1,11 +1,9 @@
 package com.cjcj55.scrum_project_1.db;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.navigation.fragment.NavHostFragment;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -15,9 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.cjcj55.scrum_project_1.AccountCreationScreen;
 import com.cjcj55.scrum_project_1.MainActivity;
-import com.cjcj55.scrum_project_1.R;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
@@ -58,7 +54,7 @@ public class MySQLDatabaseHelper {
                                 // Insert orders, toppings, and flavors of each coffee item
                                 List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transaction_id, context);
 
-                                System.out.println("coffeeItems size: " + coffeeItems.size());
+//                                System.out.println("coffeeItems size: " + coffeeItems.size());
 
                                 UserCart userCart = new UserCart();
                                 for (CoffeeItem coffeeItem : coffeeItems) {
@@ -267,6 +263,7 @@ public class MySQLDatabaseHelper {
     }
 
     public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
+//        System.out.println("inserting transaction from cart");
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/insertTransactionFromCart.php",
                 new Response.Listener<String>() {
@@ -314,6 +311,7 @@ public class MySQLDatabaseHelper {
     }
 
     private static void insertOrderCoffee(int transactionId, CoffeeItem coffeeItem, Context context) {
+//        System.out.println(coffeeItem.getName());
         StringRequest orderCoffeeRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/insertOrderCoffee.php",
                 new Response.Listener<String>() {

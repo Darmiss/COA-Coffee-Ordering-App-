@@ -54,10 +54,10 @@ public class PreviousOrderScreen extends Fragment {
         //ListIterator<UserCart> iterate = transactionList.listIterator();
         LinearLayout dynamic = view.findViewById(R.id.previousOrder);
 
-        System.out.println("onViewCreated for PreviousOrderScreen, size: " + transactionList.size());
+//        System.out.println("onViewCreated for PreviousOrderScreen, size: " + transactionList.size());
         try {
             for(int i =0; i < transactionList.size(); i++) {
-                System.out.println(i);
+//                System.out.println(i);
                 DecimalFormat df = new DecimalFormat("0.00");
                 //This will contain the orders made
                 LinearLayout contain = new LinearLayout(getContext());
@@ -200,7 +200,7 @@ public class PreviousOrderScreen extends Fragment {
                 dynamic.addView(contain);
             }
         } catch(NullPointerException e){
-            System.out.println("Hello World");
+//            System.out.println("Hello World");
         }
 
         binding.pastBackButton.setOnClickListener(new View.OnClickListener() {
