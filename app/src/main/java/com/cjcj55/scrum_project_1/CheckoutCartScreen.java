@@ -91,7 +91,6 @@ public class CheckoutCartScreen extends Fragment {
                 removeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        System.out.print("HI HI HI");
                         double tChange = 0;
                         tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getPrice();
 
@@ -106,10 +105,18 @@ public class CheckoutCartScreen extends Fragment {
                         totalView.setText("TOTAL: " + df.format(total));
                         totalView.setTextSize(40);
                         totalView.setTextColor(BLACK);
-                        MainActivity.userCart.getUserCart().remove(MainActivity.userCart.getCoffeeAt(dynamic.getId()));
+                        MainActivity.userCart.getUserCart().remove(dynamic.getId());
+
+                        // Remove the dynamic LinearLayout from the container
                         container.removeView(dynamic);
 
-
+                        // Decrement the IDs of all dynamic LinearLayouts with ID greater than the one that was just removed
+                        for (int j = dynamic.getId(); j < MainActivity.userCart.getUserCart().size(); j++) {
+                            LinearLayout layout = container.findViewById(j + 1);
+                            if (layout != null) {
+                                layout.setId(j);
+                            }
+                        }
                     }
                 });
 
