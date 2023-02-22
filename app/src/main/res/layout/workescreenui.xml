@@ -23,7 +23,7 @@
         android:layout_marginTop="29dp"
         android:layout_marginBottom="40dp"
         android:background="@drawable/roundedbutton"
-        android:text="Back to Menu"
+        android:text="Logout"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

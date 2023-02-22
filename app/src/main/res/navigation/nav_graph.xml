@@ -95,6 +95,9 @@
         <action
             android:id="@+id/action_WorkerOrderScreen_to_OrderScreen"
             app:destination="@id/OrderScreen" />
+        <action
+            android:id="@+id/action_WorkerOrderScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
     </fragment>
     <fragment
         android:id="@+id/SysAdminScreen"
