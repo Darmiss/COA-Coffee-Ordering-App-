@@ -122,6 +122,9 @@
         <action
             android:id="@+id/action_SysAdminScreen_to_RemoveFlavorScreen"
             app:destination="@id/RemoveFlavorScreen" />
+        <action
+            android:id="@+id/action_SysAdminScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
     </fragment>
 
     <fragment
