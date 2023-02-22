@@ -8,15 +8,22 @@
 
     <ScrollView
         android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="295dp"
+        android:layout_width="414dp"
+        android:layout_height="250dp"
+        android:background="@drawable/shadow"
+        android:fadeScrollbars="false"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/custom_scrollbar_track"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/rectangle_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:id="@+id/toppingContainer"
+            android:id="@+id/flavorContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"></LinearLayout>
@@ -26,49 +33,84 @@
         android:id="@+id/rectangle_view"
         android:layout_width="match_parent"
         android:layout_height="5dp"
-        android:background="#333"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        android:layout_marginTop="308dp"
+        android:background="@color/brown"
+        android:alpha="0"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView1"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="match_parent"
-        android:layout_height="295dp"
+        android:layout_width="414dp"
+        android:layout_height="257dp"
+        android:layout_marginTop="46dp"
+        android:background="@drawable/shadow"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/custom_scrollbar_track"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rectangle_view"
-        app:layout_constraintBottom_toTopOf="@+id/addtocartButton"
-        tools:layout_editor_absoluteY="308dp">
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
-            android:id="@+id/flavorContainer"
+            android:id="@+id/toppingContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"></LinearLayout>
+
+
     </ScrollView>
 
     <Button
         android:id="@+id/addtocartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="60dp"
-        android:layout_marginBottom="80dp"
+        android:layout_width="103dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/roundedbutton"
         android:text="Add to Cart"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.746"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
 
     <Button
         android:id="@+id/discardButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="80dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/roundedbutton"
         android:text="Discard"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addtocartButton"
-        app:layout_constraintHorizontal_bias="0.413"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Flavors:"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Toppings:"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,6 @@ package com.cjcj55.scrum_project_1.objects.catalog;
 
 import androidx.annotation.NonNull;
 
-import java.util.List;
-
 public class CoffeeItemInCatalog {
     private int id;
     private String name;

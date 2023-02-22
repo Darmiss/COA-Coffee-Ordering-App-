@@ -1,6 +1,7 @@
 package com.cjcj55.scrum_project_1;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +9,24 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.LoginuiBinding;
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
 
-import java.util.Objects;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginScreen extends Fragment {
     private LoginuiBinding binding;
@@ -32,14 +43,9 @@ public class LoginScreen extends Fragment {
     }
     @Override
     public View onCreateView(
-
-
-
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        MainActivity.user = -1;
-        System.out.println("User now " + MainActivity.user);
 
         if(popupaccountcreation) { //shows the popup message "Account created" if flag set in accountcreationscreen
             MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Account Successfully Created");
@@ -57,14 +63,6 @@ public class LoginScreen extends Fragment {
 
     }
 
-
-    private String getEmail(){
-        return binding.editTextTextEmailAddress.getText().toString();
-    }
-
-    private String getPassword(){
-       return binding.editTextTextPassword.getText().toString();
-    }
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
@@ -72,17 +70,72 @@ public class LoginScreen extends Fragment {
             @Override
             public void onClick(View view) {
                 Context context = getContext();
-//                boolean check = DatabaseHelper.getInstance(context).userLogin(getEmail(),getPassword());
-                boolean check = DatabaseHelper.getInstance(context).userLogin("johnjones@mail.com","coffee");
-                if(check)
+
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        "http://" + MainActivity.LOCAL_IP + "/login.php",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(response);
+
+                                    String success = jsonObject.getString("success");
+                                    if (success.equals("1")) {
+                                        String userType = jsonObject.getString("user_type");
+                                        if (userType.equals("customer")) {
+                                            JSONObject sessionData = jsonObject.getJSONObject("sessionData");
+
+                                            int uid = sessionData.getInt("user_id");
+                                            String un = sessionData.getString("username");
+                                            String firstName = sessionData.getString("firstName");
+                                            String lastName = sessionData.getString("lastName");
+
+                                            SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                                            editor.putInt("user_id", uid);
+                                            editor.putString("username", un);
+                                            editor.putString("firstName", firstName);
+                                            editor.putString("lastName", lastName);
+                                            editor.apply();
+
+                                            // Login successful, navigate to home screen
+                                            NavHostFragment.findNavController(LoginScreen.this)
+                                                    .navigate(R.id.action_LoginScreen_to_CurrentOrdersScreen);
+                                        } else if (userType.equals("worker")) {
+                                            // Login successful, navigate to worker screen
+                                            NavHostFragment.findNavController(LoginScreen.this)
+                                                    .navigate(R.id.action_LoginScreen_to_WorkerOrderScreen);
+                                        } else if (userType.equals("admin")) {
+                                            // Login successful, navigate to worker screen
+                                            NavHostFragment.findNavController(LoginScreen.this)
+                                                    .navigate(R.id.action_LoginScreen_to_SysAdminScreen);
+                                        }
+                                    } else {
+                                        Toast.makeText(context, "Invalid username/email or password", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                })
                 {
-                   NavHostFragment.findNavController(LoginScreen.this)
-                            .navigate(R.id.action_LoginScreen_to_OrderScreen);
-                }
-                else{
-                    MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Invalid Credentials");
-                    messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
-                }
+                    @Nullable
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String,String> params = new HashMap<>();
+                        params.put("username_or_email", getEmailOrUsername());
+                        params.put("password", getPassword());
+                        return params;
+                    }
+                };
+
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(stringRequest);
             }
         });
 
@@ -96,6 +149,13 @@ public class LoginScreen extends Fragment {
 
     }
 
+    private String getEmailOrUsername(){
+        return binding.editTextTextEmailAddress.getText().toString();
+    }
+
+    private String getPassword(){
+        return binding.editTextTextPassword.getText().toString();
+    }
 
     @Override
     public void onDestroyView() {

@@ -6,12 +6,40 @@
     android:layout_height="match_parent"
     tools:context=".RemoveToppingScreen">
 
+    <EditText
+        android:id="@+id/removeTopping_text"
+        android:layout_width="275dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="160dp"
+        android:ems="10"
+
+        android:hint="Name of Topping to remove"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/removeNewToppingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="96dp"
+
+        android:text="Remove Topping"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/removeTopping_text"
+        tools:ignore="MissingConstraints" />
+
+
     <Button
         android:id="@+id/RemoveToppingBackBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
+        android:background="@drawable/roundedbutton"
         android:text="Back"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"

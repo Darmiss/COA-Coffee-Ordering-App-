@@ -1,6 +1,8 @@
 package com.cjcj55.scrum_project_1;
 
 
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.GREEN;
 
 import android.os.Bundle;
 import android.view.Gravity;
@@ -14,14 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-
 import com.cjcj55.scrum_project_1.databinding.OrderhasbeenplaceduiBinding;
-
-import org.w3c.dom.Text;
 
 import java.text.DecimalFormat;
 
-
+//Thing
 //Scene after you have placed an order showcasing details
 public class OrderHasBeenPlacedScreen extends Fragment {
 
@@ -54,11 +53,13 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                 TextView coffeeName = new TextView(getContext());
                 coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
                 coffeeName.setTextSize(30);
+                coffeeName.setTextColor(BLACK);
                 //Add the coffee price
                 TextView coffeePrice = new TextView(getContext());
                 DecimalFormat df = new DecimalFormat("0.00");
                 coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
                 coffeePrice.setTextSize(30);
+                coffeePrice.setTextColor(GREEN);
                 coffeePrice.setGravity(Gravity.END);
                 //Add the views to the container
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -84,10 +85,12 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                         TextView flavorName = new TextView(getContext());
                         flavorName.setText(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getName());
                         flavorName.setTextSize(20);
+                        flavorName.setTextColor(BLACK);
                         //Add flavor price format to container
                         TextView flavorPrice = new TextView(getContext());
-                        flavorPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
+                        flavorPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
                         flavorPrice.setTextSize(20);
+                        flavorPrice.setTextColor(GREEN);
                         flavorPrice.setGravity(Gravity.END);
                         //Add container to container
                         LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -116,10 +119,12 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                         TextView toppingsName = new TextView(getContext());
                         toppingsName.setText(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getName());
                         toppingsName.setTextSize(20);
+                        toppingsName.setTextColor(BLACK);
                         //Add toppings price format to container
                         TextView toppingsPrice = new TextView(getContext());
-                        toppingsPrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
+                        toppingsPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
                         toppingsPrice.setTextSize(20);
+                        toppingsPrice.setTextColor(GREEN);
                         toppingsPrice.setGravity(Gravity.END);
                         //Add container to container
                         LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -142,10 +147,19 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         } catch(NullPointerException e){
                 System.out.println("Empty cart found");
         }
+        //Should add the totalView to the push
+        TextView totalView = view.findViewById(R.id.totalView);
+        DecimalFormat df = new DecimalFormat("0.00");
+        totalView.setText("TOTAL: $" + df.format(total));
+        totalView.setTextSize(40);
+        totalView.setTextColor(BLACK);
 
         binding.OrderScreenOkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //TODO ADD DATABASE INTERACTION
+                //TODO ADD INTERACTION WITH THE PREVIOUS PLACED ORDER SCREEN
+                MainActivity.userCart.clearCart();
                NavHostFragment.findNavController(OrderHasBeenPlacedScreen.this)
                        .navigate(R.id.action_OrderHasBeenPlacedScreen_to_OrderScreen);
             }

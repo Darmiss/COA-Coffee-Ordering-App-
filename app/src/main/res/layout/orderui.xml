@@ -2,16 +2,24 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/lo"
+    android:id="@+id/WelcomeText"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".OrderScreen">
 
     <ScrollView
+        android:id="@+id/scrollView5"
         android:layout_width="match_parent"
         android:layout_height="484dp"
+        android:scrollbarThumbVertical="@drawable/custom_scrollbar_thumb"
+        android:scrollbarTrackVertical="@drawable/custom_scrollbar_track"
+        android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:fadeScrollbars="false"
         android:layout_marginTop="60dp"
         android:layout_marginBottom="187dp"
+        android:background="#dddddd"
+        android:scrollbarStyle="outsideOverlay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,31 +28,33 @@
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical" />
     </ScrollView>
 
     <Button
-        android:id="@+id/viewPastOrdersButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:text="@string/pastorders"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/checkOutButton"
+        android:layout_width="194dp"
+        android:layout_height="68dp"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Checkout"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/OrderScreenBck"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/checkOutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:text="Checkout"
-        app:layout_constraintBottom_toTopOf="@+id/viewPastOrdersButton"
+        android:id="@+id/OrderScreenBck"
+        android:layout_width="147dp"
+        android:layout_height="56dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Back"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -52,29 +62,49 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:background="@drawable/roundedbutton"
         android:text="Logout"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/SysAdminViewBtn"
+    <TextView
+        android:id="@+id/CustomWelcomeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="104dp"
-        android:text="S"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="124dp"
+        android:text="User!"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/WorkerViewBtn"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="68dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:scrollbarSize="4sp"
+        android:text="Welcome"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/CustomWelcomeName"
+        app:layout_constraintHorizontal_bias="0.904"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/customWelcomeName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="104dp"
-        android:text="W"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="47dp"
+        android:text="Select a coffee type to get started!"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/logOutButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

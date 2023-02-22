@@ -1,12 +1,17 @@
 package com.cjcj55.scrum_project_1.objects;
 
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserCart {
     private List<CoffeeItem> coffeeItemList;
+    String timeOrdered;
+    String pickupTime;
+    int userId;
+    int transactionId;
+    double price;
 
     public UserCart() {
         coffeeItemList = new ArrayList<>();
@@ -35,5 +40,45 @@ public class UserCart {
 
     public boolean isEmpty() {
         return coffeeItemList.isEmpty();
+    }
+
+    public String getTimeOrdered() {
+        return timeOrdered;
+    }
+
+    public void setTimeOrdered(String timeOrdered) {
+        this.timeOrdered = timeOrdered;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getPickupTime() {
+        return pickupTime;
+    }
+
+    public void setPickupTime(String pickupTime) {
+        this.pickupTime = pickupTime;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(int transactionId) {
+        this.transactionId = transactionId;
     }
 }

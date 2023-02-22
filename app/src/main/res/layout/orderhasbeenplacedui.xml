@@ -10,7 +10,7 @@
         android:id="@+id/CongratsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="60dp"
         android:text="Your Order Has been Placed!"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,14 +23,17 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="88dp"
         android:text="OK"
+        android:background="@drawable/roundedbutton"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
-        android:layout_width="381dp"
-        android:layout_height="388dp"
+        android:id="@+id/scrollView3"
+        android:layout_width="377dp"
+        android:layout_height="428dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,5 +45,18 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/totalView"
+        android:layout_width="376dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="15dp"
+        android:text="TextView"
+        android:gravity="right"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

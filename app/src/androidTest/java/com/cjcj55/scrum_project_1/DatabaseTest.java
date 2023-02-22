@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.platform.app.InstrumentationRegistry;
 
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ public class DatabaseTest {
     @Test
     public void testDatabaseCreation() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         assertTrue(db.isOpen());
     }
@@ -28,7 +28,7 @@ public class DatabaseTest {
     @Test
     public void testCoffeeInsertion() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
@@ -51,7 +51,7 @@ public class DatabaseTest {
     @Test
     public void testCoffeeRemoval() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to database
@@ -77,7 +77,7 @@ public class DatabaseTest {
     @Test
     public void testToppingInsertion() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
@@ -100,7 +100,7 @@ public class DatabaseTest {
     @Test
     public void testToppingRemoval() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to database
@@ -126,7 +126,7 @@ public class DatabaseTest {
     @Test
     public void testFlavorInsertion() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
@@ -149,7 +149,7 @@ public class DatabaseTest {
     @Test
     public void testFlavorRemoval() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to database
@@ -175,7 +175,7 @@ public class DatabaseTest {
     @Test
     public void testUserInsertion() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
@@ -199,7 +199,7 @@ public class DatabaseTest {
     @Test
     public void testUserLoginPositive() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database
@@ -229,7 +229,7 @@ public class DatabaseTest {
     @Test
     public void testUserLoginNegative() {
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        DatabaseHelper dbHelper = DatabaseHelper.getInstance(appContext);
+        SQLiteDatabaseHelper dbHelper = SQLiteDatabaseHelper.getInstance(appContext);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         // Add a test tuple to the database

@@ -1,35 +1,28 @@
 package com.cjcj55.scrum_project_1;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-
-import com.cjcj55.scrum_project_1.db.DatabaseHelper;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.cjcj55.scrum_project_1.databinding.ActivityMainBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
+import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.FlavorItemInCatalog;
 import com.cjcj55.scrum_project_1.objects.catalog.ToppingItemInCatalog;
-import com.cjcj55.scrum_project_1.objects.order_items.CoffeeItem;
-
-import android.view.Menu;
-import android.view.MenuItem;
+import com.cjcj55.scrum_project_1.objects.catalog.order_items.CoffeeItem;
 
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String LOCAL_IP = "3.131.94.20";
 
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
@@ -37,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     // db path can be accessed in Device File Explorer in Android Studio (bottom right of IDE).
         // The path is:  /data/data/com.cjcj55.scrum_project_1/databases/coffee.db
         // The coffee.db file can be opened to view tables with DB Browser for SQLite.
-    private DatabaseHelper db;
+    private SQLiteDatabaseHelper db;
 
     // 3 lists to store all coffee, topping, and flavor types from database
     public static List<CoffeeItemInCatalog> coffeeItemInCatalogTypes;
@@ -46,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
     // CoffeeItem List to store user's shopping cart
     public static UserCart userCart;
-
-    // Stores USERID when a user is logged in.  Otherwise, -1
-    public static int user = -1;
 
     public static CoffeeItem currentCoffee;
 
@@ -60,24 +50,12 @@ public class MainActivity extends AppCompatActivity {
         // Create single instance of DatabaseHelper.
         // Pass this to the fragments.
 
-        db = DatabaseHelper.getInstance(this);
+        db = SQLiteDatabaseHelper.getInstance(this);
 
-        coffeeItemInCatalogTypes = DatabaseHelper.getAllActiveCoffeeTypes(db);
-        toppingItemInCatalogTypes = DatabaseHelper.getAllActiveToppingTypes(db);
-        flavorItemInCatalogTypes = DatabaseHelper.getAllActiveFlavorTypes(db);
+        coffeeItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveCoffeeTypes(MainActivity.this);
+        toppingItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveToppingTypes(MainActivity.this);
+        flavorItemInCatalogTypes = MySQLDatabaseHelper.getAllActiveFlavorTypes(MainActivity.this);
         userCart = new UserCart();
-        System.out.println("-------------------------------\nCoffee:\n-------------------------------");
-        for (CoffeeItemInCatalog coffeeItemInCatalog : coffeeItemInCatalogTypes) {
-            System.out.println(coffeeItemInCatalog.toString());
-        }
-        System.out.println("-------------------------------\nToppings:\n-------------------------------");
-        for (ToppingItemInCatalog toppingItemInCatalog : toppingItemInCatalogTypes) {
-            System.out.println(toppingItemInCatalog.toString());
-        }
-        System.out.println("-------------------------------\nFlavors:\n-------------------------------");
-        for (FlavorItemInCatalog flavorItemInCatalog : flavorItemInCatalogTypes) {
-            System.out.println(flavorItemInCatalog.toString());
-        }
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
 
