@@ -116,23 +116,23 @@ public class OrderScreen extends Fragment {
                     switch (coffeeItem.getName()) {
                         case "Espresso":
                             coffeeImage.setImageResource(R.drawable.espresso);
-                            System.out.println("shot shots shots");
+
                             break;
                         case "Latte":
                             coffeeImage.setImageResource(R.drawable.latte);
-                            System.out.println("milk drink");
+
                             break;
                         case "Americano":
                             coffeeImage.setImageResource(R.drawable.americano);
-                            System.out.println("Americano");
+
                             break;
                         case "Cappuccino":
                             coffeeImage.setImageResource(R.drawable.cappuccino);
-                            System.out.println("steamy");
+
                             break;
                         case "Iced Coffee":
                             coffeeImage.setImageResource(R.drawable.icedcoffee);
-                            System.out.println("and i oop");
+
                             break;
                         default:
                             break;
