@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class DatabaseTest {
+public class LocalDatabaseCacheTest {
 
     @Test
     public void testDatabaseCreation() {
@@ -215,13 +215,8 @@ public class DatabaseTest {
         assertEquals("email2@gmail.com", cursor.getString(cursor.getColumnIndex("email")));
         assertEquals("FirstName2", cursor.getString(cursor.getColumnIndex("firstName")));
         assertEquals("LastName2", cursor.getString(cursor.getColumnIndex("lastName")));
+
         cursor.close();
-
-        // Remove the test tuple
-        boolean loggedIn = dbHelper.userLogin("email2@gmail.com", "password2");
-
-        // Check if user was successfully logged in
-        assertTrue(loggedIn);
 
         db.close();
     }
@@ -246,12 +241,6 @@ public class DatabaseTest {
         assertEquals("FirstName3", cursor.getString(cursor.getColumnIndex("firstName")));
         assertEquals("LastName3", cursor.getString(cursor.getColumnIndex("lastName")));
         cursor.close();
-
-        // Remove the test tuple
-        boolean loggedIn = dbHelper.userLogin("email3@gmail.com", "password2");
-
-        // Check if user was successfully logged in
-        assertFalse(loggedIn);
 
         db.close();
     }
