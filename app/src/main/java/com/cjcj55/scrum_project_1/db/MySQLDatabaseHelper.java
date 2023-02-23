@@ -33,7 +33,20 @@ import java.util.List;
 import java.util.Map;
 
 public class MySQLDatabaseHelper {
-    public static List<UserCart> getAllTransactionsForUser(int userId, Context context) {
+    public interface TransactionsCallback {
+        void onTransactionsReceived(List<UserCart> transactions);
+    }
+    public interface CoffeesCallback {
+        void onCoffeesReceived(List<CoffeeItem> coffees);
+    }
+    public interface ToppingsCallback {
+        void onToppingsReceived(List<ToppingItem> toppings);
+    }
+    public interface FlavorsCallback {
+        void onFlavorsReceived(List<FlavorItem> flavors);
+    }
+
+    public static void getAllTransactionsForUser(int userId, Context context, TransactionsCallback callback) {
         List<UserCart> transactions = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -52,7 +65,13 @@ public class MySQLDatabaseHelper {
 //                                System.out.println(transaction_id + ": " + timeOrdered + ", $" + price);
 
                                 // Insert orders, toppings, and flavors of each coffee item
-                                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transaction_id, context);
+                                List<CoffeeItem> coffeeItems = new ArrayList<>();
+                                getCoffeeItemsForTransaction(transaction_id, context, new CoffeesCallback() {
+                                    @Override
+                                    public void onCoffeesReceived(List<CoffeeItem> coffees) {
+                                        coffeeItems.addAll(coffees);
+                                    }
+                                });
 
 //                                System.out.println("coffeeItems size: " + coffeeItems.size());
 
@@ -66,6 +85,7 @@ public class MySQLDatabaseHelper {
 
                                 transactions.add(userCart);
                             }
+                            callback.onTransactionsReceived(transactions);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -88,11 +108,9 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
-
-        return transactions;
     }
 
-    private static List<CoffeeItem> getCoffeeItemsForTransaction(int transactionId, Context context) {
+    private static void getCoffeeItemsForTransaction(int transactionId, Context context, CoffeesCallback callback) {
         List<CoffeeItem> coffeeItems = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -109,13 +127,23 @@ public class MySQLDatabaseHelper {
                                 int beverage_count = jsonObject.getInt("beverage_count");
                                 int order_coffee_id = jsonObject.getInt("order_coffee_id");
 
-//                                System.out.println(coffee_id + ": " + beverage_count + ", " + order_coffee_id);
-
                                 // Get toppings for this coffee item
-                                List<ToppingItem> toppingItems = getToppingItemsForOrderCoffee(order_coffee_id, context);
+                                List<ToppingItem> toppingItems = new ArrayList<>();
+                                getToppingItemsForOrderCoffee(order_coffee_id, context, new ToppingsCallback() {
+                                    @Override
+                                    public void onToppingsReceived(List<ToppingItem> toppings) {
+                                        toppingItems.addAll(toppings);
+                                    }
+                                });
 
                                 // Get flavors for this coffee item
-                                List<FlavorItem> flavorItems = getFlavorItemsForOrderCoffee(order_coffee_id, context);
+                                List<FlavorItem> flavorItems = new ArrayList<>();
+                                getFlavorItemsForOrderCoffee(order_coffee_id, context, new FlavorsCallback() {
+                                    @Override
+                                    public void onFlavorsReceived(List<FlavorItem> flavors) {
+                                        flavorItems.addAll(flavors);
+                                    }
+                                });
 
                                 int coffeeIndex = -1;
                                 // Loop to find which coffee has id = coffeeId
@@ -129,7 +157,9 @@ public class MySQLDatabaseHelper {
                                 coffeeItem.setToppingItemList(toppingItems);
                                 coffeeItem.setFlavorItemList(flavorItems);
                                 coffeeItems.add(coffeeItem);
+//                                System.out.println(coffeeItems.get(i).getName() + ", " + coffeeItems.get(i).getId());
                             }
+                            callback.onCoffeesReceived(coffeeItems);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -152,11 +182,9 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
-
-        return coffeeItems;
     }
 
-    private static List<ToppingItem> getToppingItemsForOrderCoffee(int orderCoffeeId, Context context) {
+    private static void getToppingItemsForOrderCoffee(int orderCoffeeId, Context context, ToppingsCallback callback) {
         List<ToppingItem> toppingItems = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -183,6 +211,7 @@ public class MySQLDatabaseHelper {
                                 ToppingItem toppingItem = new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(toppingIndex));
                                 toppingItems.add(toppingItem);
                             }
+                            callback.onToppingsReceived(toppingItems);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -205,11 +234,9 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
-
-        return toppingItems;
     }
 
-    private static List<FlavorItem> getFlavorItemsForOrderCoffee(int orderCoffeeId, Context context) {
+    private static void getFlavorItemsForOrderCoffee(int orderCoffeeId, Context context, FlavorsCallback callback) {
         List<FlavorItem> flavorItems = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -236,6 +263,7 @@ public class MySQLDatabaseHelper {
                                 FlavorItem flavorItem = new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(flavorIndex));
                                 flavorItems.add(flavorItem);
                             }
+                            callback.onFlavorsReceived(flavorItems);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -258,8 +286,6 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
-
-        return flavorItems;
     }
 
     public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
@@ -436,207 +462,6 @@ public class MySQLDatabaseHelper {
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(orderCoffeeFlavorRequest);
     }
-
-//    public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
-//        RequestQueue queue = Volley.newRequestQueue(context);
-//
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-//                "http://" + MainActivity.LOCAL_IP + "/insertTransactionFromCart.php",
-//                new Response.Listener<String>() {
-//                    @Override
-//                    public void onResponse(String response) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            String success = jsonObject.getString("success");
-//                            if (success.equals("1")) {
-//                                int transaction_id = jsonObject.getInt("transaction_id");
-//
-//                                // Each coffee in transaction
-//                                List<CoffeeItem> coffeeItemList = userCart.getUserCart();
-//                                for (CoffeeItem coffeeItem : coffeeItemList) {
-//                                    StringRequest orderCoffeeRequest = new StringRequest(Request.Method.POST,
-//                                            "http://" + MainActivity.LOCAL_IP + "/insertOrderCoffee.php",
-//                                            new Response.Listener<String>() {
-//                                                @Override
-//                                                public void onResponse(String response) {
-//                                                    try {
-//                                                        JSONObject jsonObject = new JSONObject(response);
-//                                                        String success = jsonObject.getString("success");
-//                                                        if (success.equals("1")) {
-//                                                            int order_coffee_id = jsonObject.getInt("order_coffee_id");
-//
-//                                                            // Toppings per coffee
-//                                                            List<ToppingItem> toppingItemList = coffeeItem.getToppingItemList();
-//                                                            if (toppingItemList.size() > 0) {
-//                                                                for (ToppingItem topping : toppingItemList) {
-//                                                                    StringRequest orderToppingRequest = new StringRequest(Request.Method.POST,
-//                                                                            "http://" + MainActivity.LOCAL_IP + "/insertOrderTopping.php",
-//                                                                            new Response.Listener<String>() {
-//                                                                                @Override
-//                                                                                public void onResponse(String response) {
-//                                                                                    try {
-//                                                                                        JSONObject jsonObject = new JSONObject(response);
-//                                                                                        String success = jsonObject.getString("success");
-//                                                                                        if (!success.equals("1")) {
-//                                                                                            Toast.makeText(context, "Unable to insert order topping item", Toast.LENGTH_LONG).show();
-//                                                                                        }
-//                                                                                    } catch (JSONException e) {
-//                                                                                        throw new RuntimeException(e);
-//                                                                                    }
-//                                                                                }
-//                                                                            }, new Response.ErrorListener() {
-//                                                                        @Override
-//                                                                        public void onErrorResponse(VolleyError error) {
-//                                                                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-//                                                                        }
-//                                                                    })
-//                                                                    {
-//                                                                        @Nullable
-//                                                                        @Override
-//                                                                        protected Map<String, String> getParams() throws AuthFailureError {
-//                                                                            Map<String, String> params = new HashMap<>();
-//                                                                            params.put("order_coffee_id", Integer.toString(order_coffee_id));
-//                                                                            params.put("topping_id", Integer.toString(topping.getId()));
-//                                                                            return params;
-//                                                                        }
-//                                                                    };
-//                                                                    queue.add(orderToppingRequest);
-//                                                                }
-//                                                            }
-//
-//                                                            // Flavors per coffee
-//                                                            List<FlavorItem> flavorItemList = coffeeItem.getFlavorItemList();
-//                                                            if (toppingItemList.size() > 0) {
-//                                                                for (FlavorItem flavor : flavorItemList) {
-//                                                                    StringRequest orderToppingRequest = new StringRequest(Request.Method.POST,
-//                                                                            "http://" + MainActivity.LOCAL_IP + "/insertOrderFlavor.php",
-//                                                                            new Response.Listener<String>() {
-//                                                                                @Override
-//                                                                                public void onResponse(String response) {
-//                                                                                    try {
-//                                                                                        JSONObject jsonObject = new JSONObject(response);
-//                                                                                        String success = jsonObject.getString("success");
-//                                                                                        if (!success.equals("1")) {
-//                                                                                            Toast.makeText(context, "Unable to insert order flavor item", Toast.LENGTH_LONG).show();
-//                                                                                        }
-//                                                                                    } catch (JSONException e) {
-//                                                                                        throw new RuntimeException(e);
-//                                                                                    }
-//                                                                                }
-//                                                                            }, new Response.ErrorListener() {
-//                                                                        @Override
-//                                                                        public void onErrorResponse(VolleyError error) {
-//                                                                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-//                                                                        }
-//                                                                    })
-//                                                                    {
-//                                                                        @Nullable
-//                                                                        @Override
-//                                                                        protected Map<String, String> getParams() throws AuthFailureError {
-//                                                                            Map<String, String> params = new HashMap<>();
-//                                                                            params.put("order_coffee_id", Integer.toString(order_coffee_id));
-//                                                                            params.put("flavor_id", Integer.toString(flavor.getId()));
-//                                                                            return params;
-//                                                                        }
-//                                                                    };
-//                                                                    queue.add(orderToppingRequest);
-//                                                                }
-//                                                            }
-//                                                        } else {
-//                                                            Toast.makeText(context, "Unable to insert order coffee item", Toast.LENGTH_LONG).show();
-//                                                        }
-//                                                    } catch (JSONException e) {
-//                                                        throw new RuntimeException(e);
-//                                                    }
-//                                                }
-//                                            }, new Response.ErrorListener() {
-//                                        @Override
-//                                        public void onErrorResponse(VolleyError error) {
-//                                            Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-//                                        }
-//                                    })
-//                                    {
-//                                        @Nullable
-//                                        @Override
-//                                        protected Map<String, String> getParams() throws AuthFailureError {
-//                                            Map<String, String> params = new HashMap<>();
-//                                            params.put("transaction_id", Integer.toString(transaction_id));
-//                                            params.put("coffee_id", Integer.toString(coffeeItem.getId()));
-//                                            params.put("beverage_count", Integer.toString(coffeeItem.getAmount()));
-//                                            return params;
-//                                        }
-//                                    };
-//
-//                                    queue.add(orderCoffeeRequest);
-//
-//
-//                                }
-//
-//                                Toast.makeText(context, "Transaction successfully inserted!", Toast.LENGTH_LONG).show();
-//                            } else {
-//                                Toast.makeText(context, "Unable to insert transaction", Toast.LENGTH_LONG).show();
-//                            }
-//                        } catch (JSONException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                    }
-//                }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-//            }
-//        })
-//        {
-//            @Nullable
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<>();
-//                params.put("user_id", Integer.toString(userId));
-//                params.put("pickup_time", pickupTime);
-//                params.put("price", Double.toString(totalPrice));
-//                return params;
-//            }
-//        };
-//        queue.add(stringRequest);
-//    }
-//
-//
-//    public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
-//        List<CoffeeItemInCatalog> coffees = new ArrayList<>();
-//        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
-//            "http://" + MainActivity.LOCAL_IP + "/getAllActiveCoffeeTypes.php",
-//                null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONArray coffeeItemsArray = response.getJSONArray("data");
-//                            for (int i = 0; i < coffeeItemsArray.length(); i++) {
-//                                JSONObject coffeeItemObject = coffeeItemsArray.getJSONObject(i);
-//                                int id = coffeeItemObject.getInt("coffee_id");
-//                                String name = coffeeItemObject.getString("name");
-//                                String description = coffeeItemObject.getString("description");
-//                                double price = coffeeItemObject.getDouble("price");
-//                                CoffeeItemInCatalog coffeeItemInCatalog = new CoffeeItemInCatalog(id, name, description, price);
-//                                coffees.add(coffeeItemInCatalog);
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(context, "Error: " + error.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//
-//        // Add the request to the request queue
-//        RequestQueue requestQueue = Volley.newRequestQueue(context);
-//        requestQueue.add(jsonObjectRequest);
-//        return coffees;
-//    }
 
     public static List<CoffeeItemInCatalog> getAllActiveCoffeeTypes(Context context) {
         List<CoffeeItemInCatalog> coffees = new ArrayList<>();
