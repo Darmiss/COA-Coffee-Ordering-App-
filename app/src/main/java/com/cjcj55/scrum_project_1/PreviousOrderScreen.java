@@ -65,7 +65,7 @@ public class PreviousOrderScreen extends Fragment {
                 //This will contain the orders made
                 LinearLayout contain = new LinearLayout(getContext());
                 contain.setOrientation(LinearLayout.VERTICAL);
-                contain.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+                contain.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shadow));
                 contain.setPadding(40,20,40,20);
                 LinearLayout.LayoutParams tempparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 tempparams.setMargins(10,10,10,10);
@@ -102,18 +102,20 @@ public class PreviousOrderScreen extends Fragment {
 
                 // Add favorite button functionality
                 Button favBtn = new Button(getContext());
-                favBtn.setBackgroundColor(RED);
-                favBtn.setText("X");
-                favBtn.setTextColor(Color.rgb(255, 204, 203));
+                favBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.roundedbutton));
+                favBtn.setText("Click to mark as favorite");
+                favBtn.setTextColor(WHITE);
                 favBtn.setPadding(20, 10, 20, 10);
 
                 favBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        favBtn.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.favselect));
+                        favBtn.setText("Item added to favorites");
                         SQLiteDatabaseHelper.getInstance(getContext()).toggleUserFavoriteOrder(contain.getId());
                     }
                 });
-                contain.addView(favBtn);
+
 
                 try{
                     for(int j = 0; j < transactionList.get(i).getUserCart().size(); j++){
@@ -125,13 +127,13 @@ public class PreviousOrderScreen extends Fragment {
                         //Adds the thing to the thing
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
-                        cofName.setTextColor(WHITE);
+                        //cofName.setTextColor(WHITE);
                         cofName.setText(transactionList.get(i).getUserCart().get(j).getAmount() + "x " + transactionList.get(i).getUserCart().get(j).getName());
                         //Adds the coffee price to the thing
                         TextView cofPrice = new TextView(getContext());
                         cofPrice.setText("$ " + df.format(transactionList.get(i).getUserCart().get(j).getPrice()));
                         cofPrice.setTextSize(20);
-                        cofPrice.setTextColor(WHITE);
+                        //cofPrice.setTextColor(WHITE);
                         cofPrice.setGravity(Gravity.CENTER);
 
                         LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -155,13 +157,13 @@ public class PreviousOrderScreen extends Fragment {
                                 //Adds the thing to the thing
                                 TextView flavorName = new TextView(getContext());
                                 flavorName.setTextSize(15);
-                                flavorName.setTextColor(WHITE);
+                                //flavorName.setTextColor(WHITE);
                                 flavorName.setText(transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView flavorPrice = new TextView(getContext());
                                 flavorPrice.setText("$ " + transactionList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getPrice());
                                 flavorPrice.setTextSize(17);
-                                flavorPrice.setTextColor(WHITE);
+                                //flavorPrice.setTextColor(WHITE);
                                 flavorPrice.setGravity(Gravity.CENTER);
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -188,13 +190,13 @@ public class PreviousOrderScreen extends Fragment {
                                 //Adds the thing to the thing
                                 TextView topName = new TextView(getContext());
                                 topName.setTextSize(17);
-                                topName.setTextColor(WHITE);
+                                //topName.setTextColor(WHITE);
                                 topName.setText(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView topPrice = new TextView(getContext());
                                 topPrice.setText("$ " + df.format(transactionList.get(i).getUserCart().get(j).getToppingItemList().get(q).getPrice()));
                                 topPrice.setTextSize(15);
-                                topPrice.setTextColor(WHITE);
+                                //topPrice.setTextColor(WHITE);
                                 topPrice.setGravity(Gravity.CENTER);
 
                                 LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -215,6 +217,7 @@ public class PreviousOrderScreen extends Fragment {
                 }catch(NullPointerException e){
 
                 }
+                contain.addView(favBtn);
                 dynamic.addView(contain);
             }
         } catch(NullPointerException e){
