@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Message;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.cjcj55.scrum_project_1.databinding.CurrentordersuiBinding;
 import com.cjcj55.scrum_project_1.databinding.OrderuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 import com.cjcj55.scrum_project_1.objects.catalog.CoffeeItemInCatalog;
@@ -161,8 +163,13 @@ public class CurrentOrdersScreen extends Fragment {
                 removeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+
                         transactionList.remove(contain.getId());
                         dynamic.removeView(contain);
+                        MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Successfully Removed");
+                        messageDialog.show(getChildFragmentManager(), "MessagePopUpFragment");
+                        //SQLiteDatabaseHelper.getInstance(getContext()).;
 
                         for (int j = contain.getId(); j < transactionList.size(); j++) {
                             LinearLayout layout = dynamic.findViewById(j + 1);
