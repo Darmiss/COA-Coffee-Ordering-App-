@@ -110,7 +110,7 @@ public class CheckoutCartScreen extends Fragment {
 
                         total = calcTotal();
                         DecimalFormat df = new DecimalFormat("0.00");
-                        totalView.setText("TOTAL: " + df.format(total));
+                        totalView.setText("TOTAL: $" + df.format(total));
                         totalView.setTextSize(40);
                         totalView.setTextColor(BLACK);
 
