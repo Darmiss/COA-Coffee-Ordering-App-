@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MySQLDatabaseHelper {
-    public static List<UserCart> getAllTransactionsForUser(int userId, Context context) {
+    public static void getAllTransactionsForUser(int userId, Context context, TransactionsCallback callback) {
         List<UserCart> transactions = new ArrayList<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
@@ -49,12 +49,7 @@ public class MySQLDatabaseHelper {
                                 String timeOrdered = jsonObject.getString("time_ordered");
                                 double price = jsonObject.getDouble("price");
 
-//                                System.out.println(transaction_id + ": " + timeOrdered + ", $" + price);
-
-                                // Insert orders, toppings, and flavors of each coffee item
                                 List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transaction_id, context);
-
-//                                System.out.println("coffeeItems size: " + coffeeItems.size());
 
                                 UserCart userCart = new UserCart();
                                 for (CoffeeItem coffeeItem : coffeeItems) {
@@ -66,17 +61,17 @@ public class MySQLDatabaseHelper {
 
                                 transactions.add(userCart);
                             }
+                            callback.onTransactionsReceived(transactions);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
                     }
                 }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                })
-        {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
             @Nullable
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
@@ -88,8 +83,10 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
+    }
 
-        return transactions;
+    public interface TransactionsCallback {
+        void onTransactionsReceived(List<UserCart> transactions);
     }
 
     private static List<CoffeeItem> getCoffeeItemsForTransaction(int transactionId, Context context) {
@@ -98,6 +95,7 @@ public class MySQLDatabaseHelper {
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/getCoffeeItemsForTransaction.php",
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         try {
