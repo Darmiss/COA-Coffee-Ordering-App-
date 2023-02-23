@@ -4,15 +4,18 @@ package com.cjcj55.scrum_project_1;
 
 
 import static android.graphics.Color.BLACK;
+import static android.graphics.Color.RED;
 import static android.graphics.Color.WHITE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -124,8 +127,17 @@ public class PreviousOrderScreen extends Fragment {
                         params.gravity = Gravity.END;
                         cofPrice.setLayoutParams(params);
                         coffeeTemp.addView(cofPrice);
+                        Button favBtn = new Button(getContext());
+                        favBtn.setBackgroundColor(RED);
+                        favBtn.setText("Add to Favorites");
+                        favBtn.setTextColor(Color.rgb(255, 204, 203));
 
+                        favBtn.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View view) {
 
+                            }
+                        });
                         contain.addView(coffeeTemp);
                         try {
                             for (int q = 0; q < transactionList.get(i).getUserCart().get(j).getFlavorItemList().size(); q++) {

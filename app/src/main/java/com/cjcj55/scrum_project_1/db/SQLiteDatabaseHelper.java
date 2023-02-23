@@ -51,10 +51,13 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     // Define user table columns
     private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
     private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
+    //Favorites Table
+    private static final String FAVORITES_TABLE = "CREATE TABLE coffee (coffee_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL, isActive BOOLEAN NOT NULL DEFAULT 1)";
 
     // Define transaction table columns
         // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to Order Coffee table.
             // Order Coffee table has each individual item a user purchases.
+
     private static final String TRANSACTIONS_TABLE = "CREATE TABLE transactions (transaction_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
             "user_id INTEGER NOT NULL, " +
             "time_ordered DATETIME DEFAULT CURRENT_TIMESTAMP, " +
@@ -100,11 +103,18 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         insertInitialDataToUsers(db);
         db.execSQL(EMPLOYEES_TABLE);
         insertInitialDataToEmployees(db);
+        db.execSQL(FAVORITES_TABLE);
+        insertInitialDataToFavorites(db);
 
         db.execSQL(TRANSACTIONS_TABLE);
         db.execSQL(ORDER_COFFEE);
         db.execSQL(ORDER_TOPPINGS_COFFEE);
         db.execSQL(ORDER_FLAVORS_COFFEE);
+    }
+
+    private void insertInitialDataToFavorites(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+
     }
 
     /**
@@ -944,7 +954,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
      * Passwords are not returned.
      */
     public Cursor getAllEmployees() {
-        String[] columns = { "username", "email", "firstName", "lastName" };
+        String[] columns = {"username", "email", "firstName", "lastName"};
         SQLiteDatabase db = getReadableDatabase();
         return db.query("employees", columns, null, null, null, null, null);
     }
