@@ -435,7 +435,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         List<UserCart> transactions = new ArrayList<>();
 
-        String query = "SELECT * FROM transactions WHERE fulfilled=? AND user_id=? ORDER BY pickup_time DESC";
+        String query = "SELECT * FROM transactions WHERE fulfilled=? AND user_id=? ORDER BY pickup_time ASC";
         Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(0), Integer.toString(user_id)});
 
         if (cursor.moveToFirst()) {
