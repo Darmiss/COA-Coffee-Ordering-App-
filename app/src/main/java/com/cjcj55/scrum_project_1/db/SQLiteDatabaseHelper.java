@@ -383,8 +383,8 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         List<UserCart> transactions = new ArrayList<>();
 
-        String query = "SELECT * FROM transactions WHERE fulfilled=?";
-        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(0)});
+        String query = "SELECT * FROM transactions WHERE fulfilled=? AND cancelled_by_customer=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(0), String.valueOf(0)});
 
         if (cursor.moveToFirst()) {
             do {
@@ -438,6 +438,44 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 userCart.setPrice(price);
                 userCart.setUserId(user_id);
                 userCart.setTransactionId(transactionId);
+
+                transactions.add(userCart);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return transactions;
+    }
+
+    public List<UserCart> getAllCompletedTransactions() {
+        SQLiteDatabase db = getReadableDatabase();
+        List<UserCart> transactions = new ArrayList<>();
+
+        String query = "SELECT * FROM transactions WHERE fulfilled=? ORDER BY pickup_time DESC";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(1)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
+                int userId = cursor.getInt(cursor.getColumnIndex("user_id"));
+                String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
+                String pickupTime = cursor.getString(cursor.getColumnIndex("pickup_time"));
+                double price = cursor.getDouble(cursor.getColumnIndex("price"));
+                int cancelledByCustomer = cursor.getInt(cursor.getColumnIndex("cancelled_by_customer"));
+                int fulfilled = cursor.getInt(cursor.getColumnIndex("fulfilled"));
+
+                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transactionId);
+
+                UserCart userCart = new UserCart();
+                for (CoffeeItem coffee : coffeeItems) {
+                    userCart.addCoffeeToCart(coffee);
+                }
+                userCart.setTimeOrdered(timeOrdered);
+                userCart.setPickupTime(pickupTime);
+                userCart.setPrice(price);
+                userCart.setUserId(userId);
+                userCart.setTransactionId(transactionId);
+                userCart.setCancelledByCustomer(cancelledByCustomer);
+                userCart.setFulfilled(fulfilled);
 
                 transactions.add(userCart);
             } while (cursor.moveToNext());

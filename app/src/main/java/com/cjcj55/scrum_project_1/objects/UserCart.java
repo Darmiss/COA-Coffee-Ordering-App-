@@ -12,6 +12,8 @@ public class UserCart {
     int userId;
     int transactionId;
     double price;
+    boolean isFulfilled;
+    boolean cancelledByCustomer;
 
     public UserCart() {
         coffeeItemList = new ArrayList<>();
@@ -80,5 +82,29 @@ public class UserCart {
 
     public void setTransactionId(int transactionId) {
         this.transactionId = transactionId;
+    }
+
+    public void setFulfilled(int fulfilled) {
+        if (fulfilled == 0) {
+            this.isFulfilled = false;
+        } else {
+            this.isFulfilled = true;
+        }
+    }
+
+    public boolean getFulfilled() {
+        return this.isFulfilled;
+    }
+
+    public void setCancelledByCustomer(int cancelled) {
+        if (cancelled == 0) {
+            this.cancelledByCustomer = false;
+        } else {
+            this.cancelledByCustomer = true;
+        }
+    }
+
+    public boolean getCancelledByCustomer() {
+        return this.cancelledByCustomer;
     }
 }
