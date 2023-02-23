@@ -52,7 +52,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String USERS_TABLE = "CREATE TABLE users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
     private static final String EMPLOYEES_TABLE = "CREATE TABLE employees (employee_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT NOT NULL, email TEXT NOT NULL, firstName TEXT NOT NULL, lastName TEXT NOT NULL)";
     //Favorites Table
-    private static final String FAVORITES_TABLE = "CREATE TABLE coffee (coffee_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL, isActive BOOLEAN NOT NULL DEFAULT 1)";
+    private static final String FAVORITES_TABLE = "CREATE TABLE favorites (coffee_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, description TEXT, price REAL NOT NULL, isActive BOOLEAN NOT NULL DEFAULT 1)";
 
     // Define transaction table columns
         // NOTE:  Transactions table has all whole transactions.  Within, has a foreign key to refer to Order Coffee table.
@@ -366,6 +366,64 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
         return rowsUpdated;
     }
+    private void insertInitialUserFavorites(SQLiteDatabase db) {
+        ContentValues values = new ContentValues();
+        values.put("username", "cjcj55");
+        values.put("password", "coffee123");
+        values.put("email", "cmp189@pitt.edu");
+        values.put("firstName", "Chris");
+        values.put("lastName", "Perrone");
+        db.insert("employees", null, values);
+        values.clear();
+    }
+    public long setUserFavoriteOrder(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isFavorite", 1);
+        String whereClause = "transaction_id=?";
+        String[] whereArgs = {String.valueOf(transactionId)};
+        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+
+    public long unsetUserFavoriteOrder(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isFavorite", 0);
+        String whereClause = "transaction_id=?";
+        String[] whereArgs = {String.valueOf(transactionId)};
+        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+    //TODO
+    public List<UserCart> getAllFavoritesForUser(int userId) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<UserCart> transactions = new ArrayList<>();
+
+        String query = "SELECT * FROM transactions WHERE user_id=? AND isFavorite=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId), Integer.toString(1)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
+                String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
+                double price = cursor.getDouble(cursor.getColumnIndex("price"));
+
+                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transactionId);
+
+                UserCart userCart = new UserCart();
+                for (CoffeeItem coffee : coffeeItems) {
+                    userCart.addCoffeeToCart(coffee);
+                }
+                userCart.setTimeOrdered(timeOrdered);
+                userCart.setPrice(price);
+
+                transactions.add(userCart);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return transactions;
+    }
 
     public List<UserCart> getAllUnfulfilledTransactions() {
         SQLiteDatabase db = getReadableDatabase();
@@ -583,6 +641,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
      * @param password
      * @return true or false if the user successfully logged in
      */
+
 //    public boolean userLogin(String email, String password) {
 //        SQLiteDatabase db = getWritableDatabase();
 //        String[] columns = {"user_id", "firstName", "lastName"};

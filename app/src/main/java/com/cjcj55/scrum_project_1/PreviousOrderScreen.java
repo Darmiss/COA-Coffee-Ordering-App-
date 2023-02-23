@@ -17,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -118,6 +120,21 @@ public class PreviousOrderScreen extends Fragment {
                         cofPrice.setTextSize(20);
                         cofPrice.setTextColor(WHITE);
                         cofPrice.setGravity(Gravity.CENTER);
+                        //Add favorite button functionality
+                        Button favBtn = new Button(getContext());
+                        favBtn.setBackgroundColor(RED);
+                        favBtn.setText("X");
+                        favBtn.setTextColor(Color.rgb(255, 204, 203));
+                        favBtn.setPadding(20, 10, 20, 10);
+
+                        favBtn.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                            }
+                        });
+
+
 
                         LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                         params.gravity = Gravity.LEFT;
@@ -127,17 +144,7 @@ public class PreviousOrderScreen extends Fragment {
                         params.gravity = Gravity.END;
                         cofPrice.setLayoutParams(params);
                         coffeeTemp.addView(cofPrice);
-                        Button favBtn = new Button(getContext());
-                        favBtn.setBackgroundColor(RED);
-                        favBtn.setText("Add to Favorites");
-                        favBtn.setTextColor(Color.rgb(255, 204, 203));
 
-                        favBtn.setOnClickListener(new View.OnClickListener(){
-                            @Override
-                            public void onClick(View view) {
-
-                            }
-                        });
                         contain.addView(coffeeTemp);
                         try {
                             for (int q = 0; q < transactionList.get(i).getUserCart().get(j).getFlavorItemList().size(); q++) {
@@ -202,6 +209,7 @@ public class PreviousOrderScreen extends Fragment {
 
                                 contain.addView(topTemp);
                             }
+                            contain.addView(favBtn);
                         }catch(NullPointerException e){
 
                         }
