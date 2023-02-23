@@ -359,25 +359,39 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         return rowsUpdated;
     }
 
-    public long setUserFavoriteOrder(int transactionId) {
+    public long toggleUserFavoriteOrder(int transactionId) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("isFavorite", 1);
         String whereClause = "transaction_id=?";
         String[] whereArgs = {String.valueOf(transactionId)};
+        Cursor cursor = db.query("transactions", new String[]{"isFavorite"}, whereClause, whereArgs, null, null, null);
+        cursor.moveToFirst();
+        int isFavorite = cursor.getInt(cursor.getColumnIndex("isFavorite"));
+        cursor.close();
+        values.put("isFavorite", isFavorite == 1 ? 0 : 1);
         long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
         return rowsUpdated;
     }
 
-    public long unsetUserFavoriteOrder(int transactionId) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("isFavorite", 0);
-        String whereClause = "transaction_id=?";
-        String[] whereArgs = {String.valueOf(transactionId)};
-        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
-        return rowsUpdated;
-    }
+//    public long setUserFavoriteOrder(int transactionId) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("isFavorite", 1);
+//        String whereClause = "transaction_id=?";
+//        String[] whereArgs = {String.valueOf(transactionId)};
+//        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+//        return rowsUpdated;
+//    }
+//
+//    public long unsetUserFavoriteOrder(int transactionId) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("isFavorite", 0);
+//        String whereClause = "transaction_id=?";
+//        String[] whereArgs = {String.valueOf(transactionId)};
+//        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+//        return rowsUpdated;
+//    }
 
     public List<UserCart> getAllUnfulfilledTransactions() {
         SQLiteDatabase db = getReadableDatabase();
