@@ -359,25 +359,43 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         return rowsUpdated;
     }
 
-    public long setUserFavoriteOrder(int transactionId) {
+    public long toggleUserFavoriteOrder(int transactionId) {
+        System.out.println("User is toggling favorite for id:" + transactionId);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("isFavorite", 1);
         String whereClause = "transaction_id=?";
         String[] whereArgs = {String.valueOf(transactionId)};
-        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
-        return rowsUpdated;
+        Cursor cursor = db.query("transactions", new String[]{"isFavorite"}, whereClause, whereArgs, null, null, null);
+        if(cursor.moveToFirst()) {
+            int isFavorite = cursor.getInt(cursor.getColumnIndex("isFavorite"));
+            cursor.close();
+            values.put("isFavorite", isFavorite == 1 ? 0 : 1);
+            long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+            return rowsUpdated;
+        } else {
+            return -1;
+        }
     }
 
-    public long unsetUserFavoriteOrder(int transactionId) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("isFavorite", 0);
-        String whereClause = "transaction_id=?";
-        String[] whereArgs = {String.valueOf(transactionId)};
-        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
-        return rowsUpdated;
-    }
+//    public long setUserFavoriteOrder(int transactionId) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("isFavorite", 1);
+//        String whereClause = "transaction_id=?";
+//        String[] whereArgs = {String.valueOf(transactionId)};
+//        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+//        return rowsUpdated;
+//    }
+//
+//    public long unsetUserFavoriteOrder(int transactionId) {
+//        SQLiteDatabase db = getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("isFavorite", 0);
+//        String whereClause = "transaction_id=?";
+//        String[] whereArgs = {String.valueOf(transactionId)};
+//        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+//        return rowsUpdated;
+//    }
 
     public List<UserCart> getAllUnfulfilledTransactions() {
         SQLiteDatabase db = getReadableDatabase();
@@ -505,6 +523,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 }
                 userCart.setTimeOrdered(timeOrdered);
                 userCart.setPrice(price);
+                userCart.setTransactionId(transactionId);
 
                 transactions.add(userCart);
             } while (cursor.moveToNext());
