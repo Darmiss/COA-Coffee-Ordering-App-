@@ -16,8 +16,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.widget.Space;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
@@ -39,6 +43,13 @@ public class CheckoutCartScreen extends Fragment {
     private CheckoutcartuiBinding binding;
     String selectedPickupTime;
 
+    public Drawable getRoundedDrawable(int color, float radius) {
+        GradientDrawable gd = new GradientDrawable();
+        gd.setColor(color);
+        gd.setCornerRadius(radius);
+        return gd;
+    }
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = CheckoutcartuiBinding.inflate(inflater, container, false);
 
@@ -59,6 +70,7 @@ public class CheckoutCartScreen extends Fragment {
                 //Slight Test real quick
                 LinearLayout dynamic = new LinearLayout(getContext());
                 dynamic.setOrientation(LinearLayout.VERTICAL);
+
                 dynamic.setPadding(40,20,40,20);
                 dynamic.setId(i);
 
@@ -66,6 +78,7 @@ public class CheckoutCartScreen extends Fragment {
                 //This already calculates the carts total so this should just be an initialize to the cart view as well
                 LinearLayout cartLayout = new TableLayout(getContext());
                 cartLayout.setOrientation(LinearLayout.HORIZONTAL);
+                //cartLayout.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
                 cartLayout.setPadding(40, 20, 40, 20);
                 ViewGroup.LayoutParams layoutC = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 cartLayout.setLayoutParams(layoutC);
@@ -86,6 +99,8 @@ public class CheckoutCartScreen extends Fragment {
                 removeBtn.setBackgroundColor(RED);
                 removeBtn.setText("X");
                 removeBtn.setTextColor(Color.rgb(255, 204, 203));
+                removeBtn.setBackground(getRoundedDrawable(Color.RED, 20));
+                removeBtn.setPadding(20, 10, 20, 10);
 
 
                 removeBtn.setOnClickListener(new View.OnClickListener() {
@@ -131,18 +146,19 @@ public class CheckoutCartScreen extends Fragment {
                 params.gravity = Gravity.END;
                 removeBtn.setLayoutParams(params);
 
-                cartLayout.addView(removeBtn);
-
                 LinearLayout coffeeNameAndPrice = new LinearLayout(getContext());
                 coffeeNameAndPrice.setOrientation(LinearLayout.HORIZONTAL);
                 coffeeNameAndPrice.addView(coffeeName);
                 coffeeNameAndPrice.addView(coffeePrice);
 
+
                 cartLayout.addView(coffeeNameAndPrice);
+
 
                 //Add the button stuff here
 
                 dynamic.addView(cartLayout);
+
                 total = total + MainActivity.userCart.getCoffeeAt(i).getPrice();
                 //Add Flavor calculation to total
                 try {
@@ -152,29 +168,33 @@ public class CheckoutCartScreen extends Fragment {
                         cartLayoutF.setPadding(40, 20, 40, 20);
                         ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         cartLayoutF.setLayoutParams(layoutF);
-                        //Add flavor name to format
+
+                        // Add flavor name to format
                         TextView flavorName = new TextView(getContext());
                         flavorName.setText(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getName());
                         flavorName.setTextSize(20);
-                        //Add flavor price to format
+
+                        // Add flavor price to format
                         TextView flavorPrice = new TextView(getContext());
                         flavorPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
                         flavorPrice.setTextSize(20);
                         flavorPrice.setGravity(Gravity.RIGHT);
-                        //Add remove button to format
 
-                        //Add it all to the GUI
-                        params.gravity = Gravity.LEFT;
-                        flavorName.setLayoutParams(params);
+                        // Add the formatting to the container
                         cartLayoutF.addView(flavorName);
 
-                        params.gravity = Gravity.RIGHT;
-                        flavorPrice.setLayoutParams(params);
+                        Space space = new Space(getContext());
+                        space.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 1f)); // This will push the flavorPrice to the right side
+                        cartLayoutF.addView(space);
+
                         cartLayoutF.addView(flavorPrice);
 
-                        dynamic.addView(cartLayoutF);
+
+                        cartLayout.addView(cartLayoutF);
+
                         total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
                     }
+
                 } catch (NullPointerException e) {
 //                    System.out.println("Empty Flavor List");
                 }
@@ -186,39 +206,52 @@ public class CheckoutCartScreen extends Fragment {
                         cartLayoutT.setPadding(40,20,40,20);
                         ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         cartLayoutT.setLayoutParams(layoutT);
-                        //Add toppings name to format
+
+                        //Add toppings name and price to format
                         TextView toppingsName = new TextView(getContext());
                         toppingsName.setText(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getName());
                         toppingsName.setTextSize(20);
-                        //Add toppings price to format
+
                         TextView toppingsPrice = new TextView(getContext());
                         toppingsPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
                         toppingsPrice.setTextSize(20);
                         toppingsPrice.setGravity(Gravity.RIGHT);
-                        //Add the button functionality
-                        //Uhhh we will do this yes push more buttons
 
                         //Add the formatting to the container
-                        params.gravity = Gravity.LEFT;
-                        toppingsName.setLayoutParams(params);
                         cartLayoutT.addView(toppingsName);
 
-                        params.gravity = Gravity.RIGHT;
-                        toppingsPrice.setLayoutParams(params);
+                        // Add a space between the toppings name and the price
+                        Space space = new Space(getContext());
+                        space.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 1f));
+                        cartLayoutT.addView(space);
+
                         cartLayoutT.addView(toppingsPrice);
 
-                        dynamic.addView(cartLayoutT);
+                        cartLayout.addView(cartLayoutT);
                         total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();
                     }
                 }catch(NullPointerException e){
 //                    System.out.println("No toppings ");
                 }
+                View line = new View(getContext());
+                line.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, 10));
+                line.setBackgroundColor(Color.parseColor("#CCCCCC"));
+
+
+
+                cartLayout.addView(removeBtn);
+
+                container.addView(line);
+
+
+
                 container.addView(dynamic);
+
             }
         }catch(NullPointerException e){
 //            System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
         }
-
         DecimalFormat df = new DecimalFormat("0.00");
         totalView.setText("TOTAL: $" + df.format(total));
         totalView.setTextSize(40);
