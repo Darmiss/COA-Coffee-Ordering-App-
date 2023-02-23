@@ -53,7 +53,7 @@ public class PreviousOrderScreen extends Fragment {
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
         int user_id = sharedPreferences.getInt("user_id", -1);
 
-        List<UserCart> transactionList = MySQLDatabaseHelper.getAllTransactionsForUser(user_id, getContext());
+        List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllTransactionsForUser(user_id);
         //ListIterator<UserCart> iterate = transactionList.listIterator();
         LinearLayout dynamic = view.findViewById(R.id.previousOrder);
 

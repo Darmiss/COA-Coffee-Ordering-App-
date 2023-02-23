@@ -405,7 +405,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         List<UserCart> transactions = new ArrayList<>();
 
-        String query = "SELECT * FROM transactions WHERE user_id=?";
+        String query = "SELECT * FROM transactions WHERE user_id=? ORDER BY time_ordered DESC";
         Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId)});
 
         if (cursor.moveToFirst()) {
