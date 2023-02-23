@@ -4,12 +4,14 @@ package com.cjcj55.scrum_project_1;
 import static android.graphics.Color.BLACK;
 import static android.graphics.Color.GREEN;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Space;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,63 +47,77 @@ public class OrderHasBeenPlacedScreen extends Fragment {
         try{
             for(int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
                 LinearLayout recLayout = new LinearLayout(getContext());
-                recLayout.setOrientation(LinearLayout.HORIZONTAL);
+                recLayout.setOrientation(LinearLayout.VERTICAL);
                 recLayout.setPadding(40, 20, 40, 20);
                 ViewGroup.LayoutParams layoutP = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 recLayout.setLayoutParams(layoutP);
-                //Add the coffee name
+
+
+                LinearLayout horizontalLayout = new LinearLayout(getContext());
+                horizontalLayout.setOrientation(LinearLayout.HORIZONTAL);
+                horizontalLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+
                 TextView coffeeName = new TextView(getContext());
                 coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
                 coffeeName.setTextSize(30);
                 coffeeName.setTextColor(BLACK);
-                //Add the coffee price
+                coffeeName.setGravity(Gravity.LEFT);
+                LinearLayout.LayoutParams nameParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                nameParams.weight = 1.0f;
+                coffeeName.setLayoutParams(nameParams);
+                horizontalLayout.addView(coffeeName);
+
+
                 TextView coffeePrice = new TextView(getContext());
                 DecimalFormat df = new DecimalFormat("0.00");
                 coffeePrice.setText(df.format(MainActivity.userCart.getCoffeeAt(i).getPrice()));
                 coffeePrice.setTextSize(30);
                 coffeePrice.setTextColor(GREEN);
                 coffeePrice.setGravity(Gravity.END);
-                //Add the views to the container
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-                params.gravity = Gravity.LEFT;
-                coffeeName.setLayoutParams(params);
-                recLayout.addView(coffeeName);
+                LinearLayout.LayoutParams priceParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                priceParams.weight = 0.5f;
+                coffeePrice.setLayoutParams(priceParams);
+                horizontalLayout.addView(coffeePrice);
 
-                params.gravity = Gravity.END;
-                coffeePrice.setLayoutParams(params);
-                recLayout.addView(coffeePrice);
+
+                recLayout.addView(horizontalLayout);
 
                 container.addView(recLayout);
                 total = total + MainActivity.userCart.getCoffeeAt(i).getPrice();
                 //This will
                 try {
                     for (int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); j++) {
-                        LinearLayout recLayoutF = new LinearLayout(getContext());
-                        recLayoutF.setOrientation(LinearLayout.HORIZONTAL);
-                        recLayoutF.setPadding(40,20,40,20);
+                        LinearLayout cartLayoutF = new LinearLayout(getContext());
+                        cartLayoutF.setOrientation(LinearLayout.HORIZONTAL);
+                        cartLayoutF.setPadding(40, 20, 40, 20);
                         ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        recLayoutF.setLayoutParams(layoutF);
-                        //Add flavor name format to the container
+                        cartLayoutF.setLayoutParams(layoutF);
+
+                        // Add flavor name to format
                         TextView flavorName = new TextView(getContext());
                         flavorName.setText(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getName());
                         flavorName.setTextSize(20);
                         flavorName.setTextColor(BLACK);
-                        //Add flavor price format to container
+
+                        // Add flavor price to format
                         TextView flavorPrice = new TextView(getContext());
                         flavorPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice()));
                         flavorPrice.setTextSize(20);
                         flavorPrice.setTextColor(GREEN);
-                        flavorPrice.setGravity(Gravity.END);
-                        //Add container to container
-                        LinearLayout.LayoutParams params1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-                        params1.gravity = Gravity.LEFT;
-                        flavorName.setLayoutParams(params1);
-                        recLayoutF.addView(flavorName);
+                        flavorPrice.setGravity(Gravity.RIGHT);
 
-                        params1.gravity = Gravity.END;
-                        flavorPrice.setLayoutParams(params1);
-                        recLayoutF.addView(flavorPrice);
-                        container.addView(recLayoutF);
+                        // Add the formatting to the container
+                        cartLayoutF.addView(flavorName);
+
+                        Space space = new Space(getContext());
+                        space.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 1f)); // This will push the flavorPrice to the right side
+                        cartLayoutF.addView(space);
+
+                        cartLayoutF.addView(flavorPrice);
+
+
+                        recLayout.addView(cartLayoutF);
 
                         total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
                     }
@@ -110,43 +126,50 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                 }
                 try{
                     for(int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); j++){
-                        LinearLayout recLayoutT = new LinearLayout(getContext());
-                        recLayoutT.setOrientation(LinearLayout.HORIZONTAL);
-                        recLayoutT.setPadding(40,20,40,20);
+                        LinearLayout cartLayoutT = new LinearLayout(getContext());
+                        cartLayoutT.setOrientation(LinearLayout.HORIZONTAL);
+                        cartLayoutT.setPadding(40,20,40,20);
                         ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                        recLayoutT.setLayoutParams(layoutT);
-                        //Add toppings name format to container
+                        cartLayoutT.setLayoutParams(layoutT);
+
+                        //Add toppings name and price to format
                         TextView toppingsName = new TextView(getContext());
                         toppingsName.setText(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getName());
                         toppingsName.setTextSize(20);
                         toppingsName.setTextColor(BLACK);
-                        //Add toppings price format to container
+
                         TextView toppingsPrice = new TextView(getContext());
                         toppingsPrice.setText("+" + df.format(MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice()));
                         toppingsPrice.setTextSize(20);
                         toppingsPrice.setTextColor(GREEN);
-                        toppingsPrice.setGravity(Gravity.END);
-                        //Add container to container
-                        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
-                        params2.gravity = Gravity.LEFT;
-                        toppingsName.setLayoutParams(params2);
-                        recLayoutT.addView(toppingsName);
+                        toppingsPrice.setGravity(Gravity.RIGHT);
 
-                        params2.gravity = Gravity.END;
-                        toppingsPrice.setLayoutParams(params2);
-                        recLayoutT.addView(toppingsPrice);
-                        container.addView(recLayoutT);
+                        //Add the formatting to the container
+                        cartLayoutT.addView(toppingsName);
 
+                        // Add a space between the toppings name and the price
+                        Space space = new Space(getContext());
+                        space.setLayoutParams(new LinearLayout.LayoutParams(0, 0, 1f));
+                        cartLayoutT.addView(space);
+
+                        cartLayoutT.addView(toppingsPrice);
+
+                        recLayout.addView(cartLayoutT);
                         total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();
-
                     }
                 } catch(NullPointerException e){
 //                    System.out.println("Toppings list is empty");
                 }
+                View line = new View(getContext());
+                line.setLayoutParams(new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, 10));
+                line.setBackgroundColor(Color.parseColor("#CCCCCC"));
+                container.addView(line);
             }
         } catch(NullPointerException e){
 //                System.out.println("Empty cart found");
         }
+
         //Should add the totalView to the push
         TextView totalView = view.findViewById(R.id.totalView);
         DecimalFormat df = new DecimalFormat("0.00");
