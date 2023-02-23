@@ -359,6 +359,26 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         return rowsUpdated;
     }
 
+    public long setUserFavoriteOrder(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isFavorite", 1);
+        String whereClause = "transaction_id=?";
+        String[] whereArgs = {String.valueOf(transactionId)};
+        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+
+    public long unsetUserFavoriteOrder(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("isFavorite", 0);
+        String whereClause = "transaction_id=?";
+        String[] whereArgs = {String.valueOf(transactionId)};
+        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+        return rowsUpdated;
+    }
+
     public List<UserCart> getAllUnfulfilledTransactions() {
         SQLiteDatabase db = getReadableDatabase();
         List<UserCart> transactions = new ArrayList<>();
@@ -432,6 +452,35 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM transactions WHERE user_id=? ORDER BY time_ordered DESC";
         Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId)});
+
+        if (cursor.moveToFirst()) {
+            do {
+                int transactionId = cursor.getInt(cursor.getColumnIndex("transaction_id"));
+                String timeOrdered = cursor.getString(cursor.getColumnIndex("time_ordered"));
+                double price = cursor.getDouble(cursor.getColumnIndex("price"));
+
+                List<CoffeeItem> coffeeItems = getCoffeeItemsForTransaction(transactionId);
+
+                UserCart userCart = new UserCart();
+                for (CoffeeItem coffee : coffeeItems) {
+                    userCart.addCoffeeToCart(coffee);
+                }
+                userCart.setTimeOrdered(timeOrdered);
+                userCart.setPrice(price);
+
+                transactions.add(userCart);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return transactions;
+    }
+
+    public List<UserCart> getAllFavoriteTransactionsForUser(int userId) {
+        SQLiteDatabase db = getReadableDatabase();
+        List<UserCart> transactions = new ArrayList<>();
+
+        String query = "SELECT * FROM transactions WHERE user_id=? AND isFavorite=?";
+        Cursor cursor = db.rawQuery(query, new String[] {String.valueOf(userId), Integer.toString(1)});
 
         if (cursor.moveToFirst()) {
             do {
