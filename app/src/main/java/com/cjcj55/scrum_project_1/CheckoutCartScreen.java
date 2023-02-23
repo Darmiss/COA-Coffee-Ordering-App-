@@ -245,6 +245,7 @@ public class CheckoutCartScreen extends Fragment {
                 }
                 else {
                     MySQLDatabaseHelper.insertTransactionFromCart(user_id, MainActivity.userCart, selectedPickupTime, calcTotal(), getContext());
+                    SQLiteDatabaseHelper.getInstance(getContext()).insertTransactionFromCart(user_id, MainActivity.userCart, selectedPickupTime, calcTotal());
                     NavHostFragment.findNavController(CheckoutCartScreen.this)
                             .navigate(R.id.action_CheckoutCartScreen_to_OrderHasBeenPlacedScreen);
                 }

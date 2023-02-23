@@ -31,6 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class MySQLDatabaseHelper {
     public interface TransactionsCallback {
@@ -46,8 +48,9 @@ public class MySQLDatabaseHelper {
         void onFlavorsReceived(List<FlavorItem> flavors);
     }
 
-    public static void getAllTransactionsForUser(int userId, Context context, TransactionsCallback callback) {
+    public static CompletableFuture<List<UserCart>> getAllTransactionsForUser(int userId, Context context) {
         List<UserCart> transactions = new ArrayList<>();
+        CompletableFuture<List<UserCart>> completableFuture = new CompletableFuture<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/getAllTransactionsForUser.php",
@@ -66,12 +69,7 @@ public class MySQLDatabaseHelper {
 
                                 // Insert orders, toppings, and flavors of each coffee item
                                 List<CoffeeItem> coffeeItems = new ArrayList<>();
-                                getCoffeeItemsForTransaction(transaction_id, context, new CoffeesCallback() {
-                                    @Override
-                                    public void onCoffeesReceived(List<CoffeeItem> coffees) {
-                                        coffeeItems.addAll(coffees);
-                                    }
-                                });
+                                coffeeItems = getCoffeeItemsForTransaction(transaction_id, context).get();
 
 //                                System.out.println("coffeeItems size: " + coffeeItems.size());
 
@@ -85,8 +83,12 @@ public class MySQLDatabaseHelper {
 
                                 transactions.add(userCart);
                             }
-                            callback.onTransactionsReceived(transactions);
+                            completableFuture.complete(transactions);
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ExecutionException e) {
+                            throw new RuntimeException(e);
+                        } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
                     }
@@ -108,10 +110,13 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
+
+        return completableFuture;
     }
 
-    private static void getCoffeeItemsForTransaction(int transactionId, Context context, CoffeesCallback callback) {
+    private static CompletableFuture<List<CoffeeItem>> getCoffeeItemsForTransaction(int transactionId, Context context) {
         List<CoffeeItem> coffeeItems = new ArrayList<>();
+        CompletableFuture<List<CoffeeItem>> completableFuture = new CompletableFuture<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/getCoffeeItemsForTransaction.php",
@@ -129,21 +134,11 @@ public class MySQLDatabaseHelper {
 
                                 // Get toppings for this coffee item
                                 List<ToppingItem> toppingItems = new ArrayList<>();
-                                getToppingItemsForOrderCoffee(order_coffee_id, context, new ToppingsCallback() {
-                                    @Override
-                                    public void onToppingsReceived(List<ToppingItem> toppings) {
-                                        toppingItems.addAll(toppings);
-                                    }
-                                });
+                                toppingItems = getToppingItemsForOrderCoffee(order_coffee_id, context).get();
 
                                 // Get flavors for this coffee item
                                 List<FlavorItem> flavorItems = new ArrayList<>();
-                                getFlavorItemsForOrderCoffee(order_coffee_id, context, new FlavorsCallback() {
-                                    @Override
-                                    public void onFlavorsReceived(List<FlavorItem> flavors) {
-                                        flavorItems.addAll(flavors);
-                                    }
-                                });
+                                flavorItems = getFlavorItemsForOrderCoffee(order_coffee_id, context).get();
 
                                 int coffeeIndex = -1;
                                 // Loop to find which coffee has id = coffeeId
@@ -159,8 +154,12 @@ public class MySQLDatabaseHelper {
                                 coffeeItems.add(coffeeItem);
 //                                System.out.println(coffeeItems.get(i).getName() + ", " + coffeeItems.get(i).getId());
                             }
-                            callback.onCoffeesReceived(coffeeItems);
+                            completableFuture.complete(coffeeItems);
                         } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        } catch (ExecutionException e) {
+                            throw new RuntimeException(e);
+                        } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         }
                     }
@@ -182,10 +181,13 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
+
+        return completableFuture;
     }
 
-    private static void getToppingItemsForOrderCoffee(int orderCoffeeId, Context context, ToppingsCallback callback) {
+    private static CompletableFuture<List<ToppingItem>> getToppingItemsForOrderCoffee(int orderCoffeeId, Context context) {
         List<ToppingItem> toppingItems = new ArrayList<>();
+        CompletableFuture<List<ToppingItem>> completableFuture = new CompletableFuture<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/getToppingItemsForOrderCoffee.php",
@@ -211,7 +213,7 @@ public class MySQLDatabaseHelper {
                                 ToppingItem toppingItem = new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(toppingIndex));
                                 toppingItems.add(toppingItem);
                             }
-                            callback.onToppingsReceived(toppingItems);
+                            completableFuture.complete(toppingItems);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -234,10 +236,13 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
+
+        return completableFuture;
     }
 
-    private static void getFlavorItemsForOrderCoffee(int orderCoffeeId, Context context, FlavorsCallback callback) {
+    private static CompletableFuture<List<FlavorItem>> getFlavorItemsForOrderCoffee(int orderCoffeeId, Context context) {
         List<FlavorItem> flavorItems = new ArrayList<>();
+        CompletableFuture<List<FlavorItem>> completableFuture = new CompletableFuture<>();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST,
                 "http://" + MainActivity.LOCAL_IP + "/getFlavorItemsForOrderCoffee.php",
@@ -263,7 +268,7 @@ public class MySQLDatabaseHelper {
                                 FlavorItem flavorItem = new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(flavorIndex));
                                 flavorItems.add(flavorItem);
                             }
-                            callback.onFlavorsReceived(flavorItems);
+                            completableFuture.complete(flavorItems);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
@@ -286,6 +291,8 @@ public class MySQLDatabaseHelper {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         queue.add(stringRequest);
+
+        return completableFuture;
     }
 
     public static void insertTransactionFromCart(int userId, UserCart userCart, String pickupTime, double totalPrice, Context context) {
