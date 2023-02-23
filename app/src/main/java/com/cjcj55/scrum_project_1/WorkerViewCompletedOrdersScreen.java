@@ -97,7 +97,7 @@ public class WorkerViewCompletedOrdersScreen extends Fragment {
                         // Coffee name
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
-                        cofName.setText(transactionList.get(i).getUserCart().get(c).getName());
+                        cofName.setText(transactionList.get(i).getUserCart().get(c).getAmount() + "x " + transactionList.get(i).getUserCart().get(c).getName());
 
                         LinearLayout.LayoutParams param1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                         params.gravity = Gravity.LEFT;

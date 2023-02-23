@@ -59,7 +59,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
 
 
                 TextView coffeeName = new TextView(getContext());
-                coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
+                coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getAmount() + "x " + MainActivity.userCart.getCoffeeAt(i).getName());
                 coffeeName.setTextSize(30);
                 coffeeName.setTextColor(BLACK);
                 coffeeName.setGravity(Gravity.LEFT);
@@ -84,7 +84,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                 recLayout.addView(horizontalLayout);
 
                 container.addView(recLayout);
-                total = total + MainActivity.userCart.getCoffeeAt(i).getPrice();
+                total = total + MainActivity.userCart.getCoffeeAt(i).getPrice() * MainActivity.userCart.getCoffeeAt(i).getAmount();
                 //This will
                 try {
                     for (int j = 0; j < MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().size(); j++) {
@@ -119,7 +119,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
 
                         recLayout.addView(cartLayoutF);
 
-                        total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice();
+                        total = total + MainActivity.userCart.getCoffeeAt(i).getFlavorItemList().get(j).getPrice() * MainActivity.userCart.getCoffeeAt(i).getAmount();
                     }
                 } catch(NullPointerException e){
 //                    System.out.println("Flavor list is empty");
@@ -155,7 +155,7 @@ public class OrderHasBeenPlacedScreen extends Fragment {
                         cartLayoutT.addView(toppingsPrice);
 
                         recLayout.addView(cartLayoutT);
-                        total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice();
+                        total = total + MainActivity.userCart.getCoffeeAt(i).getToppingItemList().get(j).getPrice() * MainActivity.userCart.getCoffeeAt(i).getAmount();
                     }
                 } catch(NullPointerException e){
 //                    System.out.println("Toppings list is empty");

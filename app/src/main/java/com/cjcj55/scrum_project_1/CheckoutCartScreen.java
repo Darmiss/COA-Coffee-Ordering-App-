@@ -84,7 +84,7 @@ public class CheckoutCartScreen extends Fragment {
                 cartLayout.setLayoutParams(layoutC);
                 //Add the coffee name to formatting
                 TextView coffeeName = new TextView(getContext());
-                coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getName());
+                coffeeName.setText(MainActivity.userCart.getCoffeeAt(i).getAmount() + "x " + MainActivity.userCart.getCoffeeAt(i).getName());
                 coffeeName.setTextSize(30);
                 coffeeName.setGravity(Gravity.LEFT);
                 //Add the coffee price to formatting
