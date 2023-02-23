@@ -4,15 +4,18 @@ package com.cjcj55.scrum_project_1;
 
 
 import static android.graphics.Color.BLACK;
+import static android.graphics.Color.RED;
 import static android.graphics.Color.WHITE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -67,7 +70,7 @@ public class PreviousOrderScreen extends Fragment {
                 LinearLayout.LayoutParams tempparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 tempparams.setMargins(10,10,10,10);
                 contain.setLayoutParams(tempparams);
-                contain.setId(i);
+                contain.setId(transactionList.get(i).getTransactionId());
                 //This part should create the title for the previous order it will contain the total and the first coffee of the list
                 LinearLayout fCart = new LinearLayout(getContext());
                 fCart.setOrientation(LinearLayout.HORIZONTAL);
@@ -96,6 +99,21 @@ public class PreviousOrderScreen extends Fragment {
                 fCart.addView(priceTotal);
 
                 contain.addView(fCart);
+
+                // Add favorite button functionality
+                Button favBtn = new Button(getContext());
+                favBtn.setBackgroundColor(RED);
+                favBtn.setText("X");
+                favBtn.setTextColor(Color.rgb(255, 204, 203));
+                favBtn.setPadding(20, 10, 20, 10);
+
+                favBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SQLiteDatabaseHelper.getInstance(getContext()).toggleUserFavoriteOrder(contain.getId());
+                    }
+                });
+                contain.addView(favBtn);
 
                 try{
                     for(int j = 0; j < transactionList.get(i).getUserCart().size(); j++){

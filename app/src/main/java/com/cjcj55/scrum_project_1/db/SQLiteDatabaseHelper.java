@@ -360,17 +360,21 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long toggleUserFavoriteOrder(int transactionId) {
+        System.out.println("User is toggling favorite for id:" + transactionId);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         String whereClause = "transaction_id=?";
         String[] whereArgs = {String.valueOf(transactionId)};
         Cursor cursor = db.query("transactions", new String[]{"isFavorite"}, whereClause, whereArgs, null, null, null);
-        cursor.moveToFirst();
-        int isFavorite = cursor.getInt(cursor.getColumnIndex("isFavorite"));
-        cursor.close();
-        values.put("isFavorite", isFavorite == 1 ? 0 : 1);
-        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
-        return rowsUpdated;
+        if(cursor.moveToFirst()) {
+            int isFavorite = cursor.getInt(cursor.getColumnIndex("isFavorite"));
+            cursor.close();
+            values.put("isFavorite", isFavorite == 1 ? 0 : 1);
+            long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+            return rowsUpdated;
+        } else {
+            return -1;
+        }
     }
 
 //    public long setUserFavoriteOrder(int transactionId) {
@@ -519,6 +523,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
                 }
                 userCart.setTimeOrdered(timeOrdered);
                 userCart.setPrice(price);
+                userCart.setTransactionId(transactionId);
 
                 transactions.add(userCart);
             } while (cursor.moveToNext());
