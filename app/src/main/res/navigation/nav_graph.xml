@@ -95,6 +95,12 @@
         <action
             android:id="@+id/action_WorkerOrderScreen_to_OrderScreen"
             app:destination="@id/OrderScreen" />
+        <action
+            android:id="@+id/action_WorkerOrderScreen_to_WorkerViewCompletedOrdersScreen"
+            app:destination="@id/WorkerViewCompletedOrdersScreen" />
+        <action
+            android:id="@+id/action_WorkerOrderScreen_to_LoginScreen"
+            app:destination="@id/LoginScreen" />
     </fragment>
     <fragment
         android:id="@+id/SysAdminScreen"
@@ -211,7 +217,22 @@
         android:name="com.cjcj55.scrum_project_1.UserFavoritesScreen"
         android:label="Favorites"
         tools:layout="@layout/userfavoritesui">
+        <action
+            android:id="@+id/action_UserFavoritesScreen_to_CurrentOrdersScreen"
+            app:destination="@id/CurrentOrdersScreen" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/WorkerViewCompletedOrdersScreen"
+        android:name="com.cjcj55.scrum_project_1.WorkerViewCompletedOrdersScreen"
+        android:label="Completed ORders"
+        tools:layout="@layout/viewcompletedordersui">
+        <action
+            android:id="@+id/action_WorkerViewCompletedOrdersScreen_to_WorkerOrderScreen"
+            app:destination="@id/WorkerOrderScreen" />
+    </fragment>
+
 
 
 
