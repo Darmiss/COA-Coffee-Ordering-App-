@@ -9,6 +9,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,8 +34,7 @@ import java.util.List;
 
 //Screen shown after selecting a item from the menu(toppings here etc)
 public class ItemSelectionScreen extends Fragment {
-
-
+private int coffeCount = 1;
     private ItemselectionuiBinding binding;
 
     public View onCreateView(
@@ -49,6 +49,44 @@ public class ItemSelectionScreen extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Button addCoffeeButton = binding.addCoffeeButton;
+        binding.itemCoffeeTextView.setText(Integer.toString(coffeCount));
+        Button removeCoffeeButton = binding.removeCoffeeButton;
+
+
+
+
+
+        addCoffeeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Increment the item count and update the UI
+                if (coffeCount >= 5) {
+                    // Don't add more than 25 items(change this if needed)
+                    return;
+                }
+
+                coffeCount++;
+                updateCoffeeCount();
+            }
+        });
+
+
+        removeCoffeeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Increment the item count and update the UI
+                if (coffeCount <= 1) {
+                    // Don't remove more than 1 items(change this if needed)
+                    return;
+                }
+
+                coffeCount--;
+                updateCoffeeCount();
+            }
+        });
+
+
 
         /**
          * -----------------------------------------------------
@@ -396,18 +434,22 @@ public class ItemSelectionScreen extends Fragment {
                 for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {
                     ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);
                     if (topping.isSelected()) {
-                        toppings.add(new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(i)));
+                            toppings.add(new ToppingItem(MainActivity.toppingItemInCatalogTypes.get(i)));
                     }
                 }
                 for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {
                     FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);
                     if (flavor.isSelected()) {
-                        flavors.add(new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(i)));
+                            flavors.add(new FlavorItem(MainActivity.flavorItemInCatalogTypes.get(i)));
                     }
                 }
+
+
                 MainActivity.currentCoffee.setToppingItemList(toppings);
                 MainActivity.currentCoffee.setFlavorItemList(flavors);
-                MainActivity.userCart.addCoffeeToCart(MainActivity.currentCoffee);
+              MainActivity.currentCoffee.setAmount(coffeCount);
+                    MainActivity.userCart.addCoffeeToCart(MainActivity.currentCoffee);
+
 //                for (int i = 0; i < MainActivity.userCart.getUserCart().size(); i++) {
 //                    System.out.println(MainActivity.userCart.getCoffeeAt(i).toString());
 //                    for (int t = 0; t < MainActivity.userCart.getCoffeeAt(i).getToppingItemList().size(); t++) {
@@ -459,6 +501,11 @@ public class ItemSelectionScreen extends Fragment {
 //                System.out.println(flavor.getId());
             }
         }
+    }
+
+    private void updateCoffeeCount() {
+        // Update the text view with the new item count
+        binding.itemCoffeeTextView.setText(Integer.toString(coffeCount));
     }
 
 

@@ -366,18 +366,22 @@ public class CheckoutCartScreen extends Fragment {
     public double calcTotal() {
         double total = 0.0;
         for (int c = 0; c < MainActivity.userCart.getUserCart().size(); c++) {
-            total += MainActivity.userCart.getCoffeeAt(c).getPrice();
+            double coffeeCost = MainActivity.userCart.getCoffeeAt(c).getPrice();
 
             for (int f = 0; f < MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().size(); f++) {
-                total += MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().get(f).getPrice();
+                coffeeCost += MainActivity.userCart.getCoffeeAt(c).getFlavorItemList().get(f).getPrice();
             }
 
             for (int t = 0; t < MainActivity.userCart.getCoffeeAt(c).getToppingItemList().size(); t++) {
-                total += MainActivity.userCart.getCoffeeAt(c).getToppingItemList().get(t).getPrice();
+                coffeeCost += MainActivity.userCart.getCoffeeAt(c).getToppingItemList().get(t).getPrice();
             }
+            coffeeCost *= MainActivity.userCart.getCoffeeAt(c).getAmount();
+            total += coffeeCost;
         }
         return total;
     }
+
+
 
 
     @Override
