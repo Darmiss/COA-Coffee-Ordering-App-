@@ -106,21 +106,13 @@ public class CheckoutCartScreen extends Fragment {
                 removeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        double tChange = 0;
-                        tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getPrice();
+                        MainActivity.userCart.getUserCart().remove(dynamic.getId());
 
-                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(dynamic.getId()).getFlavorItemList().size(); w++) {
-                            tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getFlavorItemList().get(w).getPrice();
-                        }
-                        for (int w = 0; w < MainActivity.userCart.getCoffeeAt(dynamic.getId()).getToppingItemList().size(); w++) {
-                            tChange = tChange + MainActivity.userCart.getCoffeeAt(dynamic.getId()).getToppingItemList().get(w).getPrice();
-                        }
-                        total = total - tChange;
+                        total = calcTotal();
                         DecimalFormat df = new DecimalFormat("0.00");
                         totalView.setText("TOTAL: " + df.format(total));
                         totalView.setTextSize(40);
                         totalView.setTextColor(BLACK);
-                        MainActivity.userCart.getUserCart().remove(dynamic.getId());
 
                         // Remove the dynamic LinearLayout from the container
                         container.removeView(dynamic);
@@ -253,7 +245,7 @@ public class CheckoutCartScreen extends Fragment {
 //            System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
         }
         DecimalFormat df = new DecimalFormat("0.00");
-        totalView.setText("TOTAL: $" + df.format(total));
+        totalView.setText("TOTAL: $" + df.format(calcTotal()));
         totalView.setTextSize(40);
         totalView.setTextColor(BLACK);
 
