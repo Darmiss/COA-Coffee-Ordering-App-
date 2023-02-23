@@ -1,5 +1,10 @@
 package com.cjcj55.scrum_project_1;
 
+import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
+import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -7,12 +12,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.WorkescreenuiBinding;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
@@ -29,7 +41,7 @@ public class WorkerOrderScreen extends Fragment {
             Bundle savedInstanceState
     ) {
 
-        binding =WorkescreenuiBinding.inflate(inflater, container, false);
+        binding = WorkescreenuiBinding.inflate(inflater, container, false);
         return binding.getRoot();
 
     }
@@ -47,7 +59,7 @@ public class WorkerOrderScreen extends Fragment {
                 orderButton.setOrientation(LinearLayout.VERTICAL);
                 orderButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                layoutParams.setMargins(10,10,10,10);
+                layoutParams.setMargins(10, 10, 10, 10);
                 orderButton.setLayoutParams(layoutParams);
                 orderButton.setId(transactionList.get(i).getTransactionId());
 
@@ -67,7 +79,7 @@ public class WorkerOrderScreen extends Fragment {
                 // Create title
                 LinearLayout orderContainer = new LinearLayout(getContext());
                 orderContainer.setOrientation(LinearLayout.HORIZONTAL);
-                orderContainer.setPadding(40,20,40,20);
+                orderContainer.setPadding(40, 20, 40, 20);
 
                 // Title
                 TextView title = new TextView(getContext());
@@ -90,7 +102,7 @@ public class WorkerOrderScreen extends Fragment {
                 // Display user's name (that purchased this order)
                 LinearLayout userNameContainer = new LinearLayout(getContext());
                 userNameContainer.setOrientation(LinearLayout.HORIZONTAL);
-                userNameContainer.setPadding(60,20,40,20);
+                userNameContainer.setPadding(60, 20, 40, 20);
 
                 // User's name
                 TextView userName = new TextView(getContext());
@@ -105,7 +117,7 @@ public class WorkerOrderScreen extends Fragment {
                     for (int c = 0; c < transactionList.get(i).getUserCart().size(); c++) {
                         LinearLayout coffeeTemp = new LinearLayout(getContext());
                         coffeeTemp.setOrientation(LinearLayout.HORIZONTAL);
-                        coffeeTemp.setPadding(40,20,40,20);
+                        coffeeTemp.setPadding(40, 20, 40, 20);
                         ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         coffeeTemp.setLayoutParams(layoutT);
 
@@ -128,7 +140,7 @@ public class WorkerOrderScreen extends Fragment {
                             for (int f = 0; f < transactionList.get(i).getUserCart().get(c).getFlavorItemList().size(); f++) {
                                 LinearLayout flavorTemp = new LinearLayout(getContext());
                                 flavorTemp.setOrientation(LinearLayout.HORIZONTAL);
-                                flavorTemp.setPadding(40,10,40,10);
+                                flavorTemp.setPadding(40, 10, 40, 10);
                                 ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 flavorTemp.setLayoutParams(layoutF);
 
@@ -155,7 +167,7 @@ public class WorkerOrderScreen extends Fragment {
                             for (int t = 0; t < transactionList.get(i).getUserCart().get(c).getToppingItemList().size(); t++) {
                                 LinearLayout toppingTemp = new LinearLayout(getContext());
                                 toppingTemp.setOrientation(LinearLayout.HORIZONTAL);
-                                toppingTemp.setPadding(40,10,40,10);
+                                toppingTemp.setPadding(40, 10, 40, 10);
                                 ViewGroup.LayoutParams layoutF = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                                 toppingTemp.setLayoutParams(layoutF);
 
@@ -185,11 +197,48 @@ public class WorkerOrderScreen extends Fragment {
 
         }
 
-        binding.BacktoMenuWorkerBtn.setOnClickListener(new View.OnClickListener() {
+        binding.workerLogoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Context context = getContext();
+
+                MainActivity.userCart = new UserCart(); //Remove this if so please...
+                StringRequest stringRequest = new StringRequest(Request.Method.POST,
+                        "http://" + MainActivity.LOCAL_IP + "/logout.php",
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                setLoggedOutPopup(true); //makes it so when going back to login screen, logged out popup popups
+                                setAccountCreationPopup(false); //disables account creation popup
+
+                                SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences1.edit();
+                                editor.clear();
+                                editor.apply();
+
+                                NavHostFragment.findNavController(WorkerOrderScreen.this)
+                                        .navigate(R.id.action_WorkerOrderScreen_to_LoginScreen);
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(context, "error:" + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                RequestQueue queue = Volley.newRequestQueue(context);
+                queue.add(stringRequest);
+            }
+        });
+
+
+        binding.WorkerViewCompleteOrderBtn.setOnClickListener(new View.OnClickListener() {
+            //View Completed Orders Button
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(WorkerOrderScreen.this)
-                        .navigate(R.id.action_WorkerOrderScreen_to_OrderScreen);
+                        .navigate(R.id.action_WorkerOrderScreen_to_WorkerViewCompletedOrdersScreen);
             }
         });
 
@@ -201,6 +250,6 @@ public class WorkerOrderScreen extends Fragment {
         binding = null;
     }
 
-}
 
+}
 

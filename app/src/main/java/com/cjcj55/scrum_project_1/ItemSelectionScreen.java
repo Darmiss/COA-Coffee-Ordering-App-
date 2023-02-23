@@ -58,7 +58,7 @@ public class ItemSelectionScreen extends Fragment {
         LinearLayout toppingContainer = view.findViewById(R.id.toppingContainer);
 
         for (ToppingItemInCatalog toppingItem : MainActivity.toppingItemInCatalogTypes) {
-            System.out.println(toppingItem.getName() + " " + toppingItem.getDescription() + " " + toppingItem.getPrice() + " " + toppingItem.getId());
+//            System.out.println(toppingItem.getName() + " " + toppingItem.getDescription() + " " + toppingItem.getPrice() + " " + toppingItem.getId());
 
             ToppingButton buttonLayout = new ToppingButton(getContext());
             buttonLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -101,19 +101,15 @@ public class ItemSelectionScreen extends Fragment {
                     switch (toppingItem.getName()) {
                         case "Whipped Cream":
                             toppingImage.setImageResource(R.drawable.whippedcream);
-                            System.out.println("shot shots shots");
                             break;
                         case "Cinnamon":
                             toppingImage.setImageResource(R.drawable.cinnamon);
-                            System.out.println("milk drink");
                             break;
                         case "Sprinkles":
                             toppingImage.setImageResource(R.drawable.sprinkles);
-                            System.out.println("Americano");
                             break;
                         case "Marshmallows":
                             toppingImage.setImageResource(R.drawable.marshmellow);
-                            System.out.println("steamy");
                             break;
                         default:
                             break;
@@ -274,23 +270,18 @@ public class ItemSelectionScreen extends Fragment {
                     switch (flavorItem.getName()) {
                         case "Caramel":
                             flavorImage.setImageResource(R.drawable.caramel);
-                            System.out.println("shot shots shots");
                             break;
                         case "Mocha":
                             flavorImage.setImageResource(R.drawable.mocha);
-                            System.out.println("milk drink");
                             break;
                         case "Hazelnut":
                             flavorImage.setImageResource(R.drawable.hazelnut);
-                            System.out.println("Americano");
                             break;
                         case "Vanilla":
                             flavorImage.setImageResource(R.drawable.vanilla);
-                            System.out.println("steamy");
                             break;
                         case "Brown Sugar Cinnamon":
                             flavorImage.setImageResource(R.drawable.chocolate);
-                            System.out.println("steamy");
                             break;
                         default:
                             break;
@@ -456,7 +447,7 @@ public class ItemSelectionScreen extends Fragment {
         for (int i = 0; i < binding.toppingContainer.getChildCount(); i++) {
             ToppingButton topping = (ToppingButton) binding.toppingContainer.getChildAt(i);
             if (topping.isSelected()) {
-                System.out.println(topping.getId());
+//                System.out.println(topping.getId());
             }
         }
     }
@@ -465,7 +456,7 @@ public class ItemSelectionScreen extends Fragment {
         for (int i = 0; i < binding.flavorContainer.getChildCount(); i++) {
             FlavorButton flavor = (FlavorButton) binding.flavorContainer.getChildAt(i);
             if (flavor.isSelected()) {
-                System.out.println(flavor.getId());
+//                System.out.println(flavor.getId());
             }
         }
     }
