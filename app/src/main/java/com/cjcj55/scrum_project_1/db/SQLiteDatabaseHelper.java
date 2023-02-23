@@ -360,7 +360,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long toggleUserFavoriteOrder(int transactionId) {
-        System.out.println("User is toggling favorite for id:" + transactionId);
+//        System.out.println("User is toggling favorite for id:" + transactionId);
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         String whereClause = "transaction_id=?";

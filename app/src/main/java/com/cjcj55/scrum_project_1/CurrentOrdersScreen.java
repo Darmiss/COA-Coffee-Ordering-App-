@@ -108,7 +108,7 @@ public class CurrentOrdersScreen extends Fragment {
         textView.setText(firstName);
 
         List<UserCart> transactionList = SQLiteDatabaseHelper.getInstance(getContext()).getAllUnfulfilledTransactionsForUser(user_id);
-        System.out.println("Amount of active user's orders: " + transactionList.size());
+//        System.out.println("Amount of active user's orders: " + transactionList.size());
         LinearLayout dynamic = view.findViewById(R.id.currentUserOrders);
 
         try {
