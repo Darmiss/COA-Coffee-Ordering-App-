@@ -242,12 +242,12 @@ public class CheckoutCartScreen extends Fragment {
 
                 cartLayout.addView(removeBtn);
 
-                container.addView(line);
+
 
 
 
                 container.addView(dynamic);
-
+                container.addView(line);
             }
         }catch(NullPointerException e){
 //            System.out.println("No Coffees NOTE THIS ERROR SHOULD NEVER BE SEEN");
