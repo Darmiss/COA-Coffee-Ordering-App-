@@ -106,7 +106,7 @@ public class UserFavoritesScreen extends Fragment {
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
                         cofName.setTextColor(WHITE);
-                        cofName.setText(favList.get(i).getUserCart().get(j).getName());
+                        cofName.setText(favList.get(i).getUserCart().get(j).getAmount() + "x " + favList.get(i).getUserCart().get(j).getName());
                         //Adds the coffee price to the thing
                         TextView cofPrice = new TextView(getContext());
                         cofPrice.setText("$ " + df.format(favList.get(i).getUserCart().get(j).getPrice()));

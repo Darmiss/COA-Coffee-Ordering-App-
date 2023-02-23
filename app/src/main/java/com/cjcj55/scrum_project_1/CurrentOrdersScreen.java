@@ -164,7 +164,7 @@ public class CurrentOrdersScreen extends Fragment {
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
                         cofName.setTextColor(WHITE);
-                        cofName.setText(transactionList.get(i).getUserCart().get(j).getName());
+                        cofName.setText(transactionList.get(i).getUserCart().get(j).getAmount() + "x " + transactionList.get(i).getUserCart().get(j).getName());
                         //Adds the coffee price to the thing
                         TextView cofPrice = new TextView(getContext());
                         cofPrice.setText("$ " + df.format(transactionList.get(i).getUserCart().get(j).getPrice()));
