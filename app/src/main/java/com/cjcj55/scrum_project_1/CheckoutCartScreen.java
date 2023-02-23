@@ -238,6 +238,11 @@ public class CheckoutCartScreen extends Fragment {
                     MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Cart is empty.");
                     messageDialog.show(getChildFragmentManager(), "MessagePopupFragment");
                 }
+                else if(selectedPickupTime.equals(""))
+                {
+                    binding.PickupTimeErrorText.setText("Pickup time required");
+                   binding.PickupTimeErrorText.setVisibility(View.VISIBLE);
+                }
                 else {
                     MySQLDatabaseHelper.insertTransactionFromCart(user_id, MainActivity.userCart, selectedPickupTime, calcTotal(), getContext());
                     NavHostFragment.findNavController(CheckoutCartScreen.this)
@@ -271,14 +276,15 @@ public class CheckoutCartScreen extends Fragment {
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         List<String> pickupTimeList= new ArrayList<>();
+        pickupTimeList.add(""); // Add an empty string as the first item
         for (int i = 0; i < 8; i++) { //Change for loop iterations to increase/decrease number of dropdown items
             SimpleDateFormat format = new SimpleDateFormat("h:mm a", Locale.getDefault());
             String pickupTime = format.format(calendar.getTime());
             pickupTimeList.add(pickupTime);
             calendar.add(Calendar.MINUTE, 15);
         }
-        pickupTimeList.remove(0);
-        pickupTimeList.remove(0);
+        pickupTimeList.remove(1);
+        pickupTimeList.remove(1);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, pickupTimeList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.SpinnerPickupTime.setAdapter(adapter);
@@ -286,7 +292,12 @@ public class CheckoutCartScreen extends Fragment {
         binding.SpinnerPickupTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selectedPickupTime = parent.getItemAtPosition(position).toString();
+                // Check if this is a user selection or the initial selection
+                    selectedPickupTime = parent.getItemAtPosition(position).toString();
+                    if(!selectedPickupTime.equals(""))
+                    {
+                        binding.PickupTimeErrorText.setVisibility(View.INVISIBLE);
+                    }
             }
 
             @Override
