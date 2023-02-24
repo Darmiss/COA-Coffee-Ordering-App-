@@ -1,6 +1,7 @@
 package com.cjcj55.scrum_project_1;
 
 import static android.graphics.Color.BLACK;
+import static android.graphics.Color.RED;
 import static android.graphics.Color.WHITE;
 import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
@@ -13,6 +14,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -151,6 +153,31 @@ public class CurrentOrdersScreen extends Fragment {
                 params.gravity = Gravity.END;
                 priceTotal.setLayoutParams(params);
                 fCart.addView(priceTotal);
+                Button removeBtn = new Button(getContext());
+                removeBtn.setBackgroundColor(RED);
+                removeBtn.setText("Cancel Order");
+                removeBtn.setTextColor(Color.rgb(255, 204, 203));
+                removeBtn.setPadding(20, 10, 20, 10);
+
+                removeBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
+
+                        SQLiteDatabaseHelper.getInstance(getContext()).cancelUserOrder(contain.getId());
+                        transactionList.remove(contain.getId());
+                        dynamic.removeView(contain);
+                        MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Successfully Cancelled");
+                        messageDialog.show(getChildFragmentManager(), "MessagePopUpFragment");
+
+                        for (int j = contain.getId(); j < transactionList.size(); j++) {
+                            LinearLayout layout = dynamic.findViewById(j + 1);
+                            if (layout != null) {
+                                layout.setId(j);
+                            }
+                        }
+                    }
+                });
 
                 contain.addView(fCart);
 
@@ -251,6 +278,7 @@ public class CurrentOrdersScreen extends Fragment {
 
                         }
                     }
+                    contain.addView(removeBtn);
                 }catch(NullPointerException e){
 
                 }

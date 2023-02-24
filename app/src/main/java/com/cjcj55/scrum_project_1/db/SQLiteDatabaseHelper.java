@@ -20,7 +20,7 @@ import java.util.List;
 
 public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "coffee.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
     private static SQLiteDatabaseHelper instance;
 
     /**
@@ -375,6 +375,16 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         } else {
             return -1;
         }
+    }
+
+    public long cancelUserOrder(int transactionId) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("cancelled_by_customer", 1);
+        String whereClause = "transaction_id=?";
+        String[] whereArgs = {String.valueOf(transactionId)};
+        long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
+        return rowsUpdated;
     }
 
 //    public long setUserFavoriteOrder(int transactionId) {
