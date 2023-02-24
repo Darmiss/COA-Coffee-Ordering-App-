@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.cjcj55.scrum_project_1.MainActivity;
 import com.cjcj55.scrum_project_1.objects.UserCart;
@@ -381,6 +382,7 @@ public class SQLiteDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("cancelled_by_customer", 1);
+        values.put("fulfilled",1);
         String whereClause = "transaction_id=?";
         String[] whereArgs = {String.valueOf(transactionId)};
         long rowsUpdated = db.update("transactions", values, whereClause, whereArgs);
