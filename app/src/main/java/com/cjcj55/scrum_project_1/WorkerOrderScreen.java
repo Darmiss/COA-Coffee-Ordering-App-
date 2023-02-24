@@ -57,7 +57,7 @@ public class WorkerOrderScreen extends Fragment {
             for (int i = 0; i < transactionList.size(); i++) {
                 LinearLayout orderButton = new LinearLayout(getContext());
                 orderButton.setOrientation(LinearLayout.VERTICAL);
-                orderButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+                orderButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shadow));
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams.setMargins(10, 10, 10, 10);
                 orderButton.setLayoutParams(layoutParams);

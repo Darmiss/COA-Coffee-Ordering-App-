@@ -30,8 +30,8 @@
 
     <Button
         android:id="@+id/WorkerViewCompleteOrderBtn"
-        android:layout_width="109dp"
-        android:layout_height="49dp"
+        android:layout_width="201dp"
+        android:layout_height="51dp"
         android:layout_marginTop="12dp"
         android:background="@drawable/roundedbutton"
         android:text="View Completed Orders"
@@ -61,7 +61,7 @@
         android:id="@+id/textView2"
         android:layout_width="347dp"
         android:layout_height="54dp"
-        android:layout_marginBottom="680dp"
+        android:layout_marginBottom="688dp"
         android:text="Tap an order to mark it as complete."
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"

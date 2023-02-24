@@ -60,7 +60,7 @@ public class UserFavoritesScreen extends Fragment {
                 //This will contain the orders made
                 LinearLayout contain = new LinearLayout(getContext());
                 contain.setOrientation(LinearLayout.VERTICAL);
-                contain.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+                contain.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shadow));
                 contain.setPadding(40,20,40,20);
                 LinearLayout.LayoutParams tempparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 tempparams.setMargins(10,10,10,10);
@@ -105,19 +105,19 @@ public class UserFavoritesScreen extends Fragment {
                         //Adds the thing to the thing
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
-                        cofName.setTextColor(WHITE);
+                        //cofName.setTextColor(WHITE);
                         cofName.setText(favList.get(i).getUserCart().get(j).getAmount() + "x " + favList.get(i).getUserCart().get(j).getName());
                         //Adds the coffee price to the thing
                         TextView cofPrice = new TextView(getContext());
                         cofPrice.setText("$ " + df.format(favList.get(i).getUserCart().get(j).getPrice()));
                         cofPrice.setTextSize(20);
-                        cofPrice.setTextColor(WHITE);
+                        //cofPrice.setTextColor(WHITE);
                         cofPrice.setGravity(Gravity.CENTER);
                         //Add favorite button functionality
                         Button addToCart = new Button(getContext());
-                        addToCart.setBackgroundColor(RED);
                         addToCart.setText("Add to Cart");
-                        addToCart.setTextColor(Color.rgb(255, 204, 203));
+                        addToCart.setTextColor(WHITE);
+                        addToCart.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.roundedbutton));
                         addToCart.setPadding(20, 10, 20, 10);
 
                         //Not 100% sure this works but we will see
@@ -126,6 +126,9 @@ public class UserFavoritesScreen extends Fragment {
                             public void onClick(View view) {
                                 for(int i = 0; i < favList.size(); i++){
                                     MainActivity.userCart.addCoffeeToCart(favList.get(idcheck).getCoffeeAt(i));
+                                    addToCart.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.favselect));
+                                    addToCart.setText("Order added to cart");
+
                                 }
 
                             }
@@ -153,13 +156,13 @@ public class UserFavoritesScreen extends Fragment {
                                 //Adds the thing to the thing
                                 TextView flavorName = new TextView(getContext());
                                 flavorName.setTextSize(15);
-                                flavorName.setTextColor(WHITE);
+                                //flavorName.setTextColor(WHITE);
                                 flavorName.setText(favList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView flavorPrice = new TextView(getContext());
                                 flavorPrice.setText("$ " + favList.get(i).getUserCart().get(j).getFlavorItemList().get(q).getPrice());
                                 flavorPrice.setTextSize(17);
-                                flavorPrice.setTextColor(WHITE);
+                                //flavorPrice.setTextColor(WHITE);
                                 flavorPrice.setGravity(Gravity.CENTER);
 
                                 LinearLayout.LayoutParams param2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
@@ -186,13 +189,13 @@ public class UserFavoritesScreen extends Fragment {
                                 //Adds the thing to the thing
                                 TextView topName = new TextView(getContext());
                                 topName.setTextSize(17);
-                                topName.setTextColor(WHITE);
+                                //topName.setTextColor(WHITE);
                                 topName.setText(favList.get(i).getUserCart().get(j).getToppingItemList().get(q).getName());
                                 //Adds the coffee price to the thing
                                 TextView topPrice = new TextView(getContext());
                                 topPrice.setText("$ " + df.format(favList.get(i).getUserCart().get(j).getToppingItemList().get(q).getPrice()));
                                 topPrice.setTextSize(15);
-                                topPrice.setTextColor(WHITE);
+                                //topPrice.setTextColor(WHITE);
                                 topPrice.setGravity(Gravity.CENTER);
 
                                 LinearLayout.LayoutParams param3 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
