@@ -26,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.cjcj55.scrum_project_1.databinding.WorkescreenuiBinding;
+import com.cjcj55.scrum_project_1.db.MySQLDatabaseHelper;
 import com.cjcj55.scrum_project_1.db.SQLiteDatabaseHelper;
 import com.cjcj55.scrum_project_1.objects.UserCart;
 
@@ -104,9 +105,21 @@ public class WorkerOrderScreen extends Fragment {
                 userNameContainer.setOrientation(LinearLayout.HORIZONTAL);
                 userNameContainer.setPadding(60, 20, 40, 20);
 
+                int user_id = transactionList.get(i).getUserId();
+                List<String> usersnameList = MySQLDatabaseHelper.getUsersName(user_id, getContext());
+                String usersname = "Customer " + user_id;
+                if (user_id == 9) {
+                    usersname = "Chris Perrone";
+                } else if (user_id == 27) {
+                    usersname = "Sandro Marchegiani";
+                }
+                if (usersnameList.size() > 0) {
+                    usersname = usersnameList.get(0);
+                }
+
                 // User's name
                 TextView userName = new TextView(getContext());
-                userName.setText("Ordered by: " + SQLiteDatabaseHelper.getInstance(getContext()).getUsersFullName(transactionList.get(i).getUserId()));
+                userName.setText("Ordered by: " + usersname);
                 userName.setTextSize(25);
                 userName.setGravity(Gravity.CENTER_HORIZONTAL);
                 userNameContainer.addView(userName);

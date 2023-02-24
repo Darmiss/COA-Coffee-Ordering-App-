@@ -35,17 +35,43 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class MySQLDatabaseHelper {
-    public interface TransactionsCallback {
-        void onTransactionsReceived(List<UserCart> transactions);
-    }
-    public interface CoffeesCallback {
-        void onCoffeesReceived(List<CoffeeItem> coffees);
-    }
-    public interface ToppingsCallback {
-        void onToppingsReceived(List<ToppingItem> toppings);
-    }
-    public interface FlavorsCallback {
-        void onFlavorsReceived(List<FlavorItem> flavors);
+    public static List<String> getUsersName(int userId, Context context) {
+        List<String> usersName = new ArrayList<>();
+
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,
+                "http://" + MainActivity.LOCAL_IP + "/getUsersName.php",
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject jsonObject = response;
+                            String firstName = jsonObject.getString("firstName");
+                            String lastName = jsonObject.getString("lastName");
+                            String name = firstName + " " + lastName;
+                            usersName.add(name);
+                        } catch(JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id", String.valueOf(userId));
+                return params;
+            }
+        };
+
+        RequestQueue queue = Volley.newRequestQueue(context);
+        queue.add(stringRequest);
+
+        return usersName;
     }
 
     public static CompletableFuture<List<UserCart>> getAllTransactionsForUser(int userId, Context context) {
