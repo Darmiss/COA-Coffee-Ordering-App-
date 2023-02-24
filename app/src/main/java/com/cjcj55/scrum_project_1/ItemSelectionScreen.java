@@ -414,6 +414,7 @@ private int coffeCount = 1;
                     // Checkbox toggle this item.  handle all selected on form submit
                     // Toggle the selected state
                     buttonLayout.setSelected(!buttonLayout.isSelected());
+                    buttonLayout.setElevation(15);
 
                     // Update the background color based on the selected state
                     buttonLayout.setBackground(ContextCompat.getDrawable(getContext(),

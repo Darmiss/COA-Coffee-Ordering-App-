@@ -1,5 +1,7 @@
 package com.cjcj55.scrum_project_1;
 
+import static android.graphics.Color.BLACK;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -43,7 +45,7 @@ public class WorkerViewCompletedOrdersScreen extends Fragment {
             for (int i = 0; i < transactionList.size(); i++) {
                 LinearLayout orderButton = new LinearLayout(getContext());
                 orderButton.setOrientation(LinearLayout.VERTICAL);
-                orderButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.rounded_background));
+                orderButton.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.shadow));
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 layoutParams.setMargins(10, 10, 10, 10);
                 orderButton.setLayoutParams(layoutParams);
@@ -58,6 +60,7 @@ public class WorkerViewCompletedOrdersScreen extends Fragment {
                 TextView title = new TextView(getContext());
                 title.setText("Order #" + transactionList.get(i).getTransactionId());
                 title.setTextSize(30);
+                title.setTextColor(BLACK);
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                 params.gravity = Gravity.LEFT;
@@ -67,6 +70,7 @@ public class WorkerViewCompletedOrdersScreen extends Fragment {
                 TextView pickupTime = new TextView(getContext());
                 pickupTime.setText("Pickup: " + transactionList.get(i).getPickupTime());
                 pickupTime.setTextSize(25);
+                pickupTime.setTextColor(BLACK);
                 pickupTime.setGravity(Gravity.END);
                 orderContainer.addView(pickupTime);
 
@@ -75,12 +79,13 @@ public class WorkerViewCompletedOrdersScreen extends Fragment {
                 // Display user's name (that purchased this order)
                 LinearLayout userNameContainer = new LinearLayout(getContext());
                 userNameContainer.setOrientation(LinearLayout.HORIZONTAL);
-                userNameContainer.setPadding(60, 20, 40, 20);
+                userNameContainer.setPadding(40, 20, 40, 20);
 
                 // User's name
                 TextView userName = new TextView(getContext());
                 userName.setText("Ordered by: " + SQLiteDatabaseHelper.getInstance(getContext()).getUsersFullName(transactionList.get(i).getUserId()));
                 userName.setTextSize(25);
+                pickupTime.setTextColor(BLACK);
                 userName.setGravity(Gravity.CENTER_HORIZONTAL);
                 userNameContainer.addView(userName);
 
