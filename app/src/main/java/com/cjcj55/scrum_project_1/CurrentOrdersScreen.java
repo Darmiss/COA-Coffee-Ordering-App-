@@ -126,6 +126,7 @@ public class CurrentOrdersScreen extends Fragment {
                 LinearLayout.LayoutParams tempparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 tempparams.setMargins(10,10,10,10);
                 contain.setLayoutParams(tempparams);
+                System.out.println("transactionList.size()'s ID: " + transactionList.get(i).getTransactionId());
                 contain.setId(i);
                 //This part should create the title for the previous order it will contain the total and the first coffee of the list
                 LinearLayout fCart = new LinearLayout(getContext());
@@ -133,6 +134,7 @@ public class CurrentOrdersScreen extends Fragment {
                 fCart.setPadding(40,20,40,20);
                 ViewGroup.LayoutParams layoutC = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 fCart.setLayoutParams(layoutC);
+                fCart.setId(transactionList.get(i).getTransactionId());
                 //Title formatting
                 TextView title = new TextView(getContext());
                 title.setText(transactionList.get(i).getPickupTime());

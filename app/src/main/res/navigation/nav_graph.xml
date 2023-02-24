@@ -226,7 +226,7 @@
     <fragment
         android:id="@+id/WorkerViewCompletedOrdersScreen"
         android:name="com.cjcj55.scrum_project_1.WorkerViewCompletedOrdersScreen"
-        android:label="Completed ORders"
+        android:label="Completed Orders"
         tools:layout="@layout/viewcompletedordersui">
         <action
             android:id="@+id/action_WorkerViewCompletedOrdersScreen_to_WorkerOrderScreen"
