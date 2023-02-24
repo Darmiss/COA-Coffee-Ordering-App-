@@ -94,7 +94,6 @@ public class CurrentOrdersScreen extends Fragment {
 //        customText+="!";
 //        textView.setText(customText);
 
-
         TextView textView = view.findViewById(R.id.currOrderCustomWelcomeName);
 
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
@@ -160,24 +159,15 @@ public class CurrentOrdersScreen extends Fragment {
                 removeBtn.setText("Cancel Order");
                 removeBtn.setTextColor(Color.rgb(255, 204, 203));
                 removeBtn.setPadding(20, 10, 20, 10);
-
+                removeBtn.setTag(transactionList.get(i).getTransactionId());
                 removeBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        SharedPreferences sharedPreferences1 = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
-
-                        SQLiteDatabaseHelper.getInstance(getContext()).cancelUserOrder(contain.getId());
-                        transactionList.remove(contain.getId());
-                        dynamic.removeView(contain);
-                        MessagePopupFragment messageDialog = MessagePopupFragment.newInstance("Successfully Cancelled");
-                        messageDialog.show(getChildFragmentManager(), "MessagePopUpFragment");
-
-                        for (int j = contain.getId(); j < transactionList.size(); j++) {
-                            LinearLayout layout = dynamic.findViewById(j + 1);
-                            if (layout != null) {
-                                layout.setId(j);
-                            }
-                        }
+                        // Get the transaction ID from the view's parent
+                        int transactionId = (int) view.getTag();
+                        SQLiteDatabaseHelper.getInstance(getContext()).cancelUserOrder(transactionId);
+                        Toast.makeText(getContext(), "Order canceled successfully", Toast.LENGTH_SHORT).show();
+                        dynamic.removeView((View) view.getParent());
                     }
                 });
 
