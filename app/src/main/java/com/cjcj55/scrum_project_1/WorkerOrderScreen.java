@@ -1,5 +1,6 @@
 package com.cjcj55.scrum_project_1;
 
+import static android.graphics.Color.BLACK;
 import static com.cjcj55.scrum_project_1.LoginScreen.setAccountCreationPopup;
 import static com.cjcj55.scrum_project_1.LoginScreen.setLoggedOutPopup;
 
@@ -85,6 +86,7 @@ public class WorkerOrderScreen extends Fragment {
                 TextView title = new TextView(getContext());
                 title.setText("Order #" + transactionList.get(i).getTransactionId());
                 title.setTextSize(30);
+                title.setTextColor(BLACK);
 
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
                 params.gravity = Gravity.LEFT;
@@ -94,6 +96,7 @@ public class WorkerOrderScreen extends Fragment {
                 TextView pickupTime = new TextView(getContext());
                 pickupTime.setText("Pickup: " + transactionList.get(i).getPickupTime());
                 pickupTime.setTextSize(25);
+                pickupTime.setTextColor(BLACK);
                 pickupTime.setGravity(Gravity.END);
                 orderContainer.addView(pickupTime);
 
@@ -102,12 +105,13 @@ public class WorkerOrderScreen extends Fragment {
                 // Display user's name (that purchased this order)
                 LinearLayout userNameContainer = new LinearLayout(getContext());
                 userNameContainer.setOrientation(LinearLayout.HORIZONTAL);
-                userNameContainer.setPadding(60, 20, 40, 20);
+                userNameContainer.setPadding(40, 20, 40, 20);
 
                 // User's name
                 TextView userName = new TextView(getContext());
                 userName.setText("Ordered by: " + SQLiteDatabaseHelper.getInstance(getContext()).getUsersFullName(transactionList.get(i).getUserId()));
                 userName.setTextSize(25);
+                userName.setTextColor(BLACK);
                 userName.setGravity(Gravity.CENTER_HORIZONTAL);
                 userNameContainer.addView(userName);
 
