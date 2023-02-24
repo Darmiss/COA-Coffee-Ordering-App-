@@ -45,6 +45,7 @@ public class UserFavoritesScreen extends Fragment {
         return binding.getRoot();
     }
     static int idcheck;
+    static int idcheck1;
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sharedPreferences = getContext().getSharedPreferences("myAppPrefs", Context.MODE_PRIVATE);
@@ -97,11 +98,13 @@ public class UserFavoritesScreen extends Fragment {
 
                 try{
                     for(int j = 0; j < favList.get(i).getUserCart().size(); j++){
+                        idcheck1 = j;
                         LinearLayout coffeeTemp = new LinearLayout(getContext());
                         coffeeTemp.setOrientation(LinearLayout.HORIZONTAL);
                         coffeeTemp.setPadding(40,20,40,20);
                         ViewGroup.LayoutParams layoutT = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                         coffeeTemp.setLayoutParams(layoutT);
+                        coffeeTemp.setId(j);
                         //Adds the thing to the thing
                         TextView cofName = new TextView(getContext());
                         cofName.setTextSize(20);
@@ -125,10 +128,9 @@ public class UserFavoritesScreen extends Fragment {
                             @Override
                             public void onClick(View view) {
                                 for(int i = 0; i < favList.size(); i++){
-                                    MainActivity.userCart.addCoffeeToCart(favList.get(idcheck).getCoffeeAt(i));
+                                    MainActivity.userCart.addCoffeeToCart(favList.get(idcheck).getCoffeeAt(coffeeTemp.getId()));
                                     addToCart.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.favselect));
                                     addToCart.setText("Order added to cart");
-
                                 }
 
                             }
